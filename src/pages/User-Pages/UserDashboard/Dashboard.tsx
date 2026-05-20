@@ -23,23 +23,9 @@ import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import GroupsIcon from '@mui/icons-material/Groups';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import HubIcon from '@mui/icons-material/Hub';
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import SavingsIcon from '@mui/icons-material/Savings';
-import CreditCardIcon from '@mui/icons-material/CreditCard';
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
-import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import StoreIcon from '@mui/icons-material/Store';
-import LocalTaxiIcon from '@mui/icons-material/LocalTaxi';
-import BuildIcon from '@mui/icons-material/Build';
-import TvIcon from '@mui/icons-material/Tv';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import NoteAddIcon from '@mui/icons-material/NoteAdd';
-import SpeedIcon from '@mui/icons-material/Speed';
 import LockIcon from '@mui/icons-material/Lock';
-import AutorenewIcon from '@mui/icons-material/Autorenew';
 
 import TokenService from '../../../api/token/tokenService';
 import {
@@ -51,21 +37,12 @@ import {
   useGetDailyPayout
 } from '../../../api/Memeber';
 import { toast } from 'react-toastify';
-import React from 'react';
+
 
 const UserDashboard = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const [paymentProcessed, setPaymentProcessed] = useState(false);
-  const showQuickAccess = searchParams.get('view') === 'od';
-
-  const setShowQuickAccess = (show: boolean) => {
-    if (show) {
-      setSearchParams({ view: 'od' });
-    } else {
-      setSearchParams({});
-    }
-  };
 
   const memberId = TokenService.getMemberId();
   const { data: walletOverview } = useGetWalletOverview(memberId);
@@ -111,28 +88,6 @@ const UserDashboard = () => {
       .catch(() => toast.error('Failed to copy link'));
   };
 
-  const servicesGrid = [
-    { label: "SB Account", icon: <AccountBalanceWalletIcon />, color: "#3b82f6", type: "sb" },
-    { label: "RD Account", icon: <AutorenewIcon />, color: "#10b981", type: "rd" },
-    { label: "FD Account", icon: <NoteAddIcon />, color: "#f59e0b", type: "fd" },
-    { label: "CA Account", icon: <AccountBalanceIcon />, color: "#6366f1", type: "ca" },
-    { label: "Pigmy Account", icon: <SavingsIcon />, color: "#10b981", type: "pigmy" },
-    { label: "BMS CREDIT", icon: <CreditCardIcon />, color: "#6366f1" },
-    { label: "GOLD LOAN", icon: <MonetizationOnIcon />, color: "#10b981" },
-    { label: "Group LOAN", icon: <GroupsIcon />, color: "#3b82f6" },
-    { label: "RD LOAN", icon: <CurrencyRupeeIcon />, color: "#ef4444" },
-    { label: "OD LOAN", icon: <CurrencyRupeeIcon />, color: "#6366f1" },
-    { label: "BMS PROTECT", icon: <HealthAndSafetyIcon />, color: "#10b981" },
-    { label: "E Shopy Product", icon: <ShoppingCartIcon />, color: "#f59e0b" },
-    { label: "Hurb Product", icon: <StoreIcon />, color: "#3b82f6" },
-    { label: "TV", icon: <TvIcon />, color: "#ef4444" },
-    { label: "Shoping", icon: <ShoppingCartIcon />, color: "#3b82f6" },
-    { label: "Gold Saving", icon: <SavingsIcon />, color: "#f59e0b" },
-    { label: "Pigmy Saving", icon: <SavingsIcon />, color: "#10b981" },
-    { label: "Pigmy Loan", icon: <CurrencyRupeeIcon />, color: "#ef4444" },
-    { label: "HOPETAXI", icon: <LocalTaxiIcon />, color: "#f59e0b" },
-    { label: "SERVICE", icon: <BuildIcon />, color: "#3b82f6" },
-  ];
 
   const quickAccessGroups = [
     {
@@ -233,72 +188,10 @@ const UserDashboard = () => {
         </Box>
       </Box>
 
-      {/* Row 2: Buttons + CB icon — all same height */}
-      <Box sx={{ display: 'flex', gap: 1.5, alignItems: 'stretch' }}>
-        {/* FD BOND — Visible if user is active */}
-        {isUserActive && (
-          <Button
-            variant="contained"
-            onClick={() => navigate('/user/addon-packages?view=fd')}
-            startIcon={<NoteAddIcon sx={{ fontSize: '1rem !important' }} />}
-            sx={{
-              flex: 1,
-              borderRadius: '14px',
-              textTransform: 'none',
-              fontWeight: 900,
-              bgcolor: 'white',
-              color: '#0a2558',
-              fontSize: '12.5px',
-              whiteSpace: 'nowrap',
-              py: 1.1,
-              minWidth: 0,
-              '&:hover': { bgcolor: '#f1f5f9' },
-              boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
-            }}
-          >
-            FD BOND
-          </Button>
-        )}
 
-        {/* OVER DRAFT — Toggle for upgraded users, Redirect for others — Hidden if ROI Inactive */}
-        {isUserActive && isPackageActive && (
-          <Button
-            variant="contained"
-            onClick={() => {
-              if (isPackageActive) {
-                setShowQuickAccess(!showQuickAccess);
-              } else {
-                navigate('/user/overdraft');
-              }
-            }}
-            startIcon={(isPackageActive && showQuickAccess) ? <ArrowBackIcon sx={{ fontSize: '1.2rem !important' }} /> : <SpeedIcon sx={{ fontSize: '1.2rem !important' }} />}
-            sx={{
-              flex: 1,
-              borderRadius: '14px',
-              textTransform: 'none',
-              fontWeight: 900,
-              bgcolor: '#3b82f6',
-              fontSize: '14px',
-              whiteSpace: 'nowrap',
-              py: 1.1,
-              minWidth: 0,
-              border: '2px solid rgba(255,255,255,0.2)',
-              boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
-            }}
-          >
-            {(isPackageActive && showQuickAccess) ? 'BACK' : 'OVER DRAFT'}
-          </Button>
-        )}
-
-      </Box>
     </Box>
   );
 
-  const handleAccountClick = (item: any) => {
-    if (['SB Account', 'RD Account', 'FD Account', 'CA Account', 'Pigmy Account'].includes(item.label)) {
-      navigate(`/user/account-opening/${item.type}`);
-    }
-  };
 
   return (
     <Box sx={{
@@ -329,7 +222,7 @@ const UserDashboard = () => {
         <Box sx={{
           flex: 1,
           width: '100%',
-          display: { xs: showQuickAccess ? 'none' : 'block', md: 'block' }
+          display: { xs: 'none', md: 'block' }
         }}>
           {/* CB Banner - Desktop only (mobile version is inside the header) */}
           <Box
@@ -351,66 +244,6 @@ const UserDashboard = () => {
             <img src="/cb.png" alt="BMS Banner" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </Box>
 
-          {/* Quick Services Grid */}
-          <Box sx={{ mb: 6 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: 2, mb: 3 }}>
-              <Typography variant="h6" sx={{ fontWeight: 900, color: '#0a2558', letterSpacing: '0.5px' }}>
-                QUICK SERVICES
-              </Typography>
-              <Box
-                onClick={() => navigate('/user/chat')}
-                sx={{
-                  cursor: 'pointer',
-                  width: 90,
-                  height: 60,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: '14px',
-                  bgcolor: 'white',
-                  border: '1.5px solid rgba(10,37,88,0.1)',
-                  boxShadow: '0 4px 16px rgba(0,0,0,0.07)',
-                  transition: 'all 0.25s',
-                  '&:hover': { transform: 'scale(1.08)', boxShadow: '0 8px 24px rgba(0,0,0,0.12)' },
-                  '&:active': { transform: 'scale(0.95)' }
-                }}
-              >
-                <img src="/cb.png" alt="BMS Chat" style={{ width: '100%', height: '100%', objectFit: 'contain', transform: 'scale(1.4)' }} />
-              </Box>
-            </Box>
-            <Box sx={{
-              display: 'grid',
-              gridTemplateColumns: { xs: 'repeat(4, 1fr)', lg: 'repeat(4, 1fr)', xl: 'repeat(6, 1fr)' },
-              gap: { xs: 2, md: 4 }
-            }}>
-              {servicesGrid.map((item, i) => (
-                <Box 
-                  key={i} 
-                  onClick={() => handleAccountClick(item)}
-                  sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1.5, cursor: 'pointer' }}
-                >
-                  <Paper elevation={0} sx={{
-                    width: { xs: 54, md: 74 },
-                    height: { xs: 54, md: 74 },
-                    borderRadius: '20px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    bgcolor: 'white',
-                    color: item.color,
-                    boxShadow: `0 6px 20px ${item.color}15`,
-                    '&:hover': { transform: 'translateY(-5px) scale(1.05)', boxShadow: `0 10px 30px ${item.color}25` },
-                    transition: 'all 0.3s'
-                  }}>
-                    {React.cloneElement(item.icon as React.ReactElement, { sx: { fontSize: { xs: 24, md: 32 } } })}
-                  </Paper>
-                  <Typography variant="caption" sx={{ fontWeight: 800, fontSize: '0.68rem', textAlign: 'center', color: '#334155', lineHeight: 1.2 }}>
-                    {item.label}
-                  </Typography>
-                </Box>
-              ))}
-            </Box>
-          </Box>
 
           {/* Team Performance - In Left Column on Desktop */}
           <Box sx={{ mt: 6, display: { xs: 'none', md: 'block' } }}>
@@ -432,7 +265,7 @@ const UserDashboard = () => {
         {/* Right Column / Mobile Conditional View */}
         <Box sx={{
           width: { xs: '100%', md: '380px', lg: '440px' },
-          display: { xs: showQuickAccess ? 'flex' : 'none', md: (isUserActive && isPackageActive) ? 'flex' : 'none' },
+          display: 'flex',
           flexDirection: 'column',
           gap: 4,
           position: { md: 'sticky' },
@@ -440,7 +273,7 @@ const UserDashboard = () => {
         }}>
           {/* Mobile Only: Quick Access Header */}
           <Typography variant="h6" sx={{ fontWeight: 900, color: '#0a2558', mb: 1, display: { xs: 'block', md: 'none' } }}>
-            OVER DRAFT
+            QUICK ACCESS
           </Typography>
 
           <Box sx={{ flex: 1 }}>
@@ -537,7 +370,7 @@ const UserDashboard = () => {
 
             {/* Wallet Section - Matched to 3rd Drawing */}
             <Typography variant="h6" sx={{ fontWeight: 900, color: '#0a2558', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '2px', mb: -2, mt: { xs: 2, md: 3 } }}>
-              Deposit-BOND
+              DEPOSIT DETAILS
             </Typography>
 
             <Paper elevation={0} sx={{ p: 4, borderRadius: '32px', bgcolor: 'white', border: '1px solid #e2e8f0', boxShadow: '0 10px 40px rgba(0,0,0,0.03)', mt: 1 }}>
