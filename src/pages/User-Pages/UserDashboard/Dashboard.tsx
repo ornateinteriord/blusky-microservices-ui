@@ -24,7 +24,6 @@ import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import HubIcon from '@mui/icons-material/Hub';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import LockIcon from '@mui/icons-material/Lock';
-import CampaignIcon from '@mui/icons-material/Campaign';
 
 import TokenService from '../../../api/token/tokenService';
 import {
@@ -177,25 +176,6 @@ const UserDashboard = () => {
     </Box>
   );
 
-  const AnnouncementBar = () => (
-    <Box sx={{
-      display: 'flex',
-      alignItems: 'center',
-      gap: 1.5,
-      mb: 4,
-      px: 2,
-      py: 1.25,
-      borderRadius: '12px',
-      bgcolor: 'rgba(255, 255, 255, 0.04)',
-      border: '1px solid rgba(255, 255, 255, 0.08)',
-      width: '100%'
-    }}>
-      <CampaignIcon sx={{ color: '#00e676', transform: 'rotate(-10deg)', fontSize: 22 }} />
-      <Typography sx={{ color: '#ffffff', fontSize: '0.85rem', fontWeight: 600 }}>
-        rewards of blockchain-based products and deposit options are updated!
-      </Typography>
-    </Box>
-  );
 
 
   return (
@@ -358,7 +338,6 @@ const UserDashboard = () => {
               </Box>
             ))}
 
-            <AnnouncementBar />
 
             {/* Team Performance - Mobile Only inside Quick Access */}
             <Box sx={{ mt: 2, display: { xs: 'block', md: 'none' } }}>
