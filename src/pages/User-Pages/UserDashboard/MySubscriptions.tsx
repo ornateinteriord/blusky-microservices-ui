@@ -64,13 +64,12 @@ const MySubscriptions: React.FC = () => {
               );
             }
 
-            const totalAddOnAmount = addOns.reduce((sum: number, a: any) => sum + (a.amount || a.requested_amount || 0), 0);
-            const baseAmount = (user.package_value || 0) - (primaryInAddOns ? 0 : totalAddOnAmount);
+            const baseAmount = user.package_value || 0;
 
             const primaryPkg = {
               request_id: 'PRIMARY',
               isPrimary: true,
-              requested_amount: baseAmount > 0 ? baseAmount : (user.package_value || 0),
+              requested_amount: baseAmount,
               roi_status: user.roi_status || 'Active',
               roi_payout_target: user.roi_payout_target || ((user.package_value || 0) * 2),
               roi_payout_count: user.roi_payout_count || 0,

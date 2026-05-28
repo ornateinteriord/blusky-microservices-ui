@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -10,25 +10,71 @@ import {
   Typography,
   Select,
   MenuItem,
+  CircularProgress
 } from "@mui/material";
 import UserContext from "../../../context/user/userContext";
 import { useGetWalletOverview } from "../../../api/Memeber";
-import { useRequestAddOnMutation } from "../../../api/Packages";
+import { useBuyPackageDirectlyMutation } from "../../../api/Packages";
 import { toast } from "react-toastify";
+import { get } from "../../../api/Api";
 
 const NewSubscription: React.FC = () => {
   const { user } = useContext(UserContext);
   const { data: walletOverview } = useGetWalletOverview(user?.Member_id || '');
-  const { mutate: requestAddOn, isPending: isSubmitting } = useRequestAddOnMutation();
+  const { mutate: buyPackage, isPending: isSubmitting } = useBuyPackageDirectlyMutation();
 
   const [formData, setFormData] = useState({
+    targetMemberId: user?.Member_id || "",
     package: "",
     investAmount: "",
   });
 
+  const [targetName, setTargetName] = useState(user?.Name || "");
+  const [isSearching, setIsSearching] = useState(false);
+
+  // Sync formData.targetMemberId when user context loads
+  useEffect(() => {
+    if (user?.Member_id && !formData.targetMemberId) {
+      setFormData(prev => ({ ...prev, targetMemberId: user.Member_id }));
+      setTargetName(user.Name);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (!formData.targetMemberId) {
+      setTargetName("");
+      return;
+    }
+    
+    if (formData.targetMemberId === user?.Member_id) {
+      setTargetName(user?.Name || "");
+      return;
+    }
+
+    const fetchName = async () => {
+      setIsSearching(true);
+      try {
+        const res = await get(`/auth/get-sponsor/${formData.targetMemberId}`);
+        if (res && res.success) {
+          setTargetName(res.name || "Name not available");
+        } else {
+          setTargetName("Member Not Found");
+        }
+      } catch (e) {
+        setTargetName("Member Not Found");
+      } finally {
+        setIsSearching(false);
+      }
+    };
+
+    const timeoutId = setTimeout(fetchName, 500);
+    return () => clearTimeout(timeoutId);
+  }, [formData.targetMemberId, user?.Member_id, user?.Name]);
+
   const handleSelectChange = (e: any) => {
     const value = e.target.value;
     setFormData({
+      ...formData,
       package: value,
       investAmount: value, // Auto-fill invest amount based on package selection
     });
@@ -48,14 +94,19 @@ const NewSubscription: React.FC = () => {
       toast.error("Please provide an investment amount");
       return;
     }
+
+    if (targetName === "Member Not Found" || isSearching) {
+      toast.error("Please provide a valid Target Member ID");
+      return;
+    }
     
-    requestAddOn({
+    buyPackage({
       member_id: user.Member_id,
+      target_member_id: formData.targetMemberId || user.Member_id,
       requested_amount: Number(formData.investAmount),
-      payment_method: 'wallet',
     }, {
       onSuccess: () => {
-        setFormData({ package: "", investAmount: "" });
+        setFormData(prev => ({ ...prev, package: "", investAmount: "" }));
       }
     });
   };
@@ -80,6 +131,7 @@ const NewSubscription: React.FC = () => {
     '& .MuiInputBase-input.Mui-disabled': {
       color: '#ffffff',
       WebkitTextFillColor: '#ffffff',
+      opacity: 0.8,
     },
     '& .MuiSelect-icon': {
       color: 'rgba(255,255,255,0.7)',
@@ -98,35 +150,48 @@ const NewSubscription: React.FC = () => {
           <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
             
             <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'flex-start', sm: 'center' }, gap: 1 }}>
-              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Member Id <span style={{color: '#ef4444'}}>*</span></Typography>
+              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Target Member ID <span style={{color: '#ef4444'}}>*</span></Typography>
               <TextField
-                value={user?.Member_id || ''}
+                name="targetMemberId"
+                value={formData.targetMemberId}
+                onChange={handleInputChange}
                 fullWidth
                 size="small"
-                disabled
-                sx={{ ...inputStyles, opacity: 0.7 }}
+                placeholder="Enter member ID to buy package for"
+                sx={inputStyles}
+                required
               />
             </Box>
 
             <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'flex-start', sm: 'center' }, gap: 1 }}>
-              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Name <span style={{color: '#ef4444'}}>*</span></Typography>
+              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Target Name</Typography>
               <TextField
-                value={user?.Name || ''}
+                value={targetName}
                 fullWidth
                 size="small"
                 disabled
-                sx={{ ...inputStyles, opacity: 0.7 }}
+                InputProps={{
+                  endAdornment: isSearching ? <CircularProgress size={20} color="inherit" sx={{color: 'rgba(255,255,255,0.5)'}} /> : null
+                }}
+                sx={{ 
+                  ...inputStyles, 
+                  bgcolor: targetName === 'Member Not Found' ? 'rgba(239, 68, 68, 0.1)' : 'rgba(255,255,255,0.05)',
+                  '& .MuiInputBase-input.Mui-disabled': {
+                    color: targetName === 'Member Not Found' ? '#ef4444' : '#ffffff',
+                    WebkitTextFillColor: targetName === 'Member Not Found' ? '#ef4444' : '#ffffff',
+                  }
+                }}
               />
             </Box>
 
             <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'flex-start', sm: 'center' }, gap: 1 }}>
-              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Balance <span style={{color: '#ef4444'}}>*</span></Typography>
+              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Your Top-Up Balance</Typography>
               <TextField
-                value={walletOverview?.balance || 0}
+                value={`$${walletOverview?.topUpBalance || 0}`}
                 fullWidth
                 size="small"
                 disabled
-                sx={{ ...inputStyles, opacity: 0.7 }}
+                sx={{ ...inputStyles, opacity: 0.8 }}
               />
             </Box>
 
@@ -149,14 +214,14 @@ const NewSubscription: React.FC = () => {
                     }
                   }}
                 >
-                  <MenuItem value="" disabled></MenuItem>
-                  <MenuItem value="1000">1000</MenuItem>
-                  <MenuItem value="2000">2000</MenuItem>
-                  <MenuItem value="5000">5000</MenuItem>
-                  <MenuItem value="10000">10000</MenuItem>
-                  <MenuItem value="25000">25000</MenuItem>
-                  <MenuItem value="50000">50000</MenuItem>
-                  <MenuItem value="100000">100000</MenuItem>
+                  <MenuItem value="" disabled>Select Package</MenuItem>
+                  <MenuItem value="30">$30 Package</MenuItem>
+                  <MenuItem value="60">$60 Package</MenuItem>
+                  <MenuItem value="100">$100 Package</MenuItem>
+                  <MenuItem value="120">$120 Package</MenuItem>
+                  <MenuItem value="250">$250 Package</MenuItem>
+                  <MenuItem value="500">$500 Package</MenuItem>
+                  <MenuItem value="1000">$1000 Package</MenuItem>
                 </Select>
               </FormControl>
             </Box>
@@ -171,18 +236,19 @@ const NewSubscription: React.FC = () => {
                 fullWidth
                 size="small"
                 required
+                disabled // User should select via package dropdown, but keeping it editable if they want, let's keep editable but tied to package
                 sx={inputStyles}
               />
             </Box>
 
             <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'flex-start', sm: 'center' }, gap: 1 }}>
-              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Topup Date <span style={{color: '#ef4444'}}>*</span></Typography>
+              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Topup Date</Typography>
               <TextField
                 value={new Date().toLocaleDateString('en-GB')}
                 fullWidth
                 size="small"
                 disabled
-                sx={{ ...inputStyles, opacity: 0.7 }}
+                sx={{ ...inputStyles, opacity: 0.8 }}
               />
             </Box>
 
@@ -190,7 +256,7 @@ const NewSubscription: React.FC = () => {
               <Button
                 type="submit"
                 variant="contained"
-                disabled={isSubmitting}
+                disabled={isSubmitting || targetName === "Member Not Found" || isSearching}
                 sx={{
                   bgcolor: '#00e676',
                   color: '#050916',
@@ -211,7 +277,7 @@ const NewSubscription: React.FC = () => {
                   }
                 }}
               >
-                {isSubmitting ? "Submitting..." : "Submit (F2)"}
+                {isSubmitting ? "Processing..." : "Buy Package"}
               </Button>
             </Box>
           </form>
