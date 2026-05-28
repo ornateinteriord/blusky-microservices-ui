@@ -52,7 +52,7 @@ export const useRequestAddOnMutation = () => {
 export const useBuyPackageDirectlyMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: { member_id: string; requested_amount: number }) => {
+    mutationFn: async (data: { member_id: string; requested_amount: number; target_member_id?: string }) => {
       return await post("/api/packages/addon/buy-direct", data);
     },
     onSuccess: (data) => {

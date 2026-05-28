@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import jsQR from 'jsqr';
 import {
   Box,
   Card,
@@ -45,11 +46,47 @@ const AdminLoadFundPage: React.FC = () => {
     }
   }, [config]);
 
+
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setQrFile(file);
       setQrPreview(URL.createObjectURL(file));
+
+      // Auto-extract address from QR Code
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const img = new Image();
+        img.onload = () => {
+          try {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d", { willReadFrequently: true });
+            if (!ctx) return;
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0, img.width, img.height);
+            
+            const imageData = ctx.getImageData(0, 0, img.width, img.height);
+            
+            // Handle Vite/CommonJS import differences
+            const decoder = (jsQR as any).default || jsQR;
+            const decodedQR = decoder(imageData.data, imageData.width, imageData.height);
+            
+            if (decodedQR && decodedQR.data) {
+              setWalletAddress(decodedQR.data);
+              toast.success("Address automatically extracted from QR code!");
+            } else {
+              toast.warn("Could not find a valid QR code in the image.");
+            }
+          } catch (err: any) {
+            console.error("QR Scan Error:", err);
+            toast.error("Error scanning image: " + err.message);
+          }
+        };
+        img.src = event.target?.result as string;
+      };
+      reader.readAsDataURL(file);
     }
   };
 

@@ -183,7 +183,7 @@ const LoadFundPage: React.FC = () => {
                     component="img"
                     src={config.qr_code_url}
                     alt="Payment QR Code"
-                    sx={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                    sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     onError={(e: any) => {
                       e.target.onerror = null;
                       e.target.style.display = 'none';
