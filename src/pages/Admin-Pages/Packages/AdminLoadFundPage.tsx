@@ -139,8 +139,8 @@ const AdminLoadFundPage: React.FC = () => {
   }
 
   return (
-    <Box sx={{ p: 4, mt: 8 }}>
-      <Typography variant="h4" sx={{ fontWeight: 900, mb: 4, color: '#0a2558' }}>
+    <Box sx={{ p: { xs: 2, md: 4 }, mt: { xs: 8, md: 8 } }}>
+      <Typography variant="h4" sx={{ fontWeight: 900, mb: { xs: 2, md: 4 }, color: '#0a2558', fontSize: { xs: '1.5rem', md: '2.125rem' } }}>
         Load Fund Configuration
       </Typography>
 

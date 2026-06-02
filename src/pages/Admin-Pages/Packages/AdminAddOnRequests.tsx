@@ -112,13 +112,13 @@ const AdminAddOnRequests = () => {
   ];
 
   return (
-    <>
-      <Typography variant="h4" sx={{ margin: '2rem', mt: 10 }}>
+    <Box sx={{ p: { xs: 2, md: 4 }, mt: { xs: 8, md: 8 } }}>
+      <Typography variant="h4" sx={{ mb: { xs: 2, md: 4 }, fontSize: { xs: '1.5rem', md: '2.125rem' } }}>
         Load Fund Requests
       </Typography>
 
-      <Card sx={{ margin: '2rem', mt: 2 }}>
-        <CardContent>
+      <Card sx={{ width: '100%', mb: 2 }}>
+        <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
           <Typography variant="h6" sx={{ color: '#0a2558', mb: 2 }}>
             Manage Member Load Fund Approvals
           </Typography>
@@ -157,7 +157,7 @@ const AdminAddOnRequests = () => {
           )}
         </DialogContent>
       </Dialog>
-    </>
+    </Box>
   );
 };
 
