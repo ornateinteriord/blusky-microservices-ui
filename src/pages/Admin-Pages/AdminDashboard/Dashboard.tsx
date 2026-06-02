@@ -1,9 +1,7 @@
-import { Card, CardContent, Grid, Typography } from '@mui/material';
-import { cn } from '../../../lib/utils';
+import { Grid, Typography, Box, Paper, Avatar } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import '../../Dashboard/dashboard.scss';
 import DashboardTable from '../../Dashboard/DashboardTable';
-import DashboardCard from '../../../components/common/DashboardCard';
 import { getAdminDashboardTableColumns } from '../../../utils/DataTableColumnsProvider';
 import PeopleIcon from '@mui/icons-material/People';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
@@ -13,8 +11,8 @@ import EventIcon from '@mui/icons-material/Event';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import SchoolIcon from '@mui/icons-material/School';
 import PaymentsIcon from '@mui/icons-material/Payments';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { useGetAllMembersDetails, useGetROISummary } from '../../../api/Admin';
-
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -24,8 +22,6 @@ const AdminDashboard = () => {
   const isLoading = membersLoading || roiLoading;
   const error = membersError;
 
-
-  // Sort members by most recent registration date
   const sortedMembers = [...members].sort((a, b) => {
     return new Date(b.createdAt || b.Date_of_joining).getTime() -
       new Date(a.createdAt || a.Date_of_joining).getTime();
@@ -47,140 +43,228 @@ const AdminDashboard = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <Typography>Loading dashboard data...</Typography>
-      </div>
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '64vh' }}>
+        <Typography sx={{ color: 'white' }}>Loading dashboard data...</Typography>
+      </Box>
     );
   }
 
   if (error) {
     return (
-      <div className="flex justify-center items-center h-64">
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '64vh' }}>
         <Typography color="error">
           Error loading dashboard data: {error.message}
         </Typography>
-      </div>
+      </Box>
     );
   }
 
+  const StatCard = ({ title, amount, subTitle, icon, onClick, color }: any) => (
+    <Paper
+      elevation={0}
+      onClick={onClick}
+      sx={{
+        p: 3,
+        borderRadius: '24px',
+        bgcolor: 'rgba(255, 255, 255, 0.04)',
+        backdropFilter: 'blur(12px)',
+        border: '1px solid rgba(255, 255, 255, 0.08)',
+        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+        cursor: onClick ? 'pointer' : 'default',
+        transition: 'all 0.3s ease',
+        '&:hover': {
+          transform: onClick ? 'translateY(-4px)' : 'none',
+          bgcolor: 'rgba(255, 255, 255, 0.06)',
+          border: `1px solid ${color || 'rgba(255, 255, 255, 0.15)'}`
+        },
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%'
+      }}
+    >
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
+        <Box sx={{ 
+          width: 48, 
+          height: 48, 
+          borderRadius: '16px', 
+          bgcolor: 'rgba(255,255,255,0.06)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: color || '#00e676'
+        }}>
+          {icon}
+        </Box>
+      </Box>
+      <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px', mb: 1 }}>
+        {title}
+      </Typography>
+      <Typography variant="h4" sx={{ color: 'white', fontWeight: 800, mb: 1 }}>
+        {amount}
+      </Typography>
+      {subTitle && (
+        <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.4)', fontWeight: 500 }}>
+          {subTitle}
+        </Typography>
+      )}
+    </Paper>
+  );
+
   return (
-    <>
-      <div className="h-auto md:h-40 relative w-full overflow-hidden bg-[#0a2558] flex flex-col items-center justify-center py-6 md:py-0">
-        <div className="absolute inset-0 w-full h-full bg-[#0a2558] z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
-
-        <div className="flex flex-col md:flex-row justify-evenly items-center w-full px-4 md:px-8 relative z-20 gap-6 md:gap-0">
-          <div className="text-center md:text-left">
-            <h1 className={cn("text-xl md:text-4xl text-white")}>
-              Welcome to Admin Dashboard
-            </h1>
-            <p className="mt-2 text-neutral-300 text-sm md:text-base">
+    <Box sx={{
+      pb: 6,
+      background: 'linear-gradient(180deg, #050916 0%, #0f1e36 100%)',
+      minHeight: '100vh',
+      px: { xs: 2.5, md: 5, lg: 10, xl: 16 },
+      pt: { xs: 1.5, md: 4 },
+      maxWidth: '1800px',
+      margin: '0 auto'
+    }}>
+      {/* Header Section */}
+      <Paper elevation={0} sx={{
+        mb: 4,
+        p: { xs: 3, md: 4 },
+        borderRadius: '28px',
+        bgcolor: 'rgba(255, 255, 255, 0.04)',
+        backdropFilter: 'blur(12px)',
+        border: '1px solid rgba(255, 255, 255, 0.08)',
+        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+        display: 'flex',
+        flexDirection: { xs: 'column', md: 'row' },
+        justifyContent: 'space-between',
+        alignItems: { xs: 'flex-start', md: 'center' },
+        gap: 3
+      }}>
+        {/* Welcome Text */}
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2.5 }}>
+          <Avatar
+            sx={{
+              width: { xs: 62, md: 80 },
+              height: { xs: 62, md: 80 },
+              bgcolor: 'rgba(255,255,255,0.06)',
+              border: '2px solid rgba(255,255,255,0.1)',
+            }}
+          >
+            <AdminPanelSettingsIcon sx={{ fontSize: { xs: 36, md: 46 }, color: '#00e676' }} />
+          </Avatar>
+          <Box>
+            <Typography variant="h5" sx={{ color: 'white', fontWeight: 900, letterSpacing: '-0.5px', lineHeight: 1.2, mb: 0.5, fontSize: { xs: '1.4rem', md: '1.8rem' } }}>
+              Admin Dashboard
+            </Typography>
+            <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)', fontWeight: 500 }}>
               Manage your network and track your success
-            </p>
-          </div>
+            </Typography>
+          </Box>
+        </Box>
 
-          <div className="grid grid-cols-2 md:flex items-center gap-6 md:gap-12 text-white">
-            <div className="text-center">
-              <div className="text-xl md:text-2xl font-bold mb-2">{totalLikes}k</div>
-              <div className="text-xs md:text-sm flex items-center justify-center gap-1">
-                <ThumbUpIcon sx={{ fontSize: { xs: 14, md: 16 } }} />
-                Great
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="text-xl md:text-2xl font-bold mb-2">{totalDegrees}</div>
-              <div className="text-xs md:text-sm flex items-center justify-center gap-1">
-                <SchoolIcon sx={{ fontSize: { xs: 14, md: 16 } }} />
-                Degrees
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="text-xl md:text-2xl font-bold mb-2">{totalEvents}</div>
-              <div className="text-xs md:text-sm flex items-center justify-center gap-1">
-                <EventIcon sx={{ fontSize: { xs: 14, md: 16 } }} />
-                Events
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="text-xl md:text-2xl font-bold mb-2">{totalCities}</div>
-              <div className="text-xs md:text-sm flex items-center justify-center gap-1">
-                <LocationOnIcon sx={{ fontSize: { xs: 14, md: 16 } }} />
-                Cities
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Quick Stats in Header */}
+        <Box sx={{ 
+          display: 'flex', 
+          gap: { xs: 3, md: 5 }, 
+          alignItems: 'center',
+          alignSelf: { xs: 'stretch', md: 'auto' },
+          justifyContent: { xs: 'space-between', md: 'center' }
+        }}>
+          <Box sx={{ textAlign: 'center' }}>
+            <Typography variant="h5" sx={{ color: 'white', fontWeight: 900, lineHeight: 1 }}>{totalLikes}k</Typography>
+            <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0.5, color: 'rgba(255,255,255,0.6)', mt: 0.5 }}>
+              <ThumbUpIcon sx={{ fontSize: 14 }} /> Great
+            </Typography>
+          </Box>
+          <Box sx={{ textAlign: 'center' }}>
+            <Typography variant="h5" sx={{ color: 'white', fontWeight: 900, lineHeight: 1 }}>{totalDegrees}</Typography>
+            <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0.5, color: 'rgba(255,255,255,0.6)', mt: 0.5 }}>
+              <SchoolIcon sx={{ fontSize: 14 }} /> Degrees
+            </Typography>
+          </Box>
+          <Box sx={{ textAlign: 'center' }}>
+            <Typography variant="h5" sx={{ color: 'white', fontWeight: 900, lineHeight: 1 }}>{totalEvents}</Typography>
+            <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0.5, color: 'rgba(255,255,255,0.6)', mt: 0.5 }}>
+              <EventIcon sx={{ fontSize: 14 }} /> Events
+            </Typography>
+          </Box>
+          <Box sx={{ textAlign: 'center' }}>
+            <Typography variant="h5" sx={{ color: 'white', fontWeight: 900, lineHeight: 1 }}>{totalCities}</Typography>
+            <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0.5, color: 'rgba(255,255,255,0.6)', mt: 0.5 }}>
+              <LocationOnIcon sx={{ fontSize: 14 }} /> Cities
+            </Typography>
+          </Box>
+        </Box>
+      </Paper>
 
-      <Grid
-        container
-        spacing={{ xs: 2, sm: 3 }}
-        sx={{
-          mx: { xs: 1, sm: 2 },
-          my: 2,
-          pt: 5,
-          pr: 7,
-          width: 'auto',
-          '& .MuiGrid-item': {
-            display: 'flex',
-          }
-        }}
-      >
-        <Grid item xs={12} sm={6} md={4}>
-          <DashboardCard
-            amount={totalMembers}
-            title="Total Members"
-            subTitle={`${totalMembers} members in total`}
-            IconComponent={PeopleIcon}
-            onClick={() => navigate('/admin/members')}
-          />
+      {/* Main Stats Grid */}
+      <Box sx={{ mb: 6 }}>
+        <Typography variant="subtitle2" sx={{ fontWeight: 900, color: 'white', mb: 2, letterSpacing: '1px' }}>
+          PLATFORM OVERVIEW
+        </Typography>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6} md={3}>
+            <StatCard
+              amount={totalMembers}
+              title="Total Members"
+              subTitle={`${totalMembers} members in total`}
+              icon={<PeopleIcon />}
+              color="#3b82f6"
+              onClick={() => navigate('/admin/members')}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <StatCard
+              amount={activeMembers}
+              title="Active Members"
+              subTitle={`${activeMembers} active members`}
+              icon={<PersonAddIcon />}
+              color="#10b981"
+              onClick={() => navigate('/admin/members/active')}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <StatCard
+              amount={pendingMembers}
+              title="Pending Members"
+              subTitle={`${pendingMembers} pending activation`}
+              icon={<HistoryIcon />}
+              color="#f59e0b"
+              onClick={() => navigate('/admin/members/pending')}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <StatCard
+              amount={`$${(roiSummary?.totalROIDistributed || 0).toLocaleString()}`}
+              title="ROI Distributed"
+              subTitle={`Today: $${(roiSummary?.todaysTotal || 0).toLocaleString()} (${roiSummary?.todaysCount || 0} payouts)`}
+              icon={<PaymentsIcon />}
+              color="#00e676"
+              onClick={() => navigate('/admin/income/daily-payouts')}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={6} md={4}>
-          <DashboardCard
-            amount={activeMembers}
-            title="Active Members"
-            subTitle={`${activeMembers} active members`}
-            IconComponent={PersonAddIcon}
-            onClick={() => navigate('/admin/members/active')}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4}>
-          <DashboardCard
-            amount={pendingMembers}
-            title="Pending Members"
-            subTitle={`${pendingMembers} pending activation`}
-            IconComponent={HistoryIcon}
-            onClick={() => navigate('/admin/members/pending')}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4}>
-          <DashboardCard
-            amount={`$${(roiSummary?.totalROIDistributed || 0).toLocaleString()}`}
-            title="Total ROI Distributed"
-            subTitle={`Today: $${(roiSummary?.todaysTotal || 0).toLocaleString()} (${roiSummary?.todaysCount || 0} payouts)`}
-            IconComponent={PaymentsIcon}
-            onClick={() => navigate('/admin/income/daily-payouts')}
-          />
-        </Grid>
-      </Grid>
+      </Box>
 
-
-      <div className='mt-10 p-4 rounded shadow'>
-        <Card className='bg-gray-300'>
-          <CardContent>
-            <div className="flex justify-between items-center mb-4">
-              <Typography variant="h6" style={{ fontWeight: 'bold', color: '#0a2558' }}>
-                Member Statistics ({sortedMembers.length} members)
-              </Typography>
-            </div>
+      {/* Member Statistics Table */}
+      <Box>
+        <Typography variant="subtitle2" sx={{ fontWeight: 900, color: 'white', mb: 2, letterSpacing: '1px' }}>
+          MEMBER STATISTICS ({sortedMembers.length} MEMBERS)
+        </Typography>
+        <Paper elevation={0} sx={{ 
+          p: 3, 
+          borderRadius: '28px', 
+          bgcolor: 'rgba(255, 255, 255, 0.04)', 
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          backdropFilter: 'blur(12px)',
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+          overflow: 'hidden'
+        }}>
+          <Box sx={{ width: '100%', overflowX: 'auto', bgcolor: 'white', borderRadius: '16px', p: 1 }}>
             <DashboardTable
               data={sortedMembers}
               columns={getAdminDashboardTableColumns()}
             />
-          </CardContent>
-        </Card>
-      </div>
-    </>
-  )
-}
+          </Box>
+        </Paper>
+      </Box>
+    </Box>
+  );
+};
 
 export default AdminDashboard;

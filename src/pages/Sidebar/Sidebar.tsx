@@ -63,7 +63,7 @@ const Sidebar = ({ isOpen, onClose, role }: { isOpen: boolean, onClose: () => vo
 
 
 
-  const isNidhiRole = role === "ADMIN_01" || role === "AGENT";
+  const isNidhiRole = role === "ADMIN_01" || role === "AGENT" || role === "ADMIN";
 
   return (
     <motion.div
