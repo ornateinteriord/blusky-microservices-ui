@@ -15,8 +15,8 @@ const MobileBottomNav: React.FC = () => {
   const [value, setValue] = React.useState('');
 
   const memberId = TokenService.getMemberId();
-  const { data: memberDetails } = useGetMemberDetails(memberId);
-  const isROIActive = memberDetails?.upgrade_status === 'Active';
+  useGetMemberDetails(memberId);
+
 
   // Sync state with current path
   React.useEffect(() => {
@@ -87,13 +87,11 @@ const MobileBottomNav: React.FC = () => {
             label="Home"
             icon={<Box className={value === "/user/dashboard" ? "indicator" : ""}>{<HomeIcon />}</Box>}
           />
-          {isROIActive && (
-            <BottomNavigationAction
-              value="/user/wallet"
-              label="Wallet"
-              icon={<Box className={value === "/user/wallet" ? "indicator" : ""}>{<AccountBalanceWalletIcon />}</Box>}
-            />
-          )}
+          <BottomNavigationAction
+            value="/user/wallet"
+            label="Wallet"
+            icon={<Box className={value === "/user/wallet" ? "indicator" : ""}>{<AccountBalanceWalletIcon />}</Box>}
+          />
           <BottomNavigationAction
             value="/user/chat"
             label="Chat"

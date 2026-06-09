@@ -1,17 +1,16 @@
 import React, { useState, useContext } from "react";
-import { Box, Typography, Button, Card, CardContent, Chip, CircularProgress, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from "@mui/material";
+import { Box, Typography, Button, Card, CardContent, Chip, CircularProgress, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText, TextField, InputAdornment } from "@mui/material";
 import UserContext from "../../../context/user/userContext";
 import { useGetWalletOverview } from "../../../api/Memeber";
 import { useBuyPackageDirectlyMutation } from "../../../api/Packages";
 import { toast } from "react-toastify";
 
 const PACKAGES = [
-  { id: 1, amount: 30, title: "BTC Quantitative Winning Pioneer 035", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" },
-  { id: 2, amount: 60, title: "BTC Quantitative Winning Pioneer 035", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" },
-  { id: 3, amount: 120, title: "BTC Quantitative Winning Pioneer 035", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" },
-  { id: 4, amount: 250, title: "BTC Quantitative Winning Pioneer 035", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" },
-  { id: 5, amount: 500, title: "BTC Quantitative Winning Pioneer 035", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" },
-  { id: 6, amount: 1000, title: "BTC Quantitative Winning Pioneer 035", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" }
+  { id: 1, isCustom: true, minAmount: 100, title: "Enter your own amount", yield: "3.3%", days: "210 Day", tag: "" },
+  { id: 2, amount: 250, title: "Bronze Package", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" },
+  { id: 3, amount: 500, title: "Silver Package", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" },
+  { id: 4, amount: 1000, title: "Gold Package", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" },
+  { id: 5, amount: 2000, title: "Diamond Package", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" }
 ];
 
 const ProductsContainer: React.FC = () => {
@@ -21,14 +20,20 @@ const ProductsContainer: React.FC = () => {
   const [showAll, setShowAll] = useState(false);
   const [buyingId, setBuyingId] = useState<number | null>(null);
   const [confirmPkg, setConfirmPkg] = useState<any>(null);
+  const [customAmount, setCustomAmount] = useState<number | ''>(100);
   const topUpBalance = walletOverview?.topUpBalance || 0;
 
   const handleBuyClick = (pkg: any) => {
-    if (topUpBalance < pkg.amount) {
-      toast.error(`Insufficient Top Up Balance! You need $${pkg.amount} but have $${topUpBalance}`);
+    const amountToBuy = pkg.isCustom ? Number(customAmount) : pkg.amount;
+    if (pkg.isCustom && amountToBuy < pkg.minAmount) {
+      toast.error(`Minimum amount is $${pkg.minAmount}`);
       return;
     }
-    setConfirmPkg(pkg);
+    if (topUpBalance < amountToBuy) {
+      toast.error(`Insufficient Top Up Balance! You need $${amountToBuy} but have $${topUpBalance}`);
+      return;
+    }
+    setConfirmPkg({ ...pkg, amount: amountToBuy });
   };
 
   const executeBuy = () => {
@@ -104,23 +109,68 @@ const ProductsContainer: React.FC = () => {
                 {pkg.title}
               </Typography>
               
-              <Typography variant="h5" fontWeight={800} sx={{ color: '#00e676', mb: 1 }}>
-                ${pkg.amount}
-              </Typography>
+              {pkg.isCustom ? (
+                <TextField
+                  type="number"
+                  size="small"
+                  value={customAmount}
+                  onChange={(e) => setCustomAmount(e.target.value === '' ? '' : Number(e.target.value))}
+                  InputProps={{
+                    startAdornment: <InputAdornment position="start"><Typography sx={{color: '#00e676', fontWeight: 800, mt: 0.2}}>$</Typography></InputAdornment>,
+                  }}
+                  sx={{
+                    mb: 1,
+                    width: '130px',
+                    '& .MuiInputBase-root': {
+                      color: '#00e676',
+                      fontWeight: 800,
+                      fontSize: '1.25rem',
+                      bgcolor: 'rgba(0,0,0,0.2)',
+                      borderRadius: '8px',
+                      height: '36px',
+                      pl: 1.5,
+                    },
+                    '& .MuiOutlinedInput-notchedOutline': {
+                      border: '1px solid rgba(0, 230, 118, 0.3)'
+                    },
+                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                      border: '1px solid rgba(0, 230, 118, 0.5)'
+                    },
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                      border: '1px solid #00e676'
+                    },
+                    '& input[type=number]::-webkit-outer-spin-button, & input[type=number]::-webkit-inner-spin-button': {
+                      WebkitAppearance: 'none',
+                      margin: 0,
+                    },
+                    '& input[type=number]': {
+                      MozAppearance: 'textfield',
+                    }
+                  }}
+                />
+              ) : (
+                <Typography variant="h5" fontWeight={800} sx={{ color: '#00e676', mb: 1, height: '36px', display: 'flex', alignItems: 'center' }}>
+                  ${pkg.amount}
+                </Typography>
+              )}
               
-              <Chip 
-                label={pkg.tag} 
-                size="small" 
-                sx={{ 
-                  bgcolor: 'rgba(255,255,255,0.15)', 
-                  color: 'rgba(255,255,255,0.8)',
-                  fontWeight: 500,
-                  fontSize: '0.7rem',
-                  mb: 3,
-                  borderRadius: '12px',
-                  height: '24px'
-                }} 
-              />
+              {pkg.tag ? (
+                <Chip 
+                  label={pkg.tag} 
+                  size="small" 
+                  sx={{ 
+                    bgcolor: 'rgba(255,255,255,0.15)', 
+                    color: 'rgba(255,255,255,0.8)',
+                    fontWeight: 500,
+                    fontSize: '0.7rem',
+                    mb: 3,
+                    borderRadius: '12px',
+                    height: '24px'
+                  }} 
+                />
+              ) : (
+                <Box sx={{ height: '24px', mb: 3 }} />
+              )}
               
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
                 <Box sx={{ display: 'flex', gap: 2.5 }}>
@@ -128,10 +178,10 @@ const ProductsContainer: React.FC = () => {
                     <Typography variant="subtitle1" fontWeight={800} sx={{ lineHeight: 1.2, mb: 0.5 }}>{pkg.yield}</Typography>
                     <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 500, fontSize: '0.65rem' }}>Yield</Typography>
                   </Box>
-                  <Box>
+                  {/* <Box>
                     <Typography variant="subtitle1" fontWeight={800} sx={{ lineHeight: 1.2, mb: 0.5 }}>{pkg.days}</Typography>
                     <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 500, fontSize: '0.65rem' }}>Holding Period</Typography>
-                  </Box>
+                  </Box> */}
                 </Box>
                 
                 <Button

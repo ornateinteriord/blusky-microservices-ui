@@ -76,11 +76,11 @@ const NewSubscription: React.FC = () => {
     setFormData({
       ...formData,
       package: value,
-      investAmount: value, // Auto-fill invest amount based on package selection
+      investAmount: value === 'custom' ? '' : value, // Auto-fill invest amount based on package selection
     });
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -92,6 +92,11 @@ const NewSubscription: React.FC = () => {
     e.preventDefault();
     if (!user?.Member_id || !formData.investAmount) {
       toast.error("Please provide an investment amount");
+      return;
+    }
+
+    if (Number(formData.investAmount) < 100) {
+      toast.error("Minimum investment amount is $100");
       return;
     }
 
@@ -187,7 +192,7 @@ const NewSubscription: React.FC = () => {
             <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'flex-start', sm: 'center' }, gap: 1 }}>
               <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Your Top-Up Balance</Typography>
               <TextField
-                value={`$${walletOverview?.topUpBalance || 0}`}
+                value={`$${Number(walletOverview?.topUpBalance || 0).toLocaleString(undefined, { maximumFractionDigits: 0 })}`}
                 fullWidth
                 size="small"
                 disabled
@@ -215,13 +220,12 @@ const NewSubscription: React.FC = () => {
                   }}
                 >
                   <MenuItem value="" disabled>Select Package</MenuItem>
-                  <MenuItem value="30">$30 Package</MenuItem>
-                  <MenuItem value="60">$60 Package</MenuItem>
+                  <MenuItem value="custom">Enter Custom Amount</MenuItem>
                   <MenuItem value="100">$100 Package</MenuItem>
-                  <MenuItem value="120">$120 Package</MenuItem>
                   <MenuItem value="250">$250 Package</MenuItem>
                   <MenuItem value="500">$500 Package</MenuItem>
                   <MenuItem value="1000">$1000 Package</MenuItem>
+                  <MenuItem value="2000">$2000 Package</MenuItem>
                 </Select>
               </FormControl>
             </Box>
@@ -230,13 +234,21 @@ const NewSubscription: React.FC = () => {
               <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Invest Amount <span style={{color: '#ef4444'}}>*</span></Typography>
               <TextField
                 name="investAmount"
-                type="number"
+                type="text"
                 value={formData.investAmount}
-                onChange={handleInputChange}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  if (val === '' || /^\d*\.?\d*$/.test(val)) {
+                    handleInputChange(e);
+                  }
+                }}
                 fullWidth
                 size="small"
                 required
-                disabled // User should select via package dropdown, but keeping it editable if they want, let's keep editable but tied to package
+                disabled={formData.package !== 'custom'} // Only editable if custom is selected
+                InputProps={{
+                  startAdornment: <Typography sx={{color: '#00e676', mr: 1, fontWeight: 800}}>$</Typography>,
+                }}
                 sx={inputStyles}
               />
             </Box>

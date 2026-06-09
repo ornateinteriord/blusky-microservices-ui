@@ -5,6 +5,7 @@ import {
   Dialog, DialogTitle, DialogContent, DialogActions,
   Box, Divider,
   Radio, RadioGroup, FormControlLabel, FormControl, FormLabel,
+  Select, MenuItem, InputLabel,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { CheckCircle, WarningAmber } from '@mui/icons-material';
@@ -249,7 +250,7 @@ const useMembers = (status: status) => {
   }, [isError, error]);
 
   const memberdata = Array.isArray(members)
-    ? members.filter((member: Member) => (status === "All" ? true : member.status === status)).map((member: Member, index) => ({
+    ? members.filter((member: Member) => (status === "All" ? true : member.status?.toLowerCase() === status.toLowerCase())).map((member: Member, index) => ({
       ...member,
       sNo: index + 1,
     }))
@@ -308,12 +309,14 @@ export const PendingMembers = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedMember, setSelectedMember] = useState<any>(null);
   const [packageAmount, setPackageAmount] = useState<string>('');
+  const [customAmount, setCustomAmount] = useState<string>('');
   const [activationType, setActivationType] = useState<'with' | 'without'>('with');
 
   const handleActivateClick = (member: any) => {
     setSelectedMember(member);
     // Don't pre-fill package amount to ensure "Select Package" is shown
     setPackageAmount('');
+    setCustomAmount('');
     setActivationType('with');
     setDialogOpen(true);
   };
@@ -339,7 +342,7 @@ export const PendingMembers = () => {
       return;
     }
 
-    const amt = Number(packageAmount);
+    const amt = packageAmount === 'custom' ? Number(customAmount) : Number(packageAmount);
     if (!amt || amt <= 0) {
       toast.error('Please enter a valid package amount or select None.');
       return;
@@ -410,16 +413,7 @@ export const PendingMembers = () => {
                 <Typography variant="caption" color="text.secondary">Mobile</Typography>
                 <Typography variant="body2" fontWeight={600}>{selectedMember?.mobileno}</Typography>
               </Grid>
-              <Grid item xs={6}>
-                <Typography variant="caption" color="text.secondary">Package Amount</Typography>
-                <Typography variant="body2" fontWeight={600}>
-                  {selectedMember?.package_value
-                    ? `$${selectedMember.package_value}`
-                    : selectedMember?.spackage
-                      ? `$${selectedMember.spackage}`
-                      : '-'}
-                </Typography>
-              </Grid>
+
               <Grid item xs={6}>
                 <Typography variant="caption" color="text.secondary">Sponsor</Typography>
                 <Typography variant="body2" fontWeight={600}>{selectedMember?.Sponsor_name ?? '-'}</Typography>
@@ -454,25 +448,49 @@ export const PendingMembers = () => {
             </RadioGroup>
           </FormControl>
 
-          {/* Manual Package Amount Entry */}
+          {/* Package Selection */}
           {activationType === 'with' && (
-            <TextField
-              label="Package Amount"
-              fullWidth
-              type="number"
-              value={packageAmount}
-              onChange={(e) => setPackageAmount(e.target.value)}
-              placeholder="e.g. 1000"
-              helperText="Enter the package amount to activate this member"
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': { borderColor: primaryColor },
-                  '&:hover fieldset': { borderColor: primaryColor },
-                  '&.Mui-focused fieldset': { borderColor: primaryColor },
-                },
-                '& .MuiInputLabel-root.Mui-focused': { color: primaryColor }
-              }}
-            />
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <FormControl fullWidth>
+                <InputLabel id="package-select-label">Select Package</InputLabel>
+                <Select
+                  labelId="package-select-label"
+                  value={packageAmount}
+                  label="Select Package"
+                  onChange={(e) => setPackageAmount(e.target.value)}
+                  sx={{
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: primaryColor },
+                  }}
+                >
+                  <MenuItem value="100">BMS Plan - $100</MenuItem>
+                  <MenuItem value="250">BMS Plan - $250</MenuItem>
+                  <MenuItem value="500">BMS Plan - $500</MenuItem>
+                  <MenuItem value="1000">BMS Plan - $1,000</MenuItem>
+                  <MenuItem value="2000">BMS Plan - $2,000</MenuItem>
+                  <MenuItem value="5000">BMS Plan - $5,000</MenuItem>
+                  <MenuItem value="10000">BMS Plan - $10,000</MenuItem>
+                  <MenuItem value="custom">Enter Custom Amount...</MenuItem>
+                </Select>
+              </FormControl>
+
+              {packageAmount === 'custom' && (
+                <TextField
+                  label="Custom Package Amount"
+                  fullWidth
+                  type="number"
+                  value={customAmount}
+                  onChange={(e) => setCustomAmount(e.target.value)}
+                  placeholder="e.g. 1500"
+                  helperText="Enter the custom package amount"
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
+                      '&.Mui-focused fieldset': { borderColor: primaryColor },
+                    },
+                    '& .MuiInputLabel-root.Mui-focused': { color: primaryColor }
+                  }}
+                />
+              )}
+            </Box>
           )}
 
         </DialogContent>

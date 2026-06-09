@@ -14,7 +14,6 @@ import {
 } from '@mui/material';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import StarsIcon from '@mui/icons-material/Stars';
 import DownloadIcon from '@mui/icons-material/Download';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import UserContext from '../../../context/user/userContext';
@@ -45,7 +44,7 @@ const MySubscriptions: React.FC = () => {
           My Subscriptions
         </Typography>
         <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)', mt: 0.5, ml: 2, fontWeight: 500 }}>
-          Manage your primary investment and independent add-on subscriptions.
+          Manage your deposits and investment tracks.
         </Typography>
       </Box>
 
@@ -59,9 +58,7 @@ const MySubscriptions: React.FC = () => {
             const primaryInAddOns = addOns.find((a: any) => a.package_id?.startsWith('PKG-P-'));
             let finalAddOns = [...addOns];
             if (primaryInAddOns) {
-              finalAddOns = addOns.map((a: any) => 
-                a.package_id === primaryInAddOns.package_id ? { ...a, isPrimary: true } : a
-              );
+              finalAddOns = addOns.map((a: any) => a);
             }
 
             const baseAmount = user.package_value || 0;
@@ -71,7 +68,7 @@ const MySubscriptions: React.FC = () => {
               isPrimary: true,
               requested_amount: baseAmount,
               roi_status: user.roi_status || 'Active',
-              roi_payout_target: user.roi_payout_target || ((user.package_value || 0) * 2),
+              roi_payout_target: user.roi_payout_target || ((user.package_value || 0) * 3),
               roi_payout_count: user.roi_payout_count || 0,
               roi_start_date: user.roi_start_date || user.Date_of_joining,
             };
@@ -83,18 +80,18 @@ const MySubscriptions: React.FC = () => {
               const pkgId = pkg.package_id || pkg.request_id || 'N/A';
               const totalDays = pkg.isFD 
                 ? (moment(pkg.date_of_maturity).diff(moment(pkg.roi_start_date), 'days') || 1)
-                : 300;
+                : 120;
               const pkgProgress = pkg.roi_payout_count ? Math.min((pkg.roi_payout_count / totalDays) * 100, 100) : 0;
-              const pkgTarget = pkg.roi_payout_target || (pkgAmount * 2);
-              const pkgDailyROI = pkgTarget > 0 ? parseFloat((pkgTarget / 300).toFixed(2)) : 0;
+              const pkgTarget = pkg.roi_payout_target || (pkgAmount * 3);
+              const pkgDailyROI = pkgTarget > 0 ? parseFloat((pkgTarget / 120).toFixed(2)) : 0;
 
               return (
                 <Grid item xs={12} sm={6} md={4} key={pkgId}>
                   <Card sx={{
                     height: '100%',
-                    boxShadow: pkg.isPrimary ? '0 15px 35px rgba(0, 230, 118, 0.15)' : '0 10px 30px rgba(0,0,0,0.2)',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
                     borderRadius: '24px',
-                    border: pkg.isPrimary ? '1px solid rgba(0, 230, 118, 0.3)' : '1px solid rgba(255,255,255,0.08)',
+                    border: '1px solid rgba(255,255,255,0.08)',
                     backgroundColor: 'rgba(255, 255, 255, 0.06)',
                     color: '#ffffff',
                     transition: 'transform 0.2s',
@@ -104,9 +101,9 @@ const MySubscriptions: React.FC = () => {
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
                         <Box>
                           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, mb: 0.5 }}>
-                            {pkg.isPrimary ? <StarsIcon sx={{ fontSize: 16, color: '#00e676' }} /> : (pkg.isFD ? <AccountBalanceIcon sx={{ fontSize: 16, color: '#f59e0b' }} /> : <PaymentsIcon sx={{ fontSize: 16, color: 'rgba(255,255,255,0.5)' }} />)}
-                            <Typography variant="caption" sx={{ fontSize: '0.75rem', fontWeight: 800, color: pkg.isPrimary ? '#00e676' : (pkg.isFD ? '#f59e0b' : 'rgba(255,255,255,0.5)'), textTransform: 'uppercase', letterSpacing: 0.5 }}>
-                              {pkg.isPrimary ? 'Primary Package' : (pkg.isFD ? 'Fixed Deposit' : `My Subscription #${index}`)}
+                            {pkg.isFD ? <AccountBalanceIcon sx={{ fontSize: 16, color: '#f59e0b' }} /> : <PaymentsIcon sx={{ fontSize: 16, color: 'rgba(255,255,255,0.5)' }} />}
+                            <Typography variant="caption" sx={{ fontSize: '0.75rem', fontWeight: 800, color: pkg.isFD ? '#f59e0b' : 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: 0.5 }}>
+                              {pkg.isFD ? 'Fixed Deposit' : `My Subscription #${index + 1}`}
                             </Typography>
                           </Box>
                           <Typography variant="h5" sx={{ fontWeight: 900, fontSize: '1.6rem', color: '#ffffff', lineHeight: 1.2 }}>
@@ -140,7 +137,7 @@ const MySubscriptions: React.FC = () => {
 
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                         <Typography variant="caption" sx={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', fontWeight: 600 }}>
-                          {pkg.isFD ? `Matures ${moment(pkg.date_of_maturity).format('DD MMM YYYY')}` : `Day ${pkg.roi_payout_count} of 300`}
+                          {pkg.isFD ? `Matures ${moment(pkg.date_of_maturity).format('DD MMM YYYY')}` : `Day ${pkg.roi_payout_count} of 120`}
                         </Typography>
                         <Typography variant="caption" sx={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.8)', fontWeight: 700 }}>{pkgProgress.toFixed(0)}%</Typography>
                       </Box>
@@ -152,7 +149,7 @@ const MySubscriptions: React.FC = () => {
                           borderRadius: 4,
                           backgroundColor: 'rgba(255,255,255,0.1)',
                           '& .MuiLinearProgress-bar': {
-                            background: pkg.isPrimary ? 'linear-gradient(90deg, #00e676, #3b82f6)' : 'linear-gradient(90deg, #3b82f6, #8b5cf6)',
+                            background: 'linear-gradient(90deg, #3b82f6, #8b5cf6)',
                             borderRadius: 4
                           }
                         }}
