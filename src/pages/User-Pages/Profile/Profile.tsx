@@ -24,6 +24,7 @@ const Profile: React.FC = () => {
     email: "",
     country: "",
     usdt_bep20_address: "",
+    dob: "",
   });
 
   useEffect(() => {
@@ -34,6 +35,7 @@ const Profile: React.FC = () => {
         email: user.email ?? "",
         country: user.country ?? "India",
         usdt_bep20_address: user.usdt_bep20_address ?? "",
+        dob: user.dob ?? "",
       });
     }
   }, [user]);
@@ -114,13 +116,18 @@ const Profile: React.FC = () => {
             </Box>
 
             <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'flex-start', sm: 'center' }, gap: 1 }}>
-              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Date of Joining</Typography>
+              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Date of Birth</Typography>
               <TextField
-                value={user?.Date_of_joining ? new Date(user.Date_of_joining).toLocaleDateString('en-GB') : ''}
+                name="dob"
+                type="date"
+                value={formData.dob ? formData.dob.split('T')[0] : ''}
+                onChange={handleInputChange}
                 fullWidth
                 size="small"
-                disabled
-                sx={{ ...inputStyles, opacity: 0.7 }}
+                sx={{
+                  ...inputStyles,
+                  '& ::-webkit-calendar-picker-indicator': { filter: 'invert(1)' }
+                }}
               />
             </Box>
 

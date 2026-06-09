@@ -54,14 +54,11 @@ const UserDashboard = () => {
   const roiLevelBenefits = Number(walletOverview?.roiLevelBenefits || 0);
 
   // Wallet starts at Total Principal and decreases as ROI is paid.
-  const displayWallet = Math.max(0, totalPrincipal - totalRoiPaidValue);
 
   // Once ROI exceeds Total Principal, the Deposit itself starts to "decrease" visually.
   const extraROI = Math.max(0, totalRoiPaidValue - totalPrincipal);
   const displayDeposit = Math.max(0, totalPrincipal - extraROI);
 
-  const isUserActive = memberDetails?.status === 'active';
-  const isPackageActive = memberDetails?.upgrade_status === 'Active';
 
   const bannerImages = ['/cb.png', '/B3.png', '/B3_1.png'];
   const [activeSlide, setActiveSlide] = useState(0);
@@ -110,7 +107,7 @@ const UserDashboard = () => {
       ]
     },
     {
-      title: "BMS BENEFITS",
+      title: "BENEFITS",
       items: [
         // { label: "ROI Benefits", icon: <ShowChartIcon />, route: "/user/earnings/roi-benefits", color: "#10b981" },
         { label: "Referral Bonus", icon: <PaymentsIcon />, route: "/user/earnings/referral-bonus", color: "#f59e0b" },
@@ -215,7 +212,7 @@ const UserDashboard = () => {
             Your Top Up Balance
           </Typography>
           <Typography sx={{ fontWeight: 800, fontSize: { xs: '1.85rem', md: '2.5rem' }, color: '#ffffff', lineHeight: 1.1 }}>
-            ${Number(walletOverview?.topUpBalance || 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+            ${Number(walletOverview?.topUpBalance || 0).toLocaleString('en-US', { maximumFractionDigits: 0 })}
           </Typography>
         </Box>
         <Button
@@ -425,36 +422,32 @@ const UserDashboard = () => {
                       <Typography sx={{ fontWeight: 900, color: '#ffb300' }}>${totalRoiPaidValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
                     </Box>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <Typography variant="body2" sx={{ fontWeight: 800, color: 'rgba(255,255,255,0.7)' }}>BMS ROI Benefits</Typography>
+                      <Typography variant="body2" sx={{ fontWeight: 800, color: 'rgba(255,255,255,0.7)' }}>Referral Bonus</Typography>
+                      <Typography sx={{ fontWeight: 900, color: '#00e676' }}>${Number(walletOverview?.levelBenefits || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <Typography variant="body2" sx={{ fontWeight: 800, color: 'rgba(255,255,255,0.7)' }}>Level Bonus</Typography>
                       <Typography sx={{ fontWeight: 900, color: '#00e676' }}>${roiLevelBenefits.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
                     </Box>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <Typography variant="body2" sx={{ fontWeight: 800, color: 'rgba(255,255,255,0.7)' }}>BMS Level Benefits</Typography>
-                      <Typography sx={{ fontWeight: 900, color: '#00e676' }}>${Number(walletOverview?.levelBenefits || 0).toLocaleString('en-US')}</Typography>
+                      <Typography variant="body2" sx={{ fontWeight: 800, color: 'rgba(255,255,255,0.7)' }}>Wallet</Typography>
+                      <Typography sx={{ fontWeight: 900, color: '#29b6f6' }}>${Number(walletOverview?.balance || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
                     </Box>
-                    {isUserActive && (
-                      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <Typography variant="body2" sx={{ fontWeight: 800, color: 'rgba(255,255,255,0.7)' }}>BMS - Wallet</Typography>
-                        <Typography sx={{ fontWeight: 900, color: '#29b6f6' }}>${displayWallet.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
-                      </Box>
-                    )}
                   </Stack>
                 </Box>
 
-                {/* 3rd Section: Big Balance — Hidden if Inactive ROI or User */}
-                {isUserActive && isPackageActive && (
+                {/* 3rd Section: Big Balance */}
                   <Box sx={{ textAlign: 'center', pt: 1 }}>
                     <Typography variant="subtitle1" sx={{ fontWeight: 800, color: 'rgba(255,255,255,0.7)', letterSpacing: '1px', mb: 1 }}>
-                      WALLET BALANCE
+                      Wallet
                     </Typography>
-                    <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1.5, p: 2, px: 4, bgcolor: '#00e676', borderRadius: '20px', color: '#050916' }}>
-                      <AttachMoneyIcon sx={{ fontSize: 28, color: '#050916' }} />
+                    <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1.5, p: 2.5, px: 5, bgcolor: '#00e676', borderRadius: '20px', color: '#050916' }}>
+                      <AttachMoneyIcon sx={{ fontSize: 30, color: '#050916' }} />
                       <Typography variant="h4" sx={{ fontWeight: 900 }}>
                         {Number(walletOverview?.balance || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                       </Typography>
                     </Box>
                   </Box>
-                )}
               </Stack>
             </Paper>
           </Box>

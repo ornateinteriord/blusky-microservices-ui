@@ -26,20 +26,12 @@ const LevelBenifits = () => {
       const txType = transaction.transaction_type?.toLowerCase() || "";
       const benefitType = transaction.benefit_type?.toLowerCase() || "";
 
-      // Exclude ROI related transactions from this specific page
-      if (txType.includes('roi') || benefitType.includes('roi')) return false;
-
-      const levelStr = transaction.description?.toLowerCase() || "";
-      const isLevel1 = transaction.level === 1 || levelStr.includes('1st level') || levelStr.includes('level 1');
-      if (isLevel1) return false;
+      // Allow all level-related transactions including ROI Level Bonus
 
       const matchesLevel =
-        benefitType.includes('level') ||
-        txType.includes('level') ||
-        txType.includes('commission') ||
-        txType.includes('payout') ||
-        txType.includes('benefit') ||
-        (transaction.level !== null && transaction.level !== undefined);
+        txType === 'level benefits' ||
+        txType === 'roi level benefit' ||
+        (benefitType.includes('level') && txType !== 'roi payout');
 
       return matchesLevel;
     })
@@ -51,11 +43,16 @@ const LevelBenifits = () => {
         return n + (s[(v - 20) % 10] || s[v] || s[0]);
       };
 
-      const levelStr = transaction.description && transaction.description.toLowerCase().includes('level') 
+      let levelStr = transaction.description && transaction.description.toLowerCase().includes('level') 
           ? transaction.description 
           : transaction.level 
-            ? `${getOrdinal(transaction.level)} Level Benefit` 
+            ? `${getOrdinal(transaction.level)} Level Bonus` 
             : 'N/A';
+
+      if (levelStr) {
+        levelStr = levelStr.replace(/Level Benefits?/gi, 'Level Bonus');
+        levelStr = levelStr.replace(/Benefit/gi, 'Bonus');
+      }
 
       return {
         id: transaction._id || transaction.transaction_id,

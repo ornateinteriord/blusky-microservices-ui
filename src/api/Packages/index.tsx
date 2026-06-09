@@ -59,7 +59,7 @@ export const useBuyPackageDirectlyMutation = () => {
       if (data.success) {
         toast.success(data.message || "Package purchased successfully!");
         queryClient.invalidateQueries({ queryKey: ["member-addons"] });
-        queryClient.invalidateQueries({ queryKey: ["wallet-overview"] });
+        queryClient.invalidateQueries({ queryKey: ["walletOverview"] });
       } else {
         toast.error(data.message);
       }

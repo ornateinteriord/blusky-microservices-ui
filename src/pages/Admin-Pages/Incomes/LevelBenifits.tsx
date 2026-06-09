@@ -32,11 +32,7 @@ const LevelBenifits = () => {
       transaction.category === 'level_benefits' ||
       transaction.description?.toLowerCase().includes('level')
     );
-    const isROI = transaction.description?.toLowerCase().includes('roi') || 
-                  transaction.type?.toLowerCase().includes('roi') || 
-                  transaction.transactionType?.toLowerCase().includes('roi');
-    
-    return isLevel && !isROI;
+    return isLevel;
   }) || [];
 
   // Aggregate level benefits by user
@@ -80,7 +76,7 @@ const LevelBenifits = () => {
   return (
     <>
       <Typography variant="h4" sx={{ margin: "2rem", mt: 10 }}>
-        Level Benefits
+        Level Bonus
       </Typography>
       <Card sx={{ margin: "2rem", mt: 2 }}>
         <CardContent>
@@ -93,7 +89,7 @@ const LevelBenifits = () => {
                 "& .MuiSvgIcon-root": { color: "#fff" },
               }}
             >
-              List of Level Benefits
+              List of Level Bonus
             </AccordionSummary>
             <AccordionDetails>
               <Box

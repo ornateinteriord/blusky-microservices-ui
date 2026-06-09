@@ -34,9 +34,15 @@ const ROIBenefits = () => {
       return n + (s[(v - 20) % 10] || s[v] || s[0]);
     };
 
-    const levelStr = transaction.level 
-      ? `${getOrdinal(transaction.level)} Level Benefit` 
-      : 'N/A';
+    let levelStr = transaction.description && transaction.description.toLowerCase().includes('level')
+        ? transaction.description
+        : transaction.level
+          ? `${getOrdinal(transaction.level)} Level Bonus`
+          : 'N/A';
+          
+    if (levelStr) {
+      levelStr = levelStr.replace(/Benefit/gi, 'Bonus');
+    }
 
     return {
       id: transaction._id || transaction.transaction_id,
