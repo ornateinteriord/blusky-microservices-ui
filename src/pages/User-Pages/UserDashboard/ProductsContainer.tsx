@@ -1,16 +1,18 @@
 import React, { useState, useContext } from "react";
-import { Box, Typography, Button, Card, CardContent, Chip, CircularProgress, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText, TextField, InputAdornment } from "@mui/material";
+import { Box, Typography, Button, Card, CardContent, Chip, CircularProgress, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from "@mui/material";
 import UserContext from "../../../context/user/userContext";
 import { useGetWalletOverview } from "../../../api/Memeber";
 import { useBuyPackageDirectlyMutation } from "../../../api/Packages";
 import { toast } from "react-toastify";
+import { useGetMemberAddOns } from "../../../api/Packages";
 
 const PACKAGES = [
-  { id: 1, isCustom: true, minAmount: 100, title: "Enter your own amount", yield: "3.3%", days: "210 Day", tag: "" },
-  { id: 2, amount: 250, title: "Bronze Package", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" },
-  { id: 3, amount: 500, title: "Silver Package", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" },
-  { id: 4, amount: 1000, title: "Gold Package", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" },
-  { id: 5, amount: 2000, title: "Diamond Package", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" }
+  { id: 1, amount: 30, title: "Basic Package", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" },
+  { id: 2, amount: 60, title: "Standard Package", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" },
+  { id: 3, amount: 120, title: "Bronze Package", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" },
+  { id: 4, amount: 250, title: "Silver Package", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" },
+  { id: 5, amount: 500, title: "Gold Package", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" },
+  { id: 6, amount: 1000, title: "Diamond Package", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" }
 ];
 
 const ProductsContainer: React.FC = () => {
@@ -20,15 +22,24 @@ const ProductsContainer: React.FC = () => {
   const [showAll, setShowAll] = useState(false);
   const [buyingId, setBuyingId] = useState<number | null>(null);
   const [confirmPkg, setConfirmPkg] = useState<any>(null);
-  const [customAmount, setCustomAmount] = useState<number | ''>(100);
+  const { data: memberAddons } = useGetMemberAddOns(user?.Member_id || '');
   const topUpBalance = walletOverview?.topUpBalance || 0;
 
-  const handleBuyClick = (pkg: any) => {
-    const amountToBuy = pkg.isCustom ? Number(customAmount) : pkg.amount;
-    if (pkg.isCustom && amountToBuy < pkg.minAmount) {
-      toast.error(`Minimum amount is $${pkg.minAmount}`);
-      return;
+  const isPurchased = (pkgAmount: number) => {
+    // Check primary package
+    if (walletOverview?.primaryPackage === pkgAmount) return true;
+    if (user?.package_value === pkgAmount) return true;
+    
+    // Check addon packages
+    if (memberAddons && memberAddons.length > 0) {
+      if (memberAddons.some((addon: any) => addon.amount === pkgAmount)) return true;
     }
+    
+    return false;
+  };
+
+  const handleBuyClick = (pkg: any) => {
+    const amountToBuy = pkg.amount;
     if (topUpBalance < amountToBuy) {
       toast.error(`Insufficient Top Up Balance! You need $${amountToBuy} but have $${topUpBalance}`);
       return;
@@ -109,50 +120,9 @@ const ProductsContainer: React.FC = () => {
                 {pkg.title}
               </Typography>
               
-              {pkg.isCustom ? (
-                <TextField
-                  type="number"
-                  size="small"
-                  value={customAmount}
-                  onChange={(e) => setCustomAmount(e.target.value === '' ? '' : Number(e.target.value))}
-                  InputProps={{
-                    startAdornment: <InputAdornment position="start"><Typography sx={{color: '#00e676', fontWeight: 800, mt: 0.2}}>$</Typography></InputAdornment>,
-                  }}
-                  sx={{
-                    mb: 1,
-                    width: '130px',
-                    '& .MuiInputBase-root': {
-                      color: '#00e676',
-                      fontWeight: 800,
-                      fontSize: '1.25rem',
-                      bgcolor: 'rgba(0,0,0,0.2)',
-                      borderRadius: '8px',
-                      height: '36px',
-                      pl: 1.5,
-                    },
-                    '& .MuiOutlinedInput-notchedOutline': {
-                      border: '1px solid rgba(0, 230, 118, 0.3)'
-                    },
-                    '&:hover .MuiOutlinedInput-notchedOutline': {
-                      border: '1px solid rgba(0, 230, 118, 0.5)'
-                    },
-                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                      border: '1px solid #00e676'
-                    },
-                    '& input[type=number]::-webkit-outer-spin-button, & input[type=number]::-webkit-inner-spin-button': {
-                      WebkitAppearance: 'none',
-                      margin: 0,
-                    },
-                    '& input[type=number]': {
-                      MozAppearance: 'textfield',
-                    }
-                  }}
-                />
-              ) : (
-                <Typography variant="h5" fontWeight={800} sx={{ color: '#00e676', mb: 1, height: '36px', display: 'flex', alignItems: 'center' }}>
-                  ${pkg.amount}
-                </Typography>
-              )}
+              <Typography variant="h5" fontWeight={800} sx={{ color: '#00e676', mb: 1, height: '36px', display: 'flex', alignItems: 'center' }}>
+                ${pkg.amount}
+              </Typography>
               
               {pkg.tag ? (
                 <Chip 
@@ -174,17 +144,36 @@ const ProductsContainer: React.FC = () => {
               
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
                 <Box sx={{ display: 'flex', gap: 2.5 }}>
-                  <Box>
-                    <Typography variant="subtitle1" fontWeight={800} sx={{ lineHeight: 1.2, mb: 0.5 }}>{pkg.yield}</Typography>
-                    <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 500, fontSize: '0.65rem' }}>Yield</Typography>
-                  </Box>
-                  {/* <Box>
-                    <Typography variant="subtitle1" fontWeight={800} sx={{ lineHeight: 1.2, mb: 0.5 }}>{pkg.days}</Typography>
-                    <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 500, fontSize: '0.65rem' }}>Holding Period</Typography>
-                  </Box> */}
+                  {!isPurchased(pkg.amount) ? (
+                    <Box>
+                      <Typography variant="subtitle1" fontWeight={800} sx={{ lineHeight: 1.2, mb: 0.5 }}>{pkg.yield}</Typography>
+                      <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 500, fontSize: '0.65rem' }}>Yield</Typography>
+                    </Box>
+                  ) : (
+                    <Box>
+                      <Typography variant="subtitle1" sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: '0.85rem', mb: 0.2 }}>Single Level Income</Typography>
+                      <Typography variant="h5" fontWeight={900} sx={{ lineHeight: 1.2, color: '#00e676' }}>
+                        ${(pkg.amount * 0.015).toFixed(2)}
+                      </Typography>
+                    </Box>
+                  )}
                 </Box>
                 
-                <Button
+                {isPurchased(pkg.amount) ? (
+                  <Chip 
+                    label="Purchased" 
+                    sx={{ 
+                      bgcolor: 'rgba(59, 130, 246, 0.2)', 
+                      color: '#3b82f6',
+                      fontWeight: 700,
+                      borderRadius: '24px',
+                      height: '24px',
+                      fontSize: '0.65rem',
+                      px: 0.5
+                    }} 
+                  />
+                ) : (
+                  <Button
                   variant="contained"
                   onClick={() => handleBuyClick(pkg)}
                   disabled={isPending}
@@ -210,6 +199,7 @@ const ProductsContainer: React.FC = () => {
                 >
                   {isPending && buyingId === pkg.id ? <CircularProgress size={16} color="inherit" /> : "Buy"}
                 </Button>
+                )}
               </Box>
             </CardContent>
           </Card>

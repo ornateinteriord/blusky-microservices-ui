@@ -199,6 +199,7 @@ const UserReferralBonus = lazy(
   () => import("./pages/User-Pages/Earnings/ReferralBonus")
 );
 const UserWallet = lazy(() => import("./pages/User-Pages/Wallet/Wallet"));
+const UserUpgradeWallet = lazy(() => import("./pages/User-Pages/Wallet/UpgradeWallet"));
 const UserSupportChat = lazy(() => import("./pages/User-Pages/SupportChat/SupportChat"));
 const UserChat = lazy(() => import("./pages/User-Pages/Chat/Chat"));
 const UserOverdraft = lazy(() => import("./pages/User-Pages/Overdraft/Overdraft"));
@@ -555,6 +556,7 @@ const RoutesProvider = ({
               <Route path="/user/loantransactions" element={<UserLoanTransaction />} />
               <Route path="/user/mailbox" element={<UserMailBox />} />
               <Route path="/user/wallet" element={<UserWallet />} />
+              <Route path="/user/upgrade-wallet" element={<UserUpgradeWallet />} />
               <Route path="/user/support-chat" element={<UserSupportChat />} />
               <Route path="/user/chat" element={<UserChat />} />
               <Route path="/user/overdraft" element={<UserOverdraft />} />

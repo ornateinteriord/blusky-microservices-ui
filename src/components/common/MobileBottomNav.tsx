@@ -1,7 +1,6 @@
 import React from 'react';
 import { BottomNavigation, BottomNavigationAction, Paper, Box } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import PersonIcon from '@mui/icons-material/Person';
 import ChatIcon from '@mui/icons-material/Chat';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -86,11 +85,6 @@ const MobileBottomNav: React.FC = () => {
             value="/user/dashboard"
             label="Home"
             icon={<Box className={value === "/user/dashboard" ? "indicator" : ""}>{<HomeIcon />}</Box>}
-          />
-          <BottomNavigationAction
-            value="/user/wallet"
-            label="Wallet"
-            icon={<Box className={value === "/user/wallet" ? "indicator" : ""}>{<AccountBalanceWalletIcon />}</Box>}
           />
           <BottomNavigationAction
             value="/user/chat"

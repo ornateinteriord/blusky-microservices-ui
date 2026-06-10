@@ -124,9 +124,15 @@ export const UserSideBarMenuItems: SideBarMenuItemType[] = [
   },
   */
   {
-    name: "Wallet Balance",
+    name: "Earnings Wallet",
     icon: <CreditCardIcon />,
     path: "/user/wallet",
+    isExpandable: false,
+  },
+  {
+    name: "Upgrade Wallet",
+    icon: <CreditCardIcon />,
+    path: "/user/upgrade-wallet",
     isExpandable: false,
   },
   {
