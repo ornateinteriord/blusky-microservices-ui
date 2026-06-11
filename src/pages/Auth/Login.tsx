@@ -14,7 +14,7 @@ import {
   IconButton
 } from "@mui/material";
 import { Visibility, VisibilityOff, PersonOutline, LockOutlined } from "@mui/icons-material";
-import BMSLogo from "../../assets/bms_logo.png"; // Import the logo
+import USDTLogo from "../../assets/bms_logo.png"; // Import the logo
 import { LoadingComponent } from "../../App";
 import { useLoginMutation } from "../../api/Auth";
 import ForgotPasswordForm from "./components/ForgotPasswordForm";
@@ -139,8 +139,8 @@ const Login = () => {
         >
           <Box sx={{ mb: 3, display: "flex", justifyContent: "center" }}>
             <img
-              src={BMSLogo}
-              alt="BMS Finance & Foundation"
+              src={USDTLogo}
+              alt="USDT Finance & Foundation"
               style={{ maxWidth: "220px", height: "auto", objectFit: "contain" }}
             />
           </Box>

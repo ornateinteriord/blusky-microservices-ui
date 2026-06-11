@@ -10,7 +10,7 @@ import {
     Box
 } from '@mui/material';
 
-const BMSLoanChart = () => {
+const USDTLoanChart = () => {
     const loanData = [
         { amount: '5,000', deduction: '250', cashLoan: '4,750', repayment: '500', weeks: '10 Weeks', rdPlanning: '600 & 1200' },
         { amount: '10,000', deduction: '600', cashLoan: '9,400', repayment: '1000', weeks: '10 Weeks', rdPlanning: '600 & 1200' },
@@ -49,12 +49,12 @@ const BMSLoanChart = () => {
                     letterSpacing: '1px',
                     fontSize: { xs: '1rem', md: '1.25rem' },
                 }}>
-                    📊 BMS LOAN CHART
+                    📊 USDT LOAN CHART
                 </Typography>
             </Box>
 
             <TableContainer component={Paper} sx={{ boxShadow: 'none', borderRadius: 0 }}>
-                <Table sx={{ minWidth: 500 }} aria-label="bms loan chart">
+                <Table sx={{ minWidth: 500 }} aria-label="usdt loan chart">
                     <TableHead>
                         <TableRow>
                             {headerCells.map((cell) => (
@@ -118,4 +118,4 @@ const BMSLoanChart = () => {
     );
 };
 
-export default BMSLoanChart;
+export default USDTLoanChart;

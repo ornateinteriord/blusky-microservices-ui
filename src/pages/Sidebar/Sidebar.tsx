@@ -12,7 +12,7 @@ import { LoadingComponent } from '../../App';
 import { toast } from 'react-toastify';
 import TokenService from '../../api/token/tokenService';
 
-// import BMSLogo from '../../assets/bms_logo.png'; 
+// import USDTLogo from '../../assets/bms_logo.png'; 
 
 const Sidebar = ({ isOpen, onClose, role }: { isOpen: boolean, onClose: () => void, role: string | null }) => {
   const [expandedItem, setExpandedItem] = useState<string | null>(null);

@@ -35,7 +35,7 @@ const About = () => {
                     About Us
                 </Typography>
                 <Typography variant="h6" color="text.secondary">
-                   BMS Foundation Ltd.
+                   USDT.
                 </Typography>
             </Box>
 
@@ -44,7 +44,7 @@ const About = () => {
                     Who We Are
                 </Typography>
                 <Typography variant="body1" paragraph sx={{ lineHeight: 1.8 }}>
-                    BMS Foundation ltd (BMSF) is a premier cooperative society dedicated to
+                    USDT (USDT) is a premier cooperative society dedicated to
                     providing comprehensive financial services to our valued members. Established with the vision of
                     financial inclusion and empowerment, we have been serving our community with integrity, transparency,
                     and excellence.
@@ -124,7 +124,7 @@ const About = () => {
                     <strong>Address:</strong> Shop No. G6, Asha Chandra Trade Centre, Udupi, Karnataka
                 </Typography>
                 <Typography variant="body1">
-                    <strong>Contact:</strong> +91 9004478100, 0820-7966887 | support@bmsfoundation.biz
+                    <strong>Contact:</strong> +91 9004478100, 0820-7966887 | support@usdt.com
                 </Typography>
             </Paper>
         </Container>

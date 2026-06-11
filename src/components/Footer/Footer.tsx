@@ -83,7 +83,7 @@ const Footer = () => {
                                     </Box>
                                     <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                                         <Box sx={{ p: 1, borderRadius: "8px", bgcolor: "rgba(96, 165, 250, 0.1)" }}><Mail size={18} color="#60a5fa" /></Box>
-                                        <Typography variant="body2" sx={{ fontWeight: 600 }}>BMSFundation@gmail.com</Typography>
+                                        <Typography variant="body2" sx={{ fontWeight: 600 }}>USDTundation@gmail.com</Typography>
                                     </Box>
                                 </Box>
                             </Grid>
