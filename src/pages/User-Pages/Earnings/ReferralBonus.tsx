@@ -31,7 +31,7 @@ const ReferralBonus = () => {
       if (txType.includes('roi') || benefitType.includes('roi')) return false;
 
       // Only include level 1 (Direct Referral)
-      const isLevel1 = transaction.level === 1 || descStr.includes('1st level') || descStr.includes('level 1') || descStr.includes('direct') || descStr.includes('referral');
+      const isLevel1 = Number(transaction.level) === 1 || descStr.includes('1st level') || descStr.includes('level 1') || descStr.includes('direct') || descStr.includes('referral') || txType.includes('direct');
       
       return isLevel1;
     })
@@ -42,7 +42,7 @@ const ReferralBonus = () => {
         payoutLevel: 'Referral Bonus', // Forced description as requested
         memberName: transaction.related_member_name || 'N/A',
         memberId: transaction.related_member_id || 'N/A',
-        amount: transaction.ew_credit || '0',
+        amount: ((parseFloat(transaction.ew_credit) || 0) + (parseFloat(transaction.uw_credit) || 0)).toFixed(2),
         description: 'Referral Bonus', // Forced description as requested
         transactionType: transaction.transaction_type
       };

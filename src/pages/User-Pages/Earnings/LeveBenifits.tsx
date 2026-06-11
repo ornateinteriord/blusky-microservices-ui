@@ -33,6 +33,9 @@ const LevelBenifits = () => {
         txType === 'roi level benefit' ||
         (benefitType.includes('level') && txType !== 'roi payout');
 
+      // Exclude Level 1 (Referral Bonus)
+      if (Number(transaction.level) === 1) return false;
+
       return matchesLevel;
     })
     .map((transaction: any) => {
@@ -60,7 +63,7 @@ const LevelBenifits = () => {
         payoutLevel: levelStr,
         memberName: transaction.related_member_name || 'N/A',
         memberId: transaction.related_member_id || 'N/A',
-        amount: transaction.ew_credit || '0',
+        amount: ((parseFloat(transaction.ew_credit) || 0) + (parseFloat(transaction.uw_credit) || 0)).toFixed(2),
         description: transaction.description,
         transactionType: transaction.transaction_type
       };

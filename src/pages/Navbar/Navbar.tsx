@@ -6,7 +6,7 @@ import {
   Settings,
   User,
   Headphones,
-  Bell,
+  Home,
 } from "lucide-react";
 import "./navbar.scss";
 import {
@@ -129,10 +129,10 @@ const Navbar = ({ shouldHide, onToggleSidebar }: NavbarProps) => {
                   <Headphones size={22} />
                 </IconButton>
                 <IconButton
-                  onClick={() => navigate('/user/mailbox')}
+                  onClick={() => navigate('/user/dashboard')}
                   sx={{ color: "white", '&:hover': { bgcolor: 'rgba(255,255,255,0.08)' } }}
                 >
-                  <Bell size={22} />
+                  <Home size={22} />
                 </IconButton>
               </Box>
             </>
@@ -252,19 +252,24 @@ const Navbar = ({ shouldHide, onToggleSidebar }: NavbarProps) => {
 
           <Divider />
 
-          <MenuItem onClick={handleMenuClose}>
+          <MenuItem onClick={() => {
+            if (userRole === "USER") navigate("/user/account/profile");
+            else if (userRole === "AGENT") navigate("/agent/profile");
+            setAnchorEl(null);
+          }}>
             <User size={18} style={{ marginRight: "8px" }} />
             My Profile
           </MenuItem>
 
           <MenuItem
             onClick={() => {
-              navigate("/admin/update-password");
+              if (userRole === "USER") navigate("/user/account/change-password");
+              else navigate("/admin/update-password");
               setAnchorEl(null);
             }}
           >
             <Settings size={18} style={{ marginRight: "8px" }} />
-            Account Settings
+            Change Password
           </MenuItem>
 
           <Divider />

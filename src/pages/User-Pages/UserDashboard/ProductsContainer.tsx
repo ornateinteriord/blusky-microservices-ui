@@ -153,7 +153,7 @@ const ProductsContainer: React.FC = () => {
                     <Box>
                       <Typography variant="subtitle1" sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: '0.85rem', mb: 0.2 }}>Single Level Income</Typography>
                       <Typography variant="h5" fontWeight={900} sx={{ lineHeight: 1.2, color: '#00e676' }}>
-                        ${(pkg.amount * 0.015).toFixed(2)}
+                        ${(walletOverview?.singleLevelIncomeByPackage?.[pkg.amount] || 0).toFixed(2)}
                       </Typography>
                     </Box>
                   )}

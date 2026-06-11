@@ -102,17 +102,17 @@ const ActivatePackage: React.FC = () => {
   // ];
 
   const packageOptions: PackageOption[] = [
-    { value: 'BMS_1000',    label: 'BMS Plan - $1,000',     amount: 1000 },
-    { value: 'BMS_2000',    label: 'BMS Plan - $2,000',     amount: 2000 },
-    { value: 'BMS_5000',    label: 'BMS Plan - $5,000',     amount: 5000 },
-    { value: 'BMS_10000',   label: 'BMS Plan - $10,000',    amount: 10000 },
-    { value: 'BMS_25000',   label: 'BMS Plan - $25,000',    amount: 25000 },
-    { value: 'BMS_50000',   label: 'BMS Plan - $50,000',    amount: 50000 },
-    { value: 'BMS_100000',  label: 'BMS Plan - $1,00,000',  amount: 100000 },
-    { value: 'BMS_250000',  label: 'BMS Plan - $2,50,000',  amount: 250000 },
-    { value: 'BMS_500000',  label: 'BMS Plan - $5,00,000',  amount: 500000 },
-    { value: 'BMS_1000000', label: 'BMS Plan - $10,00,000', amount: 1000000 },
-    { value: 'BMS_2500000', label: 'BMS Plan - $25,00,000', amount: 2500000 },
+    { value: 'USDT_1000',    label: 'USDT Plan - $1,000',     amount: 1000 },
+    { value: 'USDT_2000',    label: 'USDT Plan - $2,000',     amount: 2000 },
+    { value: 'USDT_5000',    label: 'USDT Plan - $5,000',     amount: 5000 },
+    { value: 'USDT_10000',   label: 'USDT Plan - $10,000',    amount: 10000 },
+    { value: 'USDT_25000',   label: 'USDT Plan - $25,000',    amount: 25000 },
+    { value: 'USDT_50000',   label: 'USDT Plan - $50,000',    amount: 50000 },
+    { value: 'USDT_100000',  label: 'USDT Plan - $1,00,000',  amount: 100000 },
+    { value: 'USDT_250000',  label: 'USDT Plan - $2,50,000',  amount: 250000 },
+    { value: 'USDT_500000',  label: 'USDT Plan - $5,00,000',  amount: 500000 },
+    { value: 'USDT_1000000', label: 'USDT Plan - $10,00,000', amount: 1000000 },
+    { value: 'USDT_2500000', label: 'USDT Plan - $25,00,000', amount: 2500000 },
   ];
 
   // Handle member ID search

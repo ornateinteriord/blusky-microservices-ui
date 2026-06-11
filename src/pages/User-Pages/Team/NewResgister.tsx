@@ -75,7 +75,7 @@ const NewResgister: React.FC = () => {
         sponsor_id: user.Member_id,
         Sponsor_code: user.Member_id,
         Sponsor_name: user.Name,
-        spackage: 'BMS Plan',
+        spackage: 'USDT Plan',
         // ...(formData.packageAmount ? { package_value: Number(formData.packageAmount) } : {}),
         ...formData
       }, {
