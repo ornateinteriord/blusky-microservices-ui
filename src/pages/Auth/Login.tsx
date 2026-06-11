@@ -14,7 +14,7 @@ import {
   IconButton
 } from "@mui/material";
 import { Visibility, VisibilityOff, PersonOutline, LockOutlined } from "@mui/icons-material";
-import USDTLogo from "../../assets/bms_logo.png"; // Import the logo
+
 import { LoadingComponent } from "../../App";
 import { useLoginMutation } from "../../api/Auth";
 import ForgotPasswordForm from "./components/ForgotPasswordForm";
@@ -137,13 +137,7 @@ const Login = () => {
             border: "1px solid rgba(255, 255, 255, 0.08)",
           }}
         >
-          <Box sx={{ mb: 3, display: "flex", justifyContent: "center" }}>
-            <img
-              src={USDTLogo}
-              alt="USDT Finance & Foundation"
-              style={{ maxWidth: "220px", height: "auto", objectFit: "contain" }}
-            />
-          </Box>
+
 
           {isResetMode ? (
             <ForgotPasswordForm onBackToLogin={() => setIsResetMode(false)} />
