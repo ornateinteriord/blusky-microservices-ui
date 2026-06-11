@@ -470,7 +470,7 @@ export const getMembersColumns = (
       name: "Package",
       selector: (row: any) => {
         const pkg = row.package_value || row.spackage;
-        if (!pkg || pkg === 'BMS Plan') return '-';
+        if (!pkg) return '-';
         return !isNaN(Number(pkg)) ? `$${Number(pkg).toLocaleString()}` : pkg;
       },
       sortable: true,
@@ -558,12 +558,12 @@ export const getPermissionsColumns = (
       name: "Package",
       selector: (row: any) => {
         const pkg = row.total_package_value ?? row.package_value ?? row.spackage;
-        return pkg === 'BMS Plan' ? "-" : pkg;
+        return pkg;
       },
       sortable: true,
       cell: (row: any) => {
         const amt = row.total_package_value ?? row.package_value ?? row.spackage;
-        if (!amt || amt === 'BMS Plan') return '-';
+        if (!amt) return '-';
         return !isNaN(Number(amt)) ? `$${Number(amt).toLocaleString()}` : amt;
       },
     },
@@ -631,12 +631,12 @@ export const getPendingMembersColumns = (
       name: "Package Amount",
       selector: (row: any) => {
         const pkg = row.package_value ?? row.spackage;
-        return pkg === 'BMS Plan' ? "-" : pkg;
+        return pkg;
       },
       sortable: true,
       cell: (row: any) => {
         const amt = row.package_value ?? row.spackage;
-        if (!amt || amt === 'BMS Plan') return '-';
+        if (!amt) return '-';
         return !isNaN(Number(amt)) ? `$${Number(amt).toLocaleString()}` : amt;
       },
     },

@@ -21,10 +21,11 @@ import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import DownloadIcon from '@mui/icons-material/Download';
+
 import UserContext from '../../../context/user/userContext';
 import { useRequestAddOnMutation, useGetMemberAddOns } from '../../../api/Packages';
-import { openBondCertificate } from '../../../utils/BondCertificateGenerator';
+import { useGetWalletOverview } from '../../../api/Memeber';
+
 
 export const UserAddOnPackages = () => {
   const { user } = useContext(UserContext);
@@ -36,6 +37,7 @@ export const UserAddOnPackages = () => {
 
   const { mutate: requestAddOn } = useRequestAddOnMutation();
   const { data: addOns = [], isLoading: addOnsLoading } = useGetMemberAddOns(user?.Member_id);
+  const { data: walletOverview } = useGetWalletOverview(user?.Member_id || '');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -201,8 +203,14 @@ export const UserAddOnPackages = () => {
                 ? (moment(pkg.date_of_maturity).diff(moment(pkg.roi_start_date), 'days') || 1)
                 : 120;
               const pkgProgress = pkg.roi_payout_count ? Math.min((pkg.roi_payout_count / totalDays) * 100, 100) : 0;
-              const pkgTarget = pkg.roi_payout_target || (pkgAmount * 3);
-              const pkgDailyROI = pkgTarget > 0 ? parseFloat((pkgTarget / 120).toFixed(2)) : 0;
+
+
+
+              // Calculate Single Leg Income buyers (Max 100)
+              const sliAmount = walletOverview?.singleLevelIncomeByPackage?.[pkgAmount] || 0;
+              const perBuyerIncome = pkgAmount * 0.015;
+              const buyersCount = perBuyerIncome > 0 ? Math.round(sliAmount / perBuyerIncome) : 0;
+              const sliProgress = Math.min((buyersCount / 100) * 100, 100);
 
               return (
                 <Grid item xs={12} sm={6} md={4} key={pkgId}>
@@ -239,22 +247,24 @@ export const UserAddOnPackages = () => {
                       <Divider sx={{ mb: 2 }} />
                       <Box sx={{ mb: 2 }}>
                         <Typography variant="caption" sx={{ fontSize: '0.75rem', color: 'text.secondary', display: 'block', fontWeight: 600 }}>
-                          {pkg.isFD ? 'Interest Rate' : 'Daily ROI'}
+                          {pkg.isFD ? 'Interest Rate' : 'Single Level Income'}
                         </Typography>
                         <Typography variant="h6" sx={{ fontWeight: 800, color: '#1565c0', fontSize: '1.1rem' }}>
-                          {pkg.isFD ? `${pkg.interest_rate || 0}% p.a.` : `$${pkgDailyROI.toLocaleString('en-US')}`}
+                          {pkg.isFD ? `${pkg.interest_rate || 0}% p.a.` : `$${sliAmount.toFixed(2)}`}
                         </Typography>
                       </Box>
 
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                        <Typography variant="caption" sx={{ fontSize: '0.75rem', color: 'text.secondary', fontWeight: 600 }}>
-                          {pkg.isFD ? `Matures ${moment(pkg.date_of_maturity).format('DD MMM YYYY')}` : `Day ${pkg.roi_payout_count} of 120`}
+                        <Typography variant="caption" sx={{ fontSize: '0.75rem', color: 'text.secondary', fontWeight: 700 }}>
+                          {pkg.isFD ? 'Maturity Progress' : `${buyersCount} of 100 Buyers`}
                         </Typography>
-                        <Typography variant="caption" sx={{ fontSize: '0.75rem', color: 'text.secondary', fontWeight: 700 }}>{pkgProgress.toFixed(0)}%</Typography>
+                        <Typography variant="caption" sx={{ fontSize: '0.75rem', color: 'text.secondary', fontWeight: 700 }}>
+                          {pkg.isFD ? `${pkgProgress.toFixed(0)}%` : `${sliProgress.toFixed(0)}%`}
+                        </Typography>
                       </Box>
                       <LinearProgress
                         variant="determinate"
-                        value={pkgProgress}
+                        value={pkg.isFD ? pkgProgress : sliProgress}
                         sx={{
                           height: 8,
                           borderRadius: 4,
@@ -266,43 +276,6 @@ export const UserAddOnPackages = () => {
                         }}
                       />
 
-                      {/* Download Bond Button */}
-                      <Button
-                        variant="outlined"
-                        size="small"
-                        startIcon={<DownloadIcon />}
-                        onClick={() => openBondCertificate({
-                          memberNumber: user.Member_id,
-                          memberName: user.Name,
-                          dob: user.dob,
-                          fatherName: user.Father_name,
-                          address: user.address,
-                          accountNo: user.account_number || pkg.package_id || `FD${pkgId.toString().slice(-5)}`,
-                          commencementDate: pkg.roi_start_date || user.Date_of_joining || new Date().toISOString(),
-                          planTerm: 'FD / 365 days',
-                          planAmount: pkgAmount,
-                          interestRate: 9.0,
-                          aadhaarNo: user.aadharcard_no,
-                          panNo: user.Pan_no,
-                          nomineeName: user.Nominee_name,
-                          nomineeRelation: user.Nominee_Relation,
-                          branchCode: '004',
-                          branch: 'UDUPI',
-                          profilePhotoUrl: user.profile_image,
-                        })}
-                        sx={{
-                          mt: 2,
-                          width: '100%',
-                          borderColor: '#0a2558',
-                          color: '#0a2558',
-                          fontWeight: 700,
-                          textTransform: 'none',
-                          fontSize: '0.75rem',
-                          '&:hover': { bgcolor: '#0a2558', color: '#fff' }
-                        }}
-                      >
-                        Download Bond Certificate
-                      </Button>
 
                       <Box sx={{ mt: 2.5, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>

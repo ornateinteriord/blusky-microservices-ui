@@ -177,8 +177,7 @@ const Register = () => {
         sponsor_id: formData.Sponsor_code,
         Sponsor_code: formData.Sponsor_code,
         Sponsor_name: formData.Sponsor_name,
-        spackage: 'BMS Plan',
-        // ...(formData.packageAmount ? { package_value: Number(formData.packageAmount) } : {}),
+        spackage: 'USDT Plan',
         ...formData
       };
 
