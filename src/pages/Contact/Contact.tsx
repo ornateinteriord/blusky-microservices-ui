@@ -101,7 +101,7 @@ const Contact = () => {
                                         Email
                                     </Typography>
                                     <Typography variant="body2">
-                                        support@bmsfoundation.biz
+                                        support@usdt.com
                                     </Typography>
                                 </Box>
                             </Box>

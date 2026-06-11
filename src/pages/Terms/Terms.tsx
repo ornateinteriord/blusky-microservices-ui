@@ -47,7 +47,7 @@ const Terms = () => {
                     </Typography>
                 </Box>
                 <Typography variant="body1" paragraph sx={{ lineHeight: 1.8 }}>
-                    Welcome to BMS Foundation ltd (\"BMSF\", \"we\", \"us\", or \"our\"). These Terms
+                    Welcome to USDT (\"USDT\", \"we\", \"us\", or \"our\"). These Terms
                     and Conditions govern your use of our services and platform. By accessing or using our services,
                     you agree to be bound by these terms.
                 </Typography>
@@ -65,7 +65,7 @@ const Terms = () => {
                     </Typography>
                 </Box>
                 <Typography variant="body1" paragraph sx={{ lineHeight: 1.8 }}>
-                    To become a member of BMSF and use our services, you must:
+                    To become a member of USDT and use our services, you must:
                 </Typography>
                 <Box component="ul" sx={{ pl: 4, mb: 2 }}>
                     <li>Be at least 18 years of age</li>
@@ -103,7 +103,7 @@ const Terms = () => {
                     Financial Services
                 </Typography>
                 <Typography variant="body1" paragraph sx={{ lineHeight: 1.8 }}>
-                    BMSF offers various financial services including:
+                    USDT offers various financial services including:
                 </Typography>
                 <Box component="ul" sx={{ pl: 4 }}>
                     <li>Savings Accounts with competitive interest rates</li>
@@ -166,7 +166,7 @@ const Terms = () => {
                     Limitation of Liability
                 </Typography>
                 <Typography variant="body1" paragraph sx={{ lineHeight: 1.8 }}>
-                    BMSF shall not be liable for any indirect, incidental, special, or consequential damages arising out
+                    USDT shall not be liable for any indirect, incidental, special, or consequential damages arising out
                     of or related to your use of our services. We do not guarantee uninterrupted or error-free service.
                 </Typography>
             </Paper>
@@ -180,7 +180,7 @@ const Terms = () => {
                     with or without notice, for any violation of these terms or for any other reason we deem appropriate.
                 </Typography>
                 <Typography variant="body1" paragraph sx={{ lineHeight: 1.8 }}>
-                    Upon termination, you remain liable for all outstanding obligations and amounts due to BMSF.
+                    Upon termination, you remain liable for all outstanding obligations and amounts due to USDT.
                 </Typography>
             </Paper>
 
@@ -203,7 +203,7 @@ const Terms = () => {
                     For questions regarding these Terms and Conditions, please contact us:
                 </Typography>
                 <Typography variant="body1">
-                    <strong>Email:</strong> support@bmsfoundation.biz<br />
+                    <strong>Email:</strong> support@usdt.com<br />
                     <strong>Phone:</strong> +91 9004478100, 0820-7966887<br />
                     <strong>Address:</strong> Shop No. G6, Asha Chandra Trade Centre, Udupi, Karnataka
                 </Typography>

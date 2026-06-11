@@ -267,7 +267,7 @@ const UserDashboard = () => {
 
             }}
           >
-            <img src="/cb.png" alt="BMS Banner" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <img src="/cb.png" alt="USDT Banner" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </Box>
 
 
