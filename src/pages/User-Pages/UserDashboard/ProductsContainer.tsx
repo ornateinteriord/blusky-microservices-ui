@@ -1,25 +1,28 @@
 import React, { useState, useContext } from "react";
 import { Box, Typography, Button, Card, CardContent, Chip, CircularProgress, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import UserContext from "../../../context/user/userContext";
 import { useGetWalletOverview } from "../../../api/Memeber";
 import { useBuyPackageDirectlyMutation } from "../../../api/Packages";
 import { toast } from "react-toastify";
 import { useGetMemberAddOns } from "../../../api/Packages";
+import USDTLogo from "../../../assets/uwt.png";
 
 const PACKAGES = [
-  { id: 1, amount: 30, title: "Basic Package", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" },
-  { id: 2, amount: 60, title: "Standard Package", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" },
-  { id: 3, amount: 120, title: "Bronze Package", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" },
-  { id: 4, amount: 250, title: "Silver Package", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" },
-  { id: 5, amount: 500, title: "Gold Package", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" },
-  { id: 6, amount: 1000, title: "Diamond Package", yield: "3.3%", days: "210 Day", tag: "Newcomers Only" }
+  { id: 1, amount: 30, title: "Basic", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#1de9b6" },
+  { id: 2, amount: 60, title: "Bronze", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#CD7F32" },
+  { id: 3, amount: 120, title: "Silver", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#C0C0C0" },
+  { id: 4, amount: 250, title: "Gold", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#FFD700" },
+  { id: 5, amount: 500, title: "Platinum", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#E5E4E2" },
+  { id: 6, amount: 1000, title: "Diamond", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#b9f2ff" }
 ];
 
 const ProductsContainer: React.FC = () => {
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
   const { data: walletOverview } = useGetWalletOverview(user?.Member_id || '');
   const { mutate: buyPackage, isPending } = useBuyPackageDirectlyMutation();
-  const [showAll, setShowAll] = useState(false);
+
   const [buyingId, setBuyingId] = useState<number | null>(null);
   const [confirmPkg, setConfirmPkg] = useState<any>(null);
   const { data: memberAddons } = useGetMemberAddOns(user?.Member_id || '');
@@ -47,6 +50,12 @@ const ProductsContainer: React.FC = () => {
     setConfirmPkg({ ...pkg, amount: amountToBuy });
   };
 
+  const handleCardClick = (pkgAmount: number) => {
+    if (isPurchased(pkgAmount)) {
+      navigate(`/user/earnings/single-level-income?package=${pkgAmount}`);
+    }
+  };
+
   const executeBuy = () => {
     if (!confirmPkg || !user?.Member_id) return;
 
@@ -64,41 +73,26 @@ const ProductsContainer: React.FC = () => {
 
   return (
     <Box sx={{ mt: 4, width: '100%' }}>
-      {/* Title & More Button Row */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2, px: 1 }}>
-        <Typography variant="h5" fontWeight={800} sx={{ background: '-webkit-linear-gradient(45deg, #FFD700, #1de9b6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-          Products
-        </Typography>
-        <Button 
-          onClick={() => setShowAll(!showAll)}
-          sx={{ 
-            color: 'rgba(255,255,255,0.7)', 
-            textTransform: 'lowercase', 
-            fontWeight: 600,
-            '&:hover': { color: '#fff', bgcolor: 'transparent' }
-          }}
-        >
-          {showAll ? "less" : "more"}
-        </Button>
-      </Box>
+
 
       {/* Packages Container */}
       <Box 
         sx={{ 
-          display: showAll ? 'flex' : 'flex',
-          flexWrap: showAll ? 'wrap' : 'nowrap',
-          overflowX: showAll ? 'visible' : 'auto',
+          display: 'flex',
+          flexWrap: 'nowrap',
+          overflowX: 'auto',
           gap: 3,
           pb: 2,
           px: 1,
           '&::-webkit-scrollbar': { height: '8px' },
           '&::-webkit-scrollbar-thumb': { backgroundColor: 'rgba(255,255,255,0.2)', borderRadius: '4px' },
-          justifyContent: showAll ? 'center' : 'flex-start'
+          justifyContent: 'flex-start'
         }}
       >
         {PACKAGES.map((pkg) => (
           <Card 
             key={pkg.id}
+            onClick={() => handleCardClick(pkg.amount)}
             sx={{ 
               minWidth: { xs: '260px', sm: '290px' },
               maxWidth: { xs: '260px', sm: '290px' },
@@ -108,6 +102,7 @@ const ProductsContainer: React.FC = () => {
               borderRadius: '16px', 
               color: '#ffffff',
               boxShadow: 'none',
+              cursor: isPurchased(pkg.amount) ? 'pointer' : 'default',
               transition: 'transform 0.3s ease',
               '&:hover': {
                 transform: 'translateY(-4px)',
@@ -116,7 +111,20 @@ const ProductsContainer: React.FC = () => {
             }}
           >
             <CardContent sx={{ p: 2.5, '&:last-child': { pb: 2.5 } }}>
-              <Typography variant="subtitle1" fontWeight={700} sx={{ mb: 1, lineHeight: 1.3, height: '48px' }}>
+              <Typography variant="subtitle1" fontWeight={700} sx={{ mb: 1, lineHeight: 1.3, height: '48px', display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Box sx={{
+                  width: 28,
+                  height: 28,
+                  backgroundColor: pkg.color,
+                  WebkitMaskImage: `url(${USDTLogo})`,
+                  WebkitMaskSize: 'contain',
+                  WebkitMaskRepeat: 'no-repeat',
+                  WebkitMaskPosition: 'center',
+                  maskImage: `url(${USDTLogo})`,
+                  maskSize: 'contain',
+                  maskRepeat: 'no-repeat',
+                  maskPosition: 'center'
+                }} />
                 {pkg.title}
               </Typography>
               

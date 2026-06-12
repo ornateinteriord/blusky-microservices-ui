@@ -1,6 +1,6 @@
 import { Box, Container, Typography, Grid, IconButton, Divider } from "@mui/material";
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import { MapPin, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
@@ -70,23 +70,7 @@ const Footer = () => {
                                 </Box>
                             </Grid>
 
-                            {/* Contact Section */}
-                            <Grid item xs={12} sm={4}>
-                                <Typography variant="overline" sx={{ fontWeight: 900, mb: 3, display: "block", color: "#3b82f6", letterSpacing: "2px" }}>
-                                    Get In Touch
-                                </Typography>
-                                <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-                                    <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                                        <Box sx={{ p: 1, borderRadius: "8px", bgcolor: "rgba(96, 165, 250, 0.1)" }}><Phone size={18} color="#60a5fa" /></Box>
-                                        <Typography variant="body2" sx={{ fontWeight: 600 }}>+91 7337679780</Typography>
-                                    </Box>
-                                    <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                                        <Box sx={{ p: 1, borderRadius: "8px", bgcolor: "rgba(96, 165, 250, 0.1)" }}><Mail size={18} color="#60a5fa" /></Box>
-                                        <Typography variant="body2" sx={{ fontWeight: 600 }}>USDTundation@gmail.com</Typography>
-                                    </Box>
-                                </Box>
-                            </Grid>
-
+                            {/* Contact Section removed */}
                             {/* Connect Section */}
                             <Grid item xs={12} sm={4}>
                                 <Typography variant="overline" sx={{ fontWeight: 900, mb: 3, display: "block", color: "#3b82f6", letterSpacing: "2px" }}>

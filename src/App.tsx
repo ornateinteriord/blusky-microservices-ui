@@ -197,6 +197,9 @@ const UserROIBenefits = lazy(
 const UserReferralBonus = lazy(
   () => import("./pages/User-Pages/Earnings/ReferralBonus")
 );
+const UserSingleLevelIncome = lazy(
+  () => import("./pages/User-Pages/Earnings/SingleLevelIncome")
+);
 const UserWallet = lazy(() => import("./pages/User-Pages/Wallet/Wallet"));
 const UserUpgradeWallet = lazy(() => import("./pages/User-Pages/Wallet/UpgradeWallet"));
 const UserSupportChat = lazy(() => import("./pages/User-Pages/SupportChat/SupportChat"));
@@ -549,6 +552,10 @@ const RoutesProvider = ({
               <Route
                 path="/user/earnings/referral-bonus"
                 element={<UserReferralBonus />}
+              />
+              <Route
+                path="/user/earnings/single-level-income"
+                element={<UserSingleLevelIncome />}
               />
               <Route path="/user/transactions" element={<UserTransaction />} />
               <Route path="/user/loantransactions" element={<UserLoanTransaction />} />

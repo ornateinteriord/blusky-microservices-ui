@@ -91,8 +91,8 @@ const Wallet = () => {
       return;
     }
 
-    if (withdrawalAmount < 100) {
-      toast.error('Minimum withdrawal amount is $100');
+    if (withdrawalAmount < 10) {
+      toast.error('Minimum withdrawal amount is $10');
       return;
     }
 
@@ -157,7 +157,7 @@ const Wallet = () => {
         >
           <AccordionDetails>
             <Grid container spacing={3} sx={{ mb: 3 }}>
-              <Grid item xs={12} md={4}>
+              <Grid item xs={12} md={6}>
                 <Box
                   sx={{
                     p: 3,
@@ -217,29 +217,7 @@ const Wallet = () => {
                 </Box>
               </Grid>
 
-              <Grid item xs={12} md={4}>
-                <Box
-                  sx={{
-                    p: 3,
-                    backgroundColor: "#f5f5f5",
-                    borderRadius: 2,
-                    textAlign: "center",
-                    opacity: isWithdrawalAllowed ? 1 : 0.7,
-                  }}
-                >
-                  <Typography variant="subtitle1" color="textSecondary">
-                    Total Income
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{ color: "#0a2558", mt: 1, fontWeight: "bold" }}
-                  >
-                    {walletData?.totalIncome ? `$${walletData?.totalIncome}` : "$0.00"}
-                  </Typography>
-                </Box>
-              </Grid>
-
-              <Grid item xs={12} md={4}>
+              <Grid item xs={12} md={6}>
                 <Box
                   sx={{
                     p: 3,
@@ -316,7 +294,7 @@ const Wallet = () => {
                 onChange={handleAmountChange}
                 fullWidth
                 size="medium"
-                placeholder="Enter amount (Min $100)"
+                placeholder="Enter amount (Min $10)"
                 disabled={withdrawMutation.isPending || !isWithdrawalAllowed}
                 error={parseFloat(amount) > displayBalance}
                 helperText={parseFloat(amount) > displayBalance ? "Insufficient Balance" : ""}
@@ -345,7 +323,7 @@ const Wallet = () => {
               */}
 
               <TextField
-                label="TDS (5%)"
+                label="Admin (5%)"
                 value={`$${tds.toFixed(2)}`}
                 fullWidth
                 size="medium"
@@ -387,8 +365,8 @@ const Wallet = () => {
                   </Typography>
                   <Box sx={{ display: "flex", gap: 4, flexDirection: isMobile ? "column" : "row" }}>
                     <Box>
-                      <Typography variant="body2">• 5% TDS applied</Typography>
-                      <Typography variant="body2">• Minimum withdrawal: $100</Typography>
+                      <Typography variant="body2">• 5% Admin applied</Typography>
+                      <Typography variant="body2">• Minimum withdrawal: $10</Typography>
                       <Typography variant="body2">• One withdrawal per day allowed</Typography>
                     </Box>
                   </Box>
