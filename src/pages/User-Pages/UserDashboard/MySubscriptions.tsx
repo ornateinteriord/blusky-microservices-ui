@@ -29,7 +29,7 @@ const MySubscriptions: React.FC = () => {
   if (!user) {
     return (
       <Box sx={{ background: 'linear-gradient(180deg, #050916 0%, #0f1e36 100%)', minHeight: '100vh', display: 'flex', justifyContent: 'center', pt: 10 }}>
-        <CircularProgress sx={{ color: '#00e676' }} />
+        <CircularProgress sx={{ color: '#FFD700' }} />
       </Box>
     );
   }
@@ -42,7 +42,7 @@ const MySubscriptions: React.FC = () => {
     }}>
       <Box sx={{ mb: 4, mt: { xs: 1, md: 3 } }}>
         <Typography variant="h5" sx={{ color: '#ffffff', fontWeight: 900, letterSpacing: -0.5, display: 'flex', alignItems: 'center', gap: 1.5, textTransform: 'uppercase' }}>
-          <Box sx={{ width: 4, height: 24, backgroundColor: '#00e676', borderRadius: 1 }} />
+          <Box sx={{ width: 4, height: 24, backgroundColor: '#FFD700', borderRadius: 1 }} />
           My Subscriptions
         </Typography>
         <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)', mt: 0.5, ml: 2, fontWeight: 500 }}>
@@ -52,7 +52,7 @@ const MySubscriptions: React.FC = () => {
 
       {addOnsLoading ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
-          <CircularProgress sx={{ color: '#00e676' }} />
+          <CircularProgress sx={{ color: '#FFD700' }} />
         </Box>
       ) : (
         <Grid container spacing={3}>
@@ -127,7 +127,7 @@ const MySubscriptions: React.FC = () => {
                             fontWeight: 800, 
                             borderRadius: '6px',
                             backgroundColor: pkg.roi_status === 'Active' ? 'rgba(0, 230, 118, 0.2)' : 'rgba(255,255,255,0.1)',
-                            color: pkg.roi_status === 'Active' ? '#00e676' : 'rgba(255,255,255,0.7)',
+                            color: pkg.roi_status === 'Active' ? '#FFD700' : 'rgba(255,255,255,0.7)',
                             border: `1px solid ${pkg.roi_status === 'Active' ? 'rgba(0, 230, 118, 0.3)' : 'rgba(255,255,255,0.2)'}`
                           }}
                         />
@@ -138,7 +138,7 @@ const MySubscriptions: React.FC = () => {
                         <Typography variant="caption" sx={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', display: 'block', fontWeight: 600 }}>
                           {pkg.isFD ? 'Interest Rate' : 'Single Level Income'}
                         </Typography>
-                        <Typography variant="h6" sx={{ fontWeight: 800, color: '#3b82f6', fontSize: '1.2rem' }}>
+                        <Typography variant="h6" sx={{ fontWeight: 800, color: '#FFD700', fontSize: '1.2rem' }}>
                           {pkg.isFD ? `${pkg.interest_rate || 0}% p.a.` : `$${sliAmount.toFixed(2)}`}
                         </Typography>
                       </Box>
@@ -159,7 +159,7 @@ const MySubscriptions: React.FC = () => {
                           borderRadius: 4,
                           backgroundColor: 'rgba(255,255,255,0.1)',
                           '& .MuiLinearProgress-bar': {
-                            background: 'linear-gradient(90deg, #3b82f6, #8b5cf6)',
+                            background: 'linear-gradient(90deg, #FFD700, #8b5cf6)',
                             borderRadius: 4
                           }
                         }}

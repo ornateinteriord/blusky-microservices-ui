@@ -76,7 +76,7 @@ const Profile: React.FC = () => {
       borderColor: 'rgba(255,255,255,0.3)',
     },
     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: '#00e676',
+      borderColor: '#FFD700',
     },
     '& .MuiInputBase-input': {
       color: '#ffffff',
@@ -215,7 +215,7 @@ const Profile: React.FC = () => {
                 variant="contained"
                 disabled={updateMember.isPending}
                 sx={{
-                  bgcolor: '#00e676',
+                  bgcolor: '#FFD700',
                   color: '#050916',
                   px: 5,
                   py: 1.2,
@@ -225,7 +225,7 @@ const Profile: React.FC = () => {
                   boxShadow: '0 4px 14px rgba(0, 230, 118, 0.4)',
                   width: { xs: '100%', sm: 'auto' },
                   "&:hover": { 
-                    bgcolor: '#00c853',
+                    bgcolor: '#e6c200',
                     boxShadow: '0 6px 20px rgba(0, 230, 118, 0.6)'
                   },
                   "&:disabled": {

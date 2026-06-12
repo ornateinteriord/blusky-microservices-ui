@@ -42,7 +42,7 @@ import MobileBottomNav from "./components/common/MobileBottomNav";
 
 
 // public pages
-// const Home = lazy(() => import("./pages/Home/Home"));
+const Home = lazy(() => import("./pages/Home/Home"));
 const Login = lazy(() => import("./pages/Auth/Login"));
 const Register = lazy(() => import("./pages/Auth/Register"));
 const RecoverPassword = lazy(() => import("./pages/Auth/RecoverPassword"))
@@ -53,7 +53,6 @@ const Sidebar = lazy(() => import("./pages/Sidebar/Sidebar"));
 const NotFound = lazy(() => import("./pages/not-found/NotFound"));
 const Footer = lazy(() => import("./components/Footer/Footer"));
 const About = lazy(() => import("./pages/About/About"));
-const Contact = lazy(() => import("./pages/Contact/Contact"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy/PrivacyPolicy"));
 const Terms = lazy(() => import("./pages/Terms/Terms"));
 const RefundPolicy = lazy(() => import("./pages/RefundPolicy/RefundPolicy"));
@@ -325,7 +324,7 @@ const RoutesProvider = ({
             width: "100%",
             overflowX: "hidden",
             // Transparent on public pages so Login/Register bg fills the whole screen
-            backgroundColor: (hideNavbar || document.body.className.includes("theme-")) ? "transparent" : "#f4f7f9",
+            backgroundColor: (hideNavbar || document.body.className.includes("theme-")) ? "transparent" : "inherit",
             minHeight: "100vh",
             // No padding offset when navbar is hidden (public pages)
             paddingTop: hideNavbar ? "0" : (!hideSidebar ? (window.innerWidth < 900 ? "56px" : "64px") : "0"),
@@ -336,7 +335,7 @@ const RoutesProvider = ({
             <Route path="/impersonate" element={<Impersonate />} />
             {/* public routes */}
             <Route element={<PublicRoute />}>
-              <Route index element={<Login />} />
+              <Route index element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/recover-password" element={<RecoverPassword />} />
@@ -344,7 +343,6 @@ const RoutesProvider = ({
             </Route>
             {/* policy and info pages - accessible to all */}
             <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/refund-policy" element={<RefundPolicy />} />

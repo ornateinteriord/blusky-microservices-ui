@@ -123,7 +123,7 @@ const LoadFundPage: React.FC = () => {
 
       {isConfigLoading ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
-          <CircularProgress sx={{ color: '#00e676' }} />
+          <CircularProgress sx={{ color: '#FFD700' }} />
         </Box>
       ) : (
         <Grid container spacing={4}>
@@ -153,8 +153,8 @@ const LoadFundPage: React.FC = () => {
                 color="success"
                 variant="outlined"
                 sx={{
-                  color: '#00e676',
-                  borderColor: '#00e676',
+                  color: '#FFD700',
+                  borderColor: '#FFD700',
                   fontWeight: 800,
                   fontSize: '0.85rem',
                   py: 2,
@@ -225,7 +225,7 @@ const LoadFundPage: React.FC = () => {
                     transition: 'all 0.2s',
                     '&:hover': {
                       bgcolor: 'rgba(255, 255, 255, 0.08)',
-                      borderColor: '#00e676',
+                      borderColor: '#FFD700',
                     },
                   }}
                 >
@@ -245,7 +245,7 @@ const LoadFundPage: React.FC = () => {
                   >
                     {config?.wallet_address || 'No wallet address configured'}
                   </Typography>
-                  <ContentCopyIcon sx={{ color: '#00e676' }} />
+                  <ContentCopyIcon sx={{ color: '#FFD700' }} />
                 </Box>
               </Box>
             </Paper>
@@ -303,7 +303,7 @@ const LoadFundPage: React.FC = () => {
                     placeholder="Enter amount loaded"
                     slotProps={{
                       inputLabel: {
-                        sx: { color: 'rgba(255,255,255,0.6)', '&.Mui-focused': { color: '#00e676' } }
+                        sx: { color: 'rgba(255,255,255,0.6)', '&.Mui-focused': { color: '#FFD700' } }
                       }
                     }}
                     sx={{
@@ -312,7 +312,7 @@ const LoadFundPage: React.FC = () => {
                         borderRadius: '14px',
                         '& fieldset': { borderColor: 'rgba(255,255,255,0.08)' },
                         '&:hover fieldset': { borderColor: 'rgba(255,255,255,0.2)' },
-                        '&.Mui-focused fieldset': { borderColor: '#00e676' },
+                        '&.Mui-focused fieldset': { borderColor: '#FFD700' },
                       },
                     }}
                   />
@@ -328,7 +328,7 @@ const LoadFundPage: React.FC = () => {
                   placeholder="Enter transaction receipt hash"
                   slotProps={{
                     inputLabel: {
-                      sx: { color: 'rgba(255,255,255,0.6)', '&.Mui-focused': { color: '#00e676' } }
+                      sx: { color: 'rgba(255,255,255,0.6)', '&.Mui-focused': { color: '#FFD700' } }
                     }
                   }}
                   sx={{
@@ -337,7 +337,7 @@ const LoadFundPage: React.FC = () => {
                       borderRadius: '14px',
                       '& fieldset': { borderColor: 'rgba(255,255,255,0.08)' },
                       '&:hover fieldset': { borderColor: 'rgba(255,255,255,0.2)' },
-                      '&.Mui-focused fieldset': { borderColor: '#00e676' },
+                      '&.Mui-focused fieldset': { borderColor: '#FFD700' },
                     },
                   }}
                 />
@@ -394,8 +394,8 @@ const LoadFundPage: React.FC = () => {
                         textTransform: 'none',
                         fontSize: '0.95rem',
                         '&:hover': {
-                          borderColor: '#00e676',
-                          color: '#00e676',
+                          borderColor: '#FFD700',
+                          color: '#FFD700',
                           bgcolor: 'rgba(0, 230, 118, 0.02)',
                         },
                       }}
@@ -415,7 +415,7 @@ const LoadFundPage: React.FC = () => {
                   type="submit"
                   disabled={isSubmitting}
                   sx={{
-                    bgcolor: '#00e676',
+                    bgcolor: '#FFD700',
                     color: '#050916',
                     textTransform: 'none',
                     fontWeight: 900,
@@ -424,7 +424,7 @@ const LoadFundPage: React.FC = () => {
                     borderRadius: '14px',
                     boxShadow: '0 6px 20px rgba(0, 230, 118, 0.35)',
                     '&:hover': {
-                      bgcolor: '#00c853',
+                      bgcolor: '#e6c200',
                       boxShadow: '0 8px 26px rgba(0, 230, 118, 0.5)',
                     },
                     '&.Mui-disabled': {

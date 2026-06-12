@@ -102,7 +102,7 @@ const Navbar = ({ shouldHide, onToggleSidebar }: NavbarProps) => {
                   sx={{
                     width: { xs: 36, md: 40 },
                     height: { xs: 36, md: 40 },
-                    bgcolor: '#00e676', // Neon green profile circular background
+                    bgcolor: '#FFD700', // Neon green profile circular background
                     color: '#ffffff',
                     fontWeight: 900,
                     fontSize: { xs: '0.95rem', md: '1.1rem' },

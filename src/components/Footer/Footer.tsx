@@ -38,15 +38,15 @@ const Footer = () => {
                                 lineHeight: 1.1
                             }}
                         >
-                            BLUSKY MICRO SERVICES FOUNDATION
+                            USDT WORLD CLUB
                         </Typography>
                         <Box sx={{ p: 2, borderRadius: "12px", bgcolor: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.05)", display: "inline-block", mb: 2 }}>
                             <Typography variant="caption" sx={{ opacity: 0.8, fontWeight: 700, letterSpacing: "1px", color: "#60a5fa" }}>
-                                CIN: U85300DC2022NPL407403 / ROC
+                                www.usdtworld.club
                             </Typography>
                         </Box>
                         <Typography variant="body1" sx={{ opacity: 0.6, fontSize: "0.95rem", lineHeight: 1.7, maxWidth: "400px" }}>
-                            Leading the way in micro-financial services with innovative solutions and unwavering commitment to your growth.
+                            A next-generation crypto trading and investment company dedicated to transforming digital wealth creation.
                         </Typography>
                     </Grid>
 
@@ -63,9 +63,8 @@ const Footer = () => {
                                     <Box>
                                         <Typography variant="body2" sx={{ fontWeight: 700, mb: 0.5 }}>Head Office</Typography>
                                         <Typography variant="body2" sx={{ opacity: 0.7, lineHeight: 1.6 }}>
-                                            Ashachandra Trade Center,<br />
-                                            Udupi - 576101,<br />
-                                            Karnataka, India
+                                            United Kingdom &<br />
+                                            Dubai, UAE
                                         </Typography>
                                     </Box>
                                 </Box>
@@ -132,14 +131,19 @@ const Footer = () => {
                     }}
                 >
                     <Typography variant="caption" sx={{ opacity: 0.4, fontWeight: 600 }}>
-                        © {currentYear} BLUSKY MICRO SERVICES FOUNDATION. Designed for excellence.
+                        © {currentYear} USDT WORLD CLUB. All rights reserved.
                     </Typography>
 
                     <Box sx={{ display: "flex", gap: { xs: 2, sm: 5 }, flexWrap: "wrap", justifyContent: "center" }}>
-                        {["About Us", "Contact Us", "Privacy Policy", "Terms & Conditions", "Refund Policy"].map((label) => (
+                        {[
+                            { label: "About Us", path: "/about" },
+                            // { label: "Privacy Policy", path: "/privacy-policy" },
+                            // { label: "Terms & Conditions", path: "/terms" },
+                            // { label: "Refund Policy", path: "/refund-policy" }
+                        ].map((item) => (
                             <Link
-                                key={label}
-                                to={`/${label.toLowerCase().replace(/ & /g, "-").replace(/ /g, "-")}`}
+                                key={item.label}
+                                to={item.path}
                                 style={{
                                     color: "white",
                                     textDecoration: "none",
@@ -160,7 +164,7 @@ const Footer = () => {
                                     e.currentTarget.style.borderBottomColor = "transparent";
                                 }}
                             >
-                                {label}
+                                {item.label}
                             </Link>
                         ))}
                     </Box>

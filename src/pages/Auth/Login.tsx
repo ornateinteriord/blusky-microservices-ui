@@ -18,6 +18,7 @@ import { Visibility, VisibilityOff, PersonOutline, LockOutlined } from "@mui/ico
 import { LoadingComponent } from "../../App";
 import { useLoginMutation } from "../../api/Auth";
 import ForgotPasswordForm from "./components/ForgotPasswordForm";
+import uwtLogo from "../../assets/uwt.png";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -137,8 +138,7 @@ const Login = () => {
             border: "1px solid rgba(255, 255, 255, 0.08)",
           }}
         >
-
-
+          <img src={uwtLogo} alt="UWT Logo" style={{ height: "140px", marginBottom: "10px", objectFit: "contain" }} />
           {isResetMode ? (
             <ForgotPasswordForm onBackToLogin={() => setIsResetMode(false)} />
           ) : (
@@ -179,7 +179,7 @@ const Login = () => {
                     borderColor: "rgba(255, 255, 255, 0.25)",
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: "#00e676",
+                    borderColor: "#FFD700",
                     borderWidth: "2px"
                   },
                 },
@@ -187,7 +187,7 @@ const Login = () => {
                   color: "rgba(255, 255, 255, 0.6)",
                 },
                 "& .MuiInputLabel-root.Mui-focused": {
-                  color: "#00e676",
+                  color: "#FFD700",
                 },
                 "& .MuiOutlinedInput-input::placeholder": {
                   color: "rgba(255, 255, 255, 0.4)",
@@ -240,7 +240,7 @@ const Login = () => {
                     borderColor: "rgba(255, 255, 255, 0.25)",
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: "#00e676",
+                    borderColor: "#FFD700",
                     borderWidth: "2px"
                   },
                 },
@@ -248,7 +248,7 @@ const Login = () => {
                   color: "rgba(255, 255, 255, 0.6)",
                 },
                 "& .MuiInputLabel-root.Mui-focused": {
-                  color: "#00e676",
+                  color: "#FFD700",
                 },
                 "& .MuiOutlinedInput-input::placeholder": {
                   color: "rgba(255, 255, 255, 0.4)",
@@ -273,7 +273,7 @@ const Login = () => {
                     sx={{
                       color: "rgba(255, 255, 255, 0.3)",
                       "&.Mui-checked": {
-                        color: "#00e676",
+                        color: "#FFD700",
                       },
                     }}
                   />
@@ -289,7 +289,7 @@ const Login = () => {
                 type="button"
                 onClick={() => setIsResetMode(true)}
                 underline="hover"
-                sx={{ color: "#00e676", fontSize: "0.875rem", fontWeight: 600, "&:hover": { color: "#00c853" } }}
+                sx={{ color: "#FFD700", fontSize: "0.875rem", fontWeight: 600, "&:hover": { color: "#e6c200" } }}
               >
                 Forgot password?
               </MuiLink>
@@ -303,7 +303,7 @@ const Login = () => {
               sx={{
                 mt: 1,
                 mb: 1,
-                background: "linear-gradient(135deg, #00e676 0%, #00c853 100%)",
+                background: "linear-gradient(135deg, #FFD700 0%, #e6c200 100%)",
                 color: "#050916",
                 fontWeight: 800,
                 fontSize: "1rem",
@@ -313,7 +313,7 @@ const Login = () => {
                 boxShadow: "0 8px 16px rgba(0, 230, 118, 0.2)",
                 transition: "all 0.3s ease",
                 "&:hover": {
-                  background: "linear-gradient(135deg, #00c853 0%, #00e676 100%)",
+                  background: "linear-gradient(135deg, #e6c200 0%, #FFD700 100%)",
                   transform: "translateY(-2px)",
                   boxShadow: "0 12px 20px rgba(0, 230, 118, 0.4)",
                 },
@@ -334,7 +334,7 @@ const Login = () => {
               <Link
                 to="/register"
                 style={{
-                  color: "#00e676",
+                  color: "#FFD700",
                   textDecoration: "none",
                   fontWeight: 700,
                   transition: "color 0.2s ease"

@@ -12,9 +12,8 @@ import {
 } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
-import slider1 from '../../../assets/slider/slider1.png';
-import slider2 from '../../../assets/slider/slider2.png';
-import slider3 from '../../../assets/slider/slider3.png';
+
+
 import ShareIcon from '@mui/icons-material/Share';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import InventoryIcon from '@mui/icons-material/Inventory';
@@ -60,15 +59,7 @@ const UserDashboard = () => {
   const displayDeposit = totalPrincipal;
 
 
-  const bannerImages = [slider1, slider2, slider3];
-  const [activeSlide, setActiveSlide] = useState(0);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % bannerImages.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [bannerImages.length]);
 
   useEffect(() => {
     const paymentParams = parsePaymentRedirectParams(searchParams);
@@ -98,10 +89,10 @@ const UserDashboard = () => {
     {
       title: "ACCOUNT",
       items: [
-        { label: "Profile", icon: <AccountCircleIcon />, route: "/user/account/profile", color: "#3b82f6" },
+        { label: "Profile", icon: <AccountCircleIcon />, route: "/user/account/profile", color: "#FFD700" },
         // { label: "KYC", icon: <VerifiedUserIcon />, route: "/user/account/kyc", color: "#10b981" },
         { label: "Password", icon: <LockIcon />, route: "/user/account/change-password", color: "#f59e0b" },
-        // { label: "Load Fund", icon: <InventoryIcon />, onClick: () => navigate("/user/load-fund"), route: "", color: "#3b82f6" },
+        // { label: "Load Fund", icon: <InventoryIcon />, onClick: () => navigate("/user/load-fund"), route: "", color: "#FFD700" },
         { label: "New Subscription", icon: <InventoryIcon />, onClick: () => navigate("/user/new-subscription"), route: "", color: "#10b981" },
         // { label: "My Subscription", icon: <ReceiptLongIcon />, onClick: () => navigate("/user/my-subscriptions"), route: "", color: "#f59e0b" },
       ]
@@ -112,8 +103,8 @@ const UserDashboard = () => {
         // { label: "ROI Benefits", icon: <ShowChartIcon />, route: "/user/earnings/roi-benefits", color: "#10b981" },
         // { label: "Referral Bonus", icon: <PaymentsIcon />, route: "/user/earnings/referral-bonus", color: "#f59e0b" },
         // { label: "Daily ROI", icon: <TrendingUpIcon />, route: "/user/earnings/daily-payout", color: "#ef4444" },
-        // { label: "Level Bonus", icon: <AccountTreeIcon />, route: "/user/earnings/level-benefits", color: "#3b82f6" },
-        { label: "Transactions", icon: <AttachMoneyIcon />, route: "/user/transactions", color: "#3b82f6" },
+        // { label: "Level Bonus", icon: <AccountTreeIcon />, route: "/user/earnings/level-benefits", color: "#FFD700" },
+        { label: "Transactions", icon: <AttachMoneyIcon />, route: "/user/transactions", color: "#FFD700" },
       ]
     },
     {
@@ -125,54 +116,8 @@ const UserDashboard = () => {
     }
   ];
 
-  const SliderSection = () => (
-    <Box sx={{ 
-      mb: 4, 
-      borderRadius: '28px', 
-      overflow: 'hidden', 
-      position: 'relative', 
-      boxShadow: '0 25px 55px rgba(0,0,0,0.35)',
-      height: { xs: '180px', sm: '220px', md: '280px' }
-    }}>
-      {bannerImages.map((src, index) => (
-        <Box
-          key={src}
-          component="img"
-          src={src}
-          alt={`Promotion banner ${index + 1}`}
-          sx={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            opacity: index === activeSlide ? 1 : 0,
-            transition: 'opacity 0.8s ease-in-out',
-            zIndex: index === activeSlide ? 1 : 0,
-          }}
-        />
-      ))}
-      <Box sx={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(2,8,20,0.05) 0%, rgba(2,8,20,0.5) 100%)', zIndex: 2 }} />
-      <Box sx={{ position: 'absolute', bottom: 16, left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 1.5, zIndex: 3 }}>
-        {bannerImages.map((_, dot) => (
-          <Box
-            key={dot}
-            onClick={() => setActiveSlide(dot)}
-            sx={{
-              width: dot === activeSlide ? 24 : 8,
-              height: 8,
-              borderRadius: '999px',
-              bgcolor: 'white',
-              opacity: dot === activeSlide ? 1 : 0.45,
-              transition: 'all 0.3s ease',
-              cursor: 'pointer'
-            }}
-          />
-        ))}
-      </Box>
-    </Box>
-  );
+
+
 
 
 
@@ -193,7 +138,9 @@ const UserDashboard = () => {
         </Box>
       )}
 
-      <SliderSection />
+      {/* <SliderSection /> */}
+      <ProductsContainer />
+      {/* <NewSliderSection /> */}
 
       <Box sx={{
         display: 'flex',
@@ -217,7 +164,7 @@ const UserDashboard = () => {
           variant="contained"
           onClick={() => navigate('/user/load-fund')}
           sx={{
-            bgcolor: '#00e676', // Vibrant neon green from screenshot
+            bgcolor: '#FFD700', // Vibrant neon green from screenshot
             color: '#050916',   // Dark text matching main dark theme
             textTransform: 'none',
             fontWeight: 800,
@@ -229,7 +176,7 @@ const UserDashboard = () => {
             minWidth: 'auto',
             flexShrink: 0,
             '&:hover': { 
-              bgcolor: '#00c853',
+              bgcolor: '#e6c200',
               boxShadow: '0 6px 20px rgba(0, 230, 118, 0.6)',
             }
           }}
@@ -280,9 +227,9 @@ const UserDashboard = () => {
                   onClick={() => navigate('/user/team')}
                   sx={{ textAlign: 'center', cursor: 'pointer', '&:hover': { opacity: 0.8 }, display: 'flex', flexDirection: 'column', alignItems: 'center' }}
                 >
-                  <GroupsIcon sx={{ fontSize: 36, color: '#3b82f6', mb: 1 }} />
+                  <GroupsIcon sx={{ fontSize: 36, color: '#FFD700', mb: 1 }} />
                   <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px' }}>My Team</Typography>
-                  <Typography variant="h3" sx={{ fontWeight: 900, color: '#ffffff', mt: 1 }}>{memberDetails?.total_team || 0}</Typography>
+                  <Typography variant="h3" sx={{ fontWeight: 900, color: '#ffffff', mt: 1 }}>{Math.max(memberDetails?.registration_stats?.total || 0, memberDetails?.total_team || 0)}</Typography>
                 </Box>
                 <Box 
                   onClick={() => navigate('/user/team/direct')}
@@ -290,7 +237,7 @@ const UserDashboard = () => {
                 >
                   <PersonAddAltIcon sx={{ fontSize: 36, color: '#6366f1', mb: 1 }} />
                   <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px' }}>My Directs</Typography>
-                  <Typography variant="h3" sx={{ fontWeight: 900, color: '#ffffff', mt: 1 }}>{memberDetails?.direct_referrals?.length || 0}</Typography>
+                  <Typography variant="h3" sx={{ fontWeight: 900, color: '#ffffff', mt: 1 }}>{Math.max(memberDetails?.registration_stats?.direct || 0, memberDetails?.direct_referrals?.length || 0)}</Typography>
                 </Box>
               </Box>
             </Paper>
@@ -335,8 +282,6 @@ const UserDashboard = () => {
                 ))}
               </Box>
             </Box>
-            
-            <ProductsContainer />
 
             {/* Team Performance - Mobile Only inside Quick Access */}
             <Box sx={{ mt: 2, display: { xs: 'block', md: 'none' } }}>
@@ -347,9 +292,9 @@ const UserDashboard = () => {
                     onClick={() => navigate('/user/team')}
                     sx={{ textAlign: 'center', cursor: 'pointer', '&:hover': { opacity: 0.8 }, display: 'flex', flexDirection: 'column', alignItems: 'center' }}
                   >
-                    <GroupsIcon sx={{ fontSize: 32, color: '#3b82f6', mb: 1 }} />
+                    <GroupsIcon sx={{ fontSize: 32, color: '#FFD700', mb: 1 }} />
                     <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 700 }}>My Team</Typography>
-                    <Typography variant="h4" sx={{ fontWeight: 900, color: '#ffffff' }}>{memberDetails?.total_team || 0}</Typography>
+                    <Typography variant="h4" sx={{ fontWeight: 900, color: '#ffffff' }}>{Math.max(memberDetails?.registration_stats?.total || 0, memberDetails?.total_team || 0)}</Typography>
                   </Box>
                   <Box 
                     onClick={() => navigate('/user/team/direct')}
@@ -357,7 +302,7 @@ const UserDashboard = () => {
                   >
                     <PersonAddAltIcon sx={{ fontSize: 32, color: '#6366f1', mb: 1 }} />
                     <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 700 }}>My Directs</Typography>
-                    <Typography variant="h4" sx={{ fontWeight: 900, color: '#ffffff' }}>{memberDetails?.direct_referrals?.length || 0}</Typography>
+                    <Typography variant="h4" sx={{ fontWeight: 900, color: '#ffffff' }}>{Math.max(memberDetails?.registration_stats?.direct || 0, memberDetails?.direct_referrals?.length || 0)}</Typography>
                   </Box>
                 </Box>
               </Paper>
@@ -368,7 +313,7 @@ const UserDashboard = () => {
             <Paper elevation={0} sx={{
               p: 4,
               borderRadius: '28px',
-              background: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)',
+              background: 'linear-gradient(135deg, #1e3a8a 0%, #FFD700 100%)',
               color: 'white',
               boxShadow: '0 20px 40px rgba(59, 130, 246, 0.25)'
             }}>
@@ -429,17 +374,17 @@ const UserDashboard = () => {
                     <Typography variant="subtitle1" sx={{ color: '#ffffff', fontWeight: 900 }}>${Number(walletOverview?.singleLineIncome || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
                   </Box>
                   <Box onClick={() => navigate('/user/earnings/level-benefits')} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1, cursor: 'pointer', p: 2, borderRadius: '24px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                    <AccountTreeIcon sx={{ fontSize: 32, color: '#3b82f6' }} />
+                    <AccountTreeIcon sx={{ fontSize: 32, color: '#FFD700' }} />
                     <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', fontWeight: 700, textAlign: 'center' }}>Level Bonus</Typography>
                     <Typography variant="subtitle1" sx={{ color: '#ffffff', fontWeight: 900 }}>${Number(walletOverview?.levelBenefits || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
                   </Box>
                   <Box onClick={() => navigate('/user/wallet')} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1, cursor: 'pointer', p: 2, borderRadius: '24px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                    <AccountBalanceWalletIcon sx={{ fontSize: 32, color: '#00e676' }} />
+                    <AccountBalanceWalletIcon sx={{ fontSize: 32, color: '#FFD700' }} />
                     <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', fontWeight: 700, textAlign: 'center' }}>Earnings Wallet</Typography>
                     <Typography variant="subtitle1" sx={{ color: '#ffffff', fontWeight: 900 }}>${Number(walletOverview?.balance || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
                   </Box>
                   <Box onClick={() => navigate('/user/upgrade-wallet')} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1, cursor: 'pointer', p: 2, borderRadius: '24px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                    <AccountBalanceWalletIcon sx={{ fontSize: 32, color: '#3b82f6' }} />
+                    <AccountBalanceWalletIcon sx={{ fontSize: 32, color: '#FFD700' }} />
                     <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', fontWeight: 700, textAlign: 'center' }}>Upgrade Wallet</Typography>
                     <Typography variant="subtitle1" sx={{ color: '#ffffff', fontWeight: 900 }}>${Number(walletOverview?.upgradeWalletBalance || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
                   </Box>

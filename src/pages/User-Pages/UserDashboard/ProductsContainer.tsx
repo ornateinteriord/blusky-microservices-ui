@@ -66,7 +66,7 @@ const ProductsContainer: React.FC = () => {
     <Box sx={{ mt: 4, width: '100%' }}>
       {/* Title & More Button Row */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2, px: 1 }}>
-        <Typography variant="h5" fontWeight={800} sx={{ background: '-webkit-linear-gradient(45deg, #00e676, #1de9b6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+        <Typography variant="h5" fontWeight={800} sx={{ background: '-webkit-linear-gradient(45deg, #FFD700, #1de9b6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
           Products
         </Typography>
         <Button 
@@ -120,7 +120,7 @@ const ProductsContainer: React.FC = () => {
                 {pkg.title}
               </Typography>
               
-              <Typography variant="h5" fontWeight={800} sx={{ color: '#00e676', mb: 1, height: '36px', display: 'flex', alignItems: 'center' }}>
+              <Typography variant="h5" fontWeight={800} sx={{ color: '#FFD700', mb: 1, height: '36px', display: 'flex', alignItems: 'center' }}>
                 ${pkg.amount}
               </Typography>
               
@@ -152,7 +152,7 @@ const ProductsContainer: React.FC = () => {
                   ) : (
                     <Box>
                       <Typography variant="subtitle1" sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: '0.85rem', mb: 0.2 }}>Single Level Income</Typography>
-                      <Typography variant="h5" fontWeight={900} sx={{ lineHeight: 1.2, color: '#00e676' }}>
+                      <Typography variant="h5" fontWeight={900} sx={{ lineHeight: 1.2, color: '#FFD700' }}>
                         ${(walletOverview?.singleLevelIncomeByPackage?.[pkg.amount] || 0).toFixed(2)}
                       </Typography>
                     </Box>
@@ -164,7 +164,7 @@ const ProductsContainer: React.FC = () => {
                     label="Purchased" 
                     sx={{ 
                       bgcolor: 'rgba(59, 130, 246, 0.2)', 
-                      color: '#3b82f6',
+                      color: '#FFD700',
                       fontWeight: 700,
                       borderRadius: '24px',
                       height: '24px',
@@ -178,7 +178,7 @@ const ProductsContainer: React.FC = () => {
                   onClick={() => handleBuyClick(pkg)}
                   disabled={isPending}
                   sx={{
-                    bgcolor: '#00e676',
+                    bgcolor: '#FFD700',
                     color: '#000000',
                     fontWeight: 800,
                     textTransform: 'none',
@@ -188,7 +188,7 @@ const ProductsContainer: React.FC = () => {
                     py: 0.8,
                     boxShadow: 'none',
                     '&:hover': {
-                      bgcolor: '#00c853',
+                      bgcolor: '#e6c200',
                       boxShadow: 'none'
                     },
                     '&:disabled': {
@@ -238,10 +238,10 @@ const ProductsContainer: React.FC = () => {
             variant="contained" 
             disabled={isPending}
             sx={{
-              bgcolor: '#00e676',
+              bgcolor: '#FFD700',
               color: '#000',
               fontWeight: 700,
-              '&:hover': { bgcolor: '#00c853' },
+              '&:hover': { bgcolor: '#e6c200' },
               '&:disabled': { bgcolor: 'rgba(0, 230, 118, 0.3)' }
             }}
           >

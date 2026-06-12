@@ -266,12 +266,12 @@ const Receipts: React.FC = () => {
           }}
           sx={{
             textTransform: 'none',
-            backgroundColor: '#3b82f6',
+            backgroundColor: '#FFD700',
             color: 'white',
             fontSize: '0.75rem',
             px: 2,
             '&:hover': {
-              backgroundColor: '#2563eb',
+              backgroundColor: '#e6c200',
             }
           }}
         >

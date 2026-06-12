@@ -10,6 +10,7 @@ import {
   Radio,
   FormControlLabel,
   Button,
+  Box,
   Card,
   CardContent,
   InputAdornment,
@@ -110,7 +111,7 @@ const NewResgister: React.FC = () => {
   };
 
   return (
-    <>
+    <Box sx={{ minHeight: "100vh", bgcolor: "#0B2453", p: 2 }}>
       <Card sx={{ margin: '2rem', mt: 10, boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}>
         <CardContent>
           {/* First Accordion - Joining Details */}
@@ -470,8 +471,9 @@ const NewResgister: React.FC = () => {
           </Button>
         </DialogActions>
       </Dialog>
-    </>
+    </Box>
   );
+
 };
 
 export default NewResgister;

@@ -89,7 +89,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
           textTransform: "none",
           fontWeight: 600,
           background: "transparent",
-          "&:hover": { color: "#00e676", backgroundColor: "rgba(255,255,255,0.05)" }
+          "&:hover": { color: "#FFD700", backgroundColor: "rgba(255,255,255,0.05)" }
         }}
       >
         Back to Login
@@ -153,7 +153,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
                   borderColor: "rgba(255, 255, 255, 0.25)",
                 },
                 "&.Mui-focused fieldset": {
-                  borderColor: "#00e676",
+                  borderColor: "#FFD700",
                   borderWidth: "2px"
                 },
               },
@@ -161,7 +161,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
                 color: "rgba(255, 255, 255, 0.6)",
               },
               "& .MuiInputLabel-root.Mui-focused": {
-                color: "#00e676",
+                color: "#FFD700",
               },
               "& .MuiOutlinedInput-input::placeholder": {
                 color: "rgba(255, 255, 255, 0.4)",
@@ -193,7 +193,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
                       borderColor: "rgba(255, 255, 255, 0.25)",
                     },
                     "&.Mui-focused fieldset": {
-                      borderColor: "#00e676",
+                      borderColor: "#FFD700",
                       borderWidth: "2px"
                     },
                   },
@@ -236,7 +236,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
                     borderColor: "rgba(255, 255, 255, 0.25)",
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: "#00e676",
+                    borderColor: "#FFD700",
                     borderWidth: "2px"
                   },
                 },
@@ -244,7 +244,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
                   color: "rgba(255, 255, 255, 0.6)",
                 },
                 "& .MuiInputLabel-root.Mui-focused": {
-                  color: "#00e676",
+                  color: "#FFD700",
                 },
                 "& .MuiOutlinedInput-input::placeholder": {
                   color: "rgba(255, 255, 255, 0.4)",
@@ -286,7 +286,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
                     borderColor: "rgba(255, 255, 255, 0.25)",
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: "#00e676",
+                    borderColor: "#FFD700",
                     borderWidth: "2px"
                   },
                 },
@@ -294,7 +294,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
                   color: "rgba(255, 255, 255, 0.6)",
                 },
                 "& .MuiInputLabel-root.Mui-focused": {
-                  color: "#00e676",
+                  color: "#FFD700",
                 },
                 "& .MuiOutlinedInput-input::placeholder": {
                   color: "rgba(255, 255, 255, 0.4)",
@@ -313,7 +313,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
           sx={{
             mt: 2,
             mb: 2,
-            background: "linear-gradient(135deg, #00e676 0%, #00c853 100%)",
+            background: "linear-gradient(135deg, #FFD700 0%, #e6c200 100%)",
             color: "#050916",
             fontWeight: 800,
             fontSize: "1rem",
@@ -323,7 +323,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
             boxShadow: "0 8px 16px rgba(0, 230, 118, 0.2)",
             transition: "all 0.3s ease",
             "&:hover": {
-              background: "linear-gradient(135deg, #00c853 0%, #00e676 100%)",
+              background: "linear-gradient(135deg, #e6c200 0%, #FFD700 100%)",
               transform: "translateY(-2px)",
               boxShadow: "0 12px 20px rgba(0, 230, 118, 0.4)",
             },

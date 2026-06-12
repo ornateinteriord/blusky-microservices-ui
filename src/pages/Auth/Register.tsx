@@ -29,7 +29,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneIcon from "@mui/icons-material/Phone";
 import WcIcon from "@mui/icons-material/Wc";
-import USDTLogo from "../../assets/bms_logo.png"; // Import the logo
+import USDTLogo from "../../assets/uwt.png"; // Import the logo
 import { useGetSponserRef, useSignupMutation } from "../../api/Auth";
 import { LoadingComponent } from "../../App";
 
@@ -217,7 +217,7 @@ const Register = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "linear-gradient(180deg, #050916 0%, #0f1e36 100%)",
+        bgcolor: "#0B2453",
         position: "relative",
         overflow: "hidden",
         pt: { xs: 5, md: 8 },
@@ -267,11 +267,11 @@ const Register = () => {
           }}
         >
           <CardContent sx={{ width: "100%", padding: { xs: '1.25rem', md: '2.5rem' } }}>
-            <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
               <img
                 src={USDTLogo}
                 alt="USDT Logo"
-                style={{ maxWidth: "220px", height: "auto", objectFit: "contain" }}
+                style={{ height: "140px", marginBottom: "0px", objectFit: "contain" }}
               />
             </Box>
             <Typography
@@ -281,7 +281,7 @@ const Register = () => {
                 color: "#ffffff",
                 fontWeight: 800,
                 textAlign: "center",
-                mb: 4,
+                mb: 3,
                 letterSpacing: "-0.5px"
               }}
             >
@@ -328,7 +328,7 @@ const Register = () => {
                           borderColor: "rgba(255, 255, 255, 0.25)",
                         },
                         "&.Mui-focused fieldset": {
-                          borderColor: "#00e676",
+                          borderColor: "#FFD700",
                           borderWidth: "2px"
                         },
                       },
@@ -336,7 +336,7 @@ const Register = () => {
                         color: "rgba(255, 255, 255, 0.6)",
                       },
                       "& .MuiInputLabel-root.Mui-focused": {
-                        color: "#00e676",
+                        color: "#FFD700",
                       },
                       "& .MuiOutlinedInput-input::placeholder": {
                         color: "rgba(255, 255, 255, 0.4)",
@@ -417,7 +417,7 @@ const Register = () => {
                           borderColor: "rgba(255, 255, 255, 0.25)",
                         },
                         "&.Mui-focused fieldset": {
-                          borderColor: "#00e676",
+                          borderColor: "#FFD700",
                           borderWidth: "2px"
                         },
                       },
@@ -425,7 +425,7 @@ const Register = () => {
                         color: "rgba(255, 255, 255, 0.6)",
                       },
                       "& .MuiInputLabel-root.Mui-focused": {
-                        color: "#00e676",
+                        color: "#FFD700",
                       },
                       "& .MuiOutlinedInput-input::placeholder": {
                         color: "rgba(255, 255, 255, 0.4)",
@@ -466,7 +466,7 @@ const Register = () => {
                           borderColor: "rgba(255, 255, 255, 0.25)",
                         },
                         "&.Mui-focused fieldset": {
-                          borderColor: "#00e676",
+                          borderColor: "#FFD700",
                           borderWidth: "2px"
                         },
                       },
@@ -474,7 +474,7 @@ const Register = () => {
                         color: "rgba(255, 255, 255, 0.6)",
                       },
                       "& .MuiInputLabel-root.Mui-focused": {
-                        color: "#00e676",
+                        color: "#FFD700",
                       },
                       "& .MuiOutlinedInput-input::placeholder": {
                         color: "rgba(255, 255, 255, 0.4)",
@@ -515,7 +515,7 @@ const Register = () => {
                           borderColor: "rgba(255, 255, 255, 0.25)",
                         },
                         "&.Mui-focused fieldset": {
-                          borderColor: "#00e676",
+                          borderColor: "#FFD700",
                           borderWidth: "2px"
                         },
                       },
@@ -523,7 +523,7 @@ const Register = () => {
                         color: "rgba(255, 255, 255, 0.6)",
                       },
                       "& .MuiInputLabel-root.Mui-focused": {
-                        color: "#00e676",
+                        color: "#FFD700",
                       },
                       "& .MuiOutlinedInput-input::placeholder": {
                         color: "rgba(255, 255, 255, 0.4)",
@@ -566,7 +566,7 @@ const Register = () => {
                           borderColor: "rgba(255, 255, 255, 0.25)",
                         },
                         "&.Mui-focused fieldset": {
-                          borderColor: "#00e676",
+                          borderColor: "#FFD700",
                           borderWidth: "2px"
                         },
                       },
@@ -574,7 +574,7 @@ const Register = () => {
                         color: "rgba(255, 255, 255, 0.6)",
                       },
                       "& .MuiInputLabel-root.Mui-focused": {
-                        color: "#00e676",
+                        color: "#FFD700",
                       },
                       "& .MuiOutlinedInput-input::placeholder": {
                         color: "rgba(255, 255, 255, 0.4)",
@@ -615,7 +615,7 @@ const Register = () => {
                           borderColor: "rgba(255, 255, 255, 0.25)",
                         },
                         "&.Mui-focused fieldset": {
-                          borderColor: "#00e676",
+                          borderColor: "#FFD700",
                           borderWidth: "2px"
                         },
                       },
@@ -623,7 +623,7 @@ const Register = () => {
                         color: "rgba(255, 255, 255, 0.6)",
                       },
                       "& .MuiInputLabel-root.Mui-focused": {
-                        color: "#00e676",
+                        color: "#FFD700",
                       },
                       "& .MuiOutlinedInput-input::placeholder": {
                         color: "rgba(255, 255, 255, 0.4)",
@@ -663,7 +663,7 @@ const Register = () => {
                           borderColor: "rgba(255, 255, 255, 0.25)",
                         },
                         "&.Mui-focused fieldset": {
-                          borderColor: "#00e676",
+                          borderColor: "#FFD700",
                           borderWidth: "2px"
                         },
                       },
@@ -671,7 +671,7 @@ const Register = () => {
                         color: "rgba(255, 255, 255, 0.6)",
                       },
                       "& .MuiInputLabel-root.Mui-focused": {
-                        color: "#00e676",
+                        color: "#FFD700",
                       },
                       "& .MuiOutlinedInput-input::placeholder": {
                         color: "rgba(255, 255, 255, 0.4)",
@@ -706,12 +706,12 @@ const Register = () => {
                     >
                       <FormControlLabel
                         value="Male"
-                        control={<Radio sx={{ color: "rgba(255, 255, 255, 0.3)", "&.Mui-checked": { color: "#00e676" } }} />}
+                        control={<Radio sx={{ color: "rgba(255, 255, 255, 0.3)", "&.Mui-checked": { color: "#FFD700" } }} />}
                         label={<span style={{ color: "rgba(255, 255, 255, 0.7)", fontWeight: 500 }}>Male</span>}
                       />
                       <FormControlLabel
                         value="Female"
-                        control={<Radio sx={{ color: "rgba(255, 255, 255, 0.3)", "&.Mui-checked": { color: "#00e676" } }} />}
+                        control={<Radio sx={{ color: "rgba(255, 255, 255, 0.3)", "&.Mui-checked": { color: "#FFD700" } }} />}
                         label={<span style={{ color: "rgba(255, 255, 255, 0.7)", fontWeight: 500 }}>Female</span>}
                       />
                     </RadioGroup>
@@ -730,7 +730,7 @@ const Register = () => {
                       <Checkbox
                         checked={isChecked}
                         onChange={handleCheckboxChange}
-                        sx={{ color: "rgba(255, 255, 255, 0.3)", "&.Mui-checked": { color: "#00e676" } }}
+                        sx={{ color: "rgba(255, 255, 255, 0.3)", "&.Mui-checked": { color: "#FFD700" } }}
                       />
                     }
                     label={
@@ -751,7 +751,7 @@ const Register = () => {
                     sx={{
                       mt: 1,
                       mb: 2,
-                      background: "linear-gradient(135deg, #00e676 0%, #00c853 100%)",
+                      background: "linear-gradient(135deg, #FFD700 0%, #e6c200 100%)",
                       color: "#050916",
                       fontWeight: 800,
                       fontSize: "1rem",
@@ -761,7 +761,7 @@ const Register = () => {
                       boxShadow: "0 8px 16px rgba(0, 230, 118, 0.2)",
                       transition: "all 0.3s ease",
                       "&:hover": {
-                        background: "linear-gradient(135deg, #00c853 0%, #00e676 100%)",
+                        background: "linear-gradient(135deg, #e6c200 0%, #FFD700 100%)",
                         transform: "translateY(-2px)",
                         boxShadow: "0 12px 20px rgba(0, 230, 118, 0.4)",
                       },
@@ -782,7 +782,7 @@ const Register = () => {
               <Link
                 to="/login"
                 style={{
-                  color: "#00e676",
+                  color: "#FFD700",
                   textDecoration: "none",
                   fontWeight: 700,
                   transition: "color 0.2s ease"
@@ -865,10 +865,10 @@ const Register = () => {
                 px: 6,
                 py: 1.25,
                 borderRadius: '12px',
-                background: "linear-gradient(135deg, #00e676 0%, #00c853 100%)",
+                background: "linear-gradient(135deg, #FFD700 0%, #e6c200 100%)",
                 color: '#050916',
                 '&:hover': {
-                  background: "linear-gradient(135deg, #00c853 0%, #00e676 100%)",
+                  background: "linear-gradient(135deg, #e6c200 0%, #FFD700 100%)",
                 }
               }}
             >

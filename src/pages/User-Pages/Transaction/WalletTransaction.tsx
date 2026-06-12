@@ -79,14 +79,17 @@ const WalletTransaction = () => {
 
   if (isLoading) {
     return (
+    <Box sx={{ minHeight: '100vh', bgcolor: '#0B2453', p: 2 }}>
       <Card sx={{ margin: "2rem", mt: 10, textAlign: "center", p: 3 }}>
         <CircularProgress size={"4rem"} sx={{ color: "#0a2558" }} />
       </Card>
-    );
+    </Box>
+  );
   }
 
   return (
-    <Card sx={{ margin: "2rem", mt: 10 }}>
+    <Box sx={{ minHeight: '100vh', bgcolor: '#0B2453', p: 2 }}>
+      <Card sx={{ margin: "2rem", mt: 10 }}>
       <CardContent>
         <Accordion defaultExpanded>
           <AccordionSummary
@@ -169,6 +172,7 @@ const WalletTransaction = () => {
         </Accordion>
       </CardContent>
     </Card>
+    </Box>
   );
 };
 

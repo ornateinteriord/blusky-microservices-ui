@@ -91,7 +91,7 @@ const AdminDashboard = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: color || '#00e676'
+          color: color || '#FFD700'
         }}>
           {icon}
         </Box>
@@ -145,7 +145,7 @@ const AdminDashboard = () => {
               border: '2px solid rgba(255,255,255,0.1)',
             }}
           >
-            <AdminPanelSettingsIcon sx={{ fontSize: { xs: 36, md: 46 }, color: '#00e676' }} />
+            <AdminPanelSettingsIcon sx={{ fontSize: { xs: 36, md: 46 }, color: '#FFD700' }} />
           </Avatar>
           <Box>
             <Typography variant="h5" sx={{ color: 'white', fontWeight: 900, letterSpacing: '-0.5px', lineHeight: 1.2, mb: 0.5, fontSize: { xs: '1.4rem', md: '1.8rem' } }}>
@@ -204,7 +204,7 @@ const AdminDashboard = () => {
               title="Total Members"
               subTitle={`${totalMembers} members in total`}
               icon={<PeopleIcon />}
-              color="#3b82f6"
+              color="#FFD700"
               onClick={() => navigate('/admin/members')}
             />
           </Grid>
@@ -234,7 +234,7 @@ const AdminDashboard = () => {
               title="ROI Distributed"
               subTitle={`Today: $${(roiSummary?.todaysTotal || 0).toLocaleString()} (${roiSummary?.todaysCount || 0} payouts)`}
               icon={<PaymentsIcon />}
-              color="#00e676"
+              color="#FFD700"
               onClick={() => navigate('/admin/income/daily-payouts')}
             />
           </Grid>
