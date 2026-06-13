@@ -1,23 +1,11 @@
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  TextField,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  Radio,
-  FormControlLabel,
-  InputAdornment,
-} from "@mui/material";
+import { TextField, FormControl, FormLabel, RadioGroup, Radio, FormControlLabel, InputAdornment,  } from '@mui/material';
 import PersonIcon from "@mui/icons-material/Person";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from '@mui/icons-material/Lock';
 import PhoneIcon from "@mui/icons-material/Phone";
 import WcIcon from "@mui/icons-material/Wc";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { MuiDatePicker } from "../../../../components/common/DateFilterComponent";
+import { MuiDatePicker } from '../../../../components/common/DateFilterComponent';
 
 interface BasicDetailsProps {
   formData: any;
@@ -42,17 +30,11 @@ export const BasicDetails: React.FC<BasicDetailsProps> = ({
   };
 
   return (
-    <Accordion defaultExpanded sx={{ boxShadow: "none", marginBottom: "20px" }}>
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon sx={{ color: "#fff" }} />}
-        sx={{
-          backgroundColor: "#0a2558",
-          color: "#fff",
-        }}
-      >
+    <div>
+      <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)", display: "flex", alignItems: "center", gap: "8px" }}>
         Basic Details
-      </AccordionSummary>
-      <AccordionDetails sx={{ padding: "2rem" }}>
+      </div>
+      <div style={{ padding: "0 1rem 1rem 1rem" }}>
         <div className="basic-details-accordion">
           <form
             style={{
@@ -273,7 +255,7 @@ export const BasicDetails: React.FC<BasicDetailsProps> = ({
             />
           </form>
         </div>
-      </AccordionDetails>
-    </Accordion>
+      </div>
+    </div>
   );
 };

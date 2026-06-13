@@ -1,6 +1,6 @@
-import { Container, Typography, Box, Paper, Button } from "@mui/material";
-import { FileText, UserCheck, Ban, AlertTriangle, Scale, ArrowLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Container, Typography, Box, Paper, Button } from '@mui/material';
+import { FileText, UserCheck, Ban, AlertTriangle, Scale, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Terms = () => {
     const navigate = useNavigate();

@@ -1,6 +1,6 @@
-import { Box, Container, Typography, Grid, IconButton, Divider } from "@mui/material";
-import { Link } from "react-router-dom";
-import { MapPin, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import { Box, Container, Typography, Grid, IconButton, Divider } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();

@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
-import { Box, Typography, Button, Card, CardContent, Chip, CircularProgress, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Box, Typography, Button, Card, CardContent, Chip, CircularProgress, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import UserContext from "../../../context/user/userContext";
-import { useGetWalletOverview } from "../../../api/Memeber";
-import { useBuyPackageDirectlyMutation } from "../../../api/Packages";
-import { toast } from "react-toastify";
-import { useGetMemberAddOns } from "../../../api/Packages";
+import { useGetWalletOverview } from '../../../api/Memeber';
+import { useBuyPackageDirectlyMutation } from '../../../api/Packages';
+import { toast } from 'react-toastify';
+import { useGetMemberAddOns } from '../../../api/Packages';
 import USDTLogo from "../../../assets/uwt.png";
 
 const PACKAGES = [
@@ -27,6 +27,13 @@ const ProductsContainer: React.FC = () => {
   const [confirmPkg, setConfirmPkg] = useState<any>(null);
   const { data: memberAddons } = useGetMemberAddOns(user?.Member_id || '');
   const topUpBalance = walletOverview?.topUpBalance || 0;
+
+  const hasAnyPackagePurchased = React.useMemo(() => {
+    if (walletOverview?.primaryPackage) return true;
+    if (user?.package_value) return true;
+    if (memberAddons && memberAddons.length > 0) return true;
+    return false;
+  }, [walletOverview, user, memberAddons]);
 
   const isPurchased = (pkgAmount: number) => {
     // Check primary package
@@ -111,10 +118,10 @@ const ProductsContainer: React.FC = () => {
             }}
           >
             <CardContent sx={{ p: 2.5, '&:last-child': { pb: 2.5 } }}>
-              <Typography variant="subtitle1" fontWeight={700} sx={{ mb: 1, lineHeight: 1.3, height: '48px', display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Typography variant="h5" fontWeight={900} sx={{ fontSize: '1.4rem', color: pkg.color, mb: 1, lineHeight: 1.3, height: '48px', display: 'flex', alignItems: 'center', gap: 0 }}>
                 <Box sx={{
-                  width: 28,
-                  height: 28,
+                  width: 38,
+                  height: 38,
                   backgroundColor: pkg.color,
                   WebkitMaskImage: `url(${USDTLogo})`,
                   WebkitMaskSize: 'contain',
@@ -184,7 +191,7 @@ const ProductsContainer: React.FC = () => {
                   <Button
                   variant="contained"
                   onClick={() => handleBuyClick(pkg)}
-                  disabled={isPending}
+                  disabled={isPending || hasAnyPackagePurchased}
                   sx={{
                     bgcolor: '#FFD700',
                     color: '#000000',

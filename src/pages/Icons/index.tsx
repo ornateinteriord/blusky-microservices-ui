@@ -18,8 +18,8 @@ import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import PaymentsIcon from '@mui/icons-material/Payments';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ComputerIcon from '@mui/icons-material/Computer';
 import LaptopIcon from '@mui/icons-material/Laptop';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
@@ -39,13 +39,13 @@ export {
   CheckCircleIcon,
   GroupIcon,
   ExpandLessIcon,
+  ExpandMoreIcon,
   MonetizationOnIcon,
   ShowChartIcon,
   CreditCardIcon,
   MailOutlineIcon,
   ExitToAppIcon,
   PersonIcon,
-  ExpandMoreIcon,
   VerifiedUserIcon,
   LockIcon,
   InventoryIcon,
@@ -70,28 +70,7 @@ export {
   PercentIcon
 };
 
-import {
-  Home,
-  Settings,
-  ClipboardCheck,
-  TrendingUp as LucideTrendingUp,
-  Landmark,
-  Wallet,
-  CreditCard as LucideCreditCard,
-  RefreshCcw,
-  Lock as LucideLock,
-  PiggyBank as LucidePiggyBank,
-  BarChart3,
-  HandCoins,
-  FileText,
-  Search,
-  Calculator,
-  Undo2,
-  XCircle,
-  PlusCircle,
-  IndianRupee,
-  Info
-} from "lucide-react";
+import { Home, Settings, ClipboardCheck, TrendingUp as LucideTrendingUp, Landmark, Wallet, CreditCard as LucideCreditCard, RefreshCcw, Lock as LucideLock, PiggyBank as LucidePiggyBank, BarChart3, HandCoins, FileText, Search, Calculator, Undo2, XCircle, PlusCircle, IndianRupee, Info } from 'lucide-react';
 
 export const LucideIcons = {
   Home,
@@ -182,7 +161,6 @@ export const MuiIcons = {
   PersonAdd,
   Payments,
   ExpandMore: ExpandMoreIcon,
-  ExpandLess: ExpandLessIcon,
   Computer,
   Laptop,
   PhoneAndroid,

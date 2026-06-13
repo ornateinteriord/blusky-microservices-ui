@@ -1,23 +1,12 @@
-import {
-  Box,
-  Typography,
-  Avatar,
-  Card,
-  CardContent,
-  AccordionSummary,
-  AccordionDetails,
-  Accordion,
-  ClickAwayListener,
-} from "@mui/material";
-import { useEffect, useState } from "react";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useGetSponsers } from "../../../api/Memeber";
-import { toast } from "react-toastify";
-import { LoadingComponent } from "../../../App";
+import { Box, Typography, Avatar, Card, CardContent, ClickAwayListener,  } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { useGetSponsers } from '../../../api/Memeber';
+import { toast } from 'react-toastify';
+import { LoadingComponent } from '../../../App';
 import DataTable from "react-data-table-component";
 import "./Tree.scss";
-import { getFormattedDate } from "../../../utils/common";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { getFormattedDate } from '../../../utils/common';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import CustomBreadcrumbs, { breadcrumbsProp } from "../../../components/common/CustomBreadcrumps";
 import TokenService from "../../../api/token/tokenService";
 
@@ -153,15 +142,8 @@ const Tree = () => {
     <Card sx={{ margin: "2rem", mt: 10 }}>
       <CardContent>
         <CustomBreadcrumbs routes={routes} />
-        <Accordion defaultExpanded>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            className="accordion-summary"
-          >
-            Tree
-          </AccordionSummary>
-          <AccordionDetails>
-            <Box className="tree-container">
+        <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>Tree</div>
+          <Box className="tree-container">
               <Box
                 sx={{
                   display: "flex",
@@ -213,8 +195,6 @@ const Tree = () => {
                 </ClickAwayListener>
               )}
             </Box>
-          </AccordionDetails>
-        </Accordion>
       </CardContent>
       {isLoading && <LoadingComponent />}
     </Card>

@@ -1,23 +1,11 @@
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Button,
-  Card,
-  CardContent,
-  Grid,
-  InputAdornment,
-  TextField,
-  Typography,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Button, Card, CardContent, Grid, InputAdornment, TextField, Typography,  } from '@mui/material';
 import PersonIcon from "@mui/icons-material/Person";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import KeyIcon from "@mui/icons-material/Key";
 import LockIcon from "@mui/icons-material/Lock";
-import { useContext, useState } from "react";
-import { useUpdatePassword } from "../../../api/Admin";
-import { toast } from "react-toastify";
+import { useContext, useState } from 'react';
+import { useUpdatePassword } from '../../../api/Admin';
+import { toast } from 'react-toastify';
 import UserContext from "../../../context/user/userContext";
 
 const UpdatePassword: React.FC = () => {
@@ -70,18 +58,11 @@ const UpdatePassword: React.FC = () => {
       </Grid>
       <Card sx={{ margin: "2rem", mt: 2 }}>
         <CardContent>
-          <Accordion defaultExpanded>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              sx={{
-                backgroundColor: "#0a2558",
-                color: "#fff",
-                "& .MuiSvgIcon-root": { color: "#fff" },
-              }}
-            >
+          <div>
+            <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)", display: "flex", alignItems: "center", gap: "8px" }}>
               Update Password
-            </AccordionSummary>
-            <AccordionDetails sx={{ padding: "2rem" }}>
+            </div>
+            <div style={{ padding: "0 1rem 1rem 1rem" }}>
               <form
                 style={{
                   display: "flex",
@@ -214,8 +195,8 @@ const UpdatePassword: React.FC = () => {
                   Update Password
                 </Button>
               </form>
-            </AccordionDetails>
-          </Accordion>
+            </div>
+          </div>
         </CardContent>
       </Card>
     </>

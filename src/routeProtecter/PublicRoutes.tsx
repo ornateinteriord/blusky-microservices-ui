@@ -1,6 +1,6 @@
-import { Navigate, Outlet, useLocation, useSearchParams } from "react-router-dom";
+import { Navigate, Outlet, useLocation, useSearchParams } from 'react-router-dom';
 import useAuth from "../hooks/use-auth";
-import { useEffect } from "react";
+import { useEffect } from 'react';
 import TokenService from "../api/token/tokenService";
 
 const PublicRoute = () => {

@@ -1,16 +1,10 @@
-import {
-  Box,
-  Button,
-  InputAdornment,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, InputAdornment, TextField, Typography,  } from '@mui/material';
 import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useState } from "react";
-import { MuiOtpInput } from "mui-one-time-password-input";
-import { useResetpassword } from "../../../api/Auth";
+import { useState } from 'react';
+import { MuiOtpInput } from 'mui-one-time-password-input';
+import { useResetpassword } from '../../../api/Auth';
 
 interface ForgotPasswordFormProps {
   onBackToLogin: () => void;

@@ -1,19 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  TextField,
-  FormControl,
-  Button,
-  Box,
-  Typography,
-  Select,
-  MenuItem,
-} from "@mui/material";
+import { Card, CardContent, CardHeader, TextField, FormControl, Button, Box, Typography, Select, MenuItem,  } from '@mui/material';
 import UserContext from "../../../context/user/userContext";
-import { useUpdateMember } from "../../../api/Memeber";
-import { LoadingComponent } from "../../../App";
+import { useUpdateMember } from '../../../api/Memeber';
+import { LoadingComponent } from '../../../App';
 
 const Profile: React.FC = () => {
   const { user } = useContext(UserContext);

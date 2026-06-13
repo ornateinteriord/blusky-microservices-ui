@@ -1,32 +1,11 @@
 import React, { useContext, useState } from 'react';
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  TextField,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  Radio,
-  FormControlLabel,
-  Button,
-  Box,
-  Card,
-  CardContent,
-  InputAdornment,
-  FormHelperText,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Typography,
-} from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { TextField, FormControl, FormLabel, RadioGroup, Radio, FormControlLabel, Button, Box, Card, CardContent, InputAdornment, FormHelperText, Dialog, DialogTitle, DialogContent, DialogActions, Typography,  } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import WcIcon from '@mui/icons-material/Wc';
 import LockIcon from '@mui/icons-material/Lock';
+import PublicIcon from '@mui/icons-material/Public';
 // import LocationOnIcon from '@mui/icons-material/LocationOn';
 import UserContext from '../../../context/user/userContext';
 import { useSignupMutation } from '../../../api/Auth';
@@ -115,27 +94,8 @@ const NewResgister: React.FC = () => {
       <Card sx={{ margin: '2rem', mt: 10, boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}>
         <CardContent>
           {/* First Accordion - Joining Details */}
-          <Accordion
-            defaultExpanded
-            sx={{
-              boxShadow: 'none',
-              '&.MuiAccordion-root': {
-                backgroundColor: '#fff'
-              }
-            }}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              sx={{
-                backgroundColor: '#0a2558',
-                color: '#fff',
-                '& .MuiSvgIcon-root': { color: '#fff' }
-              }}
-            >
-              Joining Details
-            </AccordionSummary>
-            <AccordionDetails sx={{ padding: '2rem' }}>
-              <form style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>Joining Details</div>
+          <div style={{ padding: "0 1rem 1rem 1rem", display: "flex", flexDirection: "column", gap: "1rem" }}><form style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 <TextField
                   label="Sponsor Code"
                   name="sponsorCode"
@@ -152,7 +112,7 @@ const NewResgister: React.FC = () => {
                     ),
                   }}
                   sx={{
-                    '& .MuiOutlinedInput-root': {
+                    '& .MuiOutlinedInput-root': { borderRadius: '12px', 
                       '&:hover fieldset': {
                         borderColor: '#0a2558',
                       },
@@ -178,7 +138,7 @@ const NewResgister: React.FC = () => {
                     ),
                   }}
                   sx={{
-                    '& .MuiOutlinedInput-root': {
+                    '& .MuiOutlinedInput-root': { borderRadius: '12px', 
                       '&:hover fieldset': {
                         borderColor: '#0a2558',
                       },
@@ -188,33 +148,11 @@ const NewResgister: React.FC = () => {
                     }
                   }}
                 />
-              </form>
-            </AccordionDetails>
-          </Accordion>
+              </form></div>
 
           {/* Second Accordion - New Member Details */}
-          <Accordion
-            defaultExpanded
-            sx={{
-              mt: 2,
-              boxShadow: 'none',
-              '&.MuiAccordion-root': {
-                backgroundColor: '#fff'
-              }
-            }}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              sx={{
-                backgroundColor: '#0a2558',
-                color: '#fff',
-                '& .MuiSvgIcon-root': { color: '#fff' }
-              }}
-            >
-              New Member Details
-            </AccordionSummary>
-            <AccordionDetails sx={{ padding: '2rem' }}>
-              <form style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>New Member Details</div>
+          <div style={{ padding: "0 1rem 1rem 1rem", display: "flex", flexDirection: "column", gap: "1rem" }}><form style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 <TextField
                   label="Name"
                   name="Name"
@@ -231,7 +169,7 @@ const NewResgister: React.FC = () => {
                     ),
                   }}
                   sx={{
-                    '& .MuiOutlinedInput-root': {
+                    '& .MuiOutlinedInput-root': { borderRadius: '12px', 
                       '&:hover fieldset': {
                         borderColor: '#0a2558',
                       },
@@ -292,7 +230,7 @@ const NewResgister: React.FC = () => {
                     ),
                   }}
                   sx={{
-                    '& .MuiOutlinedInput-root': {
+                    '& .MuiOutlinedInput-root': { borderRadius: '12px', 
                       '&:hover fieldset': {
                         borderColor: '#0a2558',
                       },
@@ -319,7 +257,33 @@ const NewResgister: React.FC = () => {
                     ),
                   }}
                   sx={{
-                    '& .MuiOutlinedInput-root': {
+                    '& .MuiOutlinedInput-root': { borderRadius: '12px', 
+                      '&:hover fieldset': {
+                        borderColor: '#0a2558',
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#0a2558',
+                      }
+                    }
+                  }}
+                />
+                <TextField
+                  label="Country"
+                  name="country"
+                  value={formData.country || ''}
+                  onChange={handleInputChange}
+                  fullWidth
+                  variant="outlined"
+                  placeholder="Enter your country"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <PublicIcon sx={{ color: '#0a2558' }} />
+                      </InputAdornment>
+                    ),
+                  }}
+                  sx={{
+                    '& .MuiOutlinedInput-root': { borderRadius: '12px', 
                       '&:hover fieldset': {
                         borderColor: '#0a2558',
                       },
@@ -344,7 +308,7 @@ const NewResgister: React.FC = () => {
                       variant="outlined"
                       placeholder="e.g. 15000"
                       sx={{
-                        '& .MuiOutlinedInput-root': {
+                        '& .MuiOutlinedInput-root': { borderRadius: '12px', 
                           '&:hover fieldset': { borderColor: '#0a2558' },
                           '&.Mui-focused fieldset': { borderColor: '#0a2558' }
                         }
@@ -372,7 +336,7 @@ const NewResgister: React.FC = () => {
                     ),
                   }}
                   sx={{
-                    '& .MuiOutlinedInput-root': {
+                    '& .MuiOutlinedInput-root': { borderRadius: '12px', 
                       '&:hover fieldset': {
                         borderColor: '#0a2558',
                       },
@@ -382,9 +346,7 @@ const NewResgister: React.FC = () => {
                     }
                   }}
                 />
-              </form>
-            </AccordionDetails>
-          </Accordion>
+              </form></div>
 
           {/* Register Button */}
           <Button

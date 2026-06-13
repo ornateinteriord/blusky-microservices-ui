@@ -2,7 +2,7 @@ import './sidebar.scss';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { UserSideBarMenuItems, AdminSideBarMenuItems, Admin01SideBarMenuItems, AgentSideBarMenuItems } from './SidebarUtils'
+import { UserSideBarMenuItems, AdminSideBarMenuItems, Admin01SideBarMenuItems, AgentSideBarMenuItems } from './SidebarUtils';
 import { Avatar, Toolbar, Typography } from '@mui/material';
 import { SideBarMenuItemType } from '../../store/store';
 import { ExpandMoreIcon, ExpandLessIcon } from '../Icons';

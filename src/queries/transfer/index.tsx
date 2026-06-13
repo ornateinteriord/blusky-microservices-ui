@@ -1,11 +1,6 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import useApi from "../useApi";
-import {
-    MemberBasicInfoResponse,
-    AccountsPublicResponse,
-    TransferRequest,
-    TransferResponse
-} from "../../types";
+import { MemberBasicInfoResponse, AccountsPublicResponse, TransferRequest, TransferResponse } from '../../types';
 
 // Get member basic info by member_id (for recipient lookup)
 export const useGetMemberBasicInfo = (memberId: string, enabled: boolean = false) => {

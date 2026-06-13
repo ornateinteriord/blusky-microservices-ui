@@ -1,37 +1,13 @@
 import React, { useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  TextField,
-  Button,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  IconButton,
-  Typography,
-  Box,
-  Divider,
-  CircularProgress,
-} from "@mui/material";
+import { Card, CardContent, TextField, Button, Select, MenuItem, FormControl, InputLabel, Dialog, DialogTitle, DialogContent, IconButton, Typography, Box, Divider, CircularProgress,  } from '@mui/material';
 import DataTable from "react-data-table-component";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CloseIcon from "@mui/icons-material/Close";
-import {
-  DASHBOARD_CUTSOM_STYLE,
-  getMailBoxColumns,
-} from "../../../utils/DataTableColumnsProvider";
+import { DASHBOARD_CUTSOM_STYLE, getMailBoxColumns,  } from '../../../utils/DataTableColumnsProvider';
 import TokenService from "../../../api/token/tokenService";
-import { useCreateTicket, useGetTicketDetails } from "../../../api/Memeber";
-import { toast } from "react-toastify";
+import { useCreateTicket, useGetTicketDetails } from '../../../api/Memeber';
+import { toast } from 'react-toastify';
 import useSearch from "../../../hooks/SearchQuery";
-import { getFormattedDate } from "../../../utils/common";
+import { getFormattedDate } from '../../../utils/common';
 
 interface Ticket {
   ticket_date: string;
@@ -128,27 +104,8 @@ const MailBox = () => {
         }}
       >
         <CardContent sx={{ padding: "24px" }}>
-          <Accordion
-            defaultExpanded
-            sx={{
-              boxShadow: "none",
-              "&.MuiAccordion-root": {
-                backgroundColor: "#fff",
-              },
-            }}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              sx={{
-                backgroundColor: "#0a2558",
-                color: "#fff",
-                "& .MuiSvgIcon-root": { color: "#fff" },
-                minHeight: "64px",
-              }}
-            >
-              Mail Box
-            </AccordionSummary>
-            <AccordionDetails sx={{ padding: "2rem" }}>
+          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>Mail Box</div>
+          <div style={{ padding: "0 1rem 1rem 1rem" }}>
               <form
                 onSubmit={handleSubmit}
                 style={{
@@ -244,23 +201,11 @@ const MailBox = () => {
                   Submit
                 </Button>
               </form>
-            </AccordionDetails>
-          </Accordion>
+            </div>
 
           {/* Table Section */}
-          <Accordion defaultExpanded sx={{ mt: 4 }}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              sx={{
-                backgroundColor: "#0a2558",
-                color: "#fff",
-                "& .MuiSvgIcon-root": { color: "#fff" },
-                minHeight: "64px",
-              }}
-            >
-              List of Support Details
-            </AccordionSummary>
-            <AccordionDetails>
+          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)", marginTop: "2rem" }}>List of Support Details</div>
+          <div style={{ padding: "0 1rem 1rem 1rem" }}>
               <DataTable
                 columns={getMailBoxColumns(handleOpenDialog)}
                 data={filteredData}
@@ -294,8 +239,7 @@ const MailBox = () => {
                   </div>
                 }
               />
-            </AccordionDetails>
-          </Accordion>
+            </div>
         </CardContent>
       </Card>
 

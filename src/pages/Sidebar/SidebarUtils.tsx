@@ -1,29 +1,8 @@
-import { SideBarMenuItemType } from "../../store/store";
-import {
-  DashboardIcon,
-  AccountCircleIcon,
-  CheckCircleIcon,
-  GroupIcon,
-  MonetizationOnIcon,
-  ShowChartIcon,
-  CreditCardIcon,
-  MailOutlineIcon,
-  PersonIcon,
-  VerifiedUserIcon,
-  LockIcon,
-  PeopleIcon,
-  AccountTreeIcon,
-  PersonAddIcon,
-  TrendingUpIcon,
-  PaymentsIcon,
-  SupportIcon,
-  AnnouncementIcon,
-  EventIcon,
-  SmsIcon,
-} from "../Icons";
-import { Pending } from "@mui/icons-material";
+import { SideBarMenuItemType } from '../../store/store';
+import { DashboardIcon, AccountCircleIcon, CheckCircleIcon, GroupIcon, MonetizationOnIcon, ShowChartIcon, CreditCardIcon, MailOutlineIcon, PersonIcon, VerifiedUserIcon, LockIcon, PeopleIcon, AccountTreeIcon, PersonAddIcon, TrendingUpIcon, PaymentsIcon, SupportIcon, AnnouncementIcon, EventIcon, SmsIcon,  } from '../Icons';
+import { Pending } from '@mui/icons-material';
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
-import { LucideIcons, MuiIcons } from "../Icons";
+import { LucideIcons, MuiIcons } from '../Icons';
 
 export const UserSideBarMenuItems: SideBarMenuItemType[] = [
   {
@@ -264,12 +243,17 @@ export const AdminSideBarMenuItems: SideBarMenuItemType[] = [
       //   icon: <TrendingUpIcon />,
       // },
       {
+        name: "Referral Income",
+        path: "/admin/income/referral-income",
+        icon: <PaymentsIcon />,
+      },
+      {
         name: "Level Bonus",
         path: "/admin/income/level-benefits",
         icon: <TrendingUpIcon />,
       },
       {
-        name: "Daily ROI",
+        name: "Single Level Income",
         path: "/admin/income/daily-payouts",
         icon: <PaymentsIcon />,
       },

@@ -88,7 +88,7 @@ const SupportChat: React.FC = () => {
 
     if (isLoading) {
         return (
-            <Box sx={{ height: 'calc(100vh - 64px)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', mt: 9 }}>
+            <Box sx={{ height: 'calc(100vh - 64px)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                 <CircularProgress size={60} />
                 <Typography variant="h6" sx={{ mt: 3 }}>Connecting to Support...</Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>Please wait while we connect you to our support team</Typography>
@@ -98,9 +98,9 @@ const SupportChat: React.FC = () => {
 
     if (!supportRoom) {
         return (
-            <Box sx={{ height: 'calc(100vh - 64px)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', mt: 9 }}>
-                <Paper sx={{ width: 80, height: 80, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, rgba(244, 67, 54, 0.1) 0%, rgba(255, 152, 0, 0.1) 100%)', mb: 3 }}>
-                    <Headphones size={40} color="#f44336" />
+            <Box sx={{ height: 'calc(100vh - 64px)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                <Paper sx={{ width: 80, height: 80, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, rgba(255, 152, 0, 0.1) 0%, rgba(255, 193, 7, 0.1) 100%)', mb: 3 }}>
+                    <Headphones size={40} color="#ff9800" />
                 </Paper>
                 <Typography variant="h5" fontWeight={600} gutterBottom>Support Unavailable</Typography>
                 <Typography variant="body2" color="text.secondary" textAlign="center" maxWidth={400}>We're sorry, but support is currently unavailable. Please try again later.</Typography>
@@ -109,13 +109,7 @@ const SupportChat: React.FC = () => {
     }
 
     return (
-        <Box sx={{ height: 'calc(100vh - 56px)', display: 'flex', flexDirection: 'column', mt: 7 }}>
-            <Box sx={{ p: 2, background: 'linear-gradient(135deg, #4caf50 0%, #388e3c 100%)', color: '#fff', textAlign: 'center' }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                    <Headphones size={24} /><Typography variant="h6" fontWeight={600}>Support Chat</Typography>
-                </Box>
-                <Typography variant="body2" sx={{ opacity: 0.9 }}>Chat with our support team for any assistance</Typography>
-            </Box>
+        <Box sx={{ height: 'calc(100vh - 56px)', display: 'flex', flexDirection: 'column', bgcolor: 'transparent' }}>
             <Box sx={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
                 <ChatWindow roomId={supportRoom.roomId} messages={messages} onSendMessage={handleSendMessage} onTyping={sendTypingIndicator} isConnected={isConnected} isTyping={isTyping} isLoading={isLoadingMessages} recipientName={adminParticipant?.name || 'Support'} recipientRole="admin" />
             </Box>

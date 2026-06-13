@@ -1,5 +1,5 @@
-import { Breadcrumbs, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Breadcrumbs, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 // import useBreadcrumbs from "use-react-router-breadcrumbs";
 
 export interface breadcrumbsProp {

@@ -1,25 +1,11 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  Container,
-  Chip,
-  Button,
-  Alert,
-  Snackbar,
-  Typography,
-  Stack,
-  IconButton,
-} from '@mui/material';
+import { Box, Container, Chip, Button, Alert, Snackbar, Typography, Stack, IconButton,  } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 import PercentIcon from '@mui/icons-material/Percent';
 import AdminReusableTable from '../../utils/AdminReusableTable';
 import InterestModifyDialog from '../../utils/InterestModifyDialog';
-import {
-  useGetInterests,
-  useCreateInterest,
-  useUpdateInterest
-} from '../../queries/admin/index';
+import { useGetInterests, useCreateInterest, useUpdateInterest } from '../../queries/admin/index';
 
 const MANUAL_INTERESTS = [
   { interest_id: "FD001", interest_name: "1 YEAR", plan_type: "FD", duration: 12, interest_rate_general: 9, interest_rate_senior: 8.5, minimum_deposit: 1000, status: "active", interest_type: "FD", ref_id: "AGP001" },

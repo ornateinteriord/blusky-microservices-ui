@@ -1,31 +1,6 @@
 import { useState } from 'react';
-import {
-  Box,
-  Typography,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TablePagination,
-  TextField,
-  InputAdornment,
-  Card,
-  CardContent,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Grid,
-  Button,
-  Chip,
-
-} from '@mui/material';
-import {
-  Search as SearchIcon,
-  ExpandMore as ExpandMoreIcon,
-} from '@mui/icons-material';
+import { Box, Typography, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination, TextField, InputAdornment, Card, CardContent, Grid, Button, Chip,  } from '@mui/material';
+import { Search as SearchIcon,  } from '@mui/icons-material';
 import { getProcessedLoansColumns } from '../../../utils/DataTableColumnsProvider';
 import { MuiDatePicker } from '../../../components/common/DateFilterComponent';
 import { useGetRewardLoansByStatus } from '../../../api/Admin';
@@ -110,19 +85,8 @@ export default function Processed() {
 
       <Card sx={{ margin: '2rem', mt: 2 }}>
         <CardContent>
-          <Accordion defaultExpanded>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              sx={{
-                backgroundColor: '#0a2558',
-                color: '#fff',
-                '& .MuiSvgIcon-root': { color: '#fff' }
-              }}
-            >
-              List of Processed Loans (Total: {totalCount})
-            </AccordionSummary>
-            <AccordionDetails>
-              <Box sx={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end', marginBottom: '1rem' }}>
+          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>List of Processed Loans (Total: {totalCount})</div>
+          <Box sx={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end', marginBottom: '1rem' }}>
                 <TextField
                   size="small"
                   placeholder="Search..."
@@ -202,8 +166,6 @@ export default function Processed() {
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
               />
-            </AccordionDetails>
-          </Accordion>
         </CardContent>
       </Card>
     </>

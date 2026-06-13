@@ -1,7 +1,7 @@
 import React from "react";
 import AdminReusableTable, { ColumnDefinition } from "../../../utils/AdminReusableTable";
-import { Box } from "@mui/material";
-import { getJournalEntriesColumns } from "../../../utils/DataTableColumnsProvider";
+import { Box } from '@mui/material';
+import { getJournalEntriesColumns } from '../../../utils/DataTableColumnsProvider';
 
 type Journal = {
   date: string;

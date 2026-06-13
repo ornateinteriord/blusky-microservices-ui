@@ -1,10 +1,9 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Card, CardContent, Grid, TextField, Typography } from "@mui/material"
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { MuiDatePicker } from "../../../components/common/DateFilterComponent";
+import { Box, Button, Card, CardContent, Grid, TextField, Typography } from '@mui/material';
+import { MuiDatePicker } from '../../../components/common/DateFilterComponent';
 import './CashBack.scss'
 import DataTable from "react-data-table-component";
-import { DASHBOARD_CUTSOM_STYLE, getCashBackColumns } from "../../../utils/DataTableColumnsProvider";
-import { useState } from "react";
+import { DASHBOARD_CUTSOM_STYLE, getCashBackColumns } from '../../../utils/DataTableColumnsProvider';
+import { useState } from 'react';
 
 const CashBack = () => {
   const [fromDate, setFromDate] = useState<string | null>(null);
@@ -60,19 +59,8 @@ const CashBack = () => {
       </Grid>
       <Card sx={{ margin: "2rem", mt: 2 }}>
         <CardContent>
-          <Accordion defaultExpanded>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              sx={{
-                backgroundColor: "#0a2558",
-                color: "#fff",
-                "& .MuiSvgIcon-root": { color: "#fff" },
-              }}
-            >
-              List of Daily Benefits Payouts
-            </AccordionSummary>
-            <AccordionDetails>
-              <Box
+          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>List of Daily Benefits Payouts</div>
+          <Box
                 sx={{
                   display: "flex",
                   gap: "1rem",
@@ -112,8 +100,6 @@ const CashBack = () => {
                   </Box>
                 }
               />
-            </AccordionDetails>
-          </Accordion>
         </CardContent>
       </Card>
     </>

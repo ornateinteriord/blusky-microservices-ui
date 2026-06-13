@@ -1,20 +1,11 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Container,
-  InputAdornment,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Card, CardContent, Container, InputAdornment, TextField, Typography,  } from '@mui/material';
 import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
-import { useState } from "react";
-import { MuiOtpInput } from "mui-one-time-password-input";
+import { useState } from 'react';
+import { MuiOtpInput } from 'mui-one-time-password-input';
 import LogBg from "../../assets/log_bg.jpg"; // Import the logo
-import { useResetpassword } from "../../api/Auth";
-import { LoadingComponent } from "../../App";
+import { useResetpassword } from '../../api/Auth';
+import { LoadingComponent } from '../../App';
 
 const ResetPassword = () => {
   const [step, setStep] = useState(1);

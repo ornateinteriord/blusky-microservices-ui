@@ -1,19 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  TextField,
-  Button,
-  Card,
-  CardContent,
-  InputAdornment,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel
-} from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { TextField, Button, Card, CardContent, InputAdornment, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
@@ -49,30 +35,11 @@ const Activate: React.FC = () => {
   return (
     <Card sx={{ margin: '2rem', mt: 10, boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}>
       <CardContent>
-        <Accordion 
-          defaultExpanded
-          sx={{
-            boxShadow: 'none',
-            '&.MuiAccordion-root': {
-              backgroundColor: '#fff'
-            }
-          }}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="basic-details-content"
-            id="basic-details-header"
-            sx={{
-              backgroundColor: '#04112f',
-              color: '#fff',
-              '& .MuiSvgIcon-root': {
-                color: '#fff'
-              }
-            }}
-          >
+        <div>
+          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)", display: "flex", alignItems: "center", gap: "8px" }}>
             Activate Details
-          </AccordionSummary>
-          <AccordionDetails sx={{ padding: '2rem' }}>
+          </div>
+          <div style={{ padding: "0 1rem 1rem 1rem" }}>
             <form style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <TextField
                 label="Member Code"
@@ -188,8 +155,8 @@ const Activate: React.FC = () => {
                 Submit
               </Button>
             </form>
-          </AccordionDetails>
-        </Accordion>
+          </div>
+        </div>
       </CardContent>
     </Card>
   );

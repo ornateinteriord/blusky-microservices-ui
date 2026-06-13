@@ -1,31 +1,13 @@
-import {
-  ChevronDown,
-  Lock,
-  LogOutIcon,
-  Menu as MenuIcon,
-  Settings,
-  User,
-  Headphones,
-  Home,
-} from "lucide-react";
+import { ChevronDown, Lock, LogOutIcon, Menu as MenuIcon, Settings, User, Headphones, Home,  } from 'lucide-react';
 import "./navbar.scss";
-import {
-  AppBar,
-  Avatar,
-  Box,
-  Divider,
-  Menu,
-  MenuItem,
-  Toolbar,
-  Typography,
-} from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { IconButton } from "@mui/material";
+import { AppBar, Avatar, Box, Divider, Menu, MenuItem, Toolbar, Typography,  } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { IconButton } from '@mui/material';
 import useAuth from "../../hooks/use-auth";
 import TokenService from "../../api/token/tokenService";
-import { deepOrange } from "@mui/material/colors";
-import { useState } from "react";
-import { useGetMemberDetails } from "../../api/Memeber";
+import { deepOrange } from '@mui/material/colors';
+import { useState } from 'react';
+import { useGetMemberDetails } from '../../api/Memeber';
 
 
 interface NavbarProps {

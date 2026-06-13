@@ -1,27 +1,6 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import useApi from "../useApi";
-import {
-    Member,
-    MemberResponse,
-    MembersResponse,
-    Agent,
-    AgentResponse,
-    AgentsResponse,
-    Interest,
-    InterestResponse,
-    InterestsResponse,
-    Account,
-    AccountResponse,
-    AccountsResponse,
-    AccountBooksResponse,
-    AccountGroupsResponse,
-    InterestsByGroupResponse,
-    DashboardCountsResponse,
-    RecentDataResponse,
-    PreMaturityAccountsResponse,
-    PostMaturityAccountsResponse,
-    AccountsForAssignmentResponse,
-} from "../../types";
+import { Member, MemberResponse, MembersResponse, Agent, AgentResponse, AgentsResponse, Interest, InterestResponse, InterestsResponse, Account, AccountResponse, AccountsResponse, AccountBooksResponse, AccountGroupsResponse, InterestsByGroupResponse, DashboardCountsResponse, RecentDataResponse, PreMaturityAccountsResponse, PostMaturityAccountsResponse, AccountsForAssignmentResponse,  } from '../../types';
 
 
 

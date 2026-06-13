@@ -1,28 +1,11 @@
-import { useState, useEffect } from "react";
-import {
-  Card,
-  CardContent,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  TextField,
-  Typography,
-  Grid,
-  Box,
-  Button,
-  CircularProgress,
-
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useState, useEffect } from 'react';
+import { Card, CardContent, TextField, Typography, Box, Button, CircularProgress,  } from '@mui/material';
 import DataTable from "react-data-table-component";
-import { useMediaQuery } from "@mui/material";
-import {
-  DASHBOARD_CUTSOM_STYLE,
-  getWalletColumns,
-} from "../../../utils/DataTableColumnsProvider";
+import { useMediaQuery } from '@mui/material';
+import { DASHBOARD_CUTSOM_STYLE, getWalletColumns,  } from '../../../utils/DataTableColumnsProvider';
 import TokenService from "../../../api/token/tokenService";
-import { useGetWalletOverview, useWalletWithdraw } from "../../../api/Memeber";
-import { toast } from "react-toastify";
+import { useGetWalletOverview, useWalletWithdraw } from '../../../api/Memeber';
+import { toast } from 'react-toastify';
 
 const Wallet = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
@@ -91,8 +74,8 @@ const Wallet = () => {
       return;
     }
 
-    if (withdrawalAmount < 10) {
-      toast.error('Minimum withdrawal amount is $10');
+    if (withdrawalAmount < 5) {
+      toast.error('Minimum withdrawal amount is $5');
       return;
     }
 
@@ -146,125 +129,12 @@ const Wallet = () => {
       }}
     >
       <CardContent sx={{ padding: isMobile ? "12px" : "24px" }}>
-        <Accordion
-          defaultExpanded
-          sx={{
-            boxShadow: "none",
-            "&.MuiAccordion-root": {
-              backgroundColor: "#fff",
-            },
-          }}
-        >
-          <AccordionDetails>
-            <Grid container spacing={3} sx={{ mb: 3 }}>
-              <Grid item xs={12} md={6}>
-                <Box
-                  sx={{
-                    p: 3,
-                    backgroundColor: "#f5f5f5",
-                    borderRadius: 2,
-                    textAlign: "center",
-                    border: `2px solid ${isWithdrawalAllowed ? "#0a2558" : "#ff9800"}`,
-                    position: "relative",
-                    opacity: isWithdrawalAllowed ? 1 : 0.7,
-                  }}
-                >
-                  {withdrawMutation.isPending && (
-                    <Box
-                      sx={{
-                        position: "absolute",
-                        top: 8,
-                        right: 8,
-                      }}
-                    >
-                      <CircularProgress size={20} sx={{ color: "#0a2558" }} />
-                    </Box>
-                  )}
-                  <Typography variant="subtitle1" color="textSecondary">
-                    Available Balance
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      color: isWithdrawalAllowed ? "#0a2558" : "#ff9800",
-                      mt: 1,
-                      fontWeight: "bold"
-                    }}
-                  >
-                    ${displayBalance.toFixed(2)}
-                  </Typography>
-                  {!isWithdrawalAllowed && (
-                    <Typography
-                      variant="caption"
-                      sx={{
-                        color: "#ff9800",
-                        mt: 1,
-                        display: "block",
-                        fontWeight: "bold"
-                      }}
-                    >
-                      Withdrawal Disabled
-                    </Typography>
-                  )}
-                  {withdrawMutation.isPending && (
-                    <Typography
-                      variant="caption"
-                      sx={{ color: "#0a2558", mt: 1, display: "block" }}
-                    >
-                      Updating...
-                    </Typography>
-                  )}
-                </Box>
-              </Grid>
-
-              <Grid item xs={12} md={6}>
-                <Box
-                  sx={{
-                    p: 3,
-                    backgroundColor: "#f5f5f5",
-                    borderRadius: 2,
-                    textAlign: "center",
-                    opacity: isWithdrawalAllowed ? 1 : 0.7,
-                  }}
-                >
-                  <Typography variant="subtitle1" color="textSecondary">
-                    Total Withdrawal
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{ color: "#0a2558", mt: 1, fontWeight: "bold" }}
-                  >
-                    {walletData?.totalWithdrawal ? `$${walletData?.totalWithdrawal}` : "$0.00"}
-                  </Typography>
-                </Box>
-              </Grid>
-            </Grid>
-          </AccordionDetails>
-        </Accordion>
-
         {/* Withdrawal Section */}
-        <Accordion
-          defaultExpanded
-          sx={{
-            mt: isMobile ? 2 : 4,
-            boxShadow: "none",
-            "&.MuiAccordion-root": {
-              backgroundColor: "#fff",
-            },
-          }}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            sx={{
-              backgroundColor: isWithdrawalAllowed ? "#0a2558" : "#ff9800",
-              color: "#fff",
-              "& .MuiSvgIcon-root": { color: "#fff" },
-              minHeight: isMobile ? "48px" : "64px",
-            }}
-          >
+        <div>
+          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)", display: "flex", alignItems: "center", gap: "8px" }}>
             Withdrawal Request {!isWithdrawalAllowed && "(Temporarily Disabled)"}
-          </AccordionSummary>
-          <AccordionDetails>
+          </div>
+          <div style={{ padding: "0 1rem 1rem 1rem" }}>
             <form
               style={{
                 marginTop: 2,
@@ -294,7 +164,7 @@ const Wallet = () => {
                 onChange={handleAmountChange}
                 fullWidth
                 size="medium"
-                placeholder="Enter amount (Min $10)"
+                placeholder="Enter amount (Min $5)"
                 disabled={withdrawMutation.isPending || !isWithdrawalAllowed}
                 error={parseFloat(amount) > displayBalance}
                 helperText={parseFloat(amount) > displayBalance ? "Insufficient Balance" : ""}
@@ -366,7 +236,7 @@ const Wallet = () => {
                   <Box sx={{ display: "flex", gap: 4, flexDirection: isMobile ? "column" : "row" }}>
                     <Box>
                       <Typography variant="body2">• 5% Admin applied</Typography>
-                      <Typography variant="body2">• Minimum withdrawal: $10</Typography>
+                      <Typography variant="body2">• Minimum withdrawal: $5</Typography>
                       <Typography variant="body2">• One withdrawal per day allowed</Typography>
                     </Box>
                   </Box>
@@ -411,36 +281,15 @@ const Wallet = () => {
                 </Button>
               </Box>
             </form>
-          </AccordionDetails>
-        </Accordion>
+          </div>
+        </div>
 
         {/* Transaction History */}
-        <Accordion
-          defaultExpanded
-          sx={{
-            mt: isMobile ? 2 : 4,
-            boxShadow: "none",
-            "&.MuiAccordion-root": {
-              backgroundColor: "#fff",
-            },
-          }}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            sx={{
-              backgroundColor: "#0a2558",
-              color: "#fff",
-              "& .MuiSvgIcon-root": { color: "#fff" },
-              minHeight: isMobile ? "48px" : "64px",
-            }}
-          >
-            Transaction History
-          </AccordionSummary>
-          <AccordionDetails>
-            {walletData?.transactions && walletData.transactions.length > 0 ? (
+        <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>Transaction History</div>
+          {walletData?.transactions && walletData.transactions.filter((tx: any) => tx.transaction_type !== "Upgrade Wallet Deduction").length > 0 ? (
               <DataTable
                 columns={getWalletColumns()}
-                data={walletData?.transactions}
+                data={walletData.transactions.filter((tx: any) => tx.transaction_type !== "Upgrade Wallet Deduction")}
                 pagination
                 customStyles={DASHBOARD_CUTSOM_STYLE}
                 paginationPerPage={isMobile ? 10 : 25}
@@ -464,8 +313,6 @@ const Wallet = () => {
                 </Typography>
               </Box>
             )}
-          </AccordionDetails>
-        </Accordion>
       </CardContent>
     </Card>
   );

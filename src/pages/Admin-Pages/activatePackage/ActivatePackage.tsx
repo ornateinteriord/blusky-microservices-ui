@@ -1,41 +1,7 @@
 // ActivatePackage.tsx
 import React, { useState } from 'react';
-import {
-  Box,
-  Container,
-  Typography,
-  TextField,
-  Button,
-  Card,
-  CardContent,
-  Grid,
-  MenuItem,
-  Select,
-  FormControl,
-  InputLabel,
-  Chip,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  CircularProgress,
-  Paper,
-  Divider,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from '@mui/material';
-import {
-  Cancel,
-  CheckCircle,
-  Search,
-  Warning,
-  AttachMoney,
-  Person,
-} from '@mui/icons-material';
+import { Box, Container, Typography, TextField, Button, Card, CardContent, Grid, MenuItem, Select, FormControl, InputLabel, Chip, Dialog, DialogTitle, DialogContent, DialogActions, CircularProgress, Paper, Divider, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,  } from '@mui/material';
+import { Cancel, CheckCircle, Search, Warning, AttachMoney, Person,  } from '@mui/icons-material';
 import { useGetMemberDetails } from '../../../api/Admin';
 import { useActivatePackage } from '../../../api/Memeber';
 import { useLocation } from 'react-router-dom';

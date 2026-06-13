@@ -1,6 +1,6 @@
-import { Container, Typography, Box, Paper, Button } from "@mui/material";
-import { Shield, Lock, Eye, UserCheck, Database, AlertCircle, ArrowLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Container, Typography, Box, Paper, Button } from '@mui/material';
+import { Shield, Lock, Eye, UserCheck, Database, AlertCircle, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const PrivacyPolicy = () => {
     const navigate = useNavigate();

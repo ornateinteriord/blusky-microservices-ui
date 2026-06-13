@@ -5,15 +5,15 @@ export const theme = createTheme({
     mode: "dark",
     primary: {
       main: "#FFD700", // Gold
-      contrastText: "#0a2558", // Black text on gold background
+      contrastText: "#0D2658", // Black text on gold background
     },
     secondary: {
-      main: "#0a2558",
+      main: "#0D2658",
       contrastText: "#FFD700",
     },
     background: {
-      default: "#0a2558", // Very dark grey/black
-      paper: "#0a2558", // Slightly lighter for cards
+      default: "#0D2658", // Very dark grey/black
+      paper: "#0D2658", // Slightly lighter for cards
     },
     text: {
       primary: "#ffffff",
@@ -55,7 +55,7 @@ export const theme = createTheme({
         },
         contained: {
           backgroundColor: "#FFD700",
-          color: "#0a2558",
+          color: "#0D2658",
           "&:hover": {
             backgroundColor: "#e6c200",
             transform: "translateY(-2px)",
@@ -75,7 +75,7 @@ export const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          backgroundColor: "#0a2558",
+          backgroundColor: "#0D2658",
           borderRadius: "16px",
           border: "1px solid rgba(255, 215, 0, 0.15)",
           boxShadow: "0 8px 32px rgba(0, 0, 0, 0.4)",
@@ -85,7 +85,7 @@ export const theme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          backgroundColor: "#0a2558",
+          backgroundColor: "#0D2658",
           backgroundImage: "none",
         },
       },
@@ -93,7 +93,7 @@ export const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: "#0a2558",
+          backgroundColor: "#0D2658",
           borderBottom: "1px solid rgba(255, 215, 0, 0.2)",
           boxShadow: "none",
         },
@@ -102,7 +102,7 @@ export const theme = createTheme({
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          backgroundColor: "#0a2558",
+          backgroundColor: "#0D2658",
           borderRight: "1px solid rgba(255, 215, 0, 0.2)",
         },
       },

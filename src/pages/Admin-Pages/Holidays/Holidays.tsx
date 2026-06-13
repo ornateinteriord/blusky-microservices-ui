@@ -1,31 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import DataTable from "react-data-table-component";
-import {
-  Card,
-  CardContent,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  TextField,
-  Typography,
-  Button,
-  Grid,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  CircularProgress,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import {
-  DASHBOARD_CUTSOM_STYLE,
-  getHolidaysColumns,
-} from "../../../utils/DataTableColumnsProvider";
-import { MuiDatePicker } from "../../../components/common/DateFilterComponent";
-import { useAddHoliday, useGetHoliday } from "../../../api/Admin";
-import { toast } from "react-toastify";
+import { Card, CardContent, TextField, Typography, Button, Grid, Dialog, DialogTitle, DialogContent, DialogActions, CircularProgress,  } from '@mui/material';
+import { DASHBOARD_CUTSOM_STYLE, getHolidaysColumns,  } from '../../../utils/DataTableColumnsProvider';
+import { MuiDatePicker } from '../../../components/common/DateFilterComponent';
+import { useAddHoliday, useGetHoliday } from '../../../api/Admin';
+import { toast } from 'react-toastify';
 import useSearch from "../../../hooks/SearchQuery";
-import { getFormattedDate } from "../../../utils/common";
+import { getFormattedDate } from '../../../utils/common';
 
 const Holidays = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -77,19 +58,8 @@ const Holidays = () => {
 
       <Card sx={{ margin: "2rem", mt: 2 }}>
         <CardContent>
-          <Accordion defaultExpanded>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              sx={{
-                backgroundColor: "#0a2558",
-                color: "#fff",
-                "& .MuiSvgIcon-root": { color: "#fff" },
-              }}
-            >
-              List of Holidays
-            </AccordionSummary>
-            <AccordionDetails>
-              <div
+          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>List of Holidays</div>
+          <div
                 style={{
                   display: "flex",
                   gap: "1rem",
@@ -118,8 +88,6 @@ const Holidays = () => {
                 paginationRowsPerPageOptions={[25, 50, 100]}
                 highlightOnHover
               />
-            </AccordionDetails>
-          </Accordion>
         </CardContent>
       </Card>
 

@@ -1,29 +1,11 @@
 import React, { useState } from 'react';
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  Box,
-  Typography,
-  TextField,
-  Button,
-  IconButton,
-  Chip,
-  CircularProgress,
-  Stack,
-  ToggleButton,
-  ToggleButtonGroup,
-} from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, Box, Typography, TextField, Button, IconButton, Chip, CircularProgress, Stack, ToggleButton, ToggleButtonGroup,  } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import DeleteIcon from '@mui/icons-material/Delete';
 import TokenService from '../../../api/token/tokenService';
-import {
-  useRequestAddOnMutation,
-  useGetLoadFundConfig,
-  useUploadPaymentScreenshot,
-} from '../../../api/Packages';
+import { useRequestAddOnMutation, useGetLoadFundConfig, useUploadPaymentScreenshot,  } from '../../../api/Packages';
 import { toast } from 'react-toastify';
 
 interface LoadFundModalProps {

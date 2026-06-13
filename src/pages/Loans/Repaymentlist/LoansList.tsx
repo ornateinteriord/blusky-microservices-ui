@@ -1,50 +1,11 @@
 import { useState } from 'react';
-import {
-  Box,
-  Typography,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TablePagination,
-  TableSortLabel,
-  TextField,
-  InputAdornment,
-  Card,
-  CardContent,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Grid,
-  Button,
-  CircularProgress,
-  Alert,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  DialogContentText,
-  Tabs,
-  Tab,
-} from '@mui/material';
-import {
-  Search as SearchIcon,
-  ExpandMore as ExpandMoreIcon,
-} from '@mui/icons-material';
+import { Box, Typography, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination, TableSortLabel, TextField, InputAdornment, Card, CardContent, Grid, Button, CircularProgress, Alert, Dialog, DialogTitle, DialogContent, DialogActions, FormControl, InputLabel, Select, MenuItem, DialogContentText, Tabs, Tab,  } from '@mui/material';
+import { Search as SearchIcon,  } from '@mui/icons-material';
 
 import { MuiDatePicker } from '../../../components/common/DateFilterComponent';
 import { getLoansListColumns } from '../../../utils/DataTableColumnsProvider';
 import { useGetAllTransactionDetails } from '../../../api/Admin';
-import {
-  useCreatePaymentOrder
-} from '../../../api/Memeber';
+import { useCreatePaymentOrder } from '../../../api/Memeber';
 import { toast } from 'react-toastify';
 
 interface TabPanelProps {
@@ -252,19 +213,8 @@ export default function LoansList() {
 
       <Card sx={{ margin: '2rem', mt: 2 }}>
         <CardContent>
-          <Accordion defaultExpanded>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              sx={{
-                backgroundColor: '#0a2558',
-                color: '#fff',
-                '& .MuiSvgIcon-root': { color: '#fff' },
-              }}
-            >
-              List of Approved Loan Transactions {isLoading && <CircularProgress size={16} sx={{ color: '#fff', ml: 2 }} />}
-            </AccordionSummary>
-            <AccordionDetails>
-              {isLoading ? (
+          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>List of Approved Loan Transactions {isLoading && <CircularProgress size={16} sx={{ color: '#fff', ml: 2 }} />}</div>
+          {isLoading ? (
                 <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
                   <CircularProgress />
                 </Box>
@@ -336,8 +286,6 @@ export default function LoansList() {
                   />
                 </>
               )}
-            </AccordionDetails>
-          </Accordion>
         </CardContent>
       </Card>
 

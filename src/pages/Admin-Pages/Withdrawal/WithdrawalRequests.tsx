@@ -1,22 +1,5 @@
 import React, { useState } from 'react';
-import {
-    Container,
-    Box,
-    Paper,
-    Typography,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Button,
-    Chip,
-    CircularProgress,
-    Tabs,
-    Tab,
-    Stack
-} from '@mui/material';
+import { Container, Box, Paper, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Chip, CircularProgress, Tabs, Tab, Stack } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useGetWithdrawalRequests } from '../../../queries/admin/withdrawal';
 import PayWithdrawalDialog from './PayWithdrawalDialog';

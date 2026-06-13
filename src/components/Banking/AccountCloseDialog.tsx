@@ -1,21 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogActions,
-    Button,
-    Box,
-    Typography,
-    TextField,
-    FormControl,
-    InputLabel,
-    Select,
-    MenuItem,
-    Divider,
-    CircularProgress,
-    Alert
-} from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Box, Typography, TextField, FormControl, InputLabel, Select, MenuItem, Divider, CircularProgress, Alert } from '@mui/material';
 import { MaturityAccount } from '../../types';
 import { useCreateMaturityPaymentWithCashfree, useCloseAccount, useUpdateAccount } from '../../queries/admin';
 import { toast } from 'react-toastify';

@@ -1,6 +1,6 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { get, post, put } from "../Api";
-import { toast } from "react-toastify";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { get, post, put } from '../Api';
+import { toast } from 'react-toastify';
 
 export const useUpdatePassword = () =>{
   return useMutation({

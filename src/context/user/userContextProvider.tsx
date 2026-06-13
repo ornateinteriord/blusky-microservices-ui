@@ -1,4 +1,4 @@
-import  { useState } from 'react'
+import { useState } from 'react';
 import UserContext from './userContext';
 import { get } from '../../api/Api';
 import { MemberDetails } from '../../store/store';

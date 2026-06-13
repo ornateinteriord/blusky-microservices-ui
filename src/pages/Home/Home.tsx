@@ -1,7 +1,7 @@
-import { Box, Typography, Button, Container, Grid, AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText } from "@mui/material";
-import { Menu as MenuIcon, X as CloseIcon } from "lucide-react";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Box, Typography, Button, Container, Grid, AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText } from '@mui/material';
+import { Menu as MenuIcon, X as CloseIcon } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import uwtLogo from "../../assets/uwt.png";
 import slider1 from "../../assets/slider1.jpg";
 import slider2 from "../../assets/slider2.jpg";

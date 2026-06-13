@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardContent, Button } from "@mui/material";
+import { Card, CardContent, Button } from '@mui/material';
 import "./MemberForm.scss";
 import CustomBreadcrumbs, { breadcrumbsProp } from "../../../components/common/CustomBreadcrumps";
-import { useGetMemberDetails, useUpdateMemberbyId } from "../../../api/Admin";
-import { toast } from "react-toastify";
-import { BasicDetails } from "./updated-forms/BasicDetails";
-import { BankDetails } from "./updated-forms/BankDetails";
-import { KYCDocuments } from "./updated-forms/KYCDocuments";
-import { NomineeDetails } from "./updated-forms/NomineeDetails";
-import { JoiningDetails } from "./updated-forms/JoiningDetails";
-import { LoadingComponent } from "../../../App";
-import { useParams } from "react-router-dom";
+import { useGetMemberDetails, useUpdateMemberbyId } from '../../../api/Admin';
+import { toast } from 'react-toastify';
+import { BasicDetails } from './updated-forms/BasicDetails';
+import { BankDetails } from './updated-forms/BankDetails';
+import { KYCDocuments } from './updated-forms/KYCDocuments';
+import { NomineeDetails } from './updated-forms/NomineeDetails';
+import { JoiningDetails } from './updated-forms/JoiningDetails';
+import { LoadingComponent } from '../../../App';
+import { useParams } from 'react-router-dom';
 
 const MembersUpdateForm: React.FC = () => {
   const { memberId } = useParams()

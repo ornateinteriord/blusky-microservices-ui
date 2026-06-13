@@ -1,11 +1,4 @@
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  TextField,
-  InputAdornment,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { TextField, InputAdornment,  } from '@mui/material';
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
@@ -25,20 +18,11 @@ export const BankDetails: React.FC<BankDetailsProps> = ({
   handleInputChange,
 }) => {
   return (
-    <Accordion
-      defaultExpanded
-      sx={{ boxShadow: "none", marginBottom: "20px" }}
-    >
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon sx={{ color: "#fff" }} />}
-        sx={{
-          backgroundColor: "#0a2558",
-          color: "#fff",
-        }}
-      >
+    <div>
+      <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)", display: "flex", alignItems: "center", gap: "8px" }}>
         Bank Details
-      </AccordionSummary>
-      <AccordionDetails sx={{ padding: "2rem" }}>
+      </div>
+      <div style={{ padding: "0 1rem 1rem 1rem" }}>
         <div className="basic-details-accordion">
           <form
             style={{
@@ -205,7 +189,7 @@ export const BankDetails: React.FC<BankDetailsProps> = ({
             />
           </form>
         </div>
-      </AccordionDetails>
-    </Accordion>
+      </div>
+    </div>
   )
 }

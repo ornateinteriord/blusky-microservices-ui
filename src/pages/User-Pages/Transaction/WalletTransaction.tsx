@@ -1,27 +1,12 @@
 import DataTable from "react-data-table-component";
-import {
-  Card,
-  CardContent,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  TextField,
-  CircularProgress,
-  Box,
-  Typography,
-  Button,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Card, CardContent, TextField, CircularProgress, Box, Typography, Button,  } from '@mui/material';
 import DownloadIcon from "@mui/icons-material/Download";
-import { exportToExcel } from "../../../utils/excelExport";
-import {
-  DASHBOARD_CUTSOM_STYLE,
-  getTransactionColumns,
-} from "../../../utils/DataTableColumnsProvider";
-import { useSearchParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import { useGetTransactionDetails } from "../../../api/Memeber";
+import { exportToExcel } from '../../../utils/excelExport';
+import { DASHBOARD_CUTSOM_STYLE, getTransactionColumns,  } from '../../../utils/DataTableColumnsProvider';
+import { useSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import { useGetTransactionDetails } from '../../../api/Memeber';
 
 const WalletTransaction = () => {
   const [searchParams] = useSearchParams();
@@ -91,19 +76,8 @@ const WalletTransaction = () => {
     <Box sx={{ minHeight: '100vh', bgcolor: '#0B2453', p: 2 }}>
       <Card sx={{ margin: "2rem", mt: 10 }}>
       <CardContent>
-        <Accordion defaultExpanded>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            sx={{
-              backgroundColor: "#0a2558",
-              color: "#fff",
-              "& .MuiSvgIcon-root": { color: "#fff" },
-            }}
-          >
-            {type !== 'all' ? `${type} Account History` : 'Wallet Transactions'}
-          </AccordionSummary>
-          <AccordionDetails>
-            <DataTable
+        <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>{type !== 'all' ? `${type} Account History` : 'Wallet Transactions'}</div>
+          <DataTable
               columns={getTransactionColumns()}
               data={filteredData}
               pagination
@@ -168,8 +142,6 @@ const WalletTransaction = () => {
                 </Box>
               }
             />
-          </AccordionDetails>
-        </Accordion>
       </CardContent>
     </Card>
     </Box>

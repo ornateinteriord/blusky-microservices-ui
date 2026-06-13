@@ -1,25 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import jsQR from 'jsqr';
-import {
-  Box,
-  Card,
-  CardContent,
-  Typography,
-  TextField,
-  Button,
-  CircularProgress,
-  IconButton,
-  Stack,
-  Grid
-} from '@mui/material';
+import { Box, Card, CardContent, Typography, TextField, Button, CircularProgress, IconButton, Stack, Grid } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
-import {
-  useGetLoadFundConfig,
-  useUpdateLoadFundConfigMutation,
-  useUploadAdminQR
-} from '../../../api/Packages';
+import { useGetLoadFundConfig, useUpdateLoadFundConfigMutation, useUploadAdminQR } from '../../../api/Packages';
 import { toast } from 'react-toastify';
 
 const AdminLoadFundPage: React.FC = () => {

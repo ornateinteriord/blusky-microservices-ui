@@ -1,25 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
-import {
-  TextField,
-  Button,
-  Card,
-  CardContent,
-  InputAdornment,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  IconButton,
-  CircularProgress,
-} from '@mui/material';
+import { TextField, Button, Card, CardContent, InputAdornment, Select, MenuItem, FormControl, InputLabel, IconButton, CircularProgress,  } from '@mui/material';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import PersonIcon from '@mui/icons-material/Person';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import PaidIcon from '@mui/icons-material/Paid';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DataTable from 'react-data-table-component';
 import { Typography } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -108,19 +92,8 @@ export const PackageRequests = () => {
       </Typography>
       <Card sx={{ margin: '2rem', mt: 2 }}>
         <CardContent>
-          <Accordion defaultExpanded>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              sx={{
-                backgroundColor: '#0a2558',
-                color: '#fff',
-                '& .MuiSvgIcon-root': { color: '#fff' }
-              }}
-            >
-              List of Package Request
-            </AccordionSummary>
-            <AccordionDetails>
-              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end', marginBottom: '1rem' }}>
+          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>List of Package Request</div>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end', marginBottom: '1rem' }}>
                 <TextField
                   size="small"
                   placeholder="Search..."
@@ -145,8 +118,6 @@ export const PackageRequests = () => {
                 paginationRowsPerPageOptions={[25, 50, 100]}
                 highlightOnHover
               />
-            </AccordionDetails>
-          </Accordion>
         </CardContent>
       </Card> */}
       <PackageTable
@@ -213,19 +184,8 @@ const PackageTable: React.FC<PackageTableProps> = ({ title, summaryTitle, data, 
       </Typography>
       <Card sx={{ margin: '2rem', mt: 2 }}>
         <CardContent>
-          <Accordion defaultExpanded>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              sx={{
-                backgroundColor: '#0a2558',
-                color: '#fff',
-                '& .MuiSvgIcon-root': { color: '#fff' }
-              }}
-            >
-              {summaryTitle}
-            </AccordionSummary>
-            <AccordionDetails>
-              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end', marginBottom: '1rem' }}>
+          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>{summaryTitle}</div>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end', marginBottom: '1rem' }}>
                 <TextField
                   size="small"
                   placeholder="Search..."
@@ -244,8 +204,6 @@ const PackageTable: React.FC<PackageTableProps> = ({ title, summaryTitle, data, 
                 paginationRowsPerPageOptions={[25, 50, 100]}
                 customStyles={DASHBOARD_CUTSOM_STYLE}
               />
-            </AccordionDetails>
-          </Accordion>
         </CardContent>
       </Card>
     </>
@@ -307,30 +265,11 @@ export const GeneratePackages = () => {
   return (
     <Card sx={{ margin: '2rem', mt: 10, boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}>
       <CardContent>
-        <Accordion
-          defaultExpanded
-          sx={{
-            boxShadow: 'none',
-            '&.MuiAccordion-root': {
-              backgroundColor: '#fff'
-            }
-          }}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="package-content"
-            id="package-header"
-            sx={{
-              backgroundColor: '#0a2558',
-              color: '#fff',
-              '& .MuiSvgIcon-root': {
-                color: '#fff'
-              }
-            }}
-          >
+        <div>
+          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)", display: "flex", alignItems: "center", gap: "8px" }}>
             Generate Package
-          </AccordionSummary>
-          <AccordionDetails sx={{ padding: '2rem' }}>
+          </div>
+          <div style={{ padding: "0 1rem 1rem 1rem" }}>
             <form style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <FormControl fullWidth>
                 <InputLabel id="package-label">Package</InputLabel>
@@ -461,8 +400,8 @@ export const GeneratePackages = () => {
                 Submit
               </Button>
             </form>
-          </AccordionDetails>
-        </Accordion>
+          </div>
+        </div>
       </CardContent>
       {isPending && <LoadingComponent />}
     </Card>

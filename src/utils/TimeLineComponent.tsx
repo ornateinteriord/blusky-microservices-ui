@@ -1,12 +1,5 @@
-import {
-  Timeline,
-  TimelineItem,
-  TimelineSeparator,
-  TimelineConnector,
-  TimelineContent,
-  TimelineDot
-} from "@mui/lab";
-import { Paper, Typography, SxProps, Theme } from "@mui/material";
+import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineDot } from '@mui/lab';
+import { Paper, Typography, SxProps, Theme } from '@mui/material';
 
 export interface TimelineItemData {
   title: string;

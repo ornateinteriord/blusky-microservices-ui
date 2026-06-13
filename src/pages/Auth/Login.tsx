@@ -1,22 +1,10 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import {
-  Box,
-  TextField,
-  Button,
-  Typography,
-  Container,
-  Paper,
-  Checkbox,
-  FormControlLabel,
-  Link as MuiLink,
-  InputAdornment,
-  IconButton
-} from "@mui/material";
-import { Visibility, VisibilityOff, PersonOutline, LockOutlined } from "@mui/icons-material";
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Box, TextField, Button, Typography, Container, Paper, Checkbox, FormControlLabel, Link as MuiLink, InputAdornment, IconButton } from '@mui/material';
+import { Visibility, VisibilityOff, PersonOutline, LockOutlined } from '@mui/icons-material';
 
-import { LoadingComponent } from "../../App";
-import { useLoginMutation } from "../../api/Auth";
+import { LoadingComponent } from '../../App';
+import { useLoginMutation } from '../../api/Auth';
 import ForgotPasswordForm from "./components/ForgotPasswordForm";
 import uwtLogo from "../../assets/uwt.png";
 

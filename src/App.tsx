@@ -1,16 +1,11 @@
-import { Suspense, lazy, useState } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Suspense, lazy, useState } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation,  } from 'react-router-dom';
 import "./App.css";
 import "./index.css";
-import { CircularProgress, Box } from "@mui/material";
+import { CircularProgress, Box } from '@mui/material';
 
 import Members, {
   ActiveMembers,
@@ -18,13 +13,7 @@ import Members, {
   PendingMembers,
   PermissionsMembers,
 } from "./pages/Admin-Pages/Members/Members";
-import {
-  GeneratePackages,
-  PackageHistory,
-  PackageRequests,
-  UnusedPackages,
-  UsedPackages,
-} from "./pages/Admin-Pages/Packages/Packages";
+import { GeneratePackages, PackageHistory, PackageRequests, UnusedPackages, UsedPackages,  } from './pages/Admin-Pages/Packages/Packages';
 import KYCApproval from "./pages/Admin-Pages/KYCApproval/KYCApproval";
 import Tree from "./pages/User-Pages/Team/Tree";
 import Team from "./pages/User-Pages/Team/Team";
@@ -70,6 +59,9 @@ const AdminDailyBenifitsPayouts = lazy(
 );
 const AdminLevelBenifits = lazy(
   () => import("./pages/Admin-Pages/Incomes/LevelBenifits")
+);
+const AdminReferralIncome = lazy(
+  () => import("./pages/Admin-Pages/Incomes/ReferralIncome")
 );
 const AdminROIBenefits = lazy(
   () => import("./pages/Admin-Pages/Incomes/ROIBenifits")
@@ -402,6 +394,10 @@ const RoutesProvider = ({
               <Route
                 path="/admin/income/level-benefits"
                 element={<AdminLevelBenifits />}
+              />
+              <Route
+                path="/admin/income/referral-income"
+                element={<AdminReferralIncome />}
               />
               <Route
                 path="/admin/income/daily-payouts"

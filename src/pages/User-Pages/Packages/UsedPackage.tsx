@@ -1,6 +1,5 @@
 import DataTable from 'react-data-table-component';
-import { Card, CardContent, Accordion, AccordionSummary, AccordionDetails, TextField, CircularProgress } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Card, CardContent, TextField, CircularProgress } from '@mui/material';
 import { DASHBOARD_CUTSOM_STYLE, getUsedPackageColumns } from '../../../utils/DataTableColumnsProvider';
 import { getUsedandUnusedPackages } from '../../../api/Memeber';
 import TokenService from '../../../api/token/tokenService';
@@ -36,19 +35,8 @@ const UsedPackage = () => {
   return (
     <Card sx={{ margin: '2rem', mt: 10 }}>
       <CardContent>
-        <Accordion defaultExpanded>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            sx={{
-              backgroundColor: '#0a2558',
-              color: '#fff',
-              '& .MuiSvgIcon-root': { color: '#fff' }
-            }}
-          >
-            List of Used Package
-          </AccordionSummary>
-          <AccordionDetails>
-            <DataTable
+        <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>List of Used Package</div>
+          <DataTable
               columns={getUsedPackageColumns(user)}
               data={filteredData}
               pagination
@@ -71,8 +59,6 @@ const UsedPackage = () => {
                 </div>
               }
             />
-          </AccordionDetails>
-        </Accordion>
       </CardContent>
     </Card>
   );

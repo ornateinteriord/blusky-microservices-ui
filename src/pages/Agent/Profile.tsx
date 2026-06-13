@@ -1,24 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Card,
-  CardContent,
-  Typography,
-  TextField,
-  FormControl,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  Select,
-  MenuItem,
-  InputLabel,
-  Button,
-  Avatar,
-  Box,
-  CircularProgress,
-  Grid,
-  Divider,
-  Paper
-} from '@mui/material';
+import { Card, CardContent, Typography, TextField, FormControl, RadioGroup, FormControlLabel, Radio, Select, MenuItem, InputLabel, Button, Avatar, Box, CircularProgress, Grid, Divider, Paper } from '@mui/material';
 import { toast } from 'react-toastify';
 import TokenService from '../../queries/token/tokenService';
 import { useGetAgentById } from '../../queries/Agent';

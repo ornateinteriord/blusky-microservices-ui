@@ -1,6 +1,5 @@
 import DataTable from 'react-data-table-component';
-import { Card, CardContent, Accordion, AccordionSummary, AccordionDetails, TextField, CircularProgress } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Card, CardContent, TextField, CircularProgress } from '@mui/material';
 import { DASHBOARD_CUTSOM_STYLE, getDirectColumns } from '../../../utils/DataTableColumnsProvider';
 import { useGetSponsers } from '../../../api/Memeber';
 import { useEffect } from 'react';
@@ -23,19 +22,8 @@ const Direct = () => {
   return (
     <Card sx={{ margin: '2rem', mt: 10 }}>
       <CardContent>
-        <Accordion defaultExpanded>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            sx={{
-              backgroundColor: '#0a2558',
-              color: '#fff',
-              '& .MuiSvgIcon-root': { color: '#fff' }
-            }}
-          >
-            {!isLoading && `List of Direct (${sponsers?.sponsoredUsers?.length})`}
-          </AccordionSummary>
-          <AccordionDetails>
-            <DataTable
+        <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>{!isLoading && `List of Direct (${sponsers?.sponsoredUsers?.length})`}</div>
+          <DataTable
               columns={getDirectColumns()}
               data={filteredData}
               pagination
@@ -60,8 +48,6 @@ const Direct = () => {
                 </div>
               }
             />
-          </AccordionDetails>
-        </Accordion>
       </CardContent>
     </Card>
   );

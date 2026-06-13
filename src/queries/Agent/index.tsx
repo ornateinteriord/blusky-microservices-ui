@@ -1,7 +1,7 @@
 // hooks/useGetAgentById.ts
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import useApi from "../useApi";
-import { AgentResponse, AssignedAccount } from "../../types";
+import { AgentResponse, AssignedAccount } from '../../types';
 
 export const useGetAgentById = (agentId: string, enabled: boolean = true) => {
     return useQuery({

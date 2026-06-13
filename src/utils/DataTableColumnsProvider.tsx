@@ -1,9 +1,9 @@
-import { Button, IconButton } from "@mui/material";
+import { Button, IconButton } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import { Edit } from "lucide-react";
+import { Edit } from 'lucide-react';
 import { getFormattedDate } from './common';
-import { MemberDetails } from "../store/store";
+import { MemberDetails } from '../store/store';
 
 
 
@@ -1273,14 +1273,22 @@ export const DASHBOARD_CUTSOM_STYLE = {
     style: {
       fontSize: "16px",
       fontWeight: "Bogle-Bold",
-      backgroundColor: "#0a2558",
-      color: "#fff",
-      border: "none",
+      backgroundColor: "rgba(255, 215, 0, 0.1)",
+      color: "#0D2658",
+      borderBottom: "2px solid rgba(255, 215, 0, 0.5)",
     },
   },
   rows: {
     style: {
       ...TABLE_ROW_CUSTOM_STYLE,
+      '&:hover': {
+        backgroundColor: 'rgba(255, 215, 0, 0.05)',
+      },
+    },
+    highlightOnHoverStyle: {
+      backgroundColor: 'rgba(255, 215, 0, 0.05)',
+      borderBottomColor: '#FFD700',
+      outline: '1px solid #FFD700',
     },
   },
 };
@@ -1523,5 +1531,42 @@ export const getLoansListColumns = (onRepayClick: (row: any) => void) => [
         Repay
       </button>
     ),
+  },
+];
+
+export const getUpgradeWalletColumns = () => [
+  {
+    name: "Date",
+    selector: (row: any) => {
+      if (!row.transaction_date && !row.createdAt) return "-";
+      const date = new Date(row.transaction_date || row.createdAt);
+      return date.toLocaleDateString();
+    },
+    sortable: true,
+  },
+  {
+    name: "Transaction ID",
+    selector: (row: any) => row.transaction_id || "-",
+    sortable: true,
+  },
+  {
+    name: "Type",
+    selector: (row: any) => row.transaction_type || "-",
+    sortable: true,
+  },
+  {
+    name: "Amount",
+    selector: (row: any) => {
+      const isDebit = parseFloat(row.uw_debit || 0) > 0;
+      const amt = isDebit ? row.uw_debit : row.uw_credit;
+      const sign = isDebit ? "-" : "+";
+      return amt && parseFloat(amt) > 0 ? `${sign}$${parseFloat(amt).toFixed(2)}` : "-";
+    },
+    sortable: true,
+  },
+  {
+    name: "Status",
+    selector: (row: any) => row.status || "Completed",
+    sortable: true,
   },
 ];

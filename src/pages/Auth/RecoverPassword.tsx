@@ -1,19 +1,10 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Container,
-  InputAdornment,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Card, CardContent, Container, InputAdornment, TextField, Typography,  } from '@mui/material';
 import EmailIcon from "@mui/icons-material/Email";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import LogBg from "../../assets/log_bg.jpg"; // Import the logo
-import { useRecoverpassword } from "../../api/Auth";
-import { LoadingComponent } from "../../App";
+import { useRecoverpassword } from '../../api/Auth';
+import { LoadingComponent } from '../../App';
 
 const RecoverPassword = () => {
   const [formData, setFormData] = useState({

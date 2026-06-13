@@ -1,12 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import AccountOpeningForm from '../../../components/AccountOpening/AccountOpeningForm';
-import { 
-  Box, Paper, Typography, Container, Button, Grid, IconButton, 
-  Divider, TextField, Dialog, DialogTitle, DialogContent, 
-  DialogActions, FormControl, InputLabel, Select, MenuItem,
-  CircularProgress, InputAdornment 
-} from '@mui/material';
+import { Box, Paper, Typography, Container, Button, Grid, IconButton, Divider, TextField, Dialog, DialogTitle, DialogContent, DialogActions, FormControl, InputLabel, Select, MenuItem, CircularProgress, InputAdornment } from '@mui/material';
 import TokenService from '../../../api/token/tokenService';
 import HistoryIcon from '@mui/icons-material/History';
 import DownloadIcon from '@mui/icons-material/Download';
@@ -16,7 +11,7 @@ import * as MemberQueries from '../../../queries/Member';
 import { useGetTransactionDetails, useTransferMoney } from '../../../api/Memeber';
 import { exportToExcel } from '../../../utils/excelExport';
 import DataTable from "react-data-table-component";
-import { DASHBOARD_CUTSOM_STYLE, getTransactionColumns } from "../../../utils/DataTableColumnsProvider";
+import { DASHBOARD_CUTSOM_STYLE, getTransactionColumns } from '../../../utils/DataTableColumnsProvider';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';

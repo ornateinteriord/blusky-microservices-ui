@@ -23,8 +23,8 @@ interface ChatWindowProps {
 }
 
 const ChatHeader = styled(AppBar)(({ theme }) => ({
-    background: theme.palette.background.paper,
-    color: theme.palette.text.primary,
+    background: '#0D2658',
+    color: '#fff',
     boxShadow: theme.shadows[1],
     position: 'static', // Ensure it works with flex flow
 }));
@@ -34,7 +34,7 @@ const MessagesContainer = styled(Box)(({ theme }) => ({
     overflowY: 'auto',
     minHeight: 0, // Critical for scrolling inside flex
     padding: theme.spacing(3),
-    backgroundColor: theme.palette.mode === 'dark' ? '#0b141a' : '#e5ddd5',
+    backgroundColor: theme.palette.mode === 'dark' ? '#0b141a' : '#ffffff',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
@@ -96,7 +96,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
                             <ArrowBack />
                         </IconButton>
                     )}
-                    <Avatar sx={{ background: 'linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%)', mr: 2, position: 'relative' }}>
+                    <Avatar sx={{ background: 'linear-gradient(135deg, #ffb74d 0%, #f57c00 100%)', mr: 2, position: 'relative' }}>
                         {recipientName.charAt(0).toUpperCase()}
                         {isConnected && (
                             <Circle sx={{ position: 'absolute', bottom: -2, right: -2, fontSize: 14, color: 'success.main', bgcolor: 'background.paper', borderRadius: '50%' }} />
@@ -106,15 +106,15 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
                         <Typography variant="h6" noWrap>{recipientName}</Typography>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                             {isTyping ? (
-                                <Typography variant="caption" color="primary" sx={{ fontWeight: 500 }}>Typing...</Typography>
+                                <Typography variant="caption" sx={{ color: '#ff9800', fontWeight: 500 }}>Typing...</Typography>
                             ) : (
                                 <>
-                                    {isConnected ? <Circle sx={{ fontSize: 8, color: 'success.main' }} /> : <WifiOff sx={{ fontSize: 12 }} />}
-                                    <Typography variant="caption" color="text.secondary">{isConnected ? 'Online' : 'Offline'}</Typography>
+                                    {isConnected ? <Circle sx={{ fontSize: 8, color: 'success.main' }} /> : <WifiOff sx={{ fontSize: 12, color: 'rgba(255,255,255,0.7)' }} />}
+                                    <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)' }}>{isConnected ? 'Online' : 'Offline'}</Typography>
                                 </>
                             )}
                             {recipientRole === 'admin' && (
-                                <Box component="span" sx={{ px: 1, py: 0.25, bgcolor: 'primary.main', color: 'primary.contrastText', borderRadius: 1, fontSize: '10px', fontWeight: 600 }}>Admin</Box>
+                                <Box component="span" sx={{ px: 1, py: 0.25, bgcolor: '#ff9800', color: '#fff', borderRadius: 1, fontSize: '10px', fontWeight: 600 }}>Admin</Box>
                             )}
                         </Box>
                     </Box>
@@ -127,8 +127,8 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
                     </Box>
                 ) : messages.length === 0 ? (
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', flexDirection: 'column', gap: 2 }}>
-                        <Paper sx={{ width: 80, height: 80, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, rgba(25, 118, 210, 0.1) 0%, rgba(156, 39, 176, 0.1) 100%)' }}>
-                            <User size={40} color="#1976d2" />
+                        <Paper sx={{ width: 80, height: 80, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, rgba(255, 152, 0, 0.1) 0%, rgba(255, 193, 7, 0.1) 100%)' }}>
+                            <User size={40} color="#ff9800" />
                         </Paper>
                         <Typography variant="h6" color="text.primary">No messages yet</Typography>
                         <Typography variant="body2" color="text.secondary" textAlign="center" maxWidth={400}>Start the conversation by sending a message below</Typography>

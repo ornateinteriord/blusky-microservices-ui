@@ -1,22 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Card,
-  CardContent,
-  Typography,
-  TextField,
-  Button,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  InputAdornment,
-  Grid,
-  CircularProgress,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel
-} from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Card, CardContent, Typography, TextField, Button, InputAdornment, Grid, CircularProgress, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import DateRangeIcon from '@mui/icons-material/DateRange';
@@ -104,15 +87,9 @@ const AddOnPackageView = () => {
       {/* CREATE PACKAGE FORM */}
       <Card sx={{ margin: '2rem', mt: 2, boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}>
         <CardContent>
-          <Accordion defaultExpanded sx={{ boxShadow: 'none' }}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              sx={{ backgroundColor: '#0a2558', color: '#fff', '& .MuiSvgIcon-root': { color: '#fff' } }}
-            >
-              Create New Add-On Package
-            </AccordionSummary>
-            <AccordionDetails sx={{ padding: '2rem' }}>
-              <form onSubmit={handleSubmit}>
+          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>Create New Add-On Package</div>
+          <div style={{ padding: "0 1rem 1rem 1rem" }}>
+            <form onSubmit={handleSubmit}>
                 <Grid container spacing={3}>
                   <Grid item xs={12} md={6}>
                     <TextField
@@ -171,23 +148,16 @@ const AddOnPackageView = () => {
                   {isPending ? 'Generating...' : 'Generate Add-On'}
                 </Button>
               </form>
-            </AccordionDetails>
-          </Accordion>
+            </div>
         </CardContent>
       </Card>
 
       {/* DIRECT PACKAGE ASSIGNMENT */}
       <Card sx={{ margin: '2rem', mt: 2, boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}>
         <CardContent>
-          <Accordion defaultExpanded sx={{ boxShadow: 'none' }}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              sx={{ backgroundColor: '#0a2558', color: '#fff', '& .MuiSvgIcon-root': { color: '#fff' } }}
-            >
-              Assign Add-On Package to Member
-            </AccordionSummary>
-            <AccordionDetails sx={{ padding: '2rem' }}>
-              <form onSubmit={handleAssignSubmit}>
+          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>Assign Add-On Package to Member</div>
+          <div style={{ padding: "0 1rem 1rem 1rem" }}>
+            <form onSubmit={handleAssignSubmit}>
                 <Grid container spacing={3}>
                   <Grid item xs={12} md={6}>
                     <FormControl fullWidth required>
@@ -230,20 +200,16 @@ const AddOnPackageView = () => {
                   {isAssigning ? 'Assigning...' : 'Assign Package'}
                 </Button>
               </form>
-            </AccordionDetails>
-          </Accordion>
+            </div>
         </CardContent>
       </Card>
 
       {/* PACKAGE LIST */}
       <Card sx={{ margin: '2rem', mt: 2 }}>
         <CardContent>
-          <Accordion defaultExpanded>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ backgroundColor: '#0a2558', color: '#fff', '& .MuiSvgIcon-root': { color: '#fff' } }}>
-              Available Add-On Packages
-            </AccordionSummary>
-            <AccordionDetails>
-              <DataTable
+          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>Available Add-On Packages</div>
+          <div style={{ padding: "0 1rem 1rem 1rem" }}>
+            <DataTable
                 columns={columns}
                 data={packages || []}
                 pagination
@@ -251,8 +217,7 @@ const AddOnPackageView = () => {
                 progressComponent={<CircularProgress />}
                 customStyles={DASHBOARD_CUTSOM_STYLE}
               />
-            </AccordionDetails>
-          </Accordion>
+            </div>
         </CardContent>
       </Card>
     </>

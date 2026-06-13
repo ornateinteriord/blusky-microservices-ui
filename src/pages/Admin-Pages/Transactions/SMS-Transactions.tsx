@@ -1,5 +1,5 @@
-import { getSMSTransactionColumns } from "../../../utils/DataTableColumnsProvider"
-import { TransactionDataTable } from "./Transactions"
+import { getSMSTransactionColumns } from '../../../utils/DataTableColumnsProvider';
+import { TransactionDataTable } from './Transactions';
 
 
 

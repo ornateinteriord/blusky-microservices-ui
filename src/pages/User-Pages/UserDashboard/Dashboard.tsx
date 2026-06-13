@@ -1,15 +1,7 @@
 // components/UserDashboard.tsx
 import { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import {
-  Typography,
-  Box,
-  CircularProgress,
-  IconButton,
-  Paper,
-  Button,
-  Stack,
-} from '@mui/material';
+import { Typography, Box, CircularProgress, IconButton, Paper, Button, Stack,  } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 
@@ -28,14 +20,7 @@ import PaymentsIcon from '@mui/icons-material/Payments';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
 import TokenService from '../../../api/token/tokenService';
-import {
-  useVerifyPayment,
-  parsePaymentRedirectParams,
-  useGetTransactionDetails,
-  useGetWalletOverview,
-  useGetMemberDetails,
-  useGetDailyPayout
-} from '../../../api/Memeber';
+import { useVerifyPayment, parsePaymentRedirectParams, useGetTransactionDetails, useGetWalletOverview, useGetMemberDetails, useGetDailyPayout } from '../../../api/Memeber';
 import { toast } from 'react-toastify';
 import ProductsContainer from './ProductsContainer';
 
@@ -190,7 +175,7 @@ const UserDashboard = () => {
           <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', fontWeight: 700, textAlign: 'center' }}>Earnings Wallet</Typography>
           <Typography variant="h6" sx={{ color: '#ffffff', fontWeight: 900 }}>${Number(walletOverview?.balance || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
         </Box>
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1, p: 2.5, borderRadius: '24px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
+        <Box onClick={() => navigate('/user/upgrade-wallet')} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1, cursor: 'pointer', p: 2.5, borderRadius: '24px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'transform 0.2s', '&:hover': { transform: 'translateY(-4px)', bgcolor: 'rgba(255,255,255,0.05)' } }}>
           <AccountBalanceWalletIcon sx={{ fontSize: 32, color: '#FFD700' }} />
           <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', fontWeight: 700, textAlign: 'center' }}>Upgrade Wallet</Typography>
           <Typography variant="h6" sx={{ color: '#ffffff', fontWeight: 900 }}>${Number(walletOverview?.upgradeWalletBalance || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
@@ -383,7 +368,7 @@ const UserDashboard = () => {
                     <Typography variant="subtitle1" sx={{ color: '#ffffff', fontWeight: 900 }}>${Number(walletOverview?.levelBenefits || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
                   </Box>
 
-                  <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1, cursor: 'pointer', p: 2, borderRadius: '24px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
+                  <Box onClick={() => navigate('/user/transactions?type=Withdrawal')} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1, cursor: 'pointer', p: 2, borderRadius: '24px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
                     <AttachMoneyIcon sx={{ fontSize: 32, color: '#ef4444' }} />
                     <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', fontWeight: 700, textAlign: 'center' }}>Total Withdrawal</Typography>
                     <Typography variant="subtitle1" sx={{ color: '#ffffff', fontWeight: 900 }}>${Number(walletOverview?.totalWithdrawal || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>

@@ -1,13 +1,6 @@
 import React, { useState } from 'react';
 import DataTable from 'react-data-table-component';
-import {
-  Box,
-  TextField,
-  Button,
-  Typography,
-  CircularProgress,
-  InputAdornment
-} from '@mui/material';
+import { Box, TextField, Button, Typography, CircularProgress, InputAdornment } from '@mui/material';
 import PrintIcon from '@mui/icons-material/Print';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
@@ -37,7 +30,7 @@ const ExportableTable: React.FC<ExportableTableProps> = ({
   searchQuery = '',
   onSearchChange,
   paginationPerPage = 25,
-  paginationRowsPerPageOptions = [25, 50, 100],
+  
   customStyles = DASHBOARD_CUTSOM_STYLE,
   sx = {}
 }) => {
@@ -74,7 +67,7 @@ const ExportableTable: React.FC<ExportableTableProps> = ({
   return (
     <Box sx={{ width: '100%', ...sx }}>
       {title && (
-        <Typography variant="h4" sx={{ fontWeight: 700, color: '#1a237e', mb: 1 }}>
+        <Typography variant="h4" sx={{ fontWeight: 800, color: '#0D2658', mb: 1 }}>
           {title}
         </Typography>
       )}
@@ -99,11 +92,11 @@ const ExportableTable: React.FC<ExportableTableProps> = ({
             startIcon={<PrintIcon />}
             onClick={handlePrint}
             sx={{
-              color: '#666',
-              borderColor: '#ddd',
+              color: '#0D2658',
+              borderColor: 'rgba(13, 38, 88, 0.2)',
               '&:hover': {
-                borderColor: '#999',
-                backgroundColor: '#f5f5f5'
+                borderColor: '#FFD700',
+                backgroundColor: 'rgba(255, 215, 0, 0.1)'
               }
             }}
           >
@@ -116,11 +109,11 @@ const ExportableTable: React.FC<ExportableTableProps> = ({
             startIcon={<ContentCopyIcon />}
             onClick={handleCopy}
             sx={{
-              color: '#e91e63',
-              borderColor: '#ddd',
+              color: '#0D2658',
+              borderColor: 'rgba(13, 38, 88, 0.2)',
               '&:hover': {
-                borderColor: '#e91e63',
-                backgroundColor: '#fce4ec'
+                borderColor: '#FFD700',
+                backgroundColor: 'rgba(255, 215, 0, 0.1)'
               }
             }}
           >
@@ -133,11 +126,11 @@ const ExportableTable: React.FC<ExportableTableProps> = ({
             startIcon={<PictureAsPdfIcon />}
             onClick={handlePDF}
             sx={{
-              color: '#2196f3',
-              borderColor: '#ddd',
+              color: '#0D2658',
+              borderColor: 'rgba(13, 38, 88, 0.2)',
               '&:hover': {
-                borderColor: '#2196f3',
-                backgroundColor: '#e3f2fd'
+                borderColor: '#FFD700',
+                backgroundColor: 'rgba(255, 215, 0, 0.1)'
               }
             }}
           >
@@ -150,11 +143,11 @@ const ExportableTable: React.FC<ExportableTableProps> = ({
             startIcon={<TableChartIcon />}
             onClick={handleCSV}
             sx={{
-              color: '#4caf50',
-              borderColor: '#ddd',
+              color: '#0D2658',
+              borderColor: 'rgba(13, 38, 88, 0.2)',
               '&:hover': {
-                borderColor: '#4caf50',
-                backgroundColor: '#e8f5e8'
+                borderColor: '#FFD700',
+                backgroundColor: 'rgba(255, 215, 0, 0.1)'
               }
             }}
           >
@@ -167,11 +160,11 @@ const ExportableTable: React.FC<ExportableTableProps> = ({
             startIcon={<ViewColumnIcon />}
             onClick={handleColumns}
             sx={{
-              color: '#ff9800',
-              borderColor: '#ddd',
+              color: '#0D2658',
+              borderColor: 'rgba(13, 38, 88, 0.2)',
               '&:hover': {
-                borderColor: '#ff9800',
-                backgroundColor: '#fff3e0'
+                borderColor: '#FFD700',
+                backgroundColor: 'rgba(255, 215, 0, 0.1)'
               }
             }}
           >
@@ -192,17 +185,18 @@ const ExportableTable: React.FC<ExportableTableProps> = ({
               minWidth: 200,
               '& .MuiOutlinedInput-root': {
                 '&:hover fieldset': {
-                  borderColor: '#042f2e ',
+                  borderColor: '#FFD700',
                 },
                 '&.Mui-focused fieldset': {
-                  borderColor: '#042f2e ',
+                  borderColor: '#FFD700',
+                  borderWidth: '2px',
                 }
               }
             }}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <SearchIcon sx={{ color: '#666', fontSize: 20 }} />
+                  <SearchIcon sx={{ color: '#0D2658', fontSize: 20 }} />
                 </InputAdornment>
               ),
             }}
@@ -216,10 +210,10 @@ const ExportableTable: React.FC<ExportableTableProps> = ({
         pagination
         customStyles={customStyles}
         paginationPerPage={paginationPerPage}
-        paginationRowsPerPageOptions={paginationRowsPerPageOptions}
+        paginationComponentOptions={{ noRowsPerPage: true }}
         progressPending={isLoading}
         progressComponent={
-          <CircularProgress size="4rem" sx={{ color: "#042f2e " }} />
+          <CircularProgress size="4rem" sx={{ color: "#FFD700" }} />
         }
         highlightOnHover
         pointerOnHover

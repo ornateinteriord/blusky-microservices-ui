@@ -1,22 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  TextField,
-  FormControl,
-  Button,
-  Box,
-  Typography,
-  Select,
-  MenuItem,
-  CircularProgress
-} from "@mui/material";
+import { Card, CardContent, CardHeader, TextField, FormControl, Button, Box, Typography, Select, MenuItem, CircularProgress } from '@mui/material';
 import UserContext from "../../../context/user/userContext";
-import { useGetWalletOverview } from "../../../api/Memeber";
-import { useBuyPackageDirectlyMutation } from "../../../api/Packages";
-import { toast } from "react-toastify";
-import { get } from "../../../api/Api";
+import { useGetWalletOverview } from '../../../api/Memeber';
+import { useBuyPackageDirectlyMutation } from '../../../api/Packages';
+import { toast } from 'react-toastify';
+import { get } from '../../../api/Api';
 
 const NewSubscription: React.FC = () => {
   const { user } = useContext(UserContext);

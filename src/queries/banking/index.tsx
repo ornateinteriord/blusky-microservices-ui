@@ -1,13 +1,6 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import useApi from "../useApi";
-import {
-    Receipt,
-    ReceiptResponse,
-    ReceiptsResponse,
-    Payment,
-    PaymentResponse,
-    PaymentsResponse
-} from "../../types";
+import { Receipt, ReceiptResponse, ReceiptsResponse, Payment, PaymentResponse, PaymentsResponse } from '../../types';
 
 // ==================== RECEIPTS ====================
 

@@ -1,6 +1,6 @@
-import { Container, Typography, Box, Paper, Button } from "@mui/material";
-import { Building2, Users, Target, Award, ArrowLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Container, Typography, Box, Paper, Button } from '@mui/material';
+import { Building2, Users, Target, Award, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import aboutBanner from "../../assets/about_banner.jpg";
 
 const About = () => {

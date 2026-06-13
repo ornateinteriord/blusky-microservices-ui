@@ -1,26 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import {
-  Box,
-  TextField,
-  Typography,
-  InputAdornment,
-  CircularProgress,
-  Paper,
-  Chip,
-  IconButton,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TableSortLabel,
-  Checkbox,
-  alpha,
-  useTheme,
-  Stack,
-  Button,
-} from '@mui/material';
+import { Box, TextField, Typography, InputAdornment, CircularProgress, Paper, Chip, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, Checkbox, Stack, Button,  } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import RefreshIcon from '@mui/icons-material/Refresh';
@@ -103,7 +82,7 @@ const TableToolbar: React.FC<TableToolbarProps> = ({
       <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between" alignItems={{ xs: 'flex-start', sm: 'center' }} spacing={2} sx={{ mb: 2 }}>
         <Box>
           {title && (
-            <Typography variant="h4" sx={{ fontWeight: 700, color: '#1a237e', mb: 1, fontSize: { xs: '1.5rem', sm: '1.75rem', md: '2rem' } }}>
+            <Typography variant="h4" sx={{ fontWeight: 800, color: '#0D2658', mb: 1, fontSize: { xs: '1.5rem', sm: '1.75rem', md: '2rem' } }}>
               {title}
             </Typography>
           )}
@@ -162,8 +141,10 @@ const TableToolbar: React.FC<TableToolbarProps> = ({
               textTransform: 'none',
               borderRadius: 2,
               px: 2,
-              background: 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)',
-              '&:hover': { background: 'linear-gradient(135deg, #0369a1 0%, #075985 100%)' }
+              background: 'linear-gradient(135deg, #FFD700 0%, #e6c200 100%)',
+              color: '#0D2658',
+              fontWeight: 700,
+              '&:hover': { background: 'linear-gradient(135deg, #e6c200 0%, #cca000 100%)' }
             }}
           >
             Search
@@ -211,7 +192,7 @@ const AdminReusableTable = <T extends Record<string, any>>({
   onClearSearch,
   searchQuery = '',
   paginationPerPage = 25,
-  paginationRowsPerPageOptions = [25, 50, 100, 200],
+  
   onRowClick,
   actions,
   enableSelection = false,
@@ -221,14 +202,13 @@ const AdminReusableTable = <T extends Record<string, any>>({
   emptyMessage = 'No data available',
   totalCount,
   onPageChange,
-  onRowsPerPageChange,
   currentPage = 0,
   sx = {},
 }: AdminReusableTableProps<T>) => {
-  const theme = useTheme();
+  
   const [localQuery, setLocalQuery] = useState(searchQuery);
   const [page, setPage] = useState(currentPage);
-  const [rowsPerPage, setRowsPerPage] = useState(paginationPerPage);
+  const [rowsPerPage] = useState(paginationPerPage);
   const [selected, setSelected] = useState<T[]>([]);
   const [orderBy, setOrderBy] = useState<keyof T>();
   const [order, setOrder] = useState<'asc' | 'desc'>('asc');
@@ -310,17 +290,7 @@ const AdminReusableTable = <T extends Record<string, any>>({
     }
   };
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newRowsPerPage = parseInt(event.target.value, 10);
-    setRowsPerPage(newRowsPerPage);
-    setPage(0);
-    if (onPageChange) {
-      onPageChange(0); // Reset to first page
-    }
-    if (onRowsPerPageChange) {
-      onRowsPerPageChange(newRowsPerPage);
-    }
-  };
+  
 
   const isSelected = (row: T) => selected.some((item) => {
     if ('id' in item && 'id' in row) {
@@ -436,9 +406,9 @@ const AdminReusableTable = <T extends Record<string, any>>({
         width: '100%',
         overflow: 'hidden',
         border: '1px solid #e2e8f0',
-        borderRadius: 2,
+        borderRadius: '16px',
         backgroundColor: '#ffffff',
-        boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1)',
+        boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
         position: 'relative', // Ensure relative positioning for the absolute loader
         ...sx,
       }}
@@ -458,14 +428,14 @@ const AdminReusableTable = <T extends Record<string, any>>({
       <TableContainer sx={{ maxHeight: 600 }}>
         <Table stickyHeader size="medium">
           <TableHead>
-            <TableRow sx={{ backgroundColor: '#f8fafc' }}>
+            <TableRow sx={{ backgroundColor: 'rgba(255, 215, 0, 0.1)' }}>
               {enableSelection && (
-                <TableCell padding="checkbox" sx={{ width: 60, backgroundColor: '#f8fafc' }}>
+                <TableCell padding="checkbox" sx={{ width: 60, backgroundColor: 'transparent' }}>
                   <Checkbox
                     indeterminate={selected.length > 0 && selected.length < data.length}
                     checked={data.length > 0 && selected.length === data.length}
                     onChange={handleSelectAllClick}
-                    sx={{ color: '#94a3b8' }}
+                    sx={{ color: '#0D2658', '&.Mui-checked': { color: '#0D2658' }, '&.MuiCheckbox-indeterminate': { color: '#0D2658' } }}
                   />
                 </TableCell>
               )}
@@ -476,11 +446,11 @@ const AdminReusableTable = <T extends Record<string, any>>({
                   align={column.align || 'left'}
                   sx={{
                     minWidth: column.minWidth,
-                    backgroundColor: '#f8fafc',
-                    fontWeight: 600,
-                    fontSize: '0.875rem',
-                    color: '#334155',
-                    borderBottom: '2px solid #e2e8f0',
+                    backgroundColor: 'transparent',
+                    fontWeight: 800,
+                    fontSize: '0.9rem',
+                    color: '#0D2658',
+                    borderBottom: '2px solid rgba(255, 215, 0, 0.5)',
                   }}
                 >
                   {column.sortable ? (
@@ -532,12 +502,12 @@ const AdminReusableTable = <T extends Record<string, any>>({
                     sx={{
                       cursor: onRowClick || enableSelection ? 'pointer' : 'default',
                       '&:hover': {
-                        backgroundColor: alpha(theme.palette.primary.main, 0.04),
+                        backgroundColor: 'rgba(255, 215, 0, 0.05)',
                       },
                       '&.Mui-selected': {
-                        backgroundColor: alpha(theme.palette.primary.main, 0.08),
+                        backgroundColor: 'rgba(255, 215, 0, 0.15)',
                         '&:hover': {
-                          backgroundColor: alpha(theme.palette.primary.main, 0.12),
+                          backgroundColor: 'rgba(255, 215, 0, 0.2)',
                         },
                       },
                     }}
@@ -586,32 +556,7 @@ const AdminReusableTable = <T extends Record<string, any>>({
           p: { xs: 1.5, sm: 2 },
         }}
       >
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <Typography variant="body2" sx={{ fontSize: '0.875rem', color: '#64748b' }}>
-            Rows per page:
-          </Typography>
-          <TextField
-            select
-            size="small"
-            value={rowsPerPage}
-            onChange={handleChangeRowsPerPage}
-            SelectProps={{
-              native: true,
-            }}
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                fontSize: '0.875rem',
-              },
-              width: 70,
-            }}
-          >
-            {paginationRowsPerPageOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </TextField>
-        </Box>
+        {/* Rows per page dropdown removed */}
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
           <Typography variant="body2" sx={{ fontSize: '0.875rem', color: '#334155' }}>

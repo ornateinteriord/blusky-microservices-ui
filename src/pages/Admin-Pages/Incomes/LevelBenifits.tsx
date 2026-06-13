@@ -1,21 +1,7 @@
 import { useState } from 'react';
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Card,
-  CardContent,
-  TextField,
-  Typography,
-  CircularProgress
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Box, Card, CardContent, TextField, Typography, CircularProgress } from '@mui/material';
 import DataTable from "react-data-table-component";
-import {
-  DASHBOARD_CUTSOM_STYLE,
-  getAdminAggregatedIncomeColumns,
-} from "../../../utils/DataTableColumnsProvider";
+import { DASHBOARD_CUTSOM_STYLE, getAdminAggregatedIncomeColumns,  } from '../../../utils/DataTableColumnsProvider';
 import { useGetAllTransactionDetails } from '../../../api/Admin';
 
 const LevelBenifits = () => {
@@ -80,19 +66,8 @@ const LevelBenifits = () => {
       </Typography>
       <Card sx={{ margin: "2rem", mt: 2 }}>
         <CardContent>
-          <Accordion defaultExpanded>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              sx={{
-                backgroundColor: "#0a2558",
-                color: "#fff",
-                "& .MuiSvgIcon-root": { color: "#fff" },
-              }}
-            >
-              List of Level Bonus
-            </AccordionSummary>
-            <AccordionDetails>
-              <Box
+          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>List of Level Bonus</div>
+          <Box
                 style={{
                   display: "flex",
                   gap: "1rem",
@@ -118,8 +93,6 @@ const LevelBenifits = () => {
                 highlightOnHover
                 noDataComponent={noDataComponent}
               />
-            </AccordionDetails>
-          </Accordion>
         </CardContent>
       </Card>
     </>

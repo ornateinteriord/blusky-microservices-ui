@@ -1,6 +1,5 @@
 import DataTable from 'react-data-table-component';
-import { Card, CardContent, Accordion, AccordionSummary, AccordionDetails, TextField } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Card, CardContent, TextField } from '@mui/material';
 import { DASHBOARD_CUTSOM_STYLE, getLevelBenifitsColumns } from '../../../utils/DataTableColumnsProvider';
 import { useGetTransactionDetails } from '../../../api/Memeber';
 
@@ -91,19 +90,8 @@ const LevelBenifits = () => {
   return (
     <Card sx={{ margin: '2rem', mt: 10 }}>
       <CardContent>
-        <Accordion defaultExpanded>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            sx={{
-              backgroundColor: '#0a2558',
-              color: '#fff',
-              '& .MuiSvgIcon-root': { color: '#fff' }
-            }}
-          >
-            List of Level Bonus ({levelBenefitsData.length})
-          </AccordionSummary>
-          <AccordionDetails>
-            <DataTable
+        <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>List of Level Bonus ({levelBenefitsData.length})</div>
+          <DataTable
               columns={getLevelBenifitsColumns()}
               data={levelBenefitsData}
               pagination
@@ -124,8 +112,6 @@ const LevelBenifits = () => {
                 </div>
               }
             />
-          </AccordionDetails>
-        </Accordion>
       </CardContent>
     </Card>
   );

@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo } from 'react';
 
 const useSearch = <T extends Record<string, any>>(data: T[]) => {
   const [searchQuery, setSearchQuery] = useState("");

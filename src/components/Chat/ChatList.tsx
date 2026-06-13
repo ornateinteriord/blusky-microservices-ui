@@ -1,22 +1,6 @@
 import React, { useState } from 'react';
 import { ChatRoom } from '../../hooks/useChatSocket';
-import {
-    Box,
-    List,
-    ListItemButton,
-    ListItemAvatar,
-    ListItemText,
-    Avatar,
-    Badge,
-    TextField,
-    Typography,
-    InputAdornment,
-    Paper,
-    Chip,
-    CircularProgress,
-    IconButton,
-    Tooltip
-} from '@mui/material';
+import { Box, List, ListItemButton, ListItemAvatar, ListItemText, Avatar, Badge, TextField, Typography, InputAdornment, Paper, Chip, CircularProgress, IconButton, Tooltip } from '@mui/material';
 import { Search, MessageSquare, Circle } from 'lucide-react';
 import { Add } from '@mui/icons-material';
 import { formatDistanceToNow } from 'date-fns';
@@ -32,11 +16,11 @@ interface ChatListProps {
 }
 
 const StyledListItemButton = styled(ListItemButton)<{ selected?: boolean }>(({ theme, selected }) => ({
-    borderLeft: selected ? `4px solid ${theme.palette.primary.main}` : '4px solid transparent',
+    borderLeft: selected ? `4px solid #FFD700` : '4px solid transparent',
     backgroundColor: selected
         ? theme.palette.mode === 'dark'
-            ? 'rgba(25, 118, 210, 0.15)'
-            : 'rgba(25, 118, 210, 0.08)'
+            ? 'rgba(255, 215, 0, 0.15)'
+            : 'rgba(255, 215, 0, 0.08)'
         : 'transparent',
     '&:hover': {
         backgroundColor: theme.palette.action.hover,
@@ -96,9 +80,7 @@ const ChatList: React.FC<ChatListProps> = ({
                         variant="h5"
                         sx={{
                             fontWeight: 700,
-                            background: 'linear-gradient(135deg, #1976d2 0%, #9c27b0 100%)',
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent',
+                            color: '#0D2658',
                         }}
                     >
                         Messages
@@ -109,10 +91,10 @@ const ChatList: React.FC<ChatListProps> = ({
                             <IconButton
                                 onClick={onNewChat}
                                 sx={{
-                                    background: 'linear-gradient(135deg, #1976d2 0%, #1565c0 100%)',
-                                    color: '#fff',
+                                    background: 'linear-gradient(135deg, #FFD700 0%, #e6c200 100%)',
+                                    color: '#0D2658',
                                     '&:hover': {
-                                        background: 'linear-gradient(135deg, #1565c0 0%, #0d47a1 100%)',
+                                        background: 'linear-gradient(135deg, #e6c200 0%, #cca000 100%)',
                                     },
                                 }}
                             >
@@ -166,11 +148,11 @@ const ChatList: React.FC<ChatListProps> = ({
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                background: 'linear-gradient(135deg, rgba(25, 118, 210, 0.1) 0%, rgba(156, 39, 176, 0.1) 100%)',
+                                background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.2) 100%)',
                                 mb: 2,
                             }}
                         >
-                            <MessageSquare size={32} color="#1976d2" />
+                            <MessageSquare size={32} color="#FFD700" />
                         </Paper>
                         <Typography variant="h6" gutterBottom>
                             No conversations yet
@@ -216,9 +198,10 @@ const ChatList: React.FC<ChatListProps> = ({
                                                 sx={{
                                                     background:
                                                         otherParticipant.role === 'admin'
-                                                            ? 'linear-gradient(135deg, #ff9800 0%, #f44336 100%)'
-                                                            : 'linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%)',
+                                                            ? 'linear-gradient(135deg, #FFD700 0%, #f57c00 100%)'
+                                                            : 'linear-gradient(135deg, #0D2658 0%, #173b7d 100%)',
                                                     fontWeight: 600,
+                                                    color: otherParticipant.role === 'admin' ? '#0D2658' : '#fff',
                                                 }}
                                             >
                                                 {otherParticipant.name.charAt(0).toUpperCase()}
@@ -280,7 +263,8 @@ const ChatList: React.FC<ChatListProps> = ({
                                                         sx={{
                                                             ml: 1,
                                                             '& .MuiBadge-badge': {
-                                                                background: 'linear-gradient(135deg, #1976d2 0%, #1565c0 100%)',
+                                                                background: 'linear-gradient(135deg, #FFD700 0%, #e6c200 100%)',
+                                                                color: '#0D2658',
                                                                 fontWeight: 700,
                                                             },
                                                         }}

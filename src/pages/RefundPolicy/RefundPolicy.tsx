@@ -1,6 +1,6 @@
-import { Container, Typography, Box, Paper, Button } from "@mui/material";
-import { RefreshCw, Clock, CheckCircle, XCircle, Info, ArrowLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Container, Typography, Box, Paper, Button } from '@mui/material';
+import { RefreshCw, Clock, CheckCircle, XCircle, Info, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const RefundPolicy = () => {
     const navigate = useNavigate();

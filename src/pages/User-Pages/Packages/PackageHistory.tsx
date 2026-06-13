@@ -1,5 +1,4 @@
-import { Card, CardContent, Accordion, AccordionSummary, AccordionDetails, TextField } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Card, CardContent, TextField } from '@mui/material';
 import DataTable from 'react-data-table-component';
 import { useMediaQuery } from '@mui/material';
 import { DASHBOARD_CUTSOM_STYLE, getUserPackageHistoryColumns } from '../../../utils/DataTableColumnsProvider';
@@ -28,28 +27,8 @@ const PackageHistory = () => {
       mt: 10
     }}>
       <CardContent sx={{ padding: isMobile ? '12px' : '24px' }}>
-        <Accordion
-          defaultExpanded
-          sx={{
-            boxShadow: 'none',
-            '&.MuiAccordion-root': {
-              backgroundColor: '#fff'
-            }
-          }}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            sx={{
-              backgroundColor: '#0a2558',
-              color: '#fff',
-              '& .MuiSvgIcon-root': { color: '#fff' },
-              minHeight: isMobile ? '48px' : '64px',
-            }}
-          >
-            Package History
-          </AccordionSummary>
-          <AccordionDetails>
-            <DataTable
+        <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>Package History</div>
+          <DataTable
               columns={getUserPackageHistoryColumns()}
               data={filteredData}
               pagination
@@ -74,8 +53,6 @@ const PackageHistory = () => {
                 </div>
               }
             />
-          </AccordionDetails>
-        </Accordion>
       </CardContent>
     </Card>
   );

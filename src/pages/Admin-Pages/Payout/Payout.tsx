@@ -1,21 +1,9 @@
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Card,
-  CardContent,
-  Tab,
-  Tabs,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { useState } from "react";
+import { Box, Card, CardContent, Tab, Tabs, TextField, Typography,  } from '@mui/material';
+import { useState } from 'react';
 import "./Payout.scss";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DataTable from "react-data-table-component";
-import { DASHBOARD_CUTSOM_STYLE, getProccessedColumns, getRequestColumns } from "../../../utils/DataTableColumnsProvider";
-import { useApproveWithdrawal, useGetApprovedWithdrawals, useGetPendingWithdrawals } from "../../../api/Memeber";
+import { DASHBOARD_CUTSOM_STYLE, getProccessedColumns, getRequestColumns } from '../../../utils/DataTableColumnsProvider';
+import { useApproveWithdrawal, useGetApprovedWithdrawals, useGetPendingWithdrawals } from '../../../api/Memeber';
 
 interface PayoutTableProps {
   data: any[];
@@ -70,46 +58,34 @@ export default Payout;
 
 const PayoutTable = ({ data, columns, tabTitle, loading }: PayoutTableProps) => {
   return (
-    <Accordion defaultExpanded>
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
-        sx={{
-          mt: 2,
-          backgroundColor: "#0a2558",
-          color: "#fff",
-          "& .MuiSvgIcon-root": { color: "#fff" },
+    <>
+      <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>{tabTitle}</div>
+      <Box
+        style={{
+          display: "flex",
+          gap: "1rem",
+          justifyContent: "flex-end",
+          marginBottom: "1rem",
         }}
       >
-        {tabTitle}
-      </AccordionSummary>
-      <AccordionDetails>
-        <Box
-          style={{
-            display: "flex",
-            gap: "1rem",
-            justifyContent: "flex-end",
-            marginBottom: "1rem",
-          }}
-        >
-          <TextField
-            size="small"
-            placeholder="Search withdrawals..."
-            sx={{ minWidth: 200 }}
-          />
-        </Box>
-        <DataTable
-          columns={columns}
-          data={data}
-          pagination
-          customStyles={DASHBOARD_CUTSOM_STYLE}
-          paginationPerPage={25}
-          progressPending={loading}
-          paginationRowsPerPageOptions={[25, 50, 100]}
-          highlightOnHover
-          noDataComponent={<div>No withdrawal data available</div>}
+        <TextField
+          size="small"
+          placeholder="Search withdrawals..."
+          sx={{ minWidth: 200 }}
         />
-      </AccordionDetails>
-    </Accordion>
+      </Box>
+      <DataTable
+        columns={columns}
+        data={data}
+        pagination
+        customStyles={DASHBOARD_CUTSOM_STYLE}
+        paginationPerPage={25}
+        progressPending={loading}
+        paginationComponentOptions={{ noRowsPerPage: true }}
+        highlightOnHover
+        noDataComponent={<div>No withdrawal data available</div>}
+      />
+    </>
   );
 };
 

@@ -1,14 +1,5 @@
 import React, { useState, useRef } from 'react';
-import {
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogActions,
-    IconButton,
-    Box,
-    Typography,
-    Button
-} from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogActions, IconButton, Box, Typography, Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import PrintIcon from '@mui/icons-material/Print';
 import { useReactToPrint } from 'react-to-print';

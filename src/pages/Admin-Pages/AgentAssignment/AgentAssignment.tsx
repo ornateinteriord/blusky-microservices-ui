@@ -1,45 +1,13 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Paper,
-  Typography,
-  Button,
-  TextField,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  Stack,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  CircularProgress,
-  Chip,
-  TablePagination,
-  TableContainer,
-  Divider,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Paper, Typography, Button, TextField, Table, TableHead, TableRow, TableCell, TableBody, Stack, FormControl, InputLabel, Select, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, CircularProgress, Chip, TablePagination, TableContainer, Divider, useMediaQuery, useTheme,  } from '@mui/material';
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import EditIcon from "@mui/icons-material/Edit";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
-import {
-  useGetAccountsForAssignment,
-  useGetAccountGroups,
-  useGetAllAgents,
-  useUpdateAccountAssignment,
-} from "../../../queries/admin";
-import { AccountForAssignment } from "../../../types";
+import { useGetAccountsForAssignment, useGetAccountGroups, useGetAllAgents, useUpdateAccountAssignment,  } from '../../../queries/admin';
+import { AccountForAssignment } from '../../../types';
 
 const AgentAssignment: React.FC = () => {
   const theme = useTheme();

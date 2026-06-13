@@ -1,7 +1,7 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { get, post } from "../Api";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { get, post } from '../Api';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import TokenService from "../token/tokenService";
 
 

@@ -1,8 +1,5 @@
 import { useState } from 'react';
-import {
-    Box, Typography, Card, CardContent, Button, Table, TableBody, TableCell,
-    TableContainer, TableHead, TableRow, Paper, CircularProgress, Alert
-} from '@mui/material';
+import { Box, Typography, Card, CardContent, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, CircularProgress, Alert } from '@mui/material';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';

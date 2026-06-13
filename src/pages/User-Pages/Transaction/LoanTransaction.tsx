@@ -1,23 +1,9 @@
 import DataTable from "react-data-table-component";
-import {
-  Card,
-  CardContent,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  TextField,
-  CircularProgress,
-  Box,
-  Typography,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import {
-  DASHBOARD_CUTSOM_STYLE,
-  getTransactionColumns,
-} from "../../../utils/DataTableColumnsProvider";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import { useGetTransactionDetails } from "../../../api/Memeber";
+import { Card, CardContent, TextField, CircularProgress, Box, Typography,  } from '@mui/material';
+import { DASHBOARD_CUTSOM_STYLE, getTransactionColumns,  } from '../../../utils/DataTableColumnsProvider';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import { useGetTransactionDetails } from '../../../api/Memeber';
 
 const LoanTransaction = () => {
   const {
@@ -109,19 +95,8 @@ const LoanTransaction = () => {
   return (
     <Card sx={{ margin: "2rem", mt: 10 }}>
       <CardContent>
-        <Accordion defaultExpanded>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            sx={{
-              backgroundColor: "#0a2558",
-              color: "#fff",
-              "& .MuiSvgIcon-root": { color: "#fff" },
-            }}
-          >
-            Loan Transactions ({filteredData.length})
-          </AccordionSummary>
-          <AccordionDetails>
-            <DataTable
+        <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>Loan Transactions ({filteredData.length})</div>
+          <DataTable
               columns={getTransactionColumns()}
               data={filteredData}
               pagination
@@ -154,8 +129,6 @@ const LoanTransaction = () => {
                 </Box>
               }
             />
-          </AccordionDetails>
-        </Accordion>
       </CardContent>
     </Card>
   );

@@ -1,18 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Button,
-  Card,
-  CardContent,
-  Box,
-  Typography,
-  Grid,
-  CircularProgress,
-  IconButton,
-} from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Button, Card, CardContent, Box, Typography, Grid, CircularProgress, IconButton,  } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -286,29 +273,11 @@ const KYC: React.FC = () => {
     <Card sx={{ margin: '2rem', mt: 10, boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}>
       <CardContent>
         {/* Bank Account Details Commented Out
-        <Accordion
-          defaultExpanded
-          sx={{
-            boxShadow: 'none',
-            '&.MuiAccordion-root': {
-              backgroundColor: '#fff',
-            },
-            mb: 2,
-          }}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            sx={{
-              backgroundColor: '#0a2558',
-              color: '#fff',
-              '& .MuiSvgIcon-root': {
-                color: '#fff',
-              },
-            }}
-          >
+        <div>
+          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)", display: "flex", alignItems: "center", gap: "8px" }}>
             Update Identity and Bank Account Details
-          </AccordionSummary>
-          <AccordionDetails sx={{ padding: '2rem' }}>
+          </div>
+          <div style={{ padding: "0 1rem 1rem 1rem" }}>
             <form style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <TextField
                 label="Account Name"
@@ -415,33 +384,16 @@ const KYC: React.FC = () => {
                 }}
               />
             </form>
-          </AccordionDetails>
-        </Accordion>
+          </div>
+        </div>
         */}
 
         {/* KYC Documents */}
-        <Accordion
-          defaultExpanded
-          sx={{
-            boxShadow: 'none',
-            '&.MuiAccordion-root': {
-              backgroundColor: '#fff',
-            },
-          }}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            sx={{
-              backgroundColor: '#0a2558',
-              color: '#fff',
-              '& .MuiSvgIcon-root': {
-                color: '#fff',
-              },
-            }}
-          >
+        <div>
+          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)", display: "flex", alignItems: "center", gap: "8px" }}>
             Upload KYC Documents (All Mandatory)
-          </AccordionSummary>
-          <AccordionDetails sx={{ padding: '2rem' }}>
+          </div>
+          <div style={{ padding: "0 1rem 1rem 1rem" }}>
             <Grid container spacing={3}>
               {documentConfigs.map((config) => (
                 <Grid item xs={12} sm={6} md={4} key={config.key}>
@@ -474,8 +426,8 @@ const KYC: React.FC = () => {
                 {submitKYC.isPending ? 'Submitting...' : 'Submit KYC'}
               </Button>
             </Box>
-          </AccordionDetails>
-        </Accordion>
+          </div>
+        </div>
       </CardContent>
       {submitKYC.isPending && <LoadingComponent />}
     </Card>

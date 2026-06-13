@@ -1,6 +1,5 @@
 import React from 'react';
-import { Accordion, AccordionSummary, AccordionDetails, Typography, Grid, Box, Card, CardContent } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Typography, Grid, Box, Card, CardContent } from '@mui/material';
 import ImageIcon from '@mui/icons-material/Image';
 
 interface KYCDocumentsProps {
@@ -21,20 +20,13 @@ export const KYCDocuments: React.FC<KYCDocumentsProps> = ({ formData }) => {
     const hasDocuments = uploadedDocs.length > 0;
 
     return (
-        <Accordion defaultExpanded sx={{ marginBottom: '1rem' }}>
-            <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                sx={{
-                    backgroundColor: '#0a2558',
-                    color: '#fff',
-                    '& .MuiSvgIcon-root': { color: '#fff' },
-                }}
-            >
+        <div>
+            <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)", display: "flex", alignItems: "center", gap: "8px" }}>
                 <Typography sx={{ fontWeight: 'bold' }}>
                     KYC Documents ({uploadedDocs.length}/6)
                 </Typography>
-            </AccordionSummary>
-            <AccordionDetails sx={{ padding: '2rem' }}>
+            </div>
+            <div style={{ padding: "0 1rem 1rem 1rem" }}>
                 {!hasDocuments ? (
                     <Box textAlign="center" py={4}>
                         <ImageIcon sx={{ fontSize: 60, color: '#999', mb: 2 }} />
@@ -139,7 +131,7 @@ export const KYCDocuments: React.FC<KYCDocumentsProps> = ({ formData }) => {
                         ))}
                     </Grid>
                 )}
-            </AccordionDetails>
-        </Accordion>
+            </div>
+        </div>
     );
 };

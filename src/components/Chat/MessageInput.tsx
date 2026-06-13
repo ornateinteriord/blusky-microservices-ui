@@ -27,8 +27,8 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
         borderRadius: '24px',
         backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : theme.palette.grey[50],
         '& fieldset': { borderColor: theme.palette.divider },
-        '&:hover fieldset': { borderColor: theme.palette.primary.main },
-        '&.Mui-focused fieldset': { borderColor: theme.palette.primary.main, borderWidth: '2px' },
+        '&:hover fieldset': { borderColor: '#ff9800' },
+        '&.Mui-focused fieldset': { borderColor: '#ff9800', borderWidth: '2px' },
     },
 }));
 
@@ -242,8 +242,8 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage, onTyping, di
                                                 disabled={isSending}
                                                 size="small"
                                                 sx={{
-                                                    color: 'primary.main',
-                                                    '&:hover': { color: 'primary.dark' }
+                                                    color: '#ff9800',
+                                                    '&:hover': { color: '#f57c00' }
                                                 }}
                                             >
                                                 {isSending ? <CircularProgress size={20} /> : <Send />}
@@ -253,7 +253,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage, onTyping, di
                                                 onClick={startRecording}
                                                 disabled={disabled}
                                                 size="small"
-                                                sx={{ color: 'text.secondary' }}
+                                                sx={{ color: '#ff9800' }}
                                             >
                                                 <Mic />
                                             </IconButton>
@@ -377,11 +377,11 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage, onTyping, di
                                 onClick={handleSend}
                                 disabled={isSending}
                                 sx={{
-                                    bgcolor: 'primary.main',
+                                    bgcolor: '#ff9800',
                                     color: '#fff',
                                     width: 50,
                                     height: 50,
-                                    '&:hover': { bgcolor: 'primary.dark' }
+                                    '&:hover': { bgcolor: '#f57c00' }
                                 }}
                             >
                                 {isSending ? <CircularProgress size={24} color="inherit" /> : <Send />}
