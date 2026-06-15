@@ -190,10 +190,14 @@ const UserReferralBonus = lazy(
   () => import("./pages/User-Pages/Earnings/ReferralBonus")
 );
 const UserSingleLevelIncome = lazy(
-  () => import("./pages/User-Pages/Earnings/SingleLevelIncome")
+  () => import("./pages/User-Pages/Earnings/PackageDetail")
+);
+const UserSingleLevelIncomeHistory = lazy(
+  () => import("./pages/User-Pages/Earnings/SingleLevelIncomeHistory")
 );
 const UserWallet = lazy(() => import("./pages/User-Pages/Wallet/Wallet"));
 const UserUpgradeWallet = lazy(() => import("./pages/User-Pages/Wallet/UpgradeWallet"));
+const UserWalletTransfer = lazy(() => import("./pages/User-Pages/Wallet/WalletTransfer"));
 const UserSupportChat = lazy(() => import("./pages/User-Pages/SupportChat/SupportChat"));
 const UserChat = lazy(() => import("./pages/User-Pages/Chat/Chat"));
 const UserOverdraft = lazy(() => import("./pages/User-Pages/Overdraft/Overdraft"));
@@ -550,14 +554,19 @@ const RoutesProvider = ({
                 element={<UserReferralBonus />}
               />
               <Route
-                path="/user/earnings/single-level-income"
+                path="/user/earnings/package-detail"
                 element={<UserSingleLevelIncome />}
+              />
+              <Route
+                path="/user/earnings/single-level-income-history"
+                element={<UserSingleLevelIncomeHistory />}
               />
               <Route path="/user/transactions" element={<UserTransaction />} />
               <Route path="/user/loantransactions" element={<UserLoanTransaction />} />
               <Route path="/user/mailbox" element={<UserMailBox />} />
               <Route path="/user/wallet" element={<UserWallet />} />
               <Route path="/user/upgrade-wallet" element={<UserUpgradeWallet />} />
+              <Route path="/user/transfer" element={<UserWalletTransfer />} />
               <Route path="/user/support-chat" element={<UserSupportChat />} />
               <Route path="/user/chat" element={<UserChat />} />
               <Route path="/user/overdraft" element={<UserOverdraft />} />

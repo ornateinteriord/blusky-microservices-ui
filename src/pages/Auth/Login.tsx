@@ -6,7 +6,7 @@ import { Visibility, VisibilityOff, PersonOutline, LockOutlined } from '@mui/ico
 import { LoadingComponent } from '../../App';
 import { useLoginMutation } from '../../api/Auth';
 import ForgotPasswordForm from "./components/ForgotPasswordForm";
-import uwtLogo from "../../assets/uwt.png";
+import uwtLogo from "../../assets/USDT1.png";
 
 const Login = () => {
   const [formData, setFormData] = useState({

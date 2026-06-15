@@ -165,13 +165,8 @@ export const getLevelBenifitsColumns = () => [
     sortable: true,
   },
   {
-    name: "Member Name",
-    selector: (row: any) => row.memberName,
-    sortable: true,
-  },
-  {
-    name: "Member ID",
-    selector: (row: any) => row.memberId,
+    name: "Member Name (ID)",
+    selector: (row: any) => `${row.memberName || 'N/A'} (${row.memberId || 'N/A'})`,
     sortable: true,
   },
   {
@@ -188,13 +183,8 @@ export const getAdminAggregatedIncomeColumns = () => [
     width: "80px",
   },
   {
-    name: "Member ID",
-    selector: (row: any) => row.member_id,
-    sortable: true,
-  },
-  {
-    name: "Member Name",
-    selector: (row: any) => row.name || "-",
+    name: "Member Name (ID)",
+    selector: (row: any) => `${row.name || "-"} (${row.member_id})`,
     sortable: true,
   },
   {
@@ -442,13 +432,8 @@ export const getMembersColumns = (
       sortable: true,
     },
     {
-      name: "Member",
-      selector: (row: any) => row.Member_id,
-      sortable: true,
-    },
-    {
-      name: "Name",
-      selector: (row: any) => row.Name ?? "-",
+      name: "Member Name (ID)",
+      selector: (row: any) => `${row.Name ?? "-"} (${row.Member_id})`,
       sortable: true,
     },
     {
@@ -545,13 +530,8 @@ export const getPermissionsColumns = (
       width: "70px",
     },
     {
-      name: "Member ID",
-      selector: (row: any) => row.Member_id,
-      sortable: true,
-    },
-    {
-      name: "Name",
-      selector: (row: any) => row.Name ?? "-",
+      name: "Member Name (ID)",
+      selector: (row: any) => `${row.Name ?? "-"} (${row.Member_id})`,
       sortable: true,
     },
     {
@@ -618,13 +598,8 @@ export const getPendingMembersColumns = (
       width: "70px",
     },
     {
-      name: "Member ID",
-      selector: (row: any) => row.Member_id,
-      sortable: true,
-    },
-    {
-      name: "Name",
-      selector: (row: any) => row.Name ?? "-",
+      name: "Member Name (ID)",
+      selector: (row: any) => `${row.Name ?? "-"} (${row.Member_id})`,
       sortable: true,
     },
     {

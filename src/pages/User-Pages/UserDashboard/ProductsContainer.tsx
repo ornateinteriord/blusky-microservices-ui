@@ -6,7 +6,7 @@ import { useGetWalletOverview } from '../../../api/Memeber';
 import { useBuyPackageDirectlyMutation } from '../../../api/Packages';
 import { toast } from 'react-toastify';
 import { useGetMemberAddOns } from '../../../api/Packages';
-import USDTLogo from "../../../assets/uwt.png";
+import USDTLogo from "../../../assets/USDT1.png";
 
 const PACKAGES = [
   { id: 1, amount: 30, title: "Basic", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#1de9b6" },
@@ -59,7 +59,7 @@ const ProductsContainer: React.FC = () => {
 
   const handleCardClick = (pkgAmount: number) => {
     if (isPurchased(pkgAmount)) {
-      navigate(`/user/earnings/single-level-income?package=${pkgAmount}`);
+      navigate(`/user/earnings/package-detail?package=${pkgAmount}`);
     }
   };
 
@@ -111,13 +111,32 @@ const ProductsContainer: React.FC = () => {
               boxShadow: 'none',
               cursor: isPurchased(pkg.amount) ? 'pointer' : 'default',
               transition: 'transform 0.3s ease',
+              position: 'relative',
+              overflow: 'hidden',
               '&:hover': {
                 transform: 'translateY(-4px)',
                 boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
               }
             }}
           >
-            <CardContent sx={{ p: 2.5, '&:last-child': { pb: 2.5 } }}>
+            {/* Clean Logo on the right side */}
+            <Box sx={{
+              position: 'absolute',
+              top: '36px',
+              right: '16px',
+              width: '100px',
+              height: '100px',
+              opacity: 1,
+              zIndex: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              pointerEvents: 'none'
+            }}>
+              <img src={USDTLogo} alt="USDT Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+            </Box>
+
+            <CardContent sx={{ p: 2.5, '&:last-child': { pb: 2.5 }, position: 'relative', zIndex: 1 }}>
               <Typography variant="h5" fontWeight={900} sx={{ fontSize: '1.4rem', color: pkg.color, mb: 1, lineHeight: 1.3, height: '48px', display: 'flex', alignItems: 'center', gap: 0 }}>
                 <Box sx={{
                   width: 38,

@@ -4,7 +4,7 @@ import DataTable from "react-data-table-component";
 import { useMediaQuery } from '@mui/material';
 import { DASHBOARD_CUTSOM_STYLE, getWalletColumns,  } from '../../../utils/DataTableColumnsProvider';
 import TokenService from "../../../api/token/tokenService";
-import { useGetWalletOverview, useWalletWithdraw } from '../../../api/Memeber';
+import { useGetWalletOverview, useWalletWithdraw, useGetMemberDetails } from '../../../api/Memeber';
 import { toast } from 'react-toastify';
 
 const Wallet = () => {
@@ -23,7 +23,23 @@ const Wallet = () => {
     refetch,
   } = useGetWalletOverview(memberId);
 
+  const { data: memberDetails } = useGetMemberDetails(memberId);
+
   const withdrawMutation = useWalletWithdraw(memberId);
+
+  // --- Referral requirement logic ---
+  const currentDirects = memberDetails?.data?.registration_stats?.direct || 0;
+  const totalPackages = parseFloat(walletData?.data?.totalPackages || 0);
+
+  let requiredReferrals = 0;
+  if (totalPackages >= 1000) requiredReferrals = 10;
+  else if (totalPackages >= 500) requiredReferrals = 8;
+  else if (totalPackages >= 250) requiredReferrals = 6;
+  else if (totalPackages >= 120) requiredReferrals = 4;
+  else if (totalPackages >= 60) requiredReferrals = 2;
+  else requiredReferrals = 0; // <= 30
+
+  const isReferralConditionMet = currentDirects >= requiredReferrals;
 
   useEffect(() => {
     if (walletData?.data?.balance) {
@@ -64,6 +80,11 @@ const Wallet = () => {
     }
 
     if (!memberId) {
+      return;
+    }
+
+    if (!isReferralConditionMet) {
+      toast.error(`You need ${requiredReferrals} direct referrals to withdraw at your current package level.`);
       return;
     }
 
@@ -252,6 +273,18 @@ const Wallet = () => {
                       • Withdrawal disabled due to unpaid loan from last Saturday
                     </Typography>
                   )}
+                  {!isReferralConditionMet && (
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: "#f44336",
+                        fontWeight: "bold",
+                        mt: 1
+                      }}
+                    >
+                      • Withdrawal locked: Your package level requires {requiredReferrals} direct referrals, but you currently have {currentDirects}.
+                    </Typography>
+                  )}
                 </Box>
 
                 <Button
@@ -262,13 +295,14 @@ const Wallet = () => {
                     !amount ||
                     amount === "0" ||
                     parseFloat(amount) > displayBalance ||
-                    !isWithdrawalAllowed
+                    !isWithdrawalAllowed ||
+                    !isReferralConditionMet
                   }
                   sx={{
-                    backgroundColor: isWithdrawalAllowed ? "#0a2558" : "#ff9800",
+                    backgroundColor: isWithdrawalAllowed && isReferralConditionMet ? "#0a2558" : "#ff9800",
                     minWidth: "120px",
                     "&:hover": {
-                      backgroundColor: isWithdrawalAllowed ? "#581c87" : "#f57c00"
+                      backgroundColor: isWithdrawalAllowed && isReferralConditionMet ? "#581c87" : "#f57c00"
                     },
                     "&:disabled": { backgroundColor: "#cccccc" },
                   }}
@@ -276,7 +310,7 @@ const Wallet = () => {
                   {withdrawMutation.isPending ? (
                     <CircularProgress size={24} sx={{ color: "white" }} />
                   ) : (
-                    isWithdrawalAllowed ? "Withdraw" : "Disabled"
+                    (!isWithdrawalAllowed || !isReferralConditionMet) ? "Disabled" : "Withdraw"
                   )}
                 </Button>
               </Box>

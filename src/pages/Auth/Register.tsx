@@ -10,7 +10,7 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import WcIcon from "@mui/icons-material/Wc";
 import PublicIcon from '@mui/icons-material/Public';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
-import BMSLogo from "../../assets/uwt.png";
+import BMSLogo from "../../assets/USDT1.png";
 import { useGetSponserRef, useSignupMutation } from '../../api/Auth';
 import { LoadingComponent } from '../../App';
 

@@ -18,6 +18,7 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import LockIcon from '@mui/icons-material/Lock';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import SyncAltIcon from '@mui/icons-material/SyncAlt';
 
 import TokenService from '../../../api/token/tokenService';
 import { useVerifyPayment, parsePaymentRedirectParams, useGetTransactionDetails, useGetWalletOverview, useGetMemberDetails, useGetDailyPayout } from '../../../api/Memeber';
@@ -75,7 +76,7 @@ const UserDashboard = () => {
         { label: "Profile", icon: <AccountCircleIcon />, route: "/user/account/profile", color: "#FFD700" },
         // { label: "KYC", icon: <VerifiedUserIcon />, route: "/user/account/kyc", color: "#10b981" },
         { label: "Password", icon: <LockIcon />, route: "/user/account/change-password", color: "#f59e0b" },
-        // { label: "Load Fund", icon: <InventoryIcon />, onClick: () => navigate("/user/load-fund"), route: "", color: "#FFD700" },
+        { label: "Transfer", icon: <SyncAltIcon />, route: "/user/transfer", color: "#10b981" },
         { label: "New Subscription", icon: <InventoryIcon />, onClick: () => navigate("/user/new-subscription"), route: "", color: "#10b981" },
         { label: "My Subscription", icon: <ReceiptLongIcon />, onClick: () => navigate("/user/my-subscriptions"), route: "", color: "#f59e0b" },
       ]
@@ -121,64 +122,97 @@ const UserDashboard = () => {
         </Box>
       )}
 
+      {/* Auto calculation block */}
+      <Box sx={{ 
+        bgcolor: 'rgba(255,255,255,0.04)', 
+        border: '1px solid rgba(255,255,255,0.1)', 
+        borderRadius: '16px', 
+        p: { xs: 2, md: 3 }, 
+        mb: 3, 
+        mt: 1,
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'space-between',
+        width: '100%',
+        maxWidth: '500px',
+        margin: '0 auto 24px auto',
+        boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
+      }}>
+        <Box>
+          <Typography variant="h6" sx={{ color: '#FFD700', fontWeight: 900, mb: 0.5 }}>USDT - 1$</Typography>
+          <Typography variant="body1" sx={{ color: '#ffffff', fontWeight: 700, letterSpacing: '1px' }}>INDIA INR - 95.00</Typography>
+        </Box>
+        <Box sx={{ 
+          width: '56px', 
+          height: '40px', 
+          border: '2px solid rgba(255,255,255,0.2)',
+          borderRadius: '6px',
+          overflow: 'hidden',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          bgcolor: '#fff'
+        }}>
+          <img src="https://flagcdn.com/w80/in.png" alt="India Flag" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        </Box>
+      </Box>
+
       {/* <SliderSection /> */}
       <ProductsContainer />
       {/* <NewSliderSection /> */}
 
-      <Box sx={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        width: '100%',
-        mb: 4,
-        mt: 1,
-        flexWrap: 'nowrap',
-        gap: 2
-      }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
-          <Typography sx={{ color: 'rgba(255,255,255,0.7)', fontWeight: 600, fontSize: { xs: '0.85rem', md: '0.95rem' } }}>
-            Your Top Up Balance
-          </Typography>
-          <Typography sx={{ fontWeight: 800, fontSize: { xs: '1.85rem', md: '2.5rem' }, color: '#ffffff', lineHeight: 1.1 }}>
-            ${Number(walletOverview?.topUpBalance || 0).toLocaleString('en-US', { maximumFractionDigits: 0 })}
-          </Typography>
-        </Box>
+
+      {/* Earnings, Upgrade & Top Up Wallets */}
+      {/* Load Fund Button & 3 Wallet Cards */}
+      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4, mt: 4 }}>
         <Button
           variant="contained"
           onClick={() => navigate('/user/load-fund')}
           sx={{
-            bgcolor: '#FFD700', // Vibrant neon green from screenshot
-            color: '#050916',   // Dark text matching main dark theme
-            textTransform: 'none',
-            fontWeight: 800,
+            background: 'linear-gradient(45deg, #FFD700 30%, #FFDF00 90%)',
+            color: '#050916',
             borderRadius: '999px',
-            px: { xs: 3.5, md: 5 },
-            py: { xs: 1.25, md: 1.5 },
-            fontSize: { xs: '0.95rem', md: '1.05rem' },
-            boxShadow: '0 4px 14px rgba(0, 230, 118, 0.4)',
-            minWidth: 'auto',
-            flexShrink: 0,
-            '&:hover': { 
-              bgcolor: '#e6c200',
-              boxShadow: '0 6px 20px rgba(0, 230, 118, 0.6)',
-            }
+            px: { xs: 5, md: 8 },
+            py: { xs: 1.2, md: 1.5 },
+            fontWeight: 900,
+            letterSpacing: '1px',
+            textTransform: 'uppercase',
+            fontSize: { xs: '0.9rem', md: '1rem' },
+            boxShadow: '0 8px 25px rgba(255, 215, 0, 0.3)',
+            '&:hover': {
+              background: 'linear-gradient(45deg, #e6c200 30%, #FFD700 90%)',
+              boxShadow: '0 12px 30px rgba(255, 215, 0, 0.5)',
+              transform: 'translateY(-2px)'
+            },
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
           }}
         >
           Load Fund
         </Button>
       </Box>
 
-      {/* Earnings & Upgrade Wallets */}
-      <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 2, mb: 4, px: { xs: 1, md: 0 } }}>
-        <Box onClick={() => navigate('/user/wallet')} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1, cursor: 'pointer', p: 2.5, borderRadius: '24px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'transform 0.2s', '&:hover': { transform: 'translateY(-4px)', bgcolor: 'rgba(255,255,255,0.05)' } }}>
-          <AccountBalanceWalletIcon sx={{ fontSize: 32, color: '#FFD700' }} />
-          <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', fontWeight: 700, textAlign: 'center' }}>Earnings Wallet</Typography>
-          <Typography variant="h6" sx={{ color: '#ffffff', fontWeight: 900 }}>${Number(walletOverview?.balance || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
+      <Box sx={{ 
+        display: 'flex', 
+        flexDirection: 'row', 
+        gap: { xs: 1, sm: 2 }, 
+        mb: 4, 
+        px: { xs: 0.5, md: 0 },
+        width: '100%'
+      }}>
+        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0.5, p: { xs: 1.5, sm: 2.5 }, borderRadius: { xs: '16px', sm: '24px' }, bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
+          <AccountBalanceWalletIcon sx={{ fontSize: { xs: 24, sm: 32 }, color: '#FFD700' }} />
+          <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', fontWeight: 700, textAlign: 'center', fontSize: { xs: '0.65rem', sm: '0.75rem' }, lineHeight: 1.2 }}>Top Up wlt</Typography>
+          <Typography variant="h6" sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '0.9rem', sm: '1.25rem' } }}>${Number(walletOverview?.topUpBalance || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
         </Box>
-        <Box onClick={() => navigate('/user/upgrade-wallet')} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1, cursor: 'pointer', p: 2.5, borderRadius: '24px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'transform 0.2s', '&:hover': { transform: 'translateY(-4px)', bgcolor: 'rgba(255,255,255,0.05)' } }}>
-          <AccountBalanceWalletIcon sx={{ fontSize: 32, color: '#FFD700' }} />
-          <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', fontWeight: 700, textAlign: 'center' }}>Upgrade Wallet</Typography>
-          <Typography variant="h6" sx={{ color: '#ffffff', fontWeight: 900 }}>${Number(walletOverview?.upgradeWalletBalance || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
+        <Box onClick={() => navigate('/user/upgrade-wallet')} sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0.5, cursor: 'pointer', p: { xs: 1.5, sm: 2.5 }, borderRadius: { xs: '16px', sm: '24px' }, bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'transform 0.2s', '&:hover': { transform: 'translateY(-4px)', bgcolor: 'rgba(255,255,255,0.05)' } }}>
+          <AccountBalanceWalletIcon sx={{ fontSize: { xs: 24, sm: 32 }, color: '#FFD700' }} />
+          <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', fontWeight: 700, textAlign: 'center', fontSize: { xs: '0.65rem', sm: '0.75rem' }, lineHeight: 1.2 }}>Upgrade wlt</Typography>
+          <Typography variant="h6" sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '0.9rem', sm: '1.25rem' } }}>${Number(walletOverview?.upgradeWalletBalance || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
+        </Box>
+        <Box onClick={() => navigate('/user/wallet')} sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0.5, cursor: 'pointer', p: { xs: 1.5, sm: 2.5 }, borderRadius: { xs: '16px', sm: '24px' }, bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'transform 0.2s', '&:hover': { transform: 'translateY(-4px)', bgcolor: 'rgba(255,255,255,0.05)' } }}>
+          <AccountBalanceWalletIcon sx={{ fontSize: { xs: 24, sm: 32 }, color: '#FFD700' }} />
+          <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', fontWeight: 700, textAlign: 'center', fontSize: { xs: '0.65rem', sm: '0.75rem' }, lineHeight: 1.2 }}>Earnings wlt</Typography>
+          <Typography variant="h6" sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '0.9rem', sm: '1.25rem' } }}>${Number(walletOverview?.balance || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
         </Box>
       </Box>
 
@@ -357,7 +391,7 @@ const UserDashboard = () => {
                     <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', fontWeight: 700, textAlign: 'center' }}>Referral Bonus</Typography>
                     <Typography variant="subtitle1" sx={{ color: '#ffffff', fontWeight: 900 }}>${Number(walletOverview?.directBenefits || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
                   </Box>
-                  <Box onClick={() => navigate('/user/earnings/single-level-income')} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1, cursor: 'pointer', p: 2, borderRadius: '24px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
+                  <Box onClick={() => navigate('/user/earnings/single-level-income-history')} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1, cursor: 'pointer', p: 2, borderRadius: '24px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
                     <TrendingUpIcon sx={{ fontSize: 32, color: '#ef4444' }} />
                     <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', fontWeight: 700, textAlign: 'center' }}>Single Level Income</Typography>
                     <Typography variant="subtitle1" sx={{ color: '#ffffff', fontWeight: 900 }}>${Number(walletOverview?.singleLineIncome || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>

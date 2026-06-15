@@ -561,6 +561,15 @@ export const useGetWalletOverview = (memberId: any) => {
   });
 };
 
+export const useTransferWallet = () => {
+  return useMutation({
+    mutationFn: async (data: { memberId: string; fromWallet: string; toWallet: string; amount: string | number }) => {
+      const response = await post(`/user/transfer-wallet`, data);
+      return response.data || response;
+    },
+  });
+};
+
 export const useWalletWithdraw = (memberId: any) => {
   const queryClient = useQueryClient();
 
