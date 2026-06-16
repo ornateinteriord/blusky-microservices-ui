@@ -93,14 +93,14 @@ const Navbar = ({ shouldHide, onToggleSidebar }: NavbarProps) => {
                 >
                   {memberDetails?.Name?.charAt(0).toUpperCase() || 'U'}
                 </Avatar>
-                <Box sx={{ textAlign: 'left' }}>
+                {/* <Box sx={{ textAlign: 'left' }}>
                   <Typography variant="body2" sx={{ color: 'white', fontWeight: 800, lineHeight: 1.2, fontSize: { xs: '0.85rem', md: '0.95rem' } }}>
                     {memberDetails?.Name || "Member"}
                   </Typography>
                   <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 600, fontSize: { xs: '0.65rem', md: '0.75rem' } }}>
                     ID: {memberDetails?.Member_id || ""}
                   </Typography>
-                </Box>
+                </Box> */}
               </Box>
 
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -177,14 +177,14 @@ const Navbar = ({ shouldHide, onToggleSidebar }: NavbarProps) => {
                     >
                       {memberDetails?.Name?.charAt(0).toUpperCase() || 'U'}
                     </Avatar>
-                    <Box sx={{ display: { xs: 'none', sm: 'block' }, textAlign: 'left' }}>
+                    {/* <Box sx={{ display: { xs: 'none', sm: 'block' }, textAlign: 'left' }}>
                       <Typography variant="body2" sx={{ color: 'white', fontWeight: 800, lineHeight: 1.1 }}>
                         {memberDetails?.Name || "Member"}
                       </Typography>
                       <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 600, fontSize: '0.65rem' }}>
                         {memberDetails?.Member_id || ""}
                       </Typography>
-                    </Box>
+                    </Box> */}
                     <ChevronDown size={18} color="white" style={{ opacity: 0.8 }} />
                   </Box>
                 )}

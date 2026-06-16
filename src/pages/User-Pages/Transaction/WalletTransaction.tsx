@@ -65,7 +65,7 @@ const WalletTransaction = () => {
   if (isLoading) {
     return (
     <Box sx={{ minHeight: '100vh', bgcolor: '#0B2453', p: 2 }}>
-      <Card sx={{ margin: "2rem", mt: 10, textAlign: "center", p: 3 }}>
+      <Card sx={{ margin: "1rem", mt: 10, textAlign: "center", p: 3 }}>
         <CircularProgress size={"4rem"} sx={{ color: "#0a2558" }} />
       </Card>
     </Box>
@@ -74,9 +74,11 @@ const WalletTransaction = () => {
 
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: '#0B2453', p: 2 }}>
-      <Card sx={{ margin: "2rem", mt: 10 }}>
+      <Card sx={{ margin: "1rem", mt: 10 }}>
       <CardContent>
-        <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>{type !== 'all' ? `${type} Account History` : 'Wallet Transactions'}</div>
+        <Typography variant="h5" sx={{ color: '#000000', fontWeight: 'bold', mb: 2 }}>
+          {type !== 'all' ? `${type} Account History` : 'Wallet Transactions'}
+        </Typography>
           <DataTable
               columns={getTransactionColumns()}
               data={filteredData}

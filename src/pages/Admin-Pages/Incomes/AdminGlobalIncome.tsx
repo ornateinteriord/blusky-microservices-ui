@@ -1,39 +1,32 @@
 import { useState } from 'react';
 import { Box, Card, CardContent, TextField, Typography, CircularProgress } from '@mui/material';
+
 import DataTable from "react-data-table-component";
-import { DASHBOARD_CUTSOM_STYLE, getAdminAggregatedIncomeColumns,  } from '../../../utils/DataTableColumnsProvider';
+import { DASHBOARD_CUTSOM_STYLE, getAdminAggregatedIncomeColumns } from '../../../utils/DataTableColumnsProvider';
 import { useGetAllTransactionDetails } from '../../../api/Admin';
 
-const LevelBenifits = () => {
+const AdminGlobalIncome = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Use the same transaction hook and filter for level benefits
-  const { data: allTransactions, isLoading, isError } = useGetAllTransactionDetails();
+  const { data: transactions, isLoading, isError } = useGetAllTransactionDetails();
 
-  // Filter transactions to get only level benefits
-  const levelBenefits = allTransactions?.filter((transaction: any) => {
-    const isLevel = (
-      transaction.type === 'level_benefit' ||
-      transaction.transactionType === 'level' ||
-      transaction.category === 'level_benefits' ||
-      transaction.description?.toLowerCase().includes('level')
-    );
-    return isLevel;
-  }) || [];
+  // Aggregate global income transactions by user
+  const aggregatedData = (transactions || []).reduce((acc: any, curr: any) => {
+    // Only process Global Income
+    if (curr.transaction_type !== "Global Income") return acc;
 
-  // Aggregate level benefits by user
-  const aggregatedData = levelBenefits.reduce((acc: any, curr: any) => {
     const memberId = curr.member_id || curr.related_member_id || 'N/A';
     if (!acc[memberId]) {
       acc[memberId] = {
         member_id: memberId,
-        name: curr.Name || curr.name || curr.memberName || curr.member_name || '-',
+        name: curr.Name || curr.name || curr.memberName || curr.member_name || curr.related_member_name || '-',
         totalAmount: 0,
       };
     }
-    acc[memberId].totalAmount += parseFloat(curr.ew_credit || curr.amount || 0);
+    // Net amount combines EW and UW credits from the new system
+    acc[memberId].totalAmount += parseFloat(curr.net_amount || curr.ew_credit || curr.amount || 0);
     return acc;
-  }, {});
+  }, {}) || {};
 
   const finalData = Object.values(aggregatedData);
 
@@ -61,12 +54,15 @@ const LevelBenifits = () => {
 
   return (
     <>
-      <Typography variant="h4" sx={{ margin: "1rem", mt: 10 }}>
-        Level Bonus
-      </Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: "1rem", mt: 10 }}>
+        <Typography variant="h4">
+          Global Income
+        </Typography>
+      </Box>
+
       <Card sx={{ margin: "1rem", mt: 2 }}>
         <CardContent>
-          <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem"     }}>List of Level Bonus</div>
+          <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem"     }}>Global Income Details</div>
           <Box
                 style={{
                   display: "flex",
@@ -99,4 +95,4 @@ const LevelBenifits = () => {
   );
 };
 
-export default LevelBenifits;
+export default AdminGlobalIncome;

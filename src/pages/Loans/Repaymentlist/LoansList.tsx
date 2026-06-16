@@ -213,7 +213,7 @@ export default function LoansList() {
 
       <Card sx={{ margin: '2rem', mt: 2 }}>
         <CardContent>
-          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>List of Approved Loan Transactions {isLoading && <CircularProgress size={16} sx={{ color: '#fff', ml: 2 }} />}</div>
+          <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem"     }}>List of Approved Loan Transactions {isLoading && <CircularProgress size={16} sx={{ color: '#fff', ml: 2 }} />}</div>
           {isLoading ? (
                 <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
                   <CircularProgress />

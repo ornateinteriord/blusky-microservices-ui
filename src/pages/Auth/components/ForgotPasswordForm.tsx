@@ -150,12 +150,22 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
                   borderColor: "#FFD700",
                   borderWidth: "2px"
                 },
+                "&.Mui-disabled fieldset": {
+                  borderColor: "rgba(255, 255, 255, 0.08)",
+                },
+              },
+              "& .MuiOutlinedInput-input.Mui-disabled": {
+                color: "rgba(255, 255, 255, 0.7)",
+                WebkitTextFillColor: "rgba(255, 255, 255, 0.7)",
               },
               "& .MuiInputLabel-root": {
                 color: "rgba(255, 255, 255, 0.6)",
               },
               "& .MuiInputLabel-root.Mui-focused": {
                 color: "#FFD700",
+              },
+              "& .MuiInputLabel-root.Mui-disabled": {
+                color: "rgba(255, 255, 255, 0.5)",
               },
               "& .MuiOutlinedInput-input::placeholder": {
                 color: "rgba(255, 255, 255, 0.4)",

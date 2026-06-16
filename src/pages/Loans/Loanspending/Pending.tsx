@@ -101,7 +101,7 @@ export default function PendingLoans() {
 
       <Card sx={{ margin: '2rem', mt: 2 }}>
         <CardContent>
-          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}><Typography variant="h6">
+          <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem"     }}><Typography variant="h6">
                 List of Pending Loans ({totalCount})
               </Typography></div>
           <Box sx={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end', marginBottom: '1rem' }}>

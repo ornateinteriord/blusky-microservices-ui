@@ -86,16 +86,16 @@ const LoanTransaction = () => {
 
   if (isLoading) {
     return (
-      <Card sx={{ margin: "2rem", mt: 10, textAlign: "center", p: 3 }}>
+      <Card sx={{ margin: "1rem", mt: 10, textAlign: "center", p: 3 }}>
         <CircularProgress size={"4rem"} sx={{ color: "#0a2558" }} />
       </Card>
     );
   }
 
   return (
-    <Card sx={{ margin: "2rem", mt: 10 }}>
+    <Card sx={{ margin: "1rem", mt: 10 }}>
       <CardContent>
-        <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>Loan Transactions ({filteredData.length})</div>
+        <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem"     }}>Loan Transactions ({filteredData.length})</div>
           <DataTable
               columns={getTransactionColumns()}
               data={filteredData}

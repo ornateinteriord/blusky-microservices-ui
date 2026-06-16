@@ -29,10 +29,24 @@ const StyledListItemButton = styled(ListItemButton)<{ selected?: boolean }>(({ t
     padding: theme.spacing(2),
 }));
 
-const SearchField = styled(TextField)(({ theme }) => ({
+const SearchField = styled(TextField)(() => ({
     '& .MuiOutlinedInput-root': {
         borderRadius: '12px',
-        backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100],
+        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+        color: '#fff',
+        '& fieldset': {
+            borderColor: 'rgba(255, 255, 255, 0.1)',
+        },
+        '&:hover fieldset': {
+            borderColor: 'rgba(255, 215, 0, 0.5)',
+        },
+        '&.Mui-focused fieldset': {
+            borderColor: '#FFD700',
+        },
+        '& input::placeholder': {
+            color: 'rgba(255, 255, 255, 0.5)',
+            opacity: 1,
+        },
     },
 }));
 
@@ -68,19 +82,19 @@ const ChatList: React.FC<ChatListProps> = ({
                 display: 'flex',
                 flexDirection: 'column',
                 height: '100%',
-                bgcolor: 'background.paper',
+                bgcolor: '#0f1e36',
                 borderRight: 1,
-                borderColor: 'divider',
+                borderColor: 'rgba(255, 255, 255, 0.1)',
             }}
         >
             {/* Header */}
-            <Box sx={{ p: 3, borderBottom: 1, borderColor: 'divider' }}>
+            <Box sx={{ p: 3, borderBottom: 1, borderColor: 'rgba(255, 255, 255, 0.1)' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
                     <Typography
                         variant="h5"
                         sx={{
                             fontWeight: 700,
-                            color: '#0D2658',
+                            color: '#FFD700',
                         }}
                     >
                         Messages
@@ -114,7 +128,7 @@ const ChatList: React.FC<ChatListProps> = ({
                     InputProps={{
                         startAdornment: (
                             <InputAdornment position="start">
-                                <Search size={18} />
+                                <Search size={18} color="rgba(255, 255, 255, 0.5)" />
                             </InputAdornment>
                         ),
                     }}
@@ -150,14 +164,15 @@ const ChatList: React.FC<ChatListProps> = ({
                                 justifyContent: 'center',
                                 background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.2) 100%)',
                                 mb: 2,
+                                border: '1px solid rgba(255,215,0,0.2)'
                             }}
                         >
                             <MessageSquare size={32} color="#FFD700" />
                         </Paper>
-                        <Typography variant="h6" gutterBottom>
+                        <Typography variant="h6" gutterBottom sx={{ color: '#fff' }}>
                             No conversations yet
                         </Typography>
-                        <Typography variant="body2" color="text.secondary" maxWidth={300}>
+                        <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.6)' }} maxWidth={300}>
                             {searchQuery
                                 ? 'No results found for your search'
                                 : 'Start a new conversation to get started'}
@@ -198,10 +213,11 @@ const ChatList: React.FC<ChatListProps> = ({
                                                 sx={{
                                                     background:
                                                         otherParticipant.role === 'admin'
-                                                            ? 'linear-gradient(135deg, #FFD700 0%, #f57c00 100%)'
-                                                            : 'linear-gradient(135deg, #0D2658 0%, #173b7d 100%)',
+                                                            ? 'linear-gradient(135deg, #FFD700 0%, #e6c200 100%)'
+                                                            : 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
                                                     fontWeight: 600,
-                                                    color: otherParticipant.role === 'admin' ? '#0D2658' : '#fff',
+                                                    color: otherParticipant.role === 'admin' ? '#050916' : '#FFD700',
+                                                    border: otherParticipant.role !== 'admin' ? '1px solid rgba(255, 215, 0, 0.3)' : 'none'
                                                 }}
                                             >
                                                 {otherParticipant.name.charAt(0).toUpperCase()}
@@ -216,8 +232,9 @@ const ChatList: React.FC<ChatListProps> = ({
                                                     variant="subtitle2"
                                                     noWrap
                                                     sx={{
-                                                        fontWeight: hasUnread ? 600 : 400,
+                                                        fontWeight: hasUnread ? 700 : 500,
                                                         flexGrow: 1,
+                                                        color: '#fff'
                                                     }}
                                                 >
                                                     {otherParticipant.name}
@@ -229,13 +246,14 @@ const ChatList: React.FC<ChatListProps> = ({
                                                         sx={{
                                                             height: 18,
                                                             fontSize: '10px',
-                                                            bgcolor: 'warning.light',
-                                                            color: 'warning.contrastText',
+                                                            bgcolor: 'rgba(255, 215, 0, 0.2)',
+                                                            color: '#FFD700',
+                                                            border: '1px solid rgba(255, 215, 0, 0.5)',
                                                         }}
                                                     />
                                                 )}
                                                 {room.lastMessageTime && (
-                                                    <Typography variant="caption" color="text.secondary">
+                                                    <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.5)' }}>
                                                         {formatTime(room.lastMessageTime)}
                                                     </Typography>
                                                 )}
@@ -245,13 +263,13 @@ const ChatList: React.FC<ChatListProps> = ({
                                             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                                 <Typography
                                                     variant="body2"
-                                                    color="text.secondary"
                                                     sx={{
                                                         fontWeight: hasUnread ? 500 : 400,
                                                         flexGrow: 1,
                                                         overflow: 'hidden',
                                                         textOverflow: 'ellipsis',
                                                         whiteSpace: 'nowrap',
+                                                        color: hasUnread ? '#fff' : 'rgba(255, 255, 255, 0.6)'
                                                     }}
                                                 >
                                                     {room.lastMessage || 'No messages yet'}
@@ -264,7 +282,7 @@ const ChatList: React.FC<ChatListProps> = ({
                                                             ml: 1,
                                                             '& .MuiBadge-badge': {
                                                                 background: 'linear-gradient(135deg, #FFD700 0%, #e6c200 100%)',
-                                                                color: '#0D2658',
+                                                                color: '#050916',
                                                                 fontWeight: 700,
                                                             },
                                                         }}

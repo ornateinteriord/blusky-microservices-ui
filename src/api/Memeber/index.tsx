@@ -561,11 +561,40 @@ export const useGetWalletOverview = (memberId: any) => {
   });
 };
 
-export const useTransferWallet = () => {
+export const useSendTransferOTP = () => {
   return useMutation({
     mutationFn: async (data: { memberId: string; fromWallet: string; toWallet: string; amount: string | number }) => {
+      const response = await post(`/user/transfer-wallet/send-otp`, data);
+      return response.data || response;
+    },
+  });
+};
+
+export const useTransferWallet = () => {
+  return useMutation({
+    mutationFn: async (data: { memberId: string; fromWallet: string; toWallet: string; amount: string | number; otp: string }) => {
       const response = await post(`/user/transfer-wallet`, data);
       return response.data || response;
+    },
+  });
+};
+
+export const useSendWithdrawalOTP = (memberId: string) => {
+  return useMutation({
+    mutationFn: async (data: { memberId: string; amount: string }) => {
+      return await post(`user/withdraw/send-otp/${memberId}`, data);
+    },
+    onSuccess: (response) => {
+      if (response.success) {
+        toast.success(response.message || "OTP sent successfully!");
+        return response;
+      } else {
+        throw new Error(response.message || "Failed to send OTP");
+      }
+    },
+    onError: (error: any) => {
+      const errorMessage = error.response?.data?.message || "Failed to send OTP";
+      toast.error(errorMessage);
     },
   });
 };
@@ -574,7 +603,7 @@ export const useWalletWithdraw = (memberId: any) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (data: { memberId: string; amount: string }) => {
+    mutationFn: async (data: { memberId: string; amount: string; otp: string }) => {
       return await post(`user/withdraw/${memberId}`, data);
     },
     onSuccess: (response) => {

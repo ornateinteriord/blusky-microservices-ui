@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Card, CardContent, TextField, Typography, Box, Button, CircularProgress,  } from '@mui/material';
+import { Card, CardContent, TextField, Typography, Box, Button, CircularProgress, Fade, IconButton } from '@mui/material';
 import DataTable from "react-data-table-component";
 import { useMediaQuery } from '@mui/material';
 import { DASHBOARD_CUTSOM_STYLE, getWalletColumns,  } from '../../../utils/DataTableColumnsProvider';
 import TokenService from "../../../api/token/tokenService";
-import { useGetWalletOverview, useWalletWithdraw, useGetMemberDetails } from '../../../api/Memeber';
+import { useGetWalletOverview, useWalletWithdraw, useGetMemberDetails, useSendWithdrawalOTP } from '../../../api/Memeber';
 import { toast } from 'react-toastify';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { MuiOtpInput } from 'mui-one-time-password-input';
 
 const Wallet = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
@@ -15,7 +17,7 @@ const Wallet = () => {
   const [isWithdrawalAllowed, setIsWithdrawalAllowed] = useState<boolean>(true);
   // const [ setLoanStatusMessage] = useState<string>("");
 
-  const memberId = TokenService.getMemberId();
+  const memberId = TokenService.getMemberId() || '';
 
   const {
     data: walletData,
@@ -25,7 +27,11 @@ const Wallet = () => {
 
   const { data: memberDetails } = useGetMemberDetails(memberId);
 
+  const { mutate: sendOTP, isPending: isSendingOTP } = useSendWithdrawalOTP(memberId);
   const withdrawMutation = useWalletWithdraw(memberId);
+
+  const [step, setStep] = useState<1 | 2>(1);
+  const [otp, setOtp] = useState("");
 
   // --- Referral requirement logic ---
   const currentDirects = memberDetails?.data?.registration_stats?.direct || 0;
@@ -74,7 +80,7 @@ const Wallet = () => {
     }
   };
 
-  const handleWithdraw = () => {
+  const handleSendOTP = () => {
     if (!amount || amount === "0") {
       return;
     }
@@ -100,16 +106,36 @@ const Wallet = () => {
       return;
     }
 
+    sendOTP(
+      { memberId: memberId, amount: amount },
+      {
+        onSuccess: () => {
+          setStep(2);
+        }
+      }
+    );
+  };
+
+  const handleWithdraw = () => {
+    if (otp.length !== 6) {
+      toast.error("Please enter a valid 6-digit OTP");
+      return;
+    }
+
+    const withdrawalAmount = parseFloat(amount);
+    const currentBalance = optimisticBalance !== null ? optimisticBalance : parseFloat(walletData?.balance || 0);
     const newBalance = currentBalance - withdrawalAmount;
     setOptimisticBalance(newBalance);
 
     withdrawMutation.mutate(
-      { memberId: memberId, amount: amount },
+      { memberId: memberId, amount: amount, otp: otp },
       {
         onSuccess: () => {
           setAmount("");
           setTds(0);
           setNetAmount(0);
+          setOtp("");
+          setStep(1);
           refetch();
         },
         onError: () => {
@@ -152,10 +178,17 @@ const Wallet = () => {
       <CardContent sx={{ padding: isMobile ? "12px" : "24px" }}>
         {/* Withdrawal Section */}
         <div>
-          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)", display: "flex", alignItems: "center", gap: "8px" }}>
+          <Box sx={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)", display: "flex", alignItems: "center", gap: "8px" }}>
+            {step === 2 && (
+              <IconButton onClick={() => setStep(1)} size="small" sx={{ color: 'white' }}>
+                <ArrowBackIcon fontSize="small" />
+              </IconButton>
+            )}
             Withdrawal Request {!isWithdrawalAllowed && "(Temporarily Disabled)"}
-          </div>
+          </Box>
           <div style={{ padding: "0 1rem 1rem 1rem" }}>
+            {step === 1 ? (
+              <Fade in={step === 1}>
             <form
               style={{
                 marginTop: 2,
@@ -289,9 +322,9 @@ const Wallet = () => {
 
                 <Button
                   variant="contained"
-                  onClick={handleWithdraw}
+                  onClick={handleSendOTP}
                   disabled={
-                    withdrawMutation.isPending ||
+                    isSendingOTP ||
                     !amount ||
                     amount === "0" ||
                     parseFloat(amount) > displayBalance ||
@@ -307,19 +340,79 @@ const Wallet = () => {
                     "&:disabled": { backgroundColor: "#cccccc" },
                   }}
                 >
-                  {withdrawMutation.isPending ? (
+                  {isSendingOTP ? (
                     <CircularProgress size={24} sx={{ color: "white" }} />
                   ) : (
-                    (!isWithdrawalAllowed || !isReferralConditionMet) ? "Disabled" : "Withdraw"
+                    (!isWithdrawalAllowed || !isReferralConditionMet) ? "Disabled" : "Proceed to Withdraw"
                   )}
                 </Button>
               </Box>
             </form>
+              </Fade>
+            ) : (
+              <Fade in={step === 2}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, pt: 2 }}>
+                  <Box textAlign="center">
+                    <Typography variant="h6" sx={{ color: '#0a2558', mb: 1, fontWeight: 'bold' }}>Security Verification</Typography>
+                    <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                      Enter the 6-digit OTP sent to your registered email address.
+                    </Typography>
+                  </Box>
+
+                  <Box sx={{ my: 2, display: 'flex', justifyContent: 'center' }}>
+                    <MuiOtpInput
+                      length={6}
+                      value={otp}
+                      onChange={(newValue) => setOtp(newValue)}
+                      TextFieldsProps={{
+                        size: 'medium',
+                        placeholder: '-',
+                        sx: {
+                          maxWidth: '45px',
+                          '& .MuiOutlinedInput-root': {
+                            borderRadius: '8px',
+                            fontSize: '1.2rem',
+                            fontWeight: 'bold',
+                            '&.Mui-focused fieldset': {
+                              borderColor: '#0a2558',
+                              borderWidth: '2px'
+                            },
+                          },
+                          '& .MuiOutlinedInput-input': {
+                            textAlign: 'center',
+                            px: 0,
+                          }
+                        }
+                      }}
+                    />
+                  </Box>
+
+                  <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <Button
+                      variant="contained"
+                      onClick={handleWithdraw}
+                      disabled={withdrawMutation.isPending || otp.length !== 6}
+                      sx={{
+                        backgroundColor: "#0a2558",
+                        minWidth: "150px",
+                        py: 1.2,
+                        "&:hover": {
+                          backgroundColor: "#581c87"
+                        },
+                        "&:disabled": { backgroundColor: "#cccccc" },
+                      }}
+                    >
+                      {withdrawMutation.isPending ? <CircularProgress size={24} sx={{ color: "white" }} /> : 'Confirm Withdrawal'}
+                    </Button>
+                  </Box>
+                </Box>
+              </Fade>
+            )}
           </div>
         </div>
 
         {/* Transaction History */}
-        <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>Transaction History</div>
+        <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem"     }}>Transaction History</div>
           {walletData?.transactions && walletData.transactions.filter((tx: any) => tx.transaction_type !== "Upgrade Wallet Deduction").length > 0 ? (
               <DataTable
                 columns={getWalletColumns()}

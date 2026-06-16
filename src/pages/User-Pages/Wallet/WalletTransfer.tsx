@@ -1,18 +1,23 @@
 import { useState } from 'react';
-import { Box, Typography, Card, MenuItem, Select, TextField, Button, CircularProgress } from '@mui/material';
-import { useGetWalletOverview, useTransferWallet } from '../../../api/Memeber';
+import { Box, Typography, Card, MenuItem, Select, TextField, Button, CircularProgress, Fade, IconButton } from '@mui/material';
+import { useGetWalletOverview, useTransferWallet, useSendTransferOTP } from '../../../api/Memeber';
 import TokenService from '../../../api/token/tokenService';
 import { toast } from 'react-toastify';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { MuiOtpInput } from 'mui-one-time-password-input';
 
 const WalletTransfer = () => {
   const memberId = TokenService.getMemberId();
   const { data: walletOverview, refetch } = useGetWalletOverview(memberId);
-  const { mutate: transferWallet, isPending } = useTransferWallet();
+  const { mutate: sendOTP, isPending: isSendingOTP } = useSendTransferOTP();
+  const { mutate: transferWallet, isPending: isTransferring } = useTransferWallet();
 
+  const [step, setStep] = useState<1 | 2>(1);
   const [fromWallet, setFromWallet] = useState('Earnings');
   const toWallet = fromWallet === 'Earnings' ? 'Top Up Wallet' : 'Upgrade Wallet';
   const [amount, setAmount] = useState('');
+  const [otp, setOtp] = useState('');
 
   const earningsBalance = walletOverview?.balance || '0.00';
   const topUpBalance = walletOverview?.topUpBalance || '0.00';
@@ -24,7 +29,7 @@ const WalletTransfer = () => {
     return '0.00';
   };
 
-  const handleTransfer = () => {
+  const handleSendOTP = () => {
     if (!amount || isNaN(Number(amount)) || Number(amount) <= 0) {
       toast.error('Please enter a valid amount greater than 0');
       return;
@@ -35,15 +40,40 @@ const WalletTransfer = () => {
       return;
     }
 
-    transferWallet({
+    sendOTP({
       memberId: memberId || '',
       fromWallet,
       toWallet,
       amount
     }, {
       onSuccess: () => {
+        toast.success('OTP sent to your email successfully');
+        setStep(2);
+      },
+      onError: (error: any) => {
+        toast.error(error?.response?.data?.message || 'Failed to send OTP');
+      }
+    });
+  };
+
+  const handleTransfer = () => {
+    if (otp.length !== 6) {
+      toast.error('Please enter a valid 6-digit OTP');
+      return;
+    }
+
+    transferWallet({
+      memberId: memberId || '',
+      fromWallet,
+      toWallet,
+      amount,
+      otp
+    }, {
+      onSuccess: () => {
         toast.success(`Successfully transferred $${amount} to ${toWallet}`);
         setAmount('');
+        setOtp('');
+        setStep(1);
         refetch();
       },
       onError: (error: any) => {
@@ -56,6 +86,11 @@ const WalletTransfer = () => {
     <Box sx={{ p: { xs: 2, md: 5 }, minHeight: '100vh', background: 'linear-gradient(180deg, #050916 0%, #0f1e36 100%)', pt: { xs: 3, md: 10 } }}>
       <Box sx={{ maxWidth: '600px', mx: 'auto' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 2, gap: 2 }}>
+          {step === 2 && (
+            <IconButton onClick={() => setStep(1)} sx={{ color: 'white', bgcolor: 'rgba(255,255,255,0.1)' }}>
+              <ArrowBackIcon />
+            </IconButton>
+          )}
           <Box sx={{ p: 1.5, borderRadius: '12px', bgcolor: 'rgba(16, 185, 129, 0.1)', color: '#10b981' }}>
             <CurrencyExchangeIcon fontSize="small" />
           </Box>
@@ -64,106 +99,179 @@ const WalletTransfer = () => {
 
         <Card sx={{ p: 4, borderRadius: '24px', bgcolor: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
 
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-            
-            <Box>
-              <Typography variant="subtitle2" sx={{ color: 'rgba(255,255,255,0.7)', mb: 1, fontWeight: 600 }}>From Account</Typography>
-              <Select
-                fullWidth
-                value={fromWallet}
-                onChange={(e) => setFromWallet(e.target.value)}
-                sx={{
-                  bgcolor: 'rgba(255,255,255,0.05)',
-                  color: 'white',
-                  borderRadius: '12px',
-                  '& .MuiOutlinedInput-notchedOutline': { borderColor: 'rgba(255,255,255,0.1)' },
-                  '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: 'rgba(255,255,255,0.2)' },
-                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#10b981' }
-                }}
-              >
-                <MenuItem value="Earnings">Earnings Wallet (Bal: ${earningsBalance})</MenuItem>
-                <MenuItem value="Top Up">Top Up Wallet (Bal: ${topUpBalance})</MenuItem>
-              </Select>
-            </Box>
+          {step === 1 ? (
+            <Fade in={step === 1}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                <Box>
+                  <Typography variant="subtitle2" sx={{ color: 'rgba(255,255,255,0.7)', mb: 1, fontWeight: 600 }}>From Account</Typography>
+                  <Select
+                    fullWidth
+                    value={fromWallet}
+                    onChange={(e) => setFromWallet(e.target.value)}
+                    sx={{
+                      bgcolor: 'rgba(255,255,255,0.05)',
+                      color: 'white',
+                      borderRadius: '12px',
+                      '& .MuiOutlinedInput-notchedOutline': { borderColor: 'rgba(255,255,255,0.1)' },
+                      '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: 'rgba(255,255,255,0.2)' },
+                      '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#10b981' },
+                      '& .MuiSvgIcon-root': { color: 'white' }
+                    }}
+                  >
+                    <MenuItem value="Earnings">Earnings Wallet (Bal: ${earningsBalance})</MenuItem>
+                    <MenuItem value="Top Up">Top Up Wallet (Bal: ${topUpBalance})</MenuItem>
+                  </Select>
+                </Box>
 
-            <Box>
-              <Typography variant="subtitle2" sx={{ color: 'rgba(255,255,255,0.7)', mb: 1, fontWeight: 600 }}>To Account</Typography>
-              <Select
-                fullWidth
-                value={toWallet}
-                disabled
-                sx={{
-                  bgcolor: 'rgba(255,255,255,0.02)',
-                  color: 'white',
-                  borderRadius: '12px',
-                  '& .MuiOutlinedInput-notchedOutline': { borderColor: 'rgba(255,255,255,0.1)' },
-                  '& .MuiSelect-select.Mui-disabled': { color: 'white', WebkitTextFillColor: 'white', opacity: 1 }
-                }}
-              >
-                {toWallet === 'Top Up Wallet' ? (
-                  <MenuItem value="Top Up Wallet">Top Up Wallet (Bal: ${topUpBalance})</MenuItem>
-                ) : (
-                  <MenuItem value="Upgrade Wallet">Upgrade Wallet (Bal: ${upgradeBalance})</MenuItem>
-                )}
-              </Select>
-            </Box>
+                <Box>
+                  <Typography variant="subtitle2" sx={{ color: 'rgba(255,255,255,0.7)', mb: 1, fontWeight: 600 }}>To Account</Typography>
+                  <Select
+                    fullWidth
+                    value={toWallet}
+                    disabled
+                    sx={{
+                      bgcolor: 'rgba(255,255,255,0.02)',
+                      color: 'white',
+                      borderRadius: '12px',
+                      '& .MuiOutlinedInput-notchedOutline': { borderColor: 'rgba(255,255,255,0.1)' },
+                      '& .MuiSelect-select.Mui-disabled': { color: 'rgba(255,255,255,0.7)', WebkitTextFillColor: 'rgba(255,255,255,0.7)', opacity: 1 },
+                      '& .MuiSvgIcon-root': { color: 'rgba(255,255,255,0.3)' }
+                    }}
+                  >
+                    {toWallet === 'Top Up Wallet' ? (
+                      <MenuItem value="Top Up Wallet">Top Up Wallet (Bal: ${topUpBalance})</MenuItem>
+                    ) : (
+                      <MenuItem value="Upgrade Wallet">Upgrade Wallet (Bal: ${upgradeBalance})</MenuItem>
+                    )}
+                  </Select>
+                </Box>
 
-            <Box>
-              <Typography variant="subtitle2" sx={{ color: 'rgba(255,255,255,0.7)', mb: 1, fontWeight: 600 }}>Amount (USDT)</Typography>
-              <TextField
-                fullWidth
-                placeholder="Enter amount to transfer"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                type="number"
-                InputProps={{
-                  startAdornment: <Typography sx={{ color: 'rgba(255,255,255,0.5)', mr: 1 }}>$</Typography>
-                }}
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    bgcolor: 'rgba(255,255,255,0.05)',
-                    color: 'white',
+                <Box>
+                  <Typography variant="subtitle2" sx={{ color: 'rgba(255,255,255,0.7)', mb: 1, fontWeight: 600 }}>Amount (USDT)</Typography>
+                  <TextField
+                    fullWidth
+                    placeholder="Enter amount to transfer"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                    type="number"
+                    InputProps={{
+                      startAdornment: <Typography sx={{ color: 'rgba(255,255,255,0.5)', mr: 1 }}>$</Typography>
+                    }}
+                    sx={{
+                      '& .MuiOutlinedInput-root': {
+                        bgcolor: 'rgba(255,255,255,0.05)',
+                        color: 'white',
+                        borderRadius: '12px',
+                        '& fieldset': { borderColor: 'rgba(255,255,255,0.1)' },
+                        '&:hover fieldset': { borderColor: 'rgba(255,255,255,0.2)' },
+                        '&.Mui-focused fieldset': { borderColor: '#10b981' },
+                      },
+                      '& input[type=number]::-webkit-outer-spin-button, & input[type=number]::-webkit-inner-spin-button': {
+                        WebkitAppearance: 'none',
+                        margin: 0,
+                      },
+                      '& input[type=number]': {
+                        MozAppearance: 'textfield',
+                      },
+                    }}
+                  />
+                  <Typography variant="caption" sx={{ color: '#10b981', mt: 1, display: 'block' }}>
+                    Available Balance: ${getAvailableBalance()}
+                  </Typography>
+                </Box>
+
+                <Button
+                  variant="contained"
+                  onClick={handleSendOTP}
+                  disabled={isSendingOTP}
+                  sx={{
+                    mt: 2,
+                    py: 1.5,
                     borderRadius: '12px',
-                    '& fieldset': { borderColor: 'rgba(255,255,255,0.1)' },
-                    '&:hover fieldset': { borderColor: 'rgba(255,255,255,0.2)' },
-                    '&.Mui-focused fieldset': { borderColor: '#10b981' },
-                  },
-                  '& input[type=number]::-webkit-outer-spin-button, & input[type=number]::-webkit-inner-spin-button': {
-                    WebkitAppearance: 'none',
-                    margin: 0,
-                  },
-                  '& input[type=number]': {
-                    MozAppearance: 'textfield',
-                  },
-                }}
-              />
-              <Typography variant="caption" sx={{ color: '#10b981', mt: 1, display: 'block' }}>
-                Available Balance: ${getAvailableBalance()}
-              </Typography>
-            </Box>
+                    background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                    textTransform: 'none',
+                    fontWeight: 700,
+                    fontSize: '1.1rem',
+                    boxShadow: '0 8px 20px rgba(16, 185, 129, 0.3)',
+                    '&:hover': {
+                      background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+                    }
+                  }}
+                >
+                  {isSendingOTP ? <CircularProgress size={24} color="inherit" /> : 'Proceed to Transfer'}
+                </Button>
+              </Box>
+            </Fade>
+          ) : (
+            <Fade in={step === 2}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                <Box textAlign="center">
+                  <Typography variant="h6" sx={{ color: 'white', mb: 1 }}>Security Verification</Typography>
+                  <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)' }}>
+                    Enter the 6-digit OTP sent to your registered email address.
+                  </Typography>
+                </Box>
 
-            <Button
-              variant="contained"
-              onClick={handleTransfer}
-              disabled={isPending}
-              sx={{
-                mt: 2,
-                py: 1.5,
-                borderRadius: '12px',
-                background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-                textTransform: 'none',
-                fontWeight: 700,
-                fontSize: '1.1rem',
-                boxShadow: '0 8px 20px rgba(16, 185, 129, 0.3)',
-                '&:hover': {
-                  background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
-                }
-              }}
-            >
-              {isPending ? <CircularProgress size={24} color="inherit" /> : 'Transfer Funds'}
-            </Button>
+                <Box sx={{ my: 2 }}>
+                  <MuiOtpInput
+                    length={6}
+                    value={otp}
+                    onChange={(newValue) => setOtp(newValue)}
+                    TextFieldsProps={{
+                      size: 'medium',
+                      placeholder: '-',
+                      type: 'password',
+                      sx: {
+                        '& .MuiOutlinedInput-root': {
+                          bgcolor: 'rgba(255, 255, 255, 0.05)',
+                          color: '#ffffff',
+                          borderRadius: '12px',
+                          fontSize: '1.2rem',
+                          fontWeight: 'bold',
+                          '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.15)' },
+                          '&:hover fieldset': { borderColor: 'rgba(255, 255, 255, 0.3)' },
+                          '&.Mui-focused fieldset': {
+                            borderColor: '#10b981',
+                            borderWidth: '2px'
+                          },
+                        },
+                        '& .MuiOutlinedInput-input': {
+                          textAlign: 'center',
+                          px: 0,
+                        }
+                      }
+                    }}
+                  />
+                </Box>
 
-          </Box>
+                <Button
+                  variant="contained"
+                  onClick={handleTransfer}
+                  disabled={isTransferring || otp.length !== 6}
+                  fullWidth
+                  sx={{
+                    py: 1.5,
+                    borderRadius: '12px',
+                    background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                    textTransform: 'none',
+                    fontWeight: 700,
+                    fontSize: '1.1rem',
+                    boxShadow: '0 8px 20px rgba(16, 185, 129, 0.3)',
+                    '&:hover': {
+                      background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+                    },
+                    '&.Mui-disabled': {
+                      background: 'rgba(255, 255, 255, 0.1)',
+                      color: 'rgba(255, 255, 255, 0.3)',
+                    }
+                  }}
+                >
+                  {isTransferring ? <CircularProgress size={24} color="inherit" /> : 'Confirm Transfer'}
+                </Button>
+              </Box>
+            </Fade>
+          )}
+
         </Card>
       </Box>
     </Box>

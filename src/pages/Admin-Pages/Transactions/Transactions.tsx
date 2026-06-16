@@ -69,7 +69,7 @@ export const TransactionDataTable = ({
         justifyContent="space-between"
         alignItems="center"
         className="transaction-container"
-        sx={{ margin: "2rem", mt: 12 }}
+        sx={{ margin: "1rem", mt: 12 }}
       >
         <Typography variant="h4">{title}</Typography>
         <Grid className="transaction-content">
@@ -91,9 +91,9 @@ export const TransactionDataTable = ({
           </Button>
         </Grid>
       </Grid>
-      <Card sx={{ margin: "2rem", mt: 2 }}>
+      <Card sx={{ margin: "1rem", mt: 2 }}>
         <CardContent>
-          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>{summaryTitle}</div>
+          <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem"     }}>{summaryTitle}</div>
           <div
                 style={{
                   display: "flex",

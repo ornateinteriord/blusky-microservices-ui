@@ -98,13 +98,13 @@ const MailBox = () => {
     <>
       <Card
         sx={{
-          margin: "2rem",
+          margin: "1rem",
           mt: 10,
           boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
         }}
       >
         <CardContent sx={{ padding: "24px" }}>
-          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>Mail Box</div>
+          <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem"     }}>Mail Box</div>
           <div style={{ padding: "0 1rem 1rem 1rem" }}>
               <form
                 onSubmit={handleSubmit}
@@ -204,7 +204,7 @@ const MailBox = () => {
             </div>
 
           {/* Table Section */}
-          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)", marginTop: "2rem" }}>List of Support Details</div>
+          <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem", marginTop: "2rem"     }}>List of Support Details</div>
           <div style={{ padding: "0 1rem 1rem 1rem" }}>
               <DataTable
                 columns={getMailBoxColumns(handleOpenDialog)}

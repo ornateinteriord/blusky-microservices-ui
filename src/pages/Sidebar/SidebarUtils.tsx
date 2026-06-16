@@ -257,6 +257,11 @@ export const AdminSideBarMenuItems: SideBarMenuItemType[] = [
         path: "/admin/income/daily-payouts",
         icon: <PaymentsIcon />,
       },
+      {
+        name: "Global Income",
+        path: "/admin/income/global-income",
+        icon: <PaymentsIcon />,
+      },
     ],
   },
 

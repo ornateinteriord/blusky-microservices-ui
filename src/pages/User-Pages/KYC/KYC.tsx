@@ -274,7 +274,7 @@ const KYC: React.FC = () => {
       <CardContent>
         {/* Bank Account Details Commented Out
         <div>
-          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)", display: "flex", alignItems: "center", gap: "8px" }}>
+          <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem", display: "flex", alignItems: "center", gap: "8px"     }}>
             Update Identity and Bank Account Details
           </div>
           <div style={{ padding: "0 1rem 1rem 1rem" }}>
@@ -390,7 +390,7 @@ const KYC: React.FC = () => {
 
         {/* KYC Documents */}
         <div>
-          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)", display: "flex", alignItems: "center", gap: "8px" }}>
+          <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem", display: "flex", alignItems: "center", gap: "8px"     }}>
             Upload KYC Documents (All Mandatory)
           </div>
           <div style={{ padding: "0 1rem 1rem 1rem" }}>

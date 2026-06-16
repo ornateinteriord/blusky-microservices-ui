@@ -79,7 +79,7 @@ const AdminChat: React.FC = () => {
         <Box sx={{ height: 'calc(100vh - 64px)', display: 'flex', flexDirection: 'column', mt: 7 }}>
             <Box sx={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
                 <Box sx={{ width: { xs: '100%', lg: 400 }, flexShrink: 0, display: { xs: showChatWindow ? 'none' : 'flex', lg: 'flex' }, flexDirection: 'column' }}>
-                    <Box sx={{ p: 2, background: 'linear-gradient(135deg, #ff9800 0%, #f44336 100%)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <Box sx={{ p: 2, background: 'linear-gradient(135deg, #0a2558 0%, #050916 100%)', color: '#FFD700', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,215,0,0.2)' }}>
                         <Box>
                             <Typography variant="h6" fontWeight={700}>Admin Chat</Typography>
                             <Typography variant="caption" sx={{ opacity: 0.9 }}>{rooms.length} conversation{rooms.length !== 1 ? 's' : ''}</Typography>
@@ -89,7 +89,7 @@ const AdminChat: React.FC = () => {
                                 <Typography variant="h4" fontWeight={700}>{totalUnread}</Typography>
                                 <Typography variant="caption" sx={{ opacity: 0.9 }}>Unread</Typography>
                             </Box>
-                            <Button variant="contained" startIcon={<LayoutDashboard size={18} />} onClick={() => navigate('/admin/dashboard')} sx={{ bgcolor: 'rgba(255,255,255,0.2)', color: '#fff', '&:hover': { bgcolor: 'rgba(255,255,255,0.3)' }, textTransform: 'none', fontWeight: 600 }}>Dashboard</Button>
+                            <Button variant="contained" startIcon={<LayoutDashboard size={18} />} onClick={() => navigate('/admin/dashboard')} sx={{ bgcolor: 'rgba(255,215,0,0.1)', color: '#FFD700', '&:hover': { bgcolor: 'rgba(255,215,0,0.2)' }, textTransform: 'none', fontWeight: 600 }}>Dashboard</Button>
                         </Box>
                     </Box>
                     <Box sx={{ flex: 1, overflow: 'hidden' }}>
@@ -100,13 +100,13 @@ const AdminChat: React.FC = () => {
                     {selectedRoomId ? (
                         <ChatWindow roomId={selectedRoomId} messages={messages} onSendMessage={sendMessage} onTyping={sendTypingIndicator} isConnected={isConnected} isTyping={isTyping} isLoading={isLoadingMessages} recipientName={otherParticipant?.name || 'User'} recipientRole={otherParticipant?.role || 'user'} onBack={() => { setShowChatWindow(false); setSelectedRoomId(''); }} />
                     ) : (
-                        <Box sx={{ display: { xs: 'none', lg: 'flex' }, flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', bgcolor: 'background.default', flex: 1 }}>
-                            <Paper sx={{ width: 96, height: 96, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, rgba(255, 152, 0, 0.1) 0%, rgba(244, 67, 54, 0.1) 100%)', mb: 3, boxShadow: 3 }}>
-                                <Search size={48} color="#ff9800" />
+                        <Box sx={{ display: { xs: 'none', lg: 'flex' }, flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', bgcolor: '#050916', flex: 1 }}>
+                            <Paper sx={{ width: 96, height: 96, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(10, 37, 88, 0.2) 100%)', mb: 3, boxShadow: 3, border: '1px solid rgba(255,215,0,0.2)' }}>
+                                <Search size={48} color="#FFD700" />
                             </Paper>
-                            <Typography variant="h5" fontWeight={600} gutterBottom>Admin Support Chat</Typography>
-                            <Typography variant="body2" color="text.secondary" maxWidth={400} textAlign="center" mb={3}>Select a conversation to view and respond to user messages</Typography>
-                            {totalUnread > 0 && <Paper sx={{ px: 3, py: 1, bgcolor: 'warning.light', color: 'warning.contrastText', borderRadius: 2 }}><Typography variant="body2" fontWeight={500}>You have {totalUnread} unread message{totalUnread !== 1 ? 's' : ''}</Typography></Paper>}
+                            <Typography variant="h5" fontWeight={600} gutterBottom sx={{ color: '#fff' }}>Admin Support Chat</Typography>
+                            <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)', maxWidth: 400, textAlign: 'center', mb: 3 }}>Select a conversation to view and respond to user messages</Typography>
+                            {totalUnread > 0 && <Paper sx={{ px: 3, py: 1, bgcolor: 'rgba(255,215,0,0.1)', color: '#FFD700', borderRadius: 2, border: '1px solid rgba(255,215,0,0.3)' }}><Typography variant="body2" fontWeight={500}>You have {totalUnread} unread message{totalUnread !== 1 ? 's' : ''}</Typography></Paper>}
                         </Box>
                     )}
                 </Box>

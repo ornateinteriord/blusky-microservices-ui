@@ -30,10 +30,10 @@ const Payout = () => {
 
   return (
     <>
-      <Typography variant="h4" sx={{ margin: "2rem", mt: 10 }}>
+      <Typography variant="h4" sx={{ margin: "1rem", mt: 10 }}>
         Payouts
       </Typography>
-      <Card sx={{ margin: "2rem", mt: 2 }}>
+      <Card sx={{ margin: "1rem", mt: 2 }}>
         <CardContent>
           <Box className="tabs-list">
             <Tabs
@@ -59,7 +59,7 @@ export default Payout;
 const PayoutTable = ({ data, columns, tabTitle, loading }: PayoutTableProps) => {
   return (
     <>
-      <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>{tabTitle}</div>
+      <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem"     }}>{tabTitle}</div>
       <Box
         style={{
           display: "flex",

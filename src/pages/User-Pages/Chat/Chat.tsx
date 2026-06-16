@@ -147,12 +147,12 @@ const Chat: React.FC = () => {
                     {selectedRoomId ? (
                         <ChatWindow roomId={selectedRoomId} messages={messages} onSendMessage={sendMessage} onTyping={sendTypingIndicator} isConnected={isConnected} isTyping={isTyping} isLoading={isLoadingMessages} recipientName={otherParticipant?.name || 'User'} recipientRole={otherParticipant?.role || 'user'} onBack={() => { setShowChatWindow(false); setSelectedRoomId(''); window.dispatchEvent(new CustomEvent('active-chat-room', { detail: null })); }} />
                     ) : (
-                        <Box sx={{ display: { xs: 'none', lg: 'flex' }, flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', bgcolor: 'background.default', flex: 1 }}>
-                            <Paper sx={{ width: 96, height: 96, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, rgba(25, 118, 210, 0.1) 0%, rgba(156, 39, 176, 0.1) 100%)', mb: 3, boxShadow: 3 }}>
-                                <Search size={48} color="#1976d2" />
+                        <Box sx={{ display: { xs: 'none', lg: 'flex' }, flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', bgcolor: '#050916', flex: 1 }}>
+                            <Paper sx={{ width: 96, height: 96, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(10, 37, 88, 0.2) 100%)', mb: 3, boxShadow: 3, border: '1px solid rgba(255,215,0,0.2)' }}>
+                                <Search size={48} color="#FFD700" />
                             </Paper>
-                            <Typography variant="h5" fontWeight={600} gutterBottom>Select a conversation</Typography>
-                            <Typography variant="body2" color="text.secondary" maxWidth={400} textAlign="center">Choose a conversation from the list to start chatting</Typography>
+                            <Typography variant="h5" fontWeight={600} gutterBottom sx={{ color: '#fff' }}>Select a conversation</Typography>
+                            <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)', maxWidth: 400, textAlign: 'center' }}>Choose a conversation from the list to start chatting</Typography>
                         </Box>
                     )}
                 </Box>

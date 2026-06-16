@@ -64,7 +64,7 @@ const UpgradeWallet = () => {
         </Grid>
 
         {/* Transaction History */}
-        <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>Transaction History</div>
+        <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem"     }}>Transaction History</div>
           {walletData?.transactions && walletData.transactions.filter((tx: any) => parseFloat(tx.uw_credit) > 0 || parseFloat(tx.uw_debit) > 0 || tx.transaction_type === "Upgrade Wallet Deduction").length > 0 ? (
               <DataTable
                 columns={getUpgradeWalletColumns()}

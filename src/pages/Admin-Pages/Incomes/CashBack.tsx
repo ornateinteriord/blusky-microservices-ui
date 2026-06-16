@@ -35,7 +35,7 @@ const CashBack = () => {
         justifyContent="space-between"
         alignItems="center"
         className="Cashback-container"
-        sx={{ margin: "2rem", mt: 12 }}
+        sx={{ margin: "1rem", mt: 12 }}
       >
         <Typography variant="h4">Daily Benefits</Typography>
         <Grid className="Cashback-content">
@@ -57,9 +57,9 @@ const CashBack = () => {
           </Button>
         </Grid>
       </Grid>
-      <Card sx={{ margin: "2rem", mt: 2 }}>
+      <Card sx={{ margin: "1rem", mt: 2 }}>
         <CardContent>
-          <div style={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>List of Daily Benefits Payouts</div>
+          <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem"     }}>List of Daily Benefits Payouts</div>
           <Box
                 sx={{
                   display: "flex",

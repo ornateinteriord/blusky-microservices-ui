@@ -9,12 +9,12 @@ import { useGetMemberAddOns } from '../../../api/Packages';
 import USDTLogo from "../../../assets/USDT1.png";
 
 const PACKAGES = [
-  { id: 1, amount: 30, title: "Basic", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#1de9b6" },
-  { id: 2, amount: 60, title: "Bronze", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#CD7F32" },
-  { id: 3, amount: 120, title: "Silver", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#C0C0C0" },
-  { id: 4, amount: 250, title: "Gold", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#FFD700" },
-  { id: 5, amount: 500, title: "Platinum", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#E5E4E2" },
-  { id: 6, amount: 1000, title: "Diamond", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#b9f2ff" }
+  { id: 1, amount: 30, title: "Starter Pip Plan", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#1de9b6" },
+  { id: 2, amount: 60, title: "Growth Trader Package", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#CD7F32" },
+  { id: 3, amount: 120, title: "Elite Currency Portfolio", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#C0C0C0" },
+  { id: 4, amount: 250, title: "Global FX Advantage Plan", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#FFD700" },
+  { id: 5, amount: 500, title: "Pro Trader Wealth Package", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#E5E4E2" },
+  { id: 6, amount: 1000, title: "VIP Liquidity Master Plan", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#b9f2ff" }
 ];
 
 const ProductsContainer: React.FC = () => {
@@ -122,10 +122,10 @@ const ProductsContainer: React.FC = () => {
             {/* Clean Logo on the right side */}
             <Box sx={{
               position: 'absolute',
-              top: '36px',
-              right: '16px',
-              width: '100px',
-              height: '100px',
+              top: '50px',
+              right: '-10px',
+              width: '155px',
+              height: '155px',
               opacity: 1,
               zIndex: 0,
               display: 'flex',
@@ -137,7 +137,7 @@ const ProductsContainer: React.FC = () => {
             </Box>
 
             <CardContent sx={{ p: 2.5, '&:last-child': { pb: 2.5 }, position: 'relative', zIndex: 1 }}>
-              <Typography variant="h5" fontWeight={900} sx={{ fontSize: '1.4rem', color: pkg.color, mb: 1, lineHeight: 1.3, height: '48px', display: 'flex', alignItems: 'center', gap: 0 }}>
+              <Typography variant="h5" fontWeight={900} sx={{ fontSize: '1rem', color: pkg.color, mb: 3, lineHeight: 1.2, minHeight: '48px', display: 'flex', alignItems: 'center', gap: 0.5 }}>
                 <Box sx={{
                   width: 38,
                   height: 38,

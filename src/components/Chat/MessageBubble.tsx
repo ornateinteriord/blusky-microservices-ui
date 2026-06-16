@@ -18,7 +18,7 @@ const SentBubble = styled(Paper)(({ theme }) => ({
     borderRadius: '16px',
     borderBottomRightRadius: '4px',
     background: 'linear-gradient(135deg, #FFD700 0%, #e6c200 100%)',
-    color: '#0D2658',
+    color: '#050916',
     maxWidth: '70%',
     minWidth: 'fit-content',
     wordBreak: 'break-word',
@@ -29,13 +29,13 @@ const ReceivedBubble = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(1.5, 2),
     borderRadius: '16px',
     borderBottomLeftRadius: '4px',
-    backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : theme.palette.background.paper,
-    color: theme.palette.text.primary,
+    backgroundColor: '#0a2558',
+    color: '#ffffff',
     maxWidth: '70%',
     minWidth: 'fit-content',
     wordBreak: 'break-word',
     boxShadow: theme.shadows[1],
-    border: `1px solid ${theme.palette.divider}`,
+    border: `1px solid rgba(255, 255, 255, 0.1)`,
 }));
 
 const formatFileSize = (bytes: number): string => {
@@ -132,11 +132,11 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
                                     p: 1,
                                     mb: message.text ? 1 : 0,
                                     borderRadius: 1,
-                                    bgcolor: isSent ? 'rgba(13, 38, 88, 0.1)' : 'action.hover',
+                                    bgcolor: isSent ? 'rgba(5, 9, 22, 0.1)' : 'rgba(255, 255, 255, 0.1)',
                                     minWidth: 200,
                                 }}
                             >
-                                <Volume2 size={20} color="#0D2658" />
+                                <Volume2 size={20} color={isSent ? "#050916" : "#FFD700"} />
                                 <audio
                                     controls
                                     style={{
@@ -157,7 +157,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
                                     p: 1,
                                     mb: message.text ? 1 : 0,
                                     borderRadius: 1,
-                                    bgcolor: isSent ? 'rgba(13, 38, 88, 0.1)' : 'action.hover',
+                                    bgcolor: isSent ? 'rgba(5, 9, 22, 0.1)' : 'rgba(255, 255, 255, 0.1)',
                                 }}
                             >
                                 <Box
@@ -168,8 +168,8 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
-                                        bgcolor: isSent ? 'rgba(13, 38, 88, 0.15)' : 'primary.main',
-                                        color: isSent ? '#0D2658' : 'white',
+                                        bgcolor: isSent ? 'rgba(5, 9, 22, 0.15)' : 'rgba(255, 215, 0, 0.2)',
+                                        color: isSent ? '#050916' : '#FFD700',
                                     }}
                                 >
                                     <FileText size={20} />
@@ -178,14 +178,14 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
                                     <Typography
                                         variant="body2"
                                         noWrap
-                                        sx={{ fontWeight: 500, color: isSent ? '#0D2658' : 'text.primary' }}
+                                        sx={{ fontWeight: 500, color: isSent ? '#050916' : '#fff' }}
                                     >
                                         {message.fileName || 'Document'}
                                     </Typography>
                                     {message.fileSize && (
                                         <Typography
                                             variant="caption"
-                                            sx={{ color: isSent ? 'rgba(13, 38, 88, 0.7)' : 'text.secondary' }}
+                                            sx={{ color: isSent ? 'rgba(5, 9, 22, 0.7)' : 'rgba(255, 255, 255, 0.7)' }}
                                         >
                                             {formatFileSize(message.fileSize)}
                                         </Typography>
@@ -195,9 +195,9 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
                                     size="small"
                                     onClick={() => handleDownload(message.imageUrl!, message.fileName || 'document')}
                                     sx={{
-                                        color: isSent ? '#0D2658' : 'primary.main',
+                                        color: isSent ? '#050916' : '#FFD700',
                                         '&:hover': {
-                                            bgcolor: isSent ? 'rgba(13, 38, 88, 0.15)' : 'action.hover',
+                                            bgcolor: isSent ? 'rgba(5, 9, 22, 0.15)' : 'rgba(255, 215, 0, 0.1)',
                                         },
                                     }}
                                 >
@@ -233,7 +233,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
                                     variant="caption"
                                     sx={{
                                         fontSize: '10px',
-                                        color: isSent ? 'rgba(13, 38, 88, 0.7)' : 'text.secondary',
+                                        color: isSent ? 'rgba(5, 9, 22, 0.7)' : 'rgba(255, 255, 255, 0.6)',
                                     }}
                                 >
                                     {formatTime(message.createdAt)}
@@ -241,7 +241,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
                             )}
 
                             {isSent && (
-                                <Box sx={{ display: 'flex', color: 'rgba(13, 38, 88, 0.7)' }}>
+                                <Box sx={{ display: 'flex', color: 'rgba(5, 9, 22, 0.7)' }}>
                                     {message.isRead ? (
                                         <CheckCheck size={12} />
                                     ) : (
