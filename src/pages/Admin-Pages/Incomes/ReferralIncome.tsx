@@ -13,12 +13,8 @@ const ReferralIncome = () => {
     if (!transaction || typeof transaction !== 'object') return false;
 
     const txType = transaction.transaction_type?.toLowerCase() || "";
-    const benefitType = transaction.benefit_type?.toLowerCase() || "";
-    const descStr = transaction.description?.toLowerCase() || "";
 
-    if (txType.includes('roi') || benefitType.includes('roi')) return false;
-
-    const isReferral = Number(transaction.level) === 1 || descStr.includes('1st level') || descStr.includes('level 1') || descStr.includes('direct') || descStr.includes('referral') || txType.includes('direct');
+    const isReferral = txType.includes('referral bonus');
     
     return isReferral;
   }) || [];

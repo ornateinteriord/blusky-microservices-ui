@@ -123,40 +123,8 @@ const UserDashboard = () => {
         </Box>
       )}
 
-      {/* Auto calculation block */}
-      <Box sx={{ 
-        bgcolor: 'rgba(255,255,255,0.04)', 
-        border: '1px solid rgba(255,255,255,0.1)', 
-        borderRadius: '16px', 
-        p: { xs: 2, md: 3 }, 
-        mb: 3, 
-        mt: 1,
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'space-between',
-        width: '100%',
-        maxWidth: '500px',
-        margin: '0 auto 24px auto',
-        boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
-      }}>
-        <Box>
-          <Typography variant="h6" sx={{ color: '#FFD700', fontWeight: 900, mb: 0.5 }}>USDT - 1$</Typography>
-          <Typography variant="body1" sx={{ color: '#ffffff', fontWeight: 700, letterSpacing: '1px' }}>INDIA INR - 95.00</Typography>
-        </Box>
-        <Box sx={{ 
-          width: '56px', 
-          height: '40px', 
-          border: '2px solid rgba(255,255,255,0.2)',
-          borderRadius: '6px',
-          overflow: 'hidden',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          bgcolor: '#fff'
-        }}>
-          <img src="https://flagcdn.com/w80/in.png" alt="India Flag" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-        </Box>
-      </Box>
+      {/* Auto calculation block - Replaced with Cycling Flag */}
+      <CyclingFlag />
 
       {/* <SliderSection /> */}
       <ProductsContainer />
@@ -200,7 +168,7 @@ const UserDashboard = () => {
         px: { xs: 0.5, md: 0 },
         width: '100%'
       }}>
-        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0.5, p: { xs: 1.5, sm: 2.5 }, borderRadius: { xs: '16px', sm: '24px' }, bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
+        <Box onClick={() => navigate('/user/top-up-wallet')} sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0.5, cursor: 'pointer', p: { xs: 1.5, sm: 2.5 }, borderRadius: { xs: '16px', sm: '24px' }, bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'transform 0.2s', '&:hover': { transform: 'translateY(-4px)', bgcolor: 'rgba(255,255,255,0.05)' } }}>
           <AccountBalanceWalletIcon sx={{ fontSize: { xs: 24, sm: 32 }, color: '#FFD700' }} />
           <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', fontWeight: 700, textAlign: 'center', fontSize: { xs: '0.65rem', sm: '0.75rem' }, lineHeight: 1.2 }}>Top Up</Typography>
           <Typography variant="h6" sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '0.9rem', sm: '1.25rem' } }}>${Number(walletOverview?.topUpBalance || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
@@ -418,6 +386,55 @@ const UserDashboard = () => {
             </Paper>
           </Box>
         </Box>
+      </Box>
+    </Box>
+  );
+};
+
+const CyclingFlag = () => {
+  // 12 flags, 4th is India ('in' is at index 3)
+  const flags = ['us', 'gb', 'au', 'in', 'ca', 'jp', 'de', 'fr', 'it', 'es', 'br', 'sg'];
+  const [index, setIndex] = useState(0);
+  const [fade, setFade] = useState(true);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setFade(false);
+      setTimeout(() => {
+        setIndex((prev) => (prev + 1) % flags.length);
+        setFade(true);
+      }, 300); // 300ms fade out
+    }, 2500); // cycle every 2.5 seconds
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <Box sx={{ 
+      display: 'flex', 
+      justifyContent: 'flex-end', 
+      mb: 4, 
+      mt: 2 
+    }}>
+      <Box sx={{ 
+        width: '56px', 
+        height: '40px', 
+        border: '2px solid rgba(255,255,255,0.2)',
+        borderRadius: '6px',
+        overflow: 'hidden',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        bgcolor: '#fff',
+        boxShadow: '0 8px 25px rgba(0,0,0,0.3)',
+        opacity: fade ? 1 : 0,
+        transition: 'all 0.3s ease-in-out',
+        transform: fade ? 'scale(1)' : 'scale(0.9)',
+      }}>
+        <img 
+          src={`https://flagcdn.com/w80/${flags[index]}.png`} 
+          alt={`${flags[index].toUpperCase()} Flag`} 
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+        />
       </Box>
     </Box>
   );

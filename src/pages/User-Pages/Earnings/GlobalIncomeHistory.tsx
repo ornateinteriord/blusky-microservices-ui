@@ -42,7 +42,7 @@ const GlobalIncomeHistory = () => {
       return {
         id: transaction._id || transaction.transaction_id,
         date: transaction.transaction_date,
-        payoutLevel: 'Global Income', 
+        payoutLevel: '12% Global Non Working', 
         memberName: transaction.related_member_name || '-',
         memberId: extractedMemberId,
         amount: ((parseFloat(transaction.ew_credit) || 0) + (parseFloat(transaction.uw_credit) || 0)).toFixed(2),
@@ -73,7 +73,7 @@ const GlobalIncomeHistory = () => {
     <Card sx={{ margin: '2rem', mt: 10, bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px' }}>
       <CardContent>
         <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem"     }}>
-          List of Global Income ({globalIncomeData.length})
+          List of 12% Global Non Working ({globalIncomeData.length})
         </div>
           <DataTable
               columns={getLevelBenifitsColumns()}

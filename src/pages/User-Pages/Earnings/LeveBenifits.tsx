@@ -24,18 +24,14 @@ const LevelBenifits = () => {
 
       const txType = transaction.transaction_type?.toLowerCase() || "";
       const benefitType = transaction.benefit_type?.toLowerCase() || "";
+      const descStr = transaction.description?.toLowerCase() || "";
 
-      // Allow all level-related transactions including ROI Level Bonus
-
-      const matchesLevel =
-        txType === 'level benefits' ||
-        txType === 'roi level benefit' ||
-        (benefitType.includes('level') && txType !== 'roi payout');
-
-      // Exclude Level 1 (Referral Bonus)
-      if (Number(transaction.level) === 1) return false;
-
-      return matchesLevel;
+      // Match Level Benefit exactly like the backend dashboard does
+      const isLevelBonus = (txType.includes('level benefit') || benefitType.includes('level income')) && 
+                           !txType.includes('roi') && !descStr.includes('roi') &&
+                           !txType.includes('referral') && !descStr.includes('referral');
+      
+      return isLevelBonus;
     })
     .map((transaction: any) => {
       // Helper for ordinal numbers (1st, 2nd, etc.)
@@ -62,7 +58,7 @@ const LevelBenifits = () => {
         payoutLevel: levelStr,
         memberName: transaction.related_member_name || 'N/A',
         memberId: transaction.related_member_id || 'N/A',
-        amount: ((parseFloat(transaction.ew_credit) || 0) + (parseFloat(transaction.uw_credit) || 0)).toFixed(2),
+        amount: `$${((parseFloat(transaction.ew_credit) || 0) + (parseFloat(transaction.uw_credit) || 0)).toFixed(2)}`,
         description: transaction.description,
         transactionType: transaction.transaction_type
       };

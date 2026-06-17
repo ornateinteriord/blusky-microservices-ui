@@ -9,12 +9,12 @@ import { useGetMemberAddOns } from '../../../api/Packages';
 import USDTLogo from "../../../assets/USDT1.png";
 
 const PACKAGES = [
-  { id: 1, amount: 30, title: "Starter Pip Plan", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#1de9b6" },
-  { id: 2, amount: 60, title: "Growth Trader Package", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#CD7F32" },
-  { id: 3, amount: 120, title: "Elite Currency Portfolio", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#C0C0C0" },
-  { id: 4, amount: 250, title: "Global FX Advantage Plan", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#FFD700" },
-  { id: 5, amount: 500, title: "Pro Trader Wealth Package", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#E5E4E2" },
-  { id: 6, amount: 1000, title: "VIP Liquidity Master Plan", yield: "3.3%", days: "210 Day", tag: "Members Only", color: "#b9f2ff" }
+  { id: 1, amount: 30, title: "Starter Pip Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#1de9b6" },
+  { id: 2, amount: 60, title: "Growth Trader Package", yield: "5%", days: "210 Day", tag: "Members Only", color: "#CD7F32" },
+  { id: 3, amount: 120, title: "Elite Currency Portfolio", yield: "5%", days: "210 Day", tag: "Members Only", color: "#C0C0C0" },
+  { id: 4, amount: 250, title: "Global FX Advantage Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#FFD700" },
+  { id: 5, amount: 500, title: "Pro Trader Wealth Package", yield: "5%", days: "210 Day", tag: "Members Only", color: "#E5E4E2" },
+  { id: 6, amount: 1000, title: "VIP Liquidity Master Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#b9f2ff" }
 ];
 
 const ProductsContainer: React.FC = () => {
@@ -25,6 +25,8 @@ const ProductsContainer: React.FC = () => {
 
   const [buyingId, setBuyingId] = useState<number | null>(null);
   const [confirmPkg, setConfirmPkg] = useState<any>(null);
+  const [successDialogOpen, setSuccessDialogOpen] = useState(false);
+  const [purchasedPkg, setPurchasedPkg] = useState<any>(null);
   const { data: memberAddons } = useGetMemberAddOns(user?.Member_id || '');
   const topUpBalance = walletOverview?.topUpBalance || 0;
 
@@ -73,6 +75,10 @@ const ProductsContainer: React.FC = () => {
         onSettled: () => {
           setBuyingId(null);
           setConfirmPkg(null);
+        },
+        onSuccess: () => {
+          setPurchasedPkg(confirmPkg);
+          setSuccessDialogOpen(true);
         }
       }
     );
@@ -280,6 +286,67 @@ const ProductsContainer: React.FC = () => {
             }}
           >
             {isPending ? <CircularProgress size={24} color="inherit" /> : "Yes, Buy Plan"}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Success Dialog */}
+      <Dialog
+        open={successDialogOpen}
+        onClose={() => setSuccessDialogOpen(false)}
+        PaperProps={{
+          sx: {
+            bgcolor: '#0f1e36',
+            color: '#fff',
+            borderRadius: '24px',
+            border: '1px solid rgba(16, 185, 129, 0.2)',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.5)',
+          }
+        }}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle sx={{ textAlign: 'center', pt: 4, color: '#10b981', fontWeight: 800, fontSize: '1.5rem' }}>
+          Purchase Successful!
+        </DialogTitle>
+        <DialogContent sx={{ pb: 1 }}>
+          <Typography variant="body1" sx={{ textAlign: 'center', mb: 4, color: 'rgba(255,255,255,0.7)' }}>
+            You have successfully subscribed to the package.
+          </Typography>
+          <Box sx={{ bgcolor: 'rgba(0,0,0,0.2)', p: 3, borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2, alignItems: 'center' }}>
+              <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>Package Name</Typography>
+              <Typography variant="h6" sx={{ color: '#FFD700', fontWeight: 700 }}>{purchasedPkg?.title}</Typography>
+            </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2, alignItems: 'center' }}>
+              <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>Amount Paid</Typography>
+              <Typography variant="h6" sx={{ color: '#10b981', fontWeight: 700 }}>${purchasedPkg?.amount}</Typography>
+            </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>Duration</Typography>
+              <Typography variant="h6" sx={{ color: '#fff', fontWeight: 700 }}>{purchasedPkg?.days}</Typography>
+            </Box>
+          </Box>
+        </DialogContent>
+        <DialogActions sx={{ p: 4, pt: 2, justifyContent: 'center' }}>
+          <Button
+            onClick={() => setSuccessDialogOpen(false)}
+            variant="contained"
+            fullWidth
+            sx={{
+              py: 1.5,
+              borderRadius: '12px',
+              background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+              color: '#fff',
+              textTransform: 'none',
+              fontWeight: 700,
+              fontSize: '1.1rem',
+              '&:hover': {
+                background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+              }
+            }}
+          >
+            Done
           </Button>
         </DialogActions>
       </Dialog>

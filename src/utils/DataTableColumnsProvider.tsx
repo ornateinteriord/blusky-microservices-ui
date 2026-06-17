@@ -373,6 +373,21 @@ export const getWalletColumns = () => [
     name: "Type",
     selector: (row: any) => row.transaction_type,
     sortable: true,
+    cell: (row: any) => {
+      if (row.transaction_type === "Level Benefits") {
+        if (row.description && row.description.toLowerCase().includes('referral')) {
+          return "Referral Bonus";
+        }
+        return "Level Bonus";
+      }
+      return row.transaction_type;
+    }
+  },
+  {
+    name: "Description",
+    selector: (row: any) => row.description || "-",
+    sortable: true,
+    wrap: true,
   },
   {
     name: "Amount",
@@ -1536,6 +1551,36 @@ export const getUpgradeWalletColumns = () => [
       const amt = isDebit ? row.uw_debit : row.uw_credit;
       const sign = isDebit ? "-" : "+";
       return amt && parseFloat(amt) > 0 ? `${sign}$${parseFloat(amt).toFixed(2)}` : "-";
+    },
+    sortable: true,
+  },
+  {
+    name: "Status",
+    selector: (row: any) => row.status || "Completed",
+    sortable: true,
+  },
+];
+
+export const getTopUpWalletColumns = () => [
+  {
+    name: "Date",
+    selector: (row: any) => {
+      if (!row.transaction_date && !row.createdAt) return "-";
+      const date = new Date(row.transaction_date || row.createdAt);
+      return date.toLocaleDateString();
+    },
+    sortable: true,
+  },
+  {
+    name: "Transaction ID",
+    selector: (row: any) => row.tx_no || row.transaction_id || "-",
+    sortable: true,
+  },
+  {
+    name: "Amount",
+    selector: (row: any) => {
+      const amt = row.amount || row.requested_amount || row.ew_credit;
+      return amt && parseFloat(amt) > 0 ? "$" : "-";
     },
     sortable: true,
   },

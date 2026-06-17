@@ -12,13 +12,14 @@ const LevelBenifits = () => {
 
   // Filter transactions to get only level benefits
   const levelBenefits = allTransactions?.filter((transaction: any) => {
-    const isLevel = (
-      transaction.type === 'level_benefit' ||
-      transaction.transactionType === 'level' ||
-      transaction.category === 'level_benefits' ||
-      transaction.description?.toLowerCase().includes('level')
-    );
-    return isLevel;
+    if (!transaction || typeof transaction !== 'object') return false;
+
+    const txType = (transaction.transaction_type || transaction.transactionType || transaction.type || "").toLowerCase();
+
+    // Strictly match Level Bonus and explicitly exclude referral and ROI
+    const isLevelBonus = txType.includes('level bonus') && !txType.includes('referral') && !txType.includes('roi');
+    
+    return isLevelBonus;
   }) || [];
 
   // Aggregate level benefits by user

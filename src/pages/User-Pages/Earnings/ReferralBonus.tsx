@@ -23,26 +23,27 @@ const ReferralBonus = () => {
       if (!transaction || typeof transaction !== 'object') return false;
 
       const txType = transaction.transaction_type?.toLowerCase() || "";
-      const benefitType = transaction.benefit_type?.toLowerCase() || "";
       const descStr = transaction.description?.toLowerCase() || "";
 
-      // Exclude ROI related transactions
-      if (txType.includes('roi') || benefitType.includes('roi')) return false;
-
-      // Only include level 1 (Direct Referral)
-      const isLevel1 = Number(transaction.level) === 1 || descStr.includes('1st level') || descStr.includes('level 1') || descStr.includes('direct') || descStr.includes('referral') || txType.includes('direct');
+      const isReferral = txType === 'direct benefits' || 
+                         descStr === 'direct benefits' || 
+                         txType.includes('referral') || 
+                         descStr.includes('referral');
       
-      return isLevel1;
+      return isReferral;
     })
     .map((transaction: any) => {
+      // Show actual description but provide a fallback
+      let payoutLvl = transaction.description || transaction.transaction_type || 'Referral Bonus';
+      
       return {
         id: transaction._id || transaction.transaction_id,
         date: transaction.transaction_date,
-        payoutLevel: 'Referral Bonus', // Forced description as requested
+        payoutLevel: payoutLvl,
         memberName: transaction.related_member_name || 'N/A',
         memberId: transaction.related_member_id || 'N/A',
-        amount: ((parseFloat(transaction.ew_credit) || 0) + (parseFloat(transaction.uw_credit) || 0)).toFixed(2),
-        description: 'Referral Bonus', // Forced description as requested
+        amount: `$${((parseFloat(transaction.ew_credit) || 0) + (parseFloat(transaction.uw_credit) || 0)).toFixed(2)}`,
+        description: transaction.description,
         transactionType: transaction.transaction_type
       };
     });

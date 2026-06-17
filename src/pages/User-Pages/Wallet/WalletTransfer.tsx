@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Typography, Card, MenuItem, Select, TextField, Button, CircularProgress, Fade, IconButton } from '@mui/material';
+import { Box, Typography, Card, MenuItem, Select, TextField, Button, CircularProgress, Fade, IconButton, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import { useGetWalletOverview, useTransferWallet, useSendTransferOTP } from '../../../api/Memeber';
 import TokenService from '../../../api/token/tokenService';
 import { toast } from 'react-toastify';
@@ -18,6 +18,8 @@ const WalletTransfer = () => {
   const toWallet = fromWallet === 'Earnings' ? 'Top Up Wallet' : 'Upgrade Wallet';
   const [amount, setAmount] = useState('');
   const [otp, setOtp] = useState('');
+  const [successDialogOpen, setSuccessDialogOpen] = useState(false);
+  const [transferDetails, setTransferDetails] = useState<any>(null);
 
   const earningsBalance = walletOverview?.balance || '0.00';
   const topUpBalance = walletOverview?.topUpBalance || '0.00';
@@ -70,7 +72,8 @@ const WalletTransfer = () => {
       otp
     }, {
       onSuccess: () => {
-        toast.success(`Successfully transferred $${amount} to ${toWallet}`);
+        setTransferDetails({ amount, fromWallet, toWallet });
+        setSuccessDialogOpen(true);
         setAmount('');
         setOtp('');
         setStep(1);
@@ -274,6 +277,67 @@ const WalletTransfer = () => {
 
         </Card>
       </Box>
+
+      {/* Success Dialog */}
+      <Dialog
+        open={successDialogOpen}
+        onClose={() => setSuccessDialogOpen(false)}
+        PaperProps={{
+          sx: {
+            bgcolor: '#0f1e36',
+            color: '#fff',
+            borderRadius: '24px',
+            border: '1px solid rgba(16, 185, 129, 0.2)',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.5)',
+          }
+        }}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle sx={{ textAlign: 'center', pt: 4, color: '#10b981', fontWeight: 800, fontSize: '1.5rem' }}>
+          Transfer Successful!
+        </DialogTitle>
+        <DialogContent sx={{ pb: 1 }}>
+          <Typography variant="body1" sx={{ textAlign: 'center', mb: 4, color: 'rgba(255,255,255,0.7)' }}>
+            Your funds have been successfully transferred.
+          </Typography>
+          <Box sx={{ bgcolor: 'rgba(0,0,0,0.2)', p: 3, borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2, alignItems: 'center' }}>
+              <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>Amount Transferred</Typography>
+              <Typography variant="h6" sx={{ color: '#10b981', fontWeight: 700 }}>${transferDetails?.amount}</Typography>
+            </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2, alignItems: 'center' }}>
+              <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>From</Typography>
+              <Typography variant="h6" sx={{ color: '#fff', fontWeight: 700 }}>{transferDetails?.fromWallet}</Typography>
+            </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>To</Typography>
+              <Typography variant="h6" sx={{ color: '#fff', fontWeight: 700 }}>{transferDetails?.toWallet}</Typography>
+            </Box>
+          </Box>
+        </DialogContent>
+        <DialogActions sx={{ p: 4, pt: 2, justifyContent: 'center' }}>
+          <Button
+            onClick={() => setSuccessDialogOpen(false)}
+            variant="contained"
+            fullWidth
+            sx={{
+              py: 1.5,
+              borderRadius: '12px',
+              background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+              color: '#fff',
+              textTransform: 'none',
+              fontWeight: 700,
+              fontSize: '1.1rem',
+              '&:hover': {
+                background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+              }
+            }}
+          >
+            Done
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };

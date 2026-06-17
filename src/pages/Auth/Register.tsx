@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, Link, useSearchParams } from 'react-router-dom';
-import { Box, TextField, Button, Typography, InputAdornment, FormControl, FormLabel, FormControlLabel, Radio, RadioGroup, Checkbox, FormHelperText, Dialog, DialogTitle, DialogContent, DialogActions, Grid, useTheme, useMediaQuery, Avatar,  } from '@mui/material';
+import { Box, TextField, Button, Typography, InputAdornment, FormControl, FormLabel, FormControlLabel, Radio, RadioGroup, Checkbox, FormHelperText, Dialog, DialogTitle, DialogContent, DialogActions, Grid, useTheme, useMediaQuery, Avatar, MenuItem } from '@mui/material';
 
 import PersonIcon from "@mui/icons-material/Person";
 import LockIcon from "@mui/icons-material/Lock";
@@ -13,6 +13,21 @@ import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import BMSLogo from "../../assets/USDT1.png";
 import { useGetSponserRef, useSignupMutation } from '../../api/Auth';
 import { LoadingComponent } from '../../App';
+
+const COUNTRIES = [
+  "United States", "United Kingdom", "Canada", "Australia", "India", 
+  "Germany", "France", "Japan", "China", "Brazil", "South Africa",
+  "Nigeria", "United Arab Emirates", "Singapore", "Malaysia",
+  "New Zealand", "Netherlands", "Switzerland", "Sweden", "Spain",
+  "Italy", "Mexico", "Argentina", "Colombia", "Chile", "Peru",
+  "Philippines", "Indonesia", "Vietnam", "Thailand", "South Korea",
+  "Pakistan", "Bangladesh", "Sri Lanka", "Nepal", "Saudi Arabia",
+  "Qatar", "Oman", "Kuwait", "Bahrain", "Egypt", "Kenya", "Ghana",
+  "Uganda", "Tanzania", "Morocco", "Algeria", "Tunisia", "Turkey",
+  "Iran", "Iraq", "Israel", "Jordan", "Lebanon", "Russia", "Ukraine",
+  "Poland", "Romania", "Czech Republic", "Hungary", "Greece", "Portugal",
+  "Ireland", "Belgium", "Austria", "Denmark", "Finland", "Norway"
+].sort();
 
 const Register = () => {
   const navigate = useNavigate();
@@ -307,11 +322,29 @@ const Register = () => {
               {/* Country & Pincode */}
               <Grid item xs={12} sm={6}>
                 <TextField
-                  required fullWidth name="country" placeholder="Country"
+                  select
+                  required fullWidth name="country" 
                   value={formData.country} onChange={handleChange}
                   InputProps={{ startAdornment: <InputAdornment position="start"><PublicIcon sx={{ color: "rgba(255,255,255,0.4)" }} /></InputAdornment> }}
-                  sx={textFieldStyles}
-                />
+                  SelectProps={{
+                    displayEmpty: true,
+                    renderValue: (value: any) => {
+                      if (!value) {
+                        return <span style={{ color: "rgba(255, 255, 255, 0.3)" }}>Country</span>;
+                      }
+                      return value;
+                    }
+                  }}
+                  sx={{
+                    ...textFieldStyles,
+                    "& .MuiSelect-icon": { color: "rgba(255, 255, 255, 0.6)" }
+                  }}
+                >
+                  <MenuItem disabled value=""><em>Country</em></MenuItem>
+                  {COUNTRIES.map(country => (
+                    <MenuItem key={country} value={country}>{country}</MenuItem>
+                  ))}
+                </TextField>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField

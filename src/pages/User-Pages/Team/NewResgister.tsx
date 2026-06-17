@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { TextField, FormControl, FormLabel, RadioGroup, Radio, FormControlLabel, Button, Box, Card, CardContent, InputAdornment, FormHelperText, Dialog, DialogTitle, DialogContent, DialogActions, Typography } from '@mui/material';
+import { TextField, FormControl, FormLabel, RadioGroup, Radio, FormControlLabel, Button, Box, Card, CardContent, InputAdornment, FormHelperText, Dialog, DialogTitle, DialogContent, DialogActions, Typography, MenuItem } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
@@ -10,6 +10,21 @@ import UserContext from '../../../context/user/userContext';
 import { useSignupMutation } from '../../../api/Auth';
 import { LoadingComponent } from '../../../App';
 import { toast } from 'react-toastify';
+
+const COUNTRIES = [
+  "United States", "United Kingdom", "Canada", "Australia", "India", 
+  "Germany", "France", "Japan", "China", "Brazil", "South Africa",
+  "Nigeria", "United Arab Emirates", "Singapore", "Malaysia",
+  "New Zealand", "Netherlands", "Switzerland", "Sweden", "Spain",
+  "Italy", "Mexico", "Argentina", "Colombia", "Chile", "Peru",
+  "Philippines", "Indonesia", "Vietnam", "Thailand", "South Korea",
+  "Pakistan", "Bangladesh", "Sri Lanka", "Nepal", "Saudi Arabia",
+  "Qatar", "Oman", "Kuwait", "Bahrain", "Egypt", "Kenya", "Ghana",
+  "Uganda", "Tanzania", "Morocco", "Algeria", "Tunisia", "Turkey",
+  "Iran", "Iraq", "Israel", "Jordan", "Lebanon", "Russia", "Ukraine",
+  "Poland", "Romania", "Czech Republic", "Hungary", "Greece", "Portugal",
+  "Ireland", "Belgium", "Austria", "Denmark", "Finland", "Norway"
+].sort();
 
 const NewResgister: React.FC = () => {
   const { user } = useContext(UserContext)
@@ -231,18 +246,35 @@ const NewResgister: React.FC = () => {
               />
 
               <TextField
+                select
                 label="Country"
                 name="country"
                 value={formData.country || ''}
                 onChange={handleInputChange}
                 fullWidth
                 variant="outlined"
-                placeholder="Enter country"
                 InputProps={{
                   startAdornment: <InputAdornment position="start"><PublicIcon sx={{ color: '#FFD700' }} /></InputAdornment>,
                 }}
-                sx={textFieldStyles}
-              />
+                SelectProps={{
+                  displayEmpty: true,
+                  renderValue: (value: any) => {
+                    if (!value) {
+                      return <span style={{ color: "rgba(255, 255, 255, 0.3)" }}>Enter country</span>;
+                    }
+                    return value;
+                  }
+                }}
+                sx={{
+                  ...textFieldStyles,
+                  "& .MuiSelect-icon": { color: "rgba(255, 255, 255, 0.6)" }
+                }}
+              >
+                <MenuItem disabled value=""><em>Enter country</em></MenuItem>
+                {COUNTRIES.map(country => (
+                  <MenuItem key={country} value={country}>{country}</MenuItem>
+                ))}
+              </TextField>
 
               <TextField
                 label="Password"
@@ -317,12 +349,12 @@ const NewResgister: React.FC = () => {
             <Box sx={{ width: 64, height: 64, borderRadius: '50%', bgcolor: 'rgba(16, 185, 129, 0.1)', color: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', mx: 'auto', mb: 2 }}>
               <PersonIcon sx={{ fontSize: 32 }} />
             </Box>
-            <Typography variant="h5" sx={{ fontWeight: 800, color: '#10b981' }}>Registration Successful!</Typography>
+            <Typography variant="h6" sx={{ fontWeight: 800, color: '#10b981' }}>Registration Successful!</Typography>
           </DialogTitle>
           <DialogContent sx={{ pb: 1 }}>
-            <Typography variant="body1" sx={{ textAlign: 'center', mb: 4, color: 'rgba(255,255,255,0.7)' }}>
+            {/* <Typography variant="body1" sx={{ textAlign: 'center', mb: 4, color: 'rgba(255,255,255,0.7)' }}>
               New member has been successfully added to your network.
-            </Typography>
+            </Typography> */}
             <Box sx={{ bgcolor: 'rgba(0,0,0,0.2)', p: 3, borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2, alignItems: 'center' }}>
                 <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>Member ID</Typography>

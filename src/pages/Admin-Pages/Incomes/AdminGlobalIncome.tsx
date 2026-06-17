@@ -56,13 +56,13 @@ const AdminGlobalIncome = () => {
     <>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: "1rem", mt: 10 }}>
         <Typography variant="h4">
-          Global Income
+          12% Global Non Working
         </Typography>
       </Box>
 
       <Card sx={{ margin: "1rem", mt: 2 }}>
         <CardContent>
-          <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem"     }}>Global Income Details</div>
+          <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem"     }}>12% Global Non Working Details</div>
           <Box
                 style={{
                   display: "flex",

@@ -12,12 +12,12 @@ import LanguageIcon from '@mui/icons-material/Language';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
 const PACKAGES: Record<string, { title: string, color: string }> = {
-  '30': { title: 'BASIC', color: '#1de9b6' },
-  '60': { title: 'BRONZE', color: '#CD7F32' },
-  '120': { title: 'SILVER', color: '#C0C0C0' },
-  '250': { title: 'GOLD', color: '#FFD700' },
-  '500': { title: 'PLATINUM', color: '#E5E4E2' },
-  '1000': { title: 'DIAMOND', color: '#b9f2ff' }
+  '30': { title: 'Starter Pip Plan', color: '#1de9b6' },
+  '60': { title: 'Growth Trader Package', color: '#CD7F32' },
+  '120': { title: 'Elite Currency Portfolio', color: '#C0C0C0' },
+  '250': { title: 'Global FX Advantage Plan', color: '#FFD700' },
+  '500': { title: 'Pro Trader Wealth Package', color: '#E5E4E2' },
+  '1000': { title: 'VIP Liquidity Master Plan', color: '#b9f2ff' }
 };
 
 const PackageDetail = () => {
@@ -102,7 +102,7 @@ const PackageDetail = () => {
           bgcolor: 'rgba(255,255,255,0.05)',
           boxShadow: `0 0 20px ${pkgInfo.color}30`
         }}>
-          <Typography variant="h6" sx={{ color: pkgInfo.color, fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase' }}>
+          <Typography variant="h6" sx={{ color: pkgInfo.color, fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase' }}>
             {pkgInfo.title}
           </Typography>
         </Box>
@@ -142,14 +142,14 @@ const PackageDetail = () => {
 
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1, p: 2.5, borderRadius: '24px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
           <LanguageIcon sx={{ fontSize: 32, color: '#1de9b6' }} />
-          <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', fontWeight: 700, textAlign: 'center', fontSize: '0.75rem' }}>12% Global Non Working</Typography>
+          <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', fontWeight: 700, textAlign: 'center', fontSize: '0.75rem' }}>Global Income</Typography>
           <Typography variant="h6" sx={{ color: '#ffffff', fontWeight: 900 }}>${Number(0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
         </Box>
 
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1, p: 2.5, borderRadius: '24px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
           <AccountBalanceWalletIcon sx={{ fontSize: 32, color: '#FFD700' }} />
-          <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', fontWeight: 700, textAlign: 'center', fontSize: '0.75rem' }}>Wallet Balance</Typography>
-          <Typography variant="h6" sx={{ color: '#ffffff', fontWeight: 900 }}>${Number(walletOverview?.balance || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
+          <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', fontWeight: 700, textAlign: 'center', fontSize: '0.75rem' }}>Earning Balance</Typography>
+          <Typography variant="h6" sx={{ color: '#ffffff', fontWeight: 900 }}>${Number(walletOverview?.totalIncome || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
         </Box>
       </Box>
 

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Card, CardContent, CardHeader, TextField, FormControl, Button, Box, Typography, Select, MenuItem, CircularProgress } from '@mui/material';
+import { Card, CardContent, CardHeader, TextField, FormControl, Button, Box, Typography, Select, MenuItem, CircularProgress, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import UserContext from "../../../context/user/userContext";
 import { useGetWalletOverview } from '../../../api/Memeber';
 import { useBuyPackageDirectlyMutation } from '../../../api/Packages';
@@ -19,6 +19,8 @@ const NewSubscription: React.FC = () => {
   const [targetName, setTargetName] = useState(user?.Name || "");
   const [isSearching, setIsSearching] = useState(false);
   const [isTargetActive, setIsTargetActive] = useState(false);
+  const [successDialogOpen, setSuccessDialogOpen] = useState(false);
+  const [purchasedPkgDetails, setPurchasedPkgDetails] = useState<any>(null);
 
   // Removed auto-fill of targetMemberId to allow entering anyone's user ID
 
@@ -96,7 +98,26 @@ const NewSubscription: React.FC = () => {
       requested_amount: Number(formData.package),
     }, {
       onSuccess: () => {
-        setFormData(prev => ({ ...prev, package: "" }));
+        let packageName = "";
+        switch(formData.package) {
+          case "30": packageName = "Starter Pip Plan"; break;
+          case "60": packageName = "Growth Trader Package"; break;
+          case "120": packageName = "Elite Currency Portfolio"; break;
+          case "250": packageName = "Global FX Advantage Plan"; break;
+          case "500": packageName = "Pro Trader Wealth Package"; break;
+          case "1000": packageName = "VIP Liquidity Master Plan"; break;
+          default: packageName = `$${formData.package} Package`;
+        }
+        
+        setPurchasedPkgDetails({
+          targetMemberId: formData.targetMemberId || user.Member_id,
+          targetName: targetName,
+          amount: formData.package,
+          packageName: packageName
+        });
+        setSuccessDialogOpen(true);
+        setFormData(prev => ({ ...prev, package: "", targetMemberId: "" }));
+        setTargetName("");
       }
     });
   };
@@ -205,12 +226,12 @@ const NewSubscription: React.FC = () => {
                   }}
                 >
                   <MenuItem value="" disabled>Select Package</MenuItem>
-                  <MenuItem value="30">$30 Basic Package</MenuItem>
-                  <MenuItem value="60">$60 Standard Package</MenuItem>
-                  <MenuItem value="120">$120 Bronze Package</MenuItem>
-                  <MenuItem value="250">$250 Silver Package</MenuItem>
-                  <MenuItem value="500">$500 Gold Package</MenuItem>
-                  <MenuItem value="1000">$1000 Diamond Package</MenuItem>
+                  <MenuItem value="30">$30 Starter Pip Plan</MenuItem>
+                  <MenuItem value="60">$60 Growth Trader Package</MenuItem>
+                  <MenuItem value="120">$120 Elite Currency Portfolio</MenuItem>
+                  <MenuItem value="250">$250 Global FX Advantage Plan</MenuItem>
+                  <MenuItem value="500">$500 Pro Trader Wealth Package</MenuItem>
+                  <MenuItem value="1000">$1000 VIP Liquidity Master Plan</MenuItem>
                 </Select>
               </FormControl>
             </Box>
@@ -257,6 +278,71 @@ const NewSubscription: React.FC = () => {
           </form>
         </CardContent>
       </Card>
+
+      {/* Success Dialog */}
+      <Dialog
+        open={successDialogOpen}
+        onClose={() => setSuccessDialogOpen(false)}
+        PaperProps={{
+          sx: {
+            bgcolor: '#0f1e36',
+            color: '#fff',
+            borderRadius: '24px',
+            border: '1px solid rgba(16, 185, 129, 0.2)',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.5)',
+          }
+        }}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle sx={{ textAlign: 'center', pt: 4, color: '#10b981', fontWeight: 800, fontSize: '1.5rem' }}>
+          Subscription Successful!
+        </DialogTitle>
+        <DialogContent sx={{ pb: 1 }}>
+          <Typography variant="body1" sx={{ textAlign: 'center', mb: 4, color: 'rgba(255,255,255,0.7)' }}>
+            Package has been successfully activated for the target member.
+          </Typography>
+          <Box sx={{ bgcolor: 'rgba(0,0,0,0.2)', p: 3, borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2, alignItems: 'center' }}>
+              <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>Target Member ID</Typography>
+              <Typography variant="h6" sx={{ color: '#fff', fontWeight: 700 }}>{purchasedPkgDetails?.targetMemberId}</Typography>
+            </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2, alignItems: 'center' }}>
+              <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>Target Name</Typography>
+              <Typography variant="h6" sx={{ color: '#fff', fontWeight: 700 }}>{purchasedPkgDetails?.targetName}</Typography>
+            </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2, alignItems: 'center' }}>
+              <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>Package</Typography>
+              <Typography variant="h6" sx={{ color: '#fff', fontWeight: 700 }}>{purchasedPkgDetails?.packageName}</Typography>
+            </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>Amount Paid</Typography>
+              <Typography variant="h6" sx={{ color: '#10b981', fontWeight: 700 }}>${purchasedPkgDetails?.amount}</Typography>
+            </Box>
+          </Box>
+        </DialogContent>
+        <DialogActions sx={{ p: 4, pt: 2, justifyContent: 'center' }}>
+          <Button
+            onClick={() => setSuccessDialogOpen(false)}
+            variant="contained"
+            fullWidth
+            sx={{
+              py: 1.5,
+              borderRadius: '12px',
+              background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+              color: '#fff',
+              textTransform: 'none',
+              fontWeight: 700,
+              fontSize: '1.1rem',
+              '&:hover': {
+                background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+              }
+            }}
+          >
+            Done
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };

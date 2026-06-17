@@ -258,7 +258,7 @@ export const AdminSideBarMenuItems: SideBarMenuItemType[] = [
         icon: <PaymentsIcon />,
       },
       {
-        name: "Global Income",
+        name: "12% Global Non Working",
         path: "/admin/income/global-income",
         icon: <PaymentsIcon />,
       },
