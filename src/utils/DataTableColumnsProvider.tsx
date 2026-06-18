@@ -262,7 +262,7 @@ export const getTransactionColumns = () => [
   {
     name: "Balance",
     selector: (row: any) => {
-      const amt = row.balance || row.net_amount || row.previous_balance;
+      const amt = row.balance || row.previous_balance;
       return amt ? `$ ${parseFloat(amt).toLocaleString('en-US')}` : "-";
     },
     sortable: true,

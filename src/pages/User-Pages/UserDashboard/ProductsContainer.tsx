@@ -318,13 +318,9 @@ const ProductsContainer: React.FC = () => {
               <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>Package Name</Typography>
               <Typography variant="h6" sx={{ color: '#FFD700', fontWeight: 700 }}>{purchasedPkg?.title}</Typography>
             </Box>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2, alignItems: 'center' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>Amount Paid</Typography>
               <Typography variant="h6" sx={{ color: '#10b981', fontWeight: 700 }}>${purchasedPkg?.amount}</Typography>
-            </Box>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>Duration</Typography>
-              <Typography variant="h6" sx={{ color: '#fff', fontWeight: 700 }}>{purchasedPkg?.days}</Typography>
             </Box>
           </Box>
         </DialogContent>
