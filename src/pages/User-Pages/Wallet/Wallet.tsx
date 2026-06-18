@@ -36,6 +36,7 @@ const Wallet = () => {
   // --- Referral requirement logic ---
   const currentDirects = memberDetails?.data?.registration_stats?.direct || 0;
   const totalPackages = parseFloat(walletData?.data?.totalPackages || 0);
+  const maxWithdrawal = totalPackages * 0.25;
 
   let requiredReferrals = 0;
   if (totalPackages >= 1000) requiredReferrals = 10;
@@ -103,6 +104,11 @@ const Wallet = () => {
 
     if (withdrawalAmount < 5) {
       toast.error('Minimum withdrawal amount is $5');
+      return;
+    }
+
+    if (withdrawalAmount > maxWithdrawal) {
+      toast.error(`Maximum withdrawal limit is $${maxWithdrawal.toFixed(2)} (25% of your total package amount)`);
       return;
     }
 
@@ -291,6 +297,7 @@ const Wallet = () => {
                     <Box>
                       <Typography variant="body2">• 5% Admin applied</Typography>
                       <Typography variant="body2">• Minimum withdrawal: $5</Typography>
+                      <Typography variant="body2">• Maximum withdrawal: 25% of total package (${maxWithdrawal.toFixed(2)})</Typography>
                       <Typography variant="body2">• One withdrawal per day allowed</Typography>
                     </Box>
                   </Box>

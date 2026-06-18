@@ -26,7 +26,6 @@ import { useVerifyPayment, parsePaymentRedirectParams, useGetTransactionDetails,
 import { toast } from 'react-toastify';
 import ProductsContainer from './ProductsContainer';
 
-
 const UserDashboard = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -123,7 +122,7 @@ const UserDashboard = () => {
         </Box>
       )}
 
-      {/* Auto calculation block - Replaced with Cycling Flag */}
+      {/* Sliding Flags */}
       <CyclingFlag />
 
       {/* <SliderSection /> */}
@@ -392,49 +391,53 @@ const UserDashboard = () => {
 };
 
 const CyclingFlag = () => {
-  // 12 flags, 4th is India ('in' is at index 3)
   const flags = ['us', 'gb', 'au', 'in', 'ca', 'jp', 'de', 'fr', 'it', 'es', 'br', 'sg'];
-  const [index, setIndex] = useState(0);
-  const [fade, setFade] = useState(true);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setFade(false);
-      setTimeout(() => {
-        setIndex((prev) => (prev + 1) % flags.length);
-        setFade(true);
-      }, 300); // 300ms fade out
-    }, 2500); // cycle every 2.5 seconds
-    return () => clearInterval(timer);
-  }, []);
+  // Duplicate the flags multiple times to ensure the marquee can loop seamlessly
+  const scrollFlags = [...flags, ...flags, ...flags, ...flags];
 
   return (
     <Box sx={{ 
-      display: 'flex', 
-      justifyContent: 'flex-end', 
-      mb: 4, 
-      mt: 2 
+      width: '100%',
+      overflow: 'hidden',
+      mb: 3, 
+      mt: 1,
+      bgcolor: 'rgba(255,255,255,0.02)',
+      py: 1,
+      borderRadius: '8px',
+      border: '1px solid rgba(255,255,255,0.05)',
+      boxShadow: 'inset 0 0 8px rgba(0,0,0,0.2)'
     }}>
-      <Box sx={{ 
-        width: '56px', 
-        height: '40px', 
-        border: '2px solid rgba(255,255,255,0.2)',
-        borderRadius: '6px',
-        overflow: 'hidden',
+      <Box sx={{
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        bgcolor: '#fff',
-        boxShadow: '0 8px 25px rgba(0,0,0,0.3)',
-        opacity: fade ? 1 : 0,
-        transition: 'all 0.3s ease-in-out',
-        transform: fade ? 'scale(1)' : 'scale(0.9)',
+        width: 'max-content',
+        animation: 'scrollLeftToRight 35s linear infinite',
+        '@keyframes scrollLeftToRight': {
+          '0%': { transform: 'translateX(-50%)' },
+          '100%': { transform: 'translateX(0%)' }
+        },
+        '&:hover': {
+          animationPlayState: 'paused' // Pause on hover
+        }
       }}>
-        <img 
-          src={`https://flagcdn.com/w80/${flags[index]}.png`} 
-          alt={`${flags[index].toUpperCase()} Flag`} 
-          style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-        />
+        {scrollFlags.map((flag, index) => (
+          <Box key={index} sx={{ 
+            width: '36px', 
+            height: '24px', 
+            mx: 1.5,
+            border: '1px solid rgba(255,255,255,0.15)',
+            borderRadius: '4px',
+            overflow: 'hidden',
+            bgcolor: '#fff',
+            flexShrink: 0,
+            boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+          }}>
+            <img 
+              src={`https://flagcdn.com/w40/${flag}.png`} 
+              alt={`${flag.toUpperCase()} Flag`} 
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+            />
+          </Box>
+        ))}
       </Box>
     </Box>
   );

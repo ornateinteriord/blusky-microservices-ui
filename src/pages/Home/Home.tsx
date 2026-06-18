@@ -3,10 +3,10 @@ import { Menu as MenuIcon, X as CloseIcon } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import uwtLogo from "../../assets/USDT1.png";
-import slider1 from "../../assets/slider1.jpg";
-import slider2 from "../../assets/slider2.jpg";
-import slider3 from "../../assets/slider3.jpg";
-import slider4 from "../../assets/slider4.jpg";
+import slider1 from "../../assets/slider1.png";
+import slider2 from "../../assets/slider2.png";
+import slider3 from "../../assets/slider3.png";
+import slider4 from "../../assets/slider4.png";
 
 const slides = [slider1, slider2, slider3, slider4];
 
