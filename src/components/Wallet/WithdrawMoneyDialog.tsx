@@ -184,7 +184,7 @@ const WithdrawMoneyDialog: React.FC<WithdrawMoneyDialogProps> = ({ open, onClose
                                 ) : (
                                     allAccounts.map((account: any) => (
                                         <MenuItem key={account._id} value={account._id}>
-                                            {account.account_group_name} - ${account.account_amount.toFixed(2)} ({account.account_no})
+                                            {account.account_group_name} - ${account.account_amount.toFixed(4)} ({account.account_no})
                                         </MenuItem>
                                     ))
                                 )}
@@ -202,7 +202,7 @@ const WithdrawMoneyDialog: React.FC<WithdrawMoneyDialogProps> = ({ open, onClose
                                         Available Balance
                                     </Typography>
                                     <Typography variant="h6" sx={{ fontWeight: 700, color: '#6366f1' }}>
-                                        ${selectedAccountData.account_amount.toFixed(2)}
+                                        ${selectedAccountData.account_amount.toFixed(4)}
                                     </Typography>
                                 </Box>
                             )}
@@ -220,7 +220,7 @@ const WithdrawMoneyDialog: React.FC<WithdrawMoneyDialogProps> = ({ open, onClose
                                 Available Commission Balance
                             </Typography>
                             <Typography variant="h6" sx={{ fontWeight: 700, color: '#6366f1' }}>
-                                ${availableBalance.toFixed(2)}
+                                ${availableBalance.toFixed(4)}
                             </Typography>
                         </Box>
                     )}
@@ -245,7 +245,7 @@ const WithdrawMoneyDialog: React.FC<WithdrawMoneyDialogProps> = ({ open, onClose
                             error={isCommission ? parseFloat(amount || '0') > availableBalance : (selectedAccountData && parseFloat(amount || '0') > selectedAccountData.account_amount)}
                             helperText={
                                 selectedAccountData && parseFloat(amount || '0') > selectedAccountData.account_amount
-                                    ? `Insufficient balance. Available: $${selectedAccountData.account_amount.toFixed(2)}`
+                                    ? `Insufficient balance. Available: $${selectedAccountData.account_amount.toFixed(4)}`
                                     : ''
                             }
                             InputProps={{

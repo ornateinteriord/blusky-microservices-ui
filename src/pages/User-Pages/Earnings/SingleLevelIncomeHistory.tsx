@@ -46,7 +46,7 @@ const SingleLevelIncomeHistory = () => {
         payoutLevel: 'Single Level Income', 
         memberName: transaction.related_member_name || '-',
         memberId: extractedMemberId,
-        amount: ((parseFloat(transaction.ew_credit) || 0) + (parseFloat(transaction.uw_credit) || 0)).toFixed(2),
+        amount: ((parseFloat(transaction.ew_credit) || 0) + (parseFloat(transaction.uw_credit) || 0)).toFixed(4),
         description: transaction.description || 'Single Level Income',
         transactionType: transaction.transaction_type
       };

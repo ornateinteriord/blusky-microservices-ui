@@ -126,7 +126,7 @@ const PaymentsTablePrint = forwardRef<HTMLDivElement, PaymentsTablePrintProps>((
                             <TableCell>{payment.payment_details}</TableCell>
                             <TableCell>{payment.mode_of_payment_paid}</TableCell>
                             <TableCell sx={{ textAlign: 'right', fontWeight: 600 }}>
-                                {payment.amount.toFixed(2)}
+                                {payment.amount.toFixed(4)}
                             </TableCell>
                         </TableRow>
                     ))}
@@ -137,7 +137,7 @@ const PaymentsTablePrint = forwardRef<HTMLDivElement, PaymentsTablePrintProps>((
                             Total:
                         </TableCell>
                         <TableCell sx={{ textAlign: 'right', fontWeight: 700, fontSize: '11px' }}>
-                            $ {calculateTotal().toFixed(2)}
+                            $ {calculateTotal().toFixed(4)}
                         </TableCell>
                     </TableRow>
                 </TableBody>
@@ -146,7 +146,7 @@ const PaymentsTablePrint = forwardRef<HTMLDivElement, PaymentsTablePrintProps>((
             {/* Footer */}
             <Box sx={{ mt: 3, textAlign: 'center' }}>
                 <Typography variant="caption" sx={{ fontSize: '9px', color: '#666' }}>
-                    Total Payments: {payments.length} | Total Amount: $ {calculateTotal().toFixed(2)}
+                    Total Payments: {payments.length} | Total Amount: $ {calculateTotal().toFixed(4)}
                 </Typography>
             </Box>
 

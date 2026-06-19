@@ -45,14 +45,14 @@ const Report: React.FC = () => {
       label: 'Amount Collected',
       align: 'right',
       sortable: true,
-      renderCell: (row) => `$ ${row.credit.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
+      renderCell: (row) => `$ ${row.credit.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}`,
     },
     {
       id: 'balance',
       label: 'Account Balance',
       align: 'right',
       sortable: true,
-      renderCell: (row) => `$ ${row.balance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
+      renderCell: (row) => `$ ${row.balance.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}`,
     },
     {
       id: 'status',

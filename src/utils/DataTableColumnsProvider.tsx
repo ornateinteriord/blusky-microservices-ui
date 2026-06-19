@@ -50,7 +50,7 @@ export const getUsedPackageColumns = (user: MemberDetails) => {
     },
     {
       name: "Amount",
-      selector: (row: any) => `$ ${row.amount.toLocaleString()}`,
+      selector: (row: any) => `$ ${row.amount.toFixed(4)}`,
       sortable: true,
     },
     {
@@ -91,7 +91,7 @@ export const getUnUsedPackageColumns = (user: MemberDetails) => [
   },
   {
     name: "Amount",
-    selector: (row: any) => `$ ${row.amount.toLocaleString()}`,
+    selector: (row: any) => `$ ${row.amount.toFixed(4)}`,
     sortable: true,
   },
   {
@@ -191,7 +191,7 @@ export const getAdminAggregatedIncomeColumns = () => [
     name: "Total Amount",
     selector: (row: any) => row.totalAmount,
     sortable: true,
-    format: (row: any) => `$ ${parseFloat(row.totalAmount || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
+    format: (row: any) => `$ ${parseFloat(row.totalAmount || 0).toLocaleString(undefined, { minimumFractionDigits: 4, maximumFractionDigits: 4 })}`,
   },
 ];
 
@@ -208,7 +208,7 @@ export const getDailyPayoutColumns = () => [
   },
   {
     name: "Amount",
-    selector: (row: any) => `$ ${parseFloat(row.ew_credit || row.amount || 0).toLocaleString()}`,
+    selector: (row: any) => `$ ${parseFloat(row.ew_credit || row.amount || 0).toFixed(4)}`,
     sortable: true,
   },
   {
@@ -312,12 +312,12 @@ export const getBankTransactionColumns = () => [
   },
   {
     name: "Credit",
-    selector: (row: any) => row.ew_credit ? `$ ${parseFloat(row.ew_credit).toLocaleString()}` : "-",
+    selector: (row: any) => row.ew_credit ? `$ ${parseFloat(row.ew_credit).toFixed(4)}` : "-",
     sortable: true,
   },
   {
     name: "Debit",
-    selector: (row: any) => row.ew_debit ? `$ ${parseFloat(row.ew_debit).toLocaleString()}` : "-",
+    selector: (row: any) => row.ew_debit ? `$ ${parseFloat(row.ew_debit).toFixed(4)}` : "-",
     sortable: true,
   },
   {
@@ -345,12 +345,12 @@ export const getJournalEntriesColumns = () => [
   },
   {
     name: "Debit",
-    selector: (row: any) => `$ ${parseFloat(row.debit || 0).toLocaleString()}`,
+    selector: (row: any) => `$ ${parseFloat(row.debit || 0).toFixed(4)}`,
     sortable: true,
   },
   {
     name: "Credit",
-    selector: (row: any) => `$ ${parseFloat(row.credit || 0).toLocaleString()}`,
+    selector: (row: any) => `$ ${parseFloat(row.credit || 0).toFixed(4)}`,
     sortable: true,
   },
 ];
@@ -396,9 +396,9 @@ export const getWalletColumns = () => [
     cell: (row: any) => {
 
       if (parseFloat(row.ew_debit) > 0) {
-        return `-$${parseFloat(row.ew_debit).toFixed(2)}`;
+        return `-$${parseFloat(row.ew_debit).toFixed(4)}`;
       } else {
-        return `+$${parseFloat(row.ew_credit).toFixed(2)}`;
+        return `+$${parseFloat(row.ew_credit).toFixed(4)}`;
       }
     }
   },
@@ -471,7 +471,7 @@ export const getMembersColumns = (
       selector: (row: any) => {
         const pkg = row.package_value || row.spackage;
         if (!pkg) return '-';
-        return !isNaN(Number(pkg)) ? `$${Number(pkg).toLocaleString()}` : pkg;
+        return !isNaN(Number(pkg)) ? `$${Number(pkg).toFixed(4)}` : pkg;
       },
       sortable: true,
     },
@@ -559,7 +559,7 @@ export const getPermissionsColumns = (
       cell: (row: any) => {
         const amt = row.total_package_value ?? row.package_value ?? row.spackage;
         if (!amt) return '-';
-        return !isNaN(Number(amt)) ? `$${Number(amt).toLocaleString()}` : amt;
+        return !isNaN(Number(amt)) ? `$${Number(amt).toFixed(4)}` : amt;
       },
     },
     {
@@ -627,7 +627,7 @@ export const getPendingMembersColumns = (
       cell: (row: any) => {
         const amt = row.package_value ?? row.spackage;
         if (!amt) return '-';
-        return !isNaN(Number(amt)) ? `$${Number(amt).toLocaleString()}` : amt;
+        return !isNaN(Number(amt)) ? `$${Number(amt).toFixed(4)}` : amt;
       },
     },
     {
@@ -1210,7 +1210,7 @@ export const getAdminDailyBenifitsColumns = () => [
     name: "ROI Amount",
     selector: (row: any) => row.ew_credit || row.amount || "0.00",
     sortable: true,
-    format: (row: any) => `$${parseFloat(row.ew_credit || row.amount || 0).toFixed(2)}`,
+    format: (row: any) => `$${parseFloat(row.ew_credit || row.amount || 0).toFixed(4)}`,
   },
   {
     name: "Status",
@@ -1245,7 +1245,7 @@ export const getAdminLevelBenifitsColumns = () => [
     name: "Amount",
     selector: (row: any) => row.daily_earnings.gross_profit || row.amount || row.benefitAmount || "0",
     sortable: true,
-    format: (row: any) => `$${parseFloat(row.amount || row.ew_credit || row.benefitAmount || 0).toFixed(2)}`,
+    format: (row: any) => `$${parseFloat(row.amount || row.ew_credit || row.benefitAmount || 0).toFixed(4)}`,
   },
 ];
 
@@ -1379,13 +1379,13 @@ export const getWithdrawPendingColumns = (onRepay: (transaction: any) => void) =
     name: 'Paid Amount',
     selector: (row: any) => row.ew_debit || '-',
     sortable: true,
-    cell: (row: any) => row.ew_debit ? `$${Number(row.net_amount).toLocaleString()}` : '-',
+    cell: (row: any) => row.ew_debit ? `$${Number(row.net_amount).toFixed(4)}` : '-',
   },
   {
     name: 'Deducted',
     selector: (row: any) => row.deduction || 0,
     sortable: true,
-    cell: (row: any) => `$${Number(row.deduction || 0).toLocaleString()}`,
+    cell: (row: any) => `$${Number(row.deduction || 0).toFixed(4)}`,
   },
   {
     name: 'Status',
@@ -1451,7 +1451,7 @@ export const getProcessedLoansColumns = () => [
   },
   {
     name: "Loan Amount",
-    selector: (row: any) => `$${parseInt(row.ew_credit || 0).toLocaleString()}` || "-",
+    selector: (row: any) => `$${parseInt(row.ew_credit || 0).toFixed(4)}` || "-",
     sortable: true,
   },
   {
@@ -1550,7 +1550,7 @@ export const getUpgradeWalletColumns = () => [
       const isDebit = parseFloat(row.uw_debit || 0) > 0;
       const amt = isDebit ? row.uw_debit : row.uw_credit;
       const sign = isDebit ? "-" : "+";
-      return amt && parseFloat(amt) > 0 ? `${sign}$${parseFloat(amt).toFixed(2)}` : "-";
+      return amt && parseFloat(amt) > 0 ? `${sign}$${parseFloat(amt).toFixed(4)}` : "-";
     },
     sortable: true,
   },

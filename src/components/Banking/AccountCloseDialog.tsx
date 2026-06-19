@@ -184,7 +184,7 @@ const AccountCloseDialog: React.FC<AccountCloseDialogProps> = ({
                                         <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                                             <Typography variant="body2">Interest Earned:</Typography>
                                             <Typography variant="body2" color="success.main" fontWeight={600}>
-                                                + ${interestAmount.toLocaleString('en-US', { maximumFractionDigits: 2 })}
+                                                + ${interestAmount.toLocaleString('en-US', { maximumFractionDigits: 4 })}
                                             </Typography>
                                         </Box>
                                     </>
@@ -195,7 +195,7 @@ const AccountCloseDialog: React.FC<AccountCloseDialogProps> = ({
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                     <Typography variant="body1" fontWeight={700}>Total Payout:</Typography>
                                     <Typography variant="body1" fontWeight={700} color="primary">
-                                        ${totalPayout.toLocaleString('en-US', { maximumFractionDigits: 2 })}
+                                        ${totalPayout.toLocaleString('en-US', { maximumFractionDigits: 4 })}
                                     </Typography>
                                 </Box>
                             </Box>
@@ -257,7 +257,7 @@ const AccountCloseDialog: React.FC<AccountCloseDialogProps> = ({
                     {isLoading ? (
                         <CircularProgress size={20} color="inherit" />
                     ) : hasBalance ? (
-                        `Pay $${totalPayout.toLocaleString('en-US', { maximumFractionDigits: 0 })} & Close`
+                        `Pay $${totalPayout.toLocaleString('en-US', { maximumFractionDigits: 4, minimumFractionDigits: 4 })} & Close`
                     ) : (
                         'Close Account'
                     )}

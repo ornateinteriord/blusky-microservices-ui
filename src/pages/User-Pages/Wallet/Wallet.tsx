@@ -108,7 +108,7 @@ const Wallet = () => {
     }
 
     if (withdrawalAmount > maxWithdrawal) {
-      toast.error(`Maximum withdrawal limit is $${maxWithdrawal.toFixed(2)} (25% of your total package amount)`);
+      toast.error(`Maximum withdrawal limit is $${maxWithdrawal.toFixed(4)} (25% of your total package amount)`);
       return;
     }
 
@@ -205,7 +205,7 @@ const Wallet = () => {
             >
               <TextField
                 label="Available Balance"
-                value={`$${displayBalance.toFixed(2)}`}
+                value={`$${displayBalance.toFixed(4)}`}
                 fullWidth
                 size="medium"
                 InputProps={{ readOnly: true }}
@@ -239,7 +239,7 @@ const Wallet = () => {
               {/* 
               <TextField
                 label="Admin Charges (15%)"
-                value={`$${adminCharges.toFixed(2)}`}
+                value={`$${adminCharges.toFixed(4)}`}
                 fullWidth
                 size="medium"
                 InputProps={{ readOnly: true }}
@@ -254,7 +254,7 @@ const Wallet = () => {
 
               <TextField
                 label="Admin (5%)"
-                value={`$${tds.toFixed(2)}`}
+                value={`$${tds.toFixed(4)}`}
                 fullWidth
                 size="medium"
                 InputProps={{ readOnly: true }}
@@ -268,7 +268,7 @@ const Wallet = () => {
 
               <TextField
                 label="Net Amount Received"
-                value={`$${netAmount.toFixed(2)}`}
+                value={`$${netAmount.toFixed(4)}`}
                 fullWidth
                 size="medium"
                 InputProps={{ readOnly: true }}
@@ -297,7 +297,7 @@ const Wallet = () => {
                     <Box>
                       <Typography variant="body2">• 5% Admin applied</Typography>
                       <Typography variant="body2">• Minimum withdrawal: $5</Typography>
-                      <Typography variant="body2">• Maximum withdrawal: 25% of total package (${maxWithdrawal.toFixed(2)})</Typography>
+                      <Typography variant="body2">• Maximum withdrawal: 25% of total package (${maxWithdrawal.toFixed(4)})</Typography>
                       <Typography variant="body2">• One withdrawal per day allowed</Typography>
                     </Box>
                   </Box>

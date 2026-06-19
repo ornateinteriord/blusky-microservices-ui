@@ -97,7 +97,7 @@ const ChatList: React.FC<ChatListProps> = ({
                             color: '#FFD700',
                         }}
                     >
-                        Messages
+                        Chat
                     </Typography>
 
                     {onNewChat && (

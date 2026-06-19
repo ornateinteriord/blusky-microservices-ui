@@ -477,7 +477,7 @@ const ActivatePackage: React.FC = () => {
                             />
                           </TableCell>
                           <TableCell align="right" sx={{ fontWeight: 'medium', color: 'success.main' }}>
-                            {typeof commission.amount === 'number' ? `$${commission.amount.toFixed(2)}` : '$0.00'}
+                            {typeof commission.amount === 'number' ? `$${commission.amount.toFixed(4)}` : '$0.00'}
                           </TableCell>
                         </TableRow>
                       ))}
@@ -501,7 +501,7 @@ const ActivatePackage: React.FC = () => {
                       Total Commission Distributed:
                     </Typography>
                     <Typography variant="h6" fontWeight="bold">
-                      ${totalCommission.toFixed(2)}
+                      ${totalCommission.toFixed(4)}
                     </Typography>
                   </Box>
                 )}

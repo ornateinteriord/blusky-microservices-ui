@@ -128,7 +128,7 @@ const MySubscriptions: React.FC = () => {
                           {pkg.isFD ? 'Interest Rate' : 'Single Level Income'}
                         </Typography>
                         <Typography variant="h6" sx={{ fontWeight: 800, color: '#FFD700', fontSize: '1.2rem' }}>
-                          {pkg.isFD ? `${pkg.interest_rate || 0}% p.a.` : `$${sliAmount.toFixed(2)}`}
+                          {pkg.isFD ? `${pkg.interest_rate || 0}% p.a.` : `$${sliAmount.toFixed(4)}`}
                         </Typography>
                       </Box>
 

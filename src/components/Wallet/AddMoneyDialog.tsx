@@ -167,7 +167,7 @@ const AddMoneyDialog: React.FC<AddMoneyDialogProps> = ({ open, onClose }) => {
                         ) : (
                             myAccounts.map((acc: any) => (
                                 <MenuItem key={acc._id} value={acc._id}>
-                                    {acc.account_group_name} - ${acc.account_amount.toFixed(2)} ({acc.account_no})
+                                    {acc.account_group_name} - ${acc.account_amount.toFixed(4)} ({acc.account_no})
                                 </MenuItem>
                             ))
                         )}

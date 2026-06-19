@@ -169,7 +169,7 @@ const ReceiptPrint = forwardRef<HTMLDivElement, ReceiptPrintProps>(({ receiptDat
 
                     <Box sx={{ p: 2 }}>
                         <Typography variant="body2" sx={{ fontSize: '11px', textAlign: 'right' }}>
-                            {receiptData.amount.toFixed(2)}
+                            {receiptData.amount.toFixed(4)}
                         </Typography>
                     </Box>
                 </Box>
@@ -185,7 +185,7 @@ const ReceiptPrint = forwardRef<HTMLDivElement, ReceiptPrintProps>(({ receiptDat
                     <Box sx={{ p: 1, borderRight: '1px solid #000' }}></Box>
                     <Box sx={{ p: 1 }}>
                         <Typography variant="body2" sx={{ fontSize: '11px', textAlign: 'right', fontWeight: 700 }}>
-                            {receiptData.amount.toFixed(2)}
+                            {receiptData.amount.toFixed(4)}
                         </Typography>
                     </Box>
                 </Box>

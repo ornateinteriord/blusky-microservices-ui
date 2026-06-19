@@ -236,7 +236,7 @@ export const UserAddOnPackages = () => {
                           {pkg.isFD ? 'Interest Rate' : 'Single Level Income'}
                         </Typography>
                         <Typography variant="h6" sx={{ fontWeight: 800, color: '#1565c0', fontSize: '1.1rem' }}>
-                          {pkg.isFD ? `${pkg.interest_rate || 0}% p.a.` : `$${sliAmount.toFixed(2)}`}
+                          {pkg.isFD ? `${pkg.interest_rate || 0}% p.a.` : `$${sliAmount.toFixed(4)}`}
                         </Typography>
                       </Box>
 

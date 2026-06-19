@@ -112,7 +112,7 @@ const CashTransactionTablePrint = forwardRef<HTMLDivElement, CashTransactionTabl
                                 Opening Balance
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '13px', fontWeight: 700 }}>
-                                $ {summary.openingBalance.toFixed(2)}
+                                $ {summary.openingBalance.toFixed(4)}
                             </Typography>
                         </Box>
                         <Box sx={{ textAlign: 'center' }}>
@@ -120,7 +120,7 @@ const CashTransactionTablePrint = forwardRef<HTMLDivElement, CashTransactionTabl
                                 Debit Amount
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '13px', fontWeight: 700, color: '#dc2626' }}>
-                                $ {summary.debitAmount.toFixed(2)}
+                                $ {summary.debitAmount.toFixed(4)}
                             </Typography>
                         </Box>
                         <Box sx={{ textAlign: 'center' }}>
@@ -128,7 +128,7 @@ const CashTransactionTablePrint = forwardRef<HTMLDivElement, CashTransactionTabl
                                 Credit Amount
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '13px', fontWeight: 700, color: '#10b981' }}>
-                                $ {summary.creditAmount.toFixed(2)}
+                                $ {summary.creditAmount.toFixed(4)}
                             </Typography>
                         </Box>
                         <Box sx={{ textAlign: 'center' }}>
@@ -136,7 +136,7 @@ const CashTransactionTablePrint = forwardRef<HTMLDivElement, CashTransactionTabl
                                 Closing Balance
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '13px', fontWeight: 700 }}>
-                                $ {summary.closingBalance.toFixed(2)}
+                                $ {summary.closingBalance.toFixed(4)}
                             </Typography>
                         </Box>
                     </Box>
@@ -174,13 +174,13 @@ const CashTransactionTablePrint = forwardRef<HTMLDivElement, CashTransactionTabl
                                 <TableCell>{transaction.description}</TableCell>
                                 <TableCell>{transaction.reference_no || '-'}</TableCell>
                                 <TableCell sx={{ textAlign: 'right', color: '#dc2626', fontWeight: 600 }}>
-                                    {transaction.debit > 0 ? transaction.debit.toFixed(2) : '-'}
+                                    {transaction.debit > 0 ? transaction.debit.toFixed(4) : '-'}
                                 </TableCell>
                                 <TableCell sx={{ textAlign: 'right', color: '#10b981', fontWeight: 600 }}>
-                                    {transaction.credit > 0 ? transaction.credit.toFixed(2) : '-'}
+                                    {transaction.credit > 0 ? transaction.credit.toFixed(4) : '-'}
                                 </TableCell>
                                 <TableCell sx={{ textAlign: 'right', fontWeight: 700 }}>
-                                    {transaction.balance.toFixed(2)}
+                                    {transaction.balance.toFixed(4)}
                                 </TableCell>
                             </TableRow>
                         ))}
