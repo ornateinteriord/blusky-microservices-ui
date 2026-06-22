@@ -110,7 +110,13 @@ const Login = () => {
         }}
       />
 
-      <Container component="main" maxWidth="xs" sx={{ position: "relative", zIndex: 1 }}>
+      <Container component="main" maxWidth="xs" sx={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center" }}>
+        
+        {/* LOGO OUTSIDE FORM */}
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+          <img src={uwtLogo} alt="UWT Logo" style={{ height: "140px", marginBottom: "3px", objectFit: "contain", filter: "drop-shadow(0px 10px 20px rgba(0,0,0,0.5))" }} />
+        </Box>
+
         <Paper
           elevation={24}
           sx={{
@@ -126,7 +132,16 @@ const Login = () => {
             border: "1px solid rgba(255, 255, 255, 0.08)",
           }}
         >
-          <img src={uwtLogo} alt="UWT Logo" style={{ height: "140px", marginBottom: "10px", objectFit: "contain" }} />
+          {/* TEXT INSIDE FORM */}
+          <Box sx={{ mb: 3, textAlign: 'center' }}>
+            <Typography variant="h5" sx={{ color: '#FFD700', fontWeight: 800 }}>
+              USDT World Club
+            </Typography>
+            <Typography variant="body1" sx={{ color: 'rgba(255,255,255,0.8)', fontWeight: 500, mt: 0.5 }}>
+              Empowering your digital wealth journey
+            </Typography>
+          </Box>
+
           {isResetMode ? (
             <ForgotPasswordForm onBackToLogin={() => setIsResetMode(false)} />
           ) : (
@@ -330,8 +345,40 @@ const Login = () => {
               >
                 Open an Account
               </Link>
-            </Typography>
-          </Box>
+              </Typography>
+
+              {/* SUPPORT BUTTONS */}
+              <Box sx={{ mt: 3, pt: 3, borderTop: '1px solid rgba(255,255,255,0.1)', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%', gap: 2 }}>
+                <Button 
+                    variant="text" 
+                    href="/chat"
+                    sx={{ 
+                      color: '#00e676', 
+                      textTransform: 'none',
+                      fontWeight: 700,
+                      padding: 0,
+                      minWidth: 'auto',
+                      '&:hover': { bgcolor: 'transparent', color: '#33ff99' }
+                    }}
+                >
+                    💬 Live Chat
+                </Button>
+                <Button 
+                    variant="text" 
+                    href="mailto:support@usdtworld.club"
+                    sx={{ 
+                      color: 'rgba(255,255,255,0.6)', 
+                      textTransform: 'none',
+                      fontWeight: 500,
+                      padding: 0,
+                      minWidth: 'auto',
+                      '&:hover': { color: '#fff', bgcolor: 'transparent' }
+                    }}
+                >
+                    support@usdtworld.club
+                </Button>
+              </Box>
+            </Box>
             </>
           )}
         </Paper>
