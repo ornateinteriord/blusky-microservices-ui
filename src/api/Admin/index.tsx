@@ -329,6 +329,25 @@ export const useTriggerDailyROI = () => {
   });
 };
 
+export const useTriggerAutoUpgrades = () => {
+  return useMutation({
+    mutationFn: async () => {
+      return await post("/admin/trigger-auto-upgrades", {});
+    },
+    onSuccess: (response: any) => {
+      if (response.success) {
+        toast.success(`Auto Upgrades triggered successfully. Processed: ${response.processedCount || 0}`);
+      } else {
+        toast.error(response.message || "Auto Upgrades failed");
+      }
+    },
+    onError: (error: any) => {
+      toast.error(error.response?.data?.message || "Failed to trigger Auto Upgrades");
+    },
+  });
+};
+
+
 
 
 

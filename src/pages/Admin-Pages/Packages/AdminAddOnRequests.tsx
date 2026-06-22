@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography, CircularProgress, Button, Box, Chip, Dialog, DialogTitle, DialogContent, IconButton } from '@mui/material';
+import { Card, CardContent, Typography, CircularProgress, Button, Box, Chip, Dialog, DialogTitle, DialogContent, IconButton, TextField } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import CloseIcon from '@mui/icons-material/Close';
@@ -6,12 +6,19 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import DataTable from 'react-data-table-component';
 import { DASHBOARD_CUTSOM_STYLE } from '../../../utils/DataTableColumnsProvider';
 import { useGetAddOnRequests, useEvaluateAddOnMutation } from '../../../api/Packages';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import useSearch from '../../../hooks/SearchQuery';
 
 const AdminAddOnRequests = () => {
   const { data: requests, isLoading } = useGetAddOnRequests();
   const { mutate: evaluateRequest, isPending: isEvaluating } = useEvaluateAddOnMutation();
   const [previewImage, setPreviewImage] = useState<string | null>(null);
+
+  const sortedRequests = useMemo(() => {
+    return requests ? [...requests].sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) : [];
+  }, [requests]);
+
+  const { searchQuery, setSearchQuery, filteredData } = useSearch(sortedRequests);
 
   const handleAction = (request_id: string, status: 'APPROVED' | 'REJECTED') => {
     evaluateRequest({
@@ -107,12 +114,21 @@ const AdminAddOnRequests = () => {
 
       <Card sx={{ width: '100%', mb: 2 }}>
         <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
-          <Typography variant="h6" sx={{ color: '#0a2558', mb: 2 }}>
-            Manage Member Load Fund Approvals
-          </Typography>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'space-between', marginBottom: '1rem', alignItems: 'center' }}>
+            <Typography variant="h6" sx={{ color: '#0a2558', margin: 0 }}>
+              Manage Member Load Fund Approvals
+            </Typography>
+            <TextField
+              size="small"
+              placeholder="Search..."
+              sx={{ minWidth: 200 }}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
           <DataTable
             columns={columns}
-            data={requests || []}
+            data={filteredData}
             pagination
             progressPending={isLoading}
             progressComponent={<CircularProgress />}

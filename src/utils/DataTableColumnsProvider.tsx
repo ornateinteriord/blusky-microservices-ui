@@ -469,11 +469,21 @@ export const getMembersColumns = (
     {
       name: "Package",
       selector: (row: any) => {
-        const pkg = row.package_value || row.spackage;
-        if (!pkg) return '-';
-        return !isNaN(Number(pkg)) ? `$${Number(pkg).toFixed(4)}` : pkg;
+        const primary = Number(row.package_value) || 0;
+        const addons = Array.isArray(row.addons) ? row.addons.map((a: any) => Number(a.amount)).filter((amt: number) => amt > 0) : [];
+        
+        let display = '';
+        if (primary > 0) display += `$${primary}`;
+        else if (row.spackage && !row.package_value) return row.spackage;
+        
+        if (addons.length > 0) {
+            display += (display ? ' + ' : '') + addons.map((amt: number) => `$${amt}`).join(' + ');
+        }
+        
+        return display || '-';
       },
       sortable: true,
+      minWidth: '150px'
     },
     {
       name: "MobileNo",
@@ -552,15 +562,21 @@ export const getPermissionsColumns = (
     {
       name: "Package",
       selector: (row: any) => {
-        const pkg = row.total_package_value ?? row.package_value ?? row.spackage;
-        return pkg;
+        const primary = Number(row.package_value) || 0;
+        const addons = Array.isArray(row.addons) ? row.addons.map((a: any) => Number(a.amount)).filter((amt: number) => amt > 0) : [];
+        
+        let display = '';
+        if (primary > 0) display += `$${primary}`;
+        else if (row.spackage && !row.package_value) return row.spackage;
+        
+        if (addons.length > 0) {
+            display += (display ? ' + ' : '') + addons.map((amt: number) => `$${amt}`).join(' + ');
+        }
+        
+        return display || '-';
       },
       sortable: true,
-      cell: (row: any) => {
-        const amt = row.total_package_value ?? row.package_value ?? row.spackage;
-        if (!amt) return '-';
-        return !isNaN(Number(amt)) ? `$${Number(amt).toFixed(4)}` : amt;
-      },
+      minWidth: '150px'
     },
     {
       name: "Status",

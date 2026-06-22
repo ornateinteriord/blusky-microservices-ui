@@ -3,7 +3,7 @@ import { TextField, Button, Card, CardContent, Dialog, DialogTitle, DialogConten
 import { Typography } from '@mui/material';
 import DataTable from 'react-data-table-component';
 import { DASHBOARD_CUTSOM_STYLE, getSupportTicketColumns } from '../../../utils/DataTableColumnsProvider';
-import { useGetAllTickets, useUpdateTickets } from '../../../api/Admin';
+import { useGetAllTickets, useUpdateTickets, useTriggerAutoUpgrades } from '../../../api/Admin';
 import { toast } from 'react-toastify';
 import useSearch from '../../../hooks/SearchQuery';
 
@@ -66,18 +66,45 @@ const SupportTickets = () => {
   }, [isError, error]);
 
   const { searchQuery, setSearchQuery, filteredData } = useSearch(tickets)
+  const triggerAutoUpgradesMutation = useTriggerAutoUpgrades();
+
+  const handleTriggerAutoUpgrades = () => {
+    if (window.confirm('Are you sure you want to run the Auto Upgrade process for all eligible members now?')) {
+      triggerAutoUpgradesMutation.mutate();
+    }
+  };
 
 
 
   return (
     <>
-      <Typography variant="h4" sx={{ margin: '2rem', mt: 10 }}>
-        Support Tickets
-      </Typography>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '2rem', marginTop: '5rem' }}>
+        <Typography variant="h4" sx={{ margin: 0 }}>
+          Support Tickets
+        </Typography>
+        <Button 
+          variant="contained" 
+          color="secondary" 
+          onClick={handleTriggerAutoUpgrades}
+          disabled={triggerAutoUpgradesMutation.isPending}
+          sx={{ 
+            backgroundColor: '#ffff', 
+            color: '#000', 
+            textTransform: 'capitalize', 
+            fontWeight: 'bold',
+            '&.Mui-disabled': {
+              backgroundColor: '#ffff',
+              color: '#000'
+            }
+          }}
+        >
+          {triggerAutoUpgradesMutation.isPending ? "Processing..." : "Trigger Auto Upgrades"}
+        </Button>
+      </div>
       <Card sx={{ margin: '2rem', mt: 2 }}>
         <CardContent>
           <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem"     }}>List of Support Tickets</div>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end', marginBottom: '1rem' }}>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end', marginBottom: '1rem', alignItems: 'center' }}>
                 <TextField
                   size="small"
                   placeholder="Search..."
