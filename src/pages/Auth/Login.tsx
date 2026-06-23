@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Box, TextField, Button, Typography, Container, Paper, Checkbox, FormControlLabel, Link as MuiLink, InputAdornment, IconButton } from '@mui/material';
-import { Visibility, VisibilityOff, PersonOutline, LockOutlined } from '@mui/icons-material';
+import { Box, TextField, Button, Typography, Container, Paper, Checkbox, FormControlLabel, Link as MuiLink, InputAdornment, IconButton, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import { Visibility, VisibilityOff, PersonOutline, LockOutlined, Close as CloseIcon } from '@mui/icons-material';
+import { toast } from 'react-toastify';
+import { post } from '../../api/Api';
 
 import { LoadingComponent } from '../../App';
 import { useLoginMutation } from '../../api/Auth';
@@ -16,6 +18,11 @@ const Login = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isResetMode, setIsResetMode] = useState(false);
+
+  // Guest chat state
+  const [openMsgDialog, setOpenMsgDialog] = useState(false);
+  const [guestMsgData, setGuestMsgData] = useState({ name: "", phone: "", message: "" });
+  const [isSendingMsg, setIsSendingMsg] = useState(false);
 
   // Load saved credentials on mount
   useEffect(() => {
@@ -71,6 +78,33 @@ const Login = () => {
     event.preventDefault();
   };
 
+  const handleSendGuestMessage = async () => {
+    if (!guestMsgData.name || !guestMsgData.phone || !guestMsgData.message) {
+      toast.error("Please fill all fields");
+      return;
+    }
+    try {
+      setIsSendingMsg(true);
+      const guestId = `GUEST_${guestMsgData.phone}`;
+      const res = await post("/chat/guest/message/send", {
+        roomId: `${guestId}_ADMIN_1`,
+        guestId: guestId,
+        text: `From: ${guestMsgData.name} (${guestMsgData.phone})\n\n${guestMsgData.message}`
+      });
+      if (res.success) {
+        toast.success("Message sent successfully!");
+        setOpenMsgDialog(false);
+        setGuestMsgData({ name: "", phone: "", message: "" });
+      } else {
+        toast.error("Failed to send message");
+      }
+    } catch (error) {
+      toast.error("An error occurred");
+    } finally {
+      setIsSendingMsg(false);
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -113,8 +147,14 @@ const Login = () => {
       <Container component="main" maxWidth="xs" sx={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center" }}>
         
         {/* LOGO OUTSIDE FORM */}
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-          <img src={uwtLogo} alt="UWT Logo" style={{ height: "140px", marginBottom: "3px", objectFit: "contain", filter: "drop-shadow(0px 10px 20px rgba(0,0,0,0.5))" }} />
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', mb: 0 }}>
+          <img src={uwtLogo} alt="UWT Logo" style={{ height: "120px", marginBottom: "0px", objectFit: "contain", filter: "drop-shadow(0px 10px 20px rgba(0,0,0,0.5))" }} />
+          <Typography variant="h5" sx={{ color: '#FFD700', fontWeight: 800 }}>
+            USDT World Club
+          </Typography>
+          <Typography variant="body1" sx={{ color: 'rgba(255,255,255,0.8)', fontWeight: 500, mt: 0.5 }}>
+            Empowering your digital wealth journey
+          </Typography>
         </Box>
 
         <Paper
@@ -132,15 +172,6 @@ const Login = () => {
             border: "1px solid rgba(255, 255, 255, 0.08)",
           }}
         >
-          {/* TEXT INSIDE FORM */}
-          <Box sx={{ mb: 3, textAlign: 'center' }}>
-            <Typography variant="h5" sx={{ color: '#FFD700', fontWeight: 800 }}>
-              USDT World Club
-            </Typography>
-            <Typography variant="body1" sx={{ color: 'rgba(255,255,255,0.8)', fontWeight: 500, mt: 0.5 }}>
-              Empowering your digital wealth journey
-            </Typography>
-          </Box>
 
           {isResetMode ? (
             <ForgotPasswordForm onBackToLogin={() => setIsResetMode(false)} />
@@ -329,61 +360,137 @@ const Login = () => {
               Sign In to Account
             </Button>
 
-            <Typography
-              variant="body2"
-              sx={{ textAlign: "center", mt: 1, color: "rgba(255, 255, 255, 0.5)", fontWeight: 500 }}
-            >
-              Ready to start your journey?{" "}
-              <Link
-                to="/register"
-                style={{
-                  color: "#FFD700",
-                  textDecoration: "none",
-                  fontWeight: 700,
-                  transition: "color 0.2s ease"
-                }}
-              >
-                Open an Account
-              </Link>
-              </Typography>
-
-              {/* SUPPORT BUTTONS */}
-              <Box sx={{ mt: 3, pt: 3, borderTop: '1px solid rgba(255,255,255,0.1)', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%', gap: 2 }}>
-                <Button 
-                    variant="text" 
-                    href="/chat"
-                    sx={{ 
-                      color: '#00e676', 
-                      textTransform: 'none',
-                      fontWeight: 700,
-                      padding: 0,
-                      minWidth: 'auto',
-                      '&:hover': { bgcolor: 'transparent', color: '#33ff99' }
-                    }}
-                >
-                    💬 Live Chat
-                </Button>
-                <Button 
-                    variant="text" 
-                    href="mailto:support@usdtworld.club"
-                    sx={{ 
-                      color: 'rgba(255,255,255,0.6)', 
-                      textTransform: 'none',
-                      fontWeight: 500,
-                      padding: 0,
-                      minWidth: 'auto',
-                      '&:hover': { color: '#fff', bgcolor: 'transparent' }
-                    }}
-                >
-                    support@usdtworld.club
-                </Button>
-              </Box>
             </Box>
             </>
           )}
         </Paper>
+
+        {/* SECOND CONTAINER: CREATE ACCOUNT & SUPPORT */}
+        <Paper
+          elevation={24}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: "100%",
+            mt: 1,
+            p: { xs: 3, md: 4 },
+            borderRadius: "28px",
+            background: "rgba(255, 255, 255, 0.04)",
+            backdropFilter: "blur(12px)",
+            boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
+            border: "1px solid rgba(255, 255, 255, 0.08)",
+          }}
+        >
+          <Typography variant="body1" sx={{ color: "rgba(255, 255, 255, 0.7)", fontWeight: 500, mb: 2 }}>
+            New to USDT World Club?
+          </Typography>
+          <Button
+            component={Link}
+            to="/register"
+            fullWidth
+            variant="contained"
+            sx={{
+              py: 1.5,
+              color: "#050916", // Dark text to contrast with gold
+              background: "linear-gradient(90deg, #FFD700 0%, #FFA500 100%)",
+              fontWeight: 800,
+              fontSize: "1.1rem",
+              borderRadius: "12px",
+              textTransform: "none",
+              boxShadow: "0 8px 24px rgba(255, 215, 0, 0.3)",
+              transition: "all 0.3s ease",
+              "&:hover": {
+                background: "linear-gradient(90deg, #FFA500 0%, #FFD700 100%)",
+                transform: "translateY(-2px)",
+                boxShadow: "0 12px 28px rgba(255, 215, 0, 0.4)",
+              }
+            }}
+          >
+            Create New Account
+          </Button>
+
+          {/* SUPPORT BUTTONS */}
+          <Box sx={{ mt: 3, pt: 3, borderTop: '1px solid rgba(255,255,255,0.1)', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%', gap: 2 }}>
+            <Button 
+                variant="text" 
+                onClick={() => setOpenMsgDialog(true)}
+                sx={{ 
+                  color: '#00e676', 
+                  textTransform: 'none',
+                  fontWeight: 700,
+                  padding: 0,
+                  minWidth: 'auto',
+                  '&:hover': { bgcolor: 'transparent', color: '#33ff99' }
+                }}
+            >
+                💬 Message Us
+            </Button>
+            <Button 
+                variant="text" 
+                href="mailto:support@usdt.com"
+                sx={{ 
+                  color: 'rgba(255,255,255,0.6)', 
+                  textTransform: 'none',
+                  fontWeight: 500,
+                  padding: 0,
+                  minWidth: 'auto',
+                  '&:hover': { color: '#fff', bgcolor: 'transparent' }
+                }}
+            >
+                ✉️ Mail To Us
+            </Button>
+          </Box>
+        </Paper>
       </Container>
       {isPending && <LoadingComponent />}
+
+      {/* GUEST MESSAGE DIALOG */}
+      <Dialog open={openMsgDialog} onClose={() => setOpenMsgDialog(false)} maxWidth="sm" fullWidth PaperProps={{ sx: { bgcolor: '#0f1e36', color: '#fff', borderRadius: '16px' } }}>
+        <DialogTitle sx={{ borderBottom: '1px solid rgba(255,255,255,0.1)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Typography variant="h6" fontWeight={700} color="#FFD700">Message Support</Typography>
+          <IconButton onClick={() => setOpenMsgDialog(false)} sx={{ color: 'rgba(255,255,255,0.5)' }}><CloseIcon /></IconButton>
+        </DialogTitle>
+        <DialogContent sx={{ pt: 3, display: 'flex', flexDirection: 'column', gap: 2, mt: 1 }}>
+          <TextField 
+            label="Your Name" 
+            fullWidth 
+            variant="outlined" 
+            value={guestMsgData.name} 
+            onChange={(e) => setGuestMsgData({ ...guestMsgData, name: e.target.value })}
+            sx={{ "& .MuiOutlinedInput-root": { color: "#fff", "& fieldset": { borderColor: "rgba(255,255,255,0.2)" } }, "& .MuiInputLabel-root": { color: "rgba(255,255,255,0.6)" } }}
+          />
+          <TextField 
+            label="Mobile Number" 
+            fullWidth 
+            variant="outlined" 
+            value={guestMsgData.phone} 
+            onChange={(e) => setGuestMsgData({ ...guestMsgData, phone: e.target.value })}
+            sx={{ "& .MuiOutlinedInput-root": { color: "#fff", "& fieldset": { borderColor: "rgba(255,255,255,0.2)" } }, "& .MuiInputLabel-root": { color: "rgba(255,255,255,0.6)" } }}
+          />
+          <TextField 
+            label="Message" 
+            fullWidth 
+            multiline 
+            rows={4} 
+            variant="outlined" 
+            value={guestMsgData.message} 
+            onChange={(e) => setGuestMsgData({ ...guestMsgData, message: e.target.value })}
+            sx={{ "& .MuiOutlinedInput-root": { color: "#fff", "& fieldset": { borderColor: "rgba(255,255,255,0.2)" } }, "& .MuiInputLabel-root": { color: "rgba(255,255,255,0.6)" } }}
+          />
+        </DialogContent>
+        <DialogActions sx={{ p: 2, borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+          <Button onClick={() => setOpenMsgDialog(false)} sx={{ color: 'rgba(255,255,255,0.6)' }}>Cancel</Button>
+          <Button 
+            onClick={handleSendGuestMessage} 
+            variant="contained" 
+            disabled={isSendingMsg}
+            sx={{ background: "linear-gradient(135deg, #FFD700 0%, #e6c200 100%)", color: "#050916", fontWeight: 700, borderRadius: '8px' }}
+          >
+            {isSendingMsg ? "Sending..." : "Send Message"}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };
