@@ -1,10 +1,19 @@
-import { Box, Button, InputAdornment, TextField, Typography,  } from '@mui/material';
-import EmailIcon from "@mui/icons-material/Email";
+import { Box, Button, InputAdornment, TextField, Typography } from '@mui/material';
+import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import LockIcon from "@mui/icons-material/Lock";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MuiOtpInput } from 'mui-one-time-password-input';
 import { useResetpassword } from '../../../api/Auth';
+import { auth } from '../../../firebase';
+import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from 'firebase/auth';
+import { toast } from 'react-toastify';
+
+declare global {
+  interface Window {
+    recaptchaVerifier: any;
+  }
+}
 
 interface ForgotPasswordFormProps {
   onBackToLogin: () => void;
@@ -15,6 +24,10 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [otp, setOtp] = useState("");
   const [formData, setFormData] = useState<Record<string, string>>({});
+  const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
+  const [isSendingOTP, setIsSendingOTP] = useState(false);
+  const [isVerifyingOTP, setIsVerifyingOTP] = useState(false);
+  const [firebaseToken, setFirebaseToken] = useState<string>("");
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -27,48 +40,100 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
   const ResetPasswordMutation = useResetpassword();
   const { mutate, isPending } = ResetPasswordMutation;
 
+  useEffect(() => {
+    return () => {
+      if ((window as any).forgotPwdRecaptchaVerifier) {
+        try {
+          (window as any).forgotPwdRecaptchaVerifier.clear();
+        } catch (e) {}
+        (window as any).forgotPwdRecaptchaVerifier = null;
+      }
+    };
+  }, []);
+
+  const setupRecaptcha = () => {
+    if (!(window as any).forgotPwdRecaptchaVerifier) {
+      (window as any).forgotPwdRecaptchaVerifier = new RecaptchaVerifier(auth, 'forgot-pwd-recaptcha', {
+        'size': 'invisible',
+        'callback': () => {}
+      });
+    }
+  };
+
+  const handleSendOTP = async () => {
+    if (!formData.mobileno || formData.mobileno.length < 10) {
+      toast.error("Please enter a valid mobile number");
+      return;
+    }
+    
+    let formattedPhone = formData.mobileno;
+    if (!formattedPhone.startsWith('+')) {
+      formattedPhone = '+91' + formattedPhone;
+    }
+
+    setIsSendingOTP(true);
+    try {
+      setupRecaptcha();
+      const appVerifier = (window as any).forgotPwdRecaptchaVerifier;
+      const result = await signInWithPhoneNumber(auth, formattedPhone, appVerifier);
+      setConfirmationResult(result);
+      toast.success("OTP sent to your mobile number");
+      setStep(2);
+    } catch (error: any) {
+      console.error("SMS Error", error);
+      toast.error('Failed to send OTP. ' + error.message);
+      // Removed recaptchaVerifier.clear() to prevent "already rendered" error on retry
+    } finally {
+      setIsSendingOTP(false);
+    }
+  };
+
+  const handleVerifyOTP = async () => {
+    if (otp.length !== 6) return;
+    
+    setIsVerifyingOTP(true);
+    try {
+      if (!confirmationResult) throw new Error("Session expired. Please request OTP again.");
+      const result = await confirmationResult.confirm(otp);
+      const idToken = await result.user.getIdToken();
+      setFirebaseToken(idToken);
+      toast.success("Mobile number verified!");
+      setStep(3);
+    } catch (error: any) {
+      toast.error("Invalid OTP");
+      setOtp("");
+    } finally {
+      setIsVerifyingOTP(false);
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      if (step === 1 && formData.email) {
-        mutate({ email: formData.email });
-        setStep(2); // Advance immediately to allow OTP input
-      } else if (step === 2 && otp.length === 6) {
-        mutate(
-          { email: formData.email, otp },
-          {
-            onSuccess: () => {
-              setStep(3);
-            },
-            onError: () => {
-              setOtp("");
-              setStep(1);
-            },
-          }
-        );
-      } else if (step === 3) {
-        if (formData.password?.length <= 5) {
-          setErrorMessage("Password must be at least 6 characters*");
-          return;
-        }
-        if (formData.password !== formData.confirmPassword) {
-          setErrorMessage("Passwords do not match");
-          return;
-        }
-        mutate(
-          { email: formData.email, password: formData.password, otp },
-          {
-            onSuccess: () => {
-              setFormData({ email: "", password: "", confirmPassword: "" });
-              setOtp("");
-              setErrorMessage("");
-              onBackToLogin(); // Go back to login screen safely
-            }
-          }
-        );
+    if (step === 1) {
+      handleSendOTP();
+    } else if (step === 2) {
+      handleVerifyOTP();
+    } else if (step === 3) {
+      if (formData.password?.length <= 5) {
+        setErrorMessage("Password must be at least 6 characters*");
+        return;
       }
-    } catch (error) {
-      console.error("Error", error);
+      if (formData.password !== formData.confirmPassword) {
+        setErrorMessage("Passwords do not match");
+        return;
+      }
+      mutate(
+        { mobileno: formData.mobileno, password: formData.password, otp: firebaseToken }, // Using otp field for token
+        {
+          onSuccess: () => {
+            setFormData({ mobileno: "", password: "", confirmPassword: "" });
+            setOtp("");
+            setErrorMessage("");
+            toast.success("Password reset successfully!");
+            onBackToLogin();
+          }
+        }
+      );
     }
   };
 
@@ -106,8 +171,8 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
         variant="body2"
         sx={{ color: "rgba(255, 255, 255, 0.6)", textAlign: "center", mb: 3, fontWeight: 500 }}
       >
-        {step === 1 && "Enter your registered email to receive an OTP"}
-        {step === 2 && "Enter the 6-digit OTP sent to your email"}
+        {step === 1 && "Enter your registered mobile number"}
+        {step === 2 && "Enter the 6-digit OTP sent to your mobile"}
         {step === 3 && "Securely enter your new preferred password"}
       </Typography>
 
@@ -120,18 +185,18 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
           <TextField
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            placeholder="Enter your email"
-            value={formData.email || ""}
+            id="mobileno"
+            label="Mobile Number"
+            name="mobileno"
+            autoComplete="tel"
+            placeholder="e.g. 9876543210"
+            value={formData.mobileno || ""}
             onChange={handleChange}
-            disabled={step > 1 || isPending}
+            disabled={step > 1 || isSendingOTP}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <EmailIcon sx={{ color: "rgba(255, 255, 255, 0.5)" }} />
+                  <PhoneIphoneIcon sx={{ color: "rgba(255, 255, 255, 0.5)" }} />
                 </InputAdornment>
               ),
             }}
@@ -140,40 +205,22 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
                 color: "#ffffff",
                 bgcolor: "rgba(255, 255, 255, 0.02)",
                 borderRadius: "12px",
-                "& fieldset": {
-                  borderColor: "rgba(255, 255, 255, 0.12)",
-                },
-                "&:hover fieldset": {
-                  borderColor: "rgba(255, 255, 255, 0.25)",
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: "#FFD700",
-                  borderWidth: "2px"
-                },
-                "&.Mui-disabled fieldset": {
-                  borderColor: "rgba(255, 255, 255, 0.08)",
-                },
+                "& fieldset": { borderColor: "rgba(255, 255, 255, 0.12)" },
+                "&:hover fieldset": { borderColor: "rgba(255, 255, 255, 0.25)" },
+                "&.Mui-focused fieldset": { borderColor: "#FFD700", borderWidth: "2px" },
+                "&.Mui-disabled fieldset": { borderColor: "rgba(255, 255, 255, 0.08)" },
               },
               "& .MuiOutlinedInput-input.Mui-disabled": {
                 color: "rgba(255, 255, 255, 0.7)",
                 WebkitTextFillColor: "rgba(255, 255, 255, 0.7)",
               },
-              "& .MuiInputLabel-root": {
-                color: "rgba(255, 255, 255, 0.6)",
-              },
-              "& .MuiInputLabel-root.Mui-focused": {
-                color: "#FFD700",
-              },
-              "& .MuiInputLabel-root.Mui-disabled": {
-                color: "rgba(255, 255, 255, 0.5)",
-              },
-              "& .MuiOutlinedInput-input::placeholder": {
-                color: "rgba(255, 255, 255, 0.4)",
-                opacity: 1,
-              }
+              "& .MuiInputLabel-root": { color: "rgba(255, 255, 255, 0.6)" },
+              "& .MuiInputLabel-root.Mui-focused": { color: "#FFD700" },
             }}
           />
         )}
+
+        <div id="forgot-pwd-recaptcha"></div>
 
         {step >= 2 && (
           <Box sx={{ mt: 1, mb: 1, display: "flex", justifyContent: "center" }}>
@@ -183,23 +230,16 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
               onChange={setOtp}
               autoFocus
               TextFieldsProps={{
-                disabled: step > 2 || isPending,
+                disabled: step > 2 || isVerifyingOTP,
                 sx: {
                   "& .MuiOutlinedInput-root": {
                     height: "50px",
                     color: "#ffffff",
                     bgcolor: "rgba(255, 255, 255, 0.02)",
                     borderRadius: "12px",
-                    "& fieldset": {
-                      borderColor: "rgba(255, 255, 255, 0.12)",
-                    },
-                    "&:hover fieldset": {
-                      borderColor: "rgba(255, 255, 255, 0.25)",
-                    },
-                    "&.Mui-focused fieldset": {
-                      borderColor: "#FFD700",
-                      borderWidth: "2px"
-                    },
+                    "& fieldset": { borderColor: "rgba(255, 255, 255, 0.12)" },
+                    "&:hover fieldset": { borderColor: "rgba(255, 255, 255, 0.25)" },
+                    "&.Mui-focused fieldset": { borderColor: "#FFD700", borderWidth: "2px" },
                   },
                 },
               }}
@@ -216,7 +256,6 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
               label="New Password"
               name="password"
               type="password"
-              autoComplete="new-password"
               placeholder="Enter new password"
               value={formData.password || ""}
               onChange={handleChange}
@@ -233,27 +272,12 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
                   color: "#ffffff",
                   bgcolor: "rgba(255, 255, 255, 0.02)",
                   borderRadius: "12px",
-                  "& fieldset": {
-                    borderColor: "rgba(255, 255, 255, 0.12)",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "rgba(255, 255, 255, 0.25)",
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "#FFD700",
-                    borderWidth: "2px"
-                  },
+                  "& fieldset": { borderColor: "rgba(255, 255, 255, 0.12)" },
+                  "&:hover fieldset": { borderColor: "rgba(255, 255, 255, 0.25)" },
+                  "&.Mui-focused fieldset": { borderColor: "#FFD700", borderWidth: "2px" },
                 },
-                "& .MuiInputLabel-root": {
-                  color: "rgba(255, 255, 255, 0.6)",
-                },
-                "& .MuiInputLabel-root.Mui-focused": {
-                  color: "#FFD700",
-                },
-                "& .MuiOutlinedInput-input::placeholder": {
-                  color: "rgba(255, 255, 255, 0.4)",
-                  opacity: 1,
-                }
+                "& .MuiInputLabel-root": { color: "rgba(255, 255, 255, 0.6)" },
+                "& .MuiInputLabel-root.Mui-focused": { color: "#FFD700" },
               }}
             />
 
@@ -264,7 +288,6 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
               label="Confirm Password"
               name="confirmPassword"
               type="password"
-              autoComplete="new-password"
               placeholder="Confirm new password"
               value={formData.confirmPassword || ""}
               onChange={handleChange}
@@ -283,27 +306,12 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
                   color: "#ffffff",
                   bgcolor: "rgba(255, 255, 255, 0.02)",
                   borderRadius: "12px",
-                  "& fieldset": {
-                    borderColor: "rgba(255, 255, 255, 0.12)",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "rgba(255, 255, 255, 0.25)",
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "#FFD700",
-                    borderWidth: "2px"
-                  },
+                  "& fieldset": { borderColor: "rgba(255, 255, 255, 0.12)" },
+                  "&:hover fieldset": { borderColor: "rgba(255, 255, 255, 0.25)" },
+                  "&.Mui-focused fieldset": { borderColor: "#FFD700", borderWidth: "2px" },
                 },
-                "& .MuiInputLabel-root": {
-                  color: "rgba(255, 255, 255, 0.6)",
-                },
-                "& .MuiInputLabel-root.Mui-focused": {
-                  color: "#FFD700",
-                },
-                "& .MuiOutlinedInput-input::placeholder": {
-                  color: "rgba(255, 255, 255, 0.4)",
-                  opacity: 1,
-                }
+                "& .MuiInputLabel-root": { color: "rgba(255, 255, 255, 0.6)" },
+                "& .MuiInputLabel-root.Mui-focused": { color: "#FFD700" },
               }}
             />
           </>
@@ -313,7 +321,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
           type="submit"
           fullWidth
           variant="contained"
-          disabled={isPending}
+          disabled={isPending || isSendingOTP || isVerifyingOTP}
           sx={{
             mt: 2,
             mb: 2,
@@ -337,7 +345,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
             }
           }}
         >
-          {isPending 
+          {isPending || isSendingOTP || isVerifyingOTP
             ? "Processing..." 
             : step === 1
               ? "Get OTP"

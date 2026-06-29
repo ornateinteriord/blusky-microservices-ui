@@ -1,17 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Typography, Card, MenuItem, Select, TextField, Button, CircularProgress, Fade, IconButton, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
-import { useGetWalletOverview, useTransferWallet, useSendTransferOTP } from '../../../api/Memeber';
+import { useGetWalletOverview, useTransferWallet, useGetMemberDetails } from '../../../api/Memeber';
 import TokenService from '../../../api/token/tokenService';
 import { toast } from 'react-toastify';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { MuiOtpInput } from 'mui-one-time-password-input';
+import { auth } from '../../../firebase';
+import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from 'firebase/auth';
+
+declare global {
+  interface Window {
+    recaptchaVerifier: any;
+  }
+}
 
 const WalletTransfer = () => {
   const memberId = TokenService.getMemberId();
+  const userId = TokenService.getUserId();
   const { data: walletOverview, refetch } = useGetWalletOverview(memberId);
-  const { mutate: sendOTP, isPending: isSendingOTP } = useSendTransferOTP();
-  const { mutate: transferWallet, isPending: isTransferring } = useTransferWallet();
+  const { data: memberDetails } = useGetMemberDetails(userId);
+  const { mutate: transferWallet } = useTransferWallet();
 
   const [step, setStep] = useState<1 | 2>(1);
   const [fromWallet, setFromWallet] = useState('Earnings');
@@ -20,6 +29,9 @@ const WalletTransfer = () => {
   const [otp, setOtp] = useState('');
   const [successDialogOpen, setSuccessDialogOpen] = useState(false);
   const [transferDetails, setTransferDetails] = useState<any>(null);
+  const [isSendingOTP, setIsSendingOTP] = useState(false);
+  const [isTransferring, setIsTransferring] = useState(false);
+  const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
 
   const earningsBalance = walletOverview?.balance || '0.00';
   const topUpBalance = walletOverview?.topUpBalance || '0.00';
@@ -31,7 +43,27 @@ const WalletTransfer = () => {
     return '0.00';
   };
 
-  const handleSendOTP = () => {
+  const setupRecaptcha = () => {
+    if (!(window as any).walletTransferRecaptchaVerifier) {
+      (window as any).walletTransferRecaptchaVerifier = new RecaptchaVerifier(auth, 'wallet-transfer-recaptcha', {
+        'size': 'invisible',
+        'callback': () => {}
+      });
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if ((window as any).walletTransferRecaptchaVerifier) {
+        try {
+          (window as any).walletTransferRecaptchaVerifier.clear();
+        } catch (e) {}
+        (window as any).walletTransferRecaptchaVerifier = null;
+      }
+    };
+  }, []);
+
+  const handleSendOTP = async () => {
     if (!amount || isNaN(Number(amount)) || Number(amount) <= 0) {
       toast.error('Please enter a valid amount greater than 0');
       return;
@@ -42,47 +74,80 @@ const WalletTransfer = () => {
       return;
     }
 
-    sendOTP({
-      memberId: memberId || '',
-      fromWallet,
-      toWallet,
-      amount
-    }, {
-      onSuccess: () => {
-        toast.success('OTP sent to your email successfully');
-        setStep(2);
-      },
-      onError: (error: any) => {
-        toast.error(error?.response?.data?.message || 'Failed to send OTP');
-      }
-    });
+    const phoneNumber = memberDetails?.mobileno;
+    if (!phoneNumber) {
+      toast.error('Mobile number not found in profile');
+      return;
+    }
+
+    let formattedPhone = String(phoneNumber).trim().replace(/\s+/g, '');
+    if (!formattedPhone.startsWith('+')) {
+      formattedPhone = '+91' + formattedPhone; // Default country code if missing
+    }
+
+    setIsSendingOTP(true);
+    try {
+      setupRecaptcha();
+      const appVerifier = (window as any).walletTransferRecaptchaVerifier;
+      
+      console.log("--- DEBUG START ---");
+      console.log("Original phoneNumber from profile:", phoneNumber);
+      console.log("Formatted Phone:", formattedPhone);
+      console.log("App Verifier Object:", appVerifier);
+      console.log("--- DEBUG END ---");
+
+      const result = await signInWithPhoneNumber(auth, formattedPhone, appVerifier);
+      setConfirmationResult(result);
+      
+      toast.success('OTP sent to your mobile successfully');
+      setStep(2);
+    } catch (error: any) {
+      console.error("SMS Error", error);
+      toast.error('Failed: ' + (error.message || 'Unknown error'));
+      // Removed recaptchaVerifier.clear() to prevent widget corruption
+    } finally {
+      setIsSendingOTP(false);
+    }
   };
 
-  const handleTransfer = () => {
+  const handleTransfer = async () => {
     if (otp.length !== 6) {
       toast.error('Please enter a valid 6-digit OTP');
       return;
     }
 
-    transferWallet({
-      memberId: memberId || '',
-      fromWallet,
-      toWallet,
-      amount,
-      otp
-    }, {
-      onSuccess: () => {
-        setTransferDetails({ amount, fromWallet, toWallet });
-        setSuccessDialogOpen(true);
-        setAmount('');
-        setOtp('');
-        setStep(1);
-        refetch();
-      },
-      onError: (error: any) => {
-        toast.error(error?.response?.data?.message || 'Transfer failed');
-      }
-    });
+    setIsTransferring(true);
+    try {
+      if (!confirmationResult) throw new Error("Session expired, please request OTP again.");
+      
+      const result = await confirmationResult.confirm(otp);
+      const idToken = await result.user.getIdToken();
+
+      transferWallet({
+        memberId: memberId || '',
+        fromWallet,
+        toWallet,
+        amount,
+        otp: idToken // Send Firebase token to backend instead of raw OTP
+      }, {
+        onSuccess: () => {
+          setTransferDetails({ amount, fromWallet, toWallet });
+          setSuccessDialogOpen(true);
+          setAmount('');
+          setOtp('');
+          setStep(1);
+          refetch();
+        },
+        onError: (error: any) => {
+          toast.error(error?.response?.data?.message || 'Transfer failed');
+        }
+      });
+    } catch (error: any) {
+      console.error(error);
+      toast.error('Invalid OTP or transfer failed.');
+    } finally {
+      setIsTransferring(false);
+    }
   };
 
   return (
@@ -211,7 +276,7 @@ const WalletTransfer = () => {
                 <Box textAlign="center">
                   <Typography variant="h6" sx={{ color: 'white', mb: 1 }}>Security Verification</Typography>
                   <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)' }}>
-                    Enter the 6-digit OTP sent to your registered email address.
+                    Enter the 6-digit OTP sent to your registered mobile number.
                   </Typography>
                 </Box>
 
@@ -338,8 +403,12 @@ const WalletTransfer = () => {
           </Button>
         </DialogActions>
       </Dialog>
+      
+      {/* Permanent mount for invisible reCAPTCHA to prevent 'element has been removed' errors */}
+      <div id="wallet-transfer-recaptcha"></div>
     </Box>
   );
 };
 
 export default WalletTransfer;
+

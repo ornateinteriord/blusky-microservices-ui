@@ -41,23 +41,6 @@ export const useGetSponserRef = (ref?: string) => {
   })
 }
 
-export const useRecoverpassword = () => {
-  return useMutation({
-    mutationFn: async (data: any) => {
-      return await post("/auth/recover-password", data);
-    },
-    onSuccess: (response) => {
-      if (response.success) {
-        toast.success(response.message);
-      } else {
-        console.error(response.message)
-      }
-    },
-    onError: (error: any) => {
-      toast.error(error.response.data.message)
-    }
-  })
-}
 export const useResetpassword = () => {
   return useMutation({
     mutationFn: async (data: any) => {

@@ -171,3 +171,10 @@ body {
   color: hsl(var(--foreground));
   transition: background 0.3s ease;
 }
+
+/* Hide the invisible reCAPTCHA badge */
+.grecaptcha-badge { 
+  visibility: hidden !important;
+  opacity: 0 !important;
+  display: none !important;
+}
