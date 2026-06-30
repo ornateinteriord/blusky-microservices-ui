@@ -24,6 +24,7 @@ import UserProvider from "./context/user/userContextProvider";
 import MembersUpdateForm from "./pages/Admin-Pages/UpdateForms";
 import ChatNotificationListener from "./components/Chat/ChatNotificationListener";
 import MobileBottomNav from "./components/common/MobileBottomNav";
+import ScrollToTop from "./components/common/ScrollToTop";
 
 
 
@@ -269,6 +270,7 @@ function App() {
           className="text-sm text-gray-800"
           style={{ width: 'auto', minWidth: '25rem' }} />
         <Router>
+          <ScrollToTop />
           <Suspense fallback={<LoadingComponent />}>
 
             <RoutesProvider

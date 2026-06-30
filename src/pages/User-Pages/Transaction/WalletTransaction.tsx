@@ -122,8 +122,8 @@ const WalletTransaction = () => {
                         data: filteredData.map(tx => ({
                           ...tx,
                           transaction_date: tx.transaction_date ? new Date(tx.transaction_date).toLocaleDateString('en-GB') : (tx.createdAt ? new Date(tx.createdAt).toLocaleDateString('en-GB') : ''),
-                          credit: tx.credit || tx.ew_credit || 0,
-                          debit: tx.debit || tx.ew_debit || 0,
+                          credit: tx.credit || tx.ew_credit || tx.uw_credit || 0,
+                          debit: tx.debit || tx.ew_debit || tx.uw_debit || 0,
                           balance: tx.balance || tx.previous_balance || 0
                         })),
                         statusField: 'status'

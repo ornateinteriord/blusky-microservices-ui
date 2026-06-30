@@ -150,7 +150,7 @@ const Login = () => {
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', mb: 0 }}>
           <img src={uwtLogo} alt="UWT Logo" style={{ height: "120px", marginBottom: "0px", objectFit: "contain", filter: "drop-shadow(0px 10px 20px rgba(0,0,0,0.5))" }} />
           <Typography variant="h5" sx={{ color: '#FFD700', fontWeight: 800 }}>
-            USDT World Club
+            UWC+
           </Typography>
           <Typography variant="body1" sx={{ color: 'rgba(255,255,255,0.8)', fontWeight: 500, mt: 0.5 }}>
             Empowering your digital wealth journey
@@ -383,7 +383,7 @@ const Login = () => {
           }}
         >
           <Typography variant="body1" sx={{ color: "rgba(255, 255, 255, 0.7)", fontWeight: 500, mb: 2 }}>
-            New to USDT World Club?
+            New to UWC+?
           </Typography>
           <Button
             component={Link}

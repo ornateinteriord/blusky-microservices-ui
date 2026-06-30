@@ -87,9 +87,9 @@ const Home = () => {
         <Container maxWidth="xl">
           <Toolbar sx={{ justifyContent: "space-between", py: 1, px: { xs: 0, sm: 2 } }}>
             <Box sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }} onClick={() => scrollToSection('home')}>
-              <img src={uwtLogo} alt="USDT World" style={{ height: "45px", objectFit: "contain" }} />
+              <img src={uwtLogo} alt="UWC+" style={{ height: "45px", objectFit: "contain" }} />
               <Typography variant="h6" sx={{ ml: 1.5, fontWeight: 800, letterSpacing: '-0.5px', display: { xs: 'none', sm: 'block' } }}>
-                USDT WORLD
+                UWC+
               </Typography>
             </Box>
 
@@ -176,7 +176,7 @@ const Home = () => {
                 <br/> Token Sale.
               </Typography>
               <Typography sx={{ color: 'rgba(255,255,255,0.7)', fontSize: '1.1rem', mb: 5, maxWidth: '90%', lineHeight: 1.7 }}>
-                Join the USDT World presale and secure your stake in a next-gen crypto launchpad ecosystem. Transparent pricing, real-time sale progress, and early access before public listing.
+                Join the UWC+ presale and secure your stake in a next-gen crypto launchpad ecosystem. Transparent pricing, real-time sale progress, and early access before public listing.
               </Typography>
               
               <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 6 }}>
@@ -206,7 +206,7 @@ const Home = () => {
 
             <Grid item xs={12} md={6} sx={{ position: 'relative' }}>
               <Box sx={{ position: 'relative', width: '100%', maxWidth: '500px', mx: 'auto' }}>
-                <img src={aboutImage} alt="USDT World Platform" style={{ width: '100%' }} />
+                <img src={aboutImage} alt="UWC+ Platform" style={{ width: '100%' }} />
                 
                 {/* Floating Badges */}
                 <Card sx={{ position: 'absolute', top: '10%', left: '-5%', bgcolor: 'rgba(10, 25, 41, 0.8)', backdropFilter: 'blur(10px)', p: 2, borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', gap: 2 }}>
@@ -329,7 +329,7 @@ const Home = () => {
                     <img src={uwtLogo} alt="USDTW" style={{ height: '60px', width: '60px', borderRadius: '50%', background: '#fff', padding: '5px' }} />
                     <Box>
                       <Typography variant="h4" sx={{ fontWeight: 800, color: '#FFD700' }}>UWC+</Typography>
-                      <Typography sx={{ color: 'rgba(255,255,255,0.6)' }}>USDT World Token Ecosystem</Typography>
+                      <Typography sx={{ color: 'rgba(255,255,255,0.6)' }}>UWC+ Token Ecosystem</Typography>
                     </Box>
                   </Box>
                   <Box sx={{ textAlign: 'right' }}>
@@ -341,7 +341,7 @@ const Home = () => {
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, mb: 4 }}>
                   <Box>
                     <Typography sx={{ fontWeight: 700, color: '#fff', mb: 1 }}>Description</Typography>
-                    <Typography sx={{ color: 'rgba(255,255,255,0.6)' }}>USDT World disrupts traditional finance through decentralized applications (dApps) and smart contracts built for modern traders.</Typography>
+                    <Typography sx={{ color: 'rgba(255,255,255,0.6)' }}>UWC+ disrupts traditional finance through decentralized applications (dApps) and smart contracts built for modern traders.</Typography>
                   </Box>
                   <Box>
                     <Typography sx={{ fontWeight: 700, color: '#fff', mb: 1 }}>Key Features</Typography>
@@ -420,9 +420,9 @@ const Home = () => {
         <Container maxWidth="lg">
           <Box sx={{ textAlign: 'center', mb: 8, maxWidth: '800px', mx: 'auto' }}>
             <Typography sx={{ color: '#FFD700', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', mb: 2 }}>Our Ecosystem</Typography>
-            <Typography variant="h2" sx={{ fontWeight: 800, mb: 3, fontSize: { xs: '2.5rem', md: '3.5rem' } }}>USDT World Ecosystem <span style={{ color: '#FFD700' }}>for Everyone</span></Typography>
+            <Typography variant="h2" sx={{ fontWeight: 800, mb: 3, fontSize: { xs: '2.5rem', md: '3.5rem' } }}>UWC+ Ecosystem <span style={{ color: '#FFD700' }}>for Everyone</span></Typography>
             <Typography sx={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.1rem', lineHeight: 1.8 }}>
-              USDT World ecosystem embodies a dynamic and inclusive landscape, redefining decentralized finance (DeFi) with innovative platforms and a user-centric approach built for modern traders.
+              UWC+ ecosystem embodies a dynamic and inclusive landscape, redefining decentralized finance (DeFi) with innovative platforms and a user-centric approach built for modern traders.
             </Typography>
           </Box>
 
@@ -452,7 +452,7 @@ const Home = () => {
           <Grid container spacing={8} alignItems="center">
             <Grid item xs={12} md={6}>
               <Box sx={{ position: 'relative', p: 2 }}>
-                <img src={aboutSocial} alt="About USDT World" style={{ width: '100%', borderRadius: '24px', boxShadow: '0 20px 50px rgba(0,0,0,0.5)' }} />
+                <img src={aboutSocial} alt="About UWC+" style={{ width: '100%', borderRadius: '24px', boxShadow: '0 20px 50px rgba(0,0,0,0.5)' }} />
                 <Card sx={{ position: 'absolute', bottom: '10%', right: '-5%', bgcolor: 'rgba(10, 25, 41, 0.9)', backdropFilter: 'blur(10px)', p: 3, borderRadius: '20px', border: '1px solid rgba(255, 215, 0, 0.3)', textAlign: 'center' }}>
                   <Typography variant="h4" sx={{ fontWeight: 800, color: '#FFD700', mb: 0.5 }}>USDTW</Typography>
                   <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)', fontWeight: 600 }}>Native Token</Typography>
@@ -461,9 +461,9 @@ const Home = () => {
             </Grid>
             <Grid item xs={12} md={6}>
               <Typography sx={{ color: '#FFD700', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', mb: 2 }}>About USDTW</Typography>
-              <Typography variant="h2" sx={{ fontWeight: 800, mb: 3, fontSize: { xs: '2.5rem', md: '3.5rem' } }}>The Token Behind <span style={{ color: '#FFD700' }}>USDT World</span></Typography>
+              <Typography variant="h2" sx={{ fontWeight: 800, mb: 3, fontSize: { xs: '2.5rem', md: '3.5rem' } }}>The Token Behind <span style={{ color: '#FFD700' }}>UWC+</span></Typography>
               <Typography sx={{ color: 'rgba(255,255,255,0.6)', mb: 5, fontSize: '1.1rem', lineHeight: 1.8 }}>
-                USDTW powers the USDT World launchpad ecosystem — from presale access and staking rewards to governance and platform utility across token trading, liquidity, and new project launches.
+                USDTW powers the UWC+ launchpad ecosystem — from presale access and staking rewards to governance and platform utility across token trading, liquidity, and new project launches.
               </Typography>
               
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>

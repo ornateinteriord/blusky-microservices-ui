@@ -9,12 +9,12 @@ import { useGetMemberAddOns } from '../../../api/Packages';
 import USDTLogo from "../../../assets/USDT1.png";
 
 const PACKAGES = [
-  { id: 1, amount: 30, title: "Starter Pip Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#1de9b6" },
-  { id: 2, amount: 60, title: "Growth Trader Package", yield: "5%", days: "210 Day", tag: "Members Only", color: "#CD7F32" },
-  { id: 3, amount: 120, title: "Elite Currency Portfolio", yield: "5%", days: "210 Day", tag: "Members Only", color: "#C0C0C0" },
-  { id: 4, amount: 250, title: "Global FX Advantage Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#FFD700" },
-  { id: 5, amount: 500, title: "Pro Trader Wealth Package", yield: "5%", days: "210 Day", tag: "Members Only", color: "#E5E4E2" },
-  { id: 6, amount: 1000, title: "VIP Liquidity Master Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#b9f2ff" }
+  { id: 1, amount: 30, title: "Starter Pip Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#1de9b6", description: "Begin your journey with the Starter PIP Plan and unlock new growth opportunities" },
+  { id: 2, amount: 60, title: "Growth Trader Package", yield: "5%", days: "210 Day", tag: "Members Only", color: "#CD7F32", description: "The Growth Trader Package helps you explore enhanced features and expand your trading potential" },
+  { id: 3, amount: 120, title: "Elite Currency Portfolio", yield: "5%", days: "210 Day", tag: "Members Only", color: "#C0C0C0", description: "Explore the Elite Currency Portfolio designed for advanced financial management and growth opportunities" },
+  { id: 4, amount: 250, title: "Global FX Advantage Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#FFD700", description: "Take your forex journey further with the Global FX Advantage Plan" },
+  { id: 5, amount: 500, title: "Pro Trader Wealth Package", yield: "5%", days: "210 Day", tag: "Members Only", color: "#E5E4E2", description: "A premium package built to support smarter trading decisions and long-term growth" },
+  { id: 6, amount: 1000, title: "VIP Liquidity Master Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#b9f2ff", description: "Experience a higher level of financial flexibility with the VIP Liquidity Master Plan" }
 ];
 
 const ProductsContainer: React.FC = () => {
@@ -128,10 +128,10 @@ const ProductsContainer: React.FC = () => {
             {/* Clean Logo on the right side */}
             <Box sx={{
               position: 'absolute',
-              top: '50px',
+              top: '90px',
               right: '-10px',
-              width: '155px',
-              height: '155px',
+              width: '135px',
+              height: '135px',
               opacity: 1,
               zIndex: 0,
               display: 'flex',
@@ -143,7 +143,7 @@ const ProductsContainer: React.FC = () => {
             </Box>
 
             <CardContent sx={{ p: 2.5, '&:last-child': { pb: 2.5 }, position: 'relative', zIndex: 1 }}>
-              <Typography variant="h5" fontWeight={900} sx={{ fontSize: '1rem', color: pkg.color, mb: 3, lineHeight: 1.2, minHeight: '48px', display: 'flex', alignItems: 'center', gap: 0.5 }}>
+              <Typography variant="h5" fontWeight={900} sx={{ fontSize: '1rem', color: pkg.color, mb: 1, lineHeight: 1.2, minHeight: '48px', display: 'flex', alignItems: 'center', gap: 0.5 }}>
                 <Box sx={{
                   width: 38,
                   height: 38,
@@ -158,6 +158,10 @@ const ProductsContainer: React.FC = () => {
                   maskPosition: 'center'
                 }} />
                 {pkg.title}
+              </Typography>
+              
+              <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.75rem', mb: 2, minHeight: '40px', lineHeight: 1.3, pr: '60px', position: 'relative', zIndex: 2 }}>
+                {pkg.description}
               </Typography>
               
               <Typography variant="h5" fontWeight={800} sx={{ color: '#FFD700', mb: 1, height: '36px', display: 'flex', alignItems: 'center' }}>
@@ -264,6 +268,11 @@ const ProductsContainer: React.FC = () => {
           <DialogContentText sx={{ color: 'rgba(255,255,255,0.8)' }}>
             Are you sure you want to buy <strong>{confirmPkg?.title}</strong> for <strong>${confirmPkg?.amount}</strong>?
           </DialogContentText>
+          {confirmPkg?.description && (
+            <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)', mt: 2, fontStyle: 'italic' }}>
+              "{confirmPkg.description}"
+            </Typography>
+          )}
         </DialogContent>
         <DialogActions sx={{ p: 2, pt: 0 }}>
           <Button 
@@ -314,10 +323,17 @@ const ProductsContainer: React.FC = () => {
             You have successfully subscribed to the package.
           </Typography>
           <Box sx={{ bgcolor: 'rgba(0,0,0,0.2)', p: 3, borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2, alignItems: 'center' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2, alignItems: 'flex-start' }}>
               <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>Package Name</Typography>
-              <Typography variant="h6" sx={{ color: '#FFD700', fontWeight: 700 }}>{purchasedPkg?.title}</Typography>
+              <Typography variant="h6" sx={{ color: '#FFD700', fontWeight: 700, textAlign: 'right' }}>{purchasedPkg?.title}</Typography>
             </Box>
+            {purchasedPkg?.description && (
+              <Box sx={{ mb: 2, display: 'flex', justifyContent: 'flex-end' }}>
+                <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)', fontStyle: 'italic', textAlign: 'right', maxWidth: '80%' }}>
+                  "{purchasedPkg.description}"
+                </Typography>
+              </Box>
+            )}
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>Amount Paid</Typography>
               <Typography variant="h6" sx={{ color: '#10b981', fontWeight: 700 }}>${purchasedPkg?.amount}</Typography>

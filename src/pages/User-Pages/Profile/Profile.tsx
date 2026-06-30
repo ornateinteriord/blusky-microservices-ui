@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Box, Typography, TextField, Button, Avatar, Card, CardContent, CardHeader } from '@mui/material';
+import PersonIcon from '@mui/icons-material/Person';
 import UserContext from "../../../context/user/userContext";
 import { useUpdateMember } from '../../../api/Memeber';
 import { LoadingComponent } from '../../../App';
-import uwtLogo from '../../../assets/USDT1.png';
+
 
 const Profile: React.FC = () => {
   const { user } = useContext(UserContext);
@@ -48,21 +49,24 @@ const Profile: React.FC = () => {
   };
 
   const inputStyles = {
-    bgcolor: 'rgba(255,255,255,0.05)',
-    borderRadius: '8px',
+    bgcolor: 'rgba(20, 24, 33, 0.8)',
+    borderRadius: '12px',
+    boxShadow: 'inset 0 2px 5px rgba(0,0,0,0.2)',
     '& .MuiOutlinedInput-notchedOutline': {
-      borderColor: 'rgba(255,255,255,0.2)',
+      borderColor: 'rgba(255, 215, 0, 0.2)',
     },
     '&:hover .MuiOutlinedInput-notchedOutline': {
-      borderColor: 'rgba(255,255,255,0.5)',
+      borderColor: 'rgba(255, 215, 0, 0.5)',
     },
     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
       borderColor: '#FFD700',
     },
     '& .MuiInputBase-input': {
       color: '#ffffff',
-      WebkitTextFillColor: '#ffffff',
-      padding: '10px 14px',
+      padding: '14px 18px',
+      fontSize: '1.05rem',
+      fontWeight: 500,
+      letterSpacing: '0.5px'
     },
   };
 
@@ -98,122 +102,116 @@ const Profile: React.FC = () => {
         <CardContent sx={{ p: { xs: 2, md: 3 } }}>
           <form onSubmit={handleSubmit}>
             
+            {/* Top Banner - Photo, Name, ID */}
             <Box sx={{ 
               display: 'flex', 
-              flexDirection: 'row', 
-              justifyContent: 'space-between', 
-              gap: { xs: 2, md: 2 },
-              mb: 4 
+              flexDirection: { xs: 'column', sm: 'row' }, 
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+              bgcolor: 'rgba(0, 0, 0, 0.25)',
+              p: { xs: 3, md: 4 },
+              borderRadius: '20px',
+              border: '1px solid rgba(255, 215, 0, 0.15)',
+              mb: 5,
+              boxShadow: 'inset 0 0 30px rgba(0,0,0,0.5), 0 10px 30px rgba(0,0,0,0.2)',
+              gap: { xs: 3, sm: 4 }
             }}>
-              
-              {/* Left Column - Package Info */}
-              <Box sx={{ 
-                display: 'flex', 
-                flexDirection: 'column', 
-                alignItems: 'center',
-                justifyContent: 'center', 
-                flex: 1, 
-                p: { xs: 1, md: 2 }
-              }}>
-                <Box sx={{ 
-                  p: 1, 
-                  bgcolor: 'rgba(255,255,255,0.03)', 
-                  borderRadius: '50%', 
-                  mb: 1,
-                  boxShadow: '0 0 30px rgba(255, 215, 0, 0.05)',
-                  border: '1px solid rgba(255, 215, 0, 0.1)'
-                }}>
-                  <img src={uwtLogo} alt="Logo" style={{ width: '90px', height: '90px', objectFit: 'contain' }} />
+                <Box sx={{ position: 'relative' }}>
+                  <Avatar sx={{ 
+                    width: 90, 
+                    height: 90, 
+                    border: '2px solid rgba(255, 215, 0, 0.6)', 
+                    bgcolor: 'rgba(255, 215, 0, 0.1)',
+                    boxShadow: '0 0 20px rgba(255, 215, 0, 0.2)',
+                    color: '#FFD700',
+                    fontSize: '2.5rem'
+                  }}>
+                    {formData.Name ? formData.Name.charAt(0).toUpperCase() : <PersonIcon sx={{ fontSize: 50 }} />}
+                  </Avatar>
                 </Box>
                 
-                <Box sx={{ textAlign: 'center' }}>
-                  
-                  <Typography variant="h6" sx={{ fontWeight: 800, color: '#ffffff', mb: 2, fontSize: { xs: '1.1rem', md: '1.4rem' } }}>
-                    My Top Package
+                <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
+                  <Typography variant="overline" sx={{ color: 'rgba(255,255,255,0.5)', letterSpacing: '2px', display: 'block', lineHeight: 1.2, mb: 0.5 }}>
+                    Profile
                   </Typography>
-                  
+                  <Typography variant="h4" sx={{ fontWeight: 800, color: '#ffffff', letterSpacing: '1px', lineHeight: 1.2, mb: 1.5 }}>
+                    {formData.Name || 'RAM'}
+                  </Typography>
                   <Box sx={{ 
                     display: 'inline-flex', 
                     alignItems: 'center',
                     bgcolor: 'rgba(255, 215, 0, 0.1)',
                     border: '1px solid rgba(255, 215, 0, 0.3)',
-                    borderRadius: '20px',
-                    px: 2,
-                    py: 0.5
+                    borderRadius: '8px',
+                    px: 1.5,
+                    py: 0.5,
+                    backdropFilter: 'blur(10px)'
                   }}>
-                    <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)', mr: 1, fontWeight: 'bold' }}>ID:</Typography>
-                    <Typography variant="body1" sx={{ fontWeight: 'bold', color: '#FFD700', letterSpacing: '1px' }}>
+                    <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)', mr: 1, fontWeight: 'medium' }}>ID:</Typography>
+                    <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#FFD700', letterSpacing: '1.5px', lineHeight: 1 }}>
                       {user?.member_code || user?.Member_id || 'N/A'}
                     </Typography>
                   </Box>
                 </Box>
+            </Box>
+
+            {/* Form Fields Section */}
+            <Box sx={{ 
+              display: 'grid', 
+              gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, 
+              gap: 3.5,
+              mb: 5
+            }}>
+              <Box>
+                <Typography variant="body2" sx={{ mb: 1.5, color: '#FFD700', fontWeight: 600, ml: 1, textTransform: 'uppercase', letterSpacing: '1.5px', fontSize: '0.8rem' }}>Date of Birth</Typography>
+                <TextField
+                  name="dob"
+                  type="text"
+                  value={formData.dob}
+                  onChange={handleInputChange}
+                  fullWidth
+                  sx={inputStyles}
+                />
               </Box>
 
-              {/* Right Column - User Info */}
-              <Box sx={{ 
-                display: 'flex', 
-                flexDirection: 'column', 
-                flex: 1.5, 
-                gap: { xs: 1.5, md: 2 },
-                p: { xs: 1, md: 2 }
-              }}>
-                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: { xs: 0.5, md: 2 } }}>
-                  <Avatar sx={{ width: { xs: 60, md: 80 }, height: { xs: 60, md: 80 }, mb: 1.5, border: '2px solid rgba(255,255,255,0.8)', bgcolor: 'transparent' }} />
-                  <Box sx={{ border: '1px solid rgba(255,255,255,0.4)', borderRadius: '6px', px: 2, py: 0.2 }}>
-                    <Typography variant="caption" fontWeight="bold">Photo</Typography>
-                  </Box>
-                  <Typography variant="h5" sx={{ fontWeight: 'bold', mt: { xs: 1, md: 2 }, fontSize: { xs: '1.2rem', md: '1.5rem' }, textAlign: 'center' }}>{formData.Name || 'RAM'}</Typography>
-                </Box>
-                
-                <Box>
-                  <Typography variant="body2" sx={{ mb: 0.5, color: 'rgba(255,255,255,0.7)', fontSize: { xs: '0.75rem', md: '0.875rem' } }}>Date of Birth</Typography>
-                  <TextField
-                    name="dob"
-                    type="text"
-                    value={formData.dob}
-                    onChange={handleInputChange}
-                    fullWidth
-                    size="small"
-                    sx={inputStyles}
-                  />
-                </Box>
+              <Box>
+                <Typography variant="body2" sx={{ mb: 1.5, color: '#FFD700', fontWeight: 600, ml: 1, textTransform: 'uppercase', letterSpacing: '1.5px', fontSize: '0.8rem' }}>Email Id</Typography>
+                <TextField
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  fullWidth
+                  sx={inputStyles}
+                />
+              </Box>
 
-                <Box>
-                  <Typography variant="body2" sx={{ mb: 0.5, color: 'rgba(255,255,255,0.7)', fontSize: { xs: '0.75rem', md: '0.875rem' } }}>Email Id</Typography>
-                  <TextField
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    fullWidth
-                    size="small"
-                    sx={inputStyles}
-                  />
-                </Box>
-
-                <Box>
-                  <Typography variant="body2" sx={{ mb: 0.5, color: 'rgba(255,255,255,0.7)', fontSize: { xs: '0.75rem', md: '0.875rem' } }}>Country</Typography>
-                  <TextField
-                    name="country"
-                    value={formData.country}
-                    onChange={handleInputChange}
-                    fullWidth
-                    size="small"
-                    sx={inputStyles}
-                  />
-                </Box>
+              <Box sx={{ gridColumn: { md: '1 / span 2' } }}>
+                <Typography variant="body2" sx={{ mb: 1.5, color: '#FFD700', fontWeight: 600, ml: 1, textTransform: 'uppercase', letterSpacing: '1.5px', fontSize: '0.8rem' }}>Country</Typography>
+                <TextField
+                  name="country"
+                  value={formData.country}
+                  onChange={handleInputChange}
+                  fullWidth
+                  sx={inputStyles}
+                />
               </Box>
             </Box>
 
             {/* Bottom Row - USDT Address */}
             <Box sx={{ 
               p: 3, 
-              bgcolor: 'rgba(255,255,255,0.02)', 
-              borderRadius: '16px', 
-              border: '1px solid rgba(255,255,255,0.05)',
-              mb: 4
+              bgcolor: 'rgba(0, 0, 0, 0.15)', 
+              borderRadius: '20px', 
+              border: '1px solid rgba(255, 215, 0, 0.15)',
+              mb: 5,
+              position: 'relative',
+              overflow: 'hidden'
             }}>
-              <Typography variant="body2" sx={{ mb: 1, color: 'rgba(255,255,255,0.7)' }}>USDT - BEP20 Address</Typography>
+              {/* Decorative accent */}
+              <Box sx={{ position: 'absolute', top: 0, left: 0, width: '4px', height: '100%', bgcolor: '#FFD700' }} />
+              
+              <Typography variant="body2" sx={{ mb: 1.5, color: '#FFD700', fontWeight: 'bold', letterSpacing: '1px', ml: 1 }}>USDT - BEP20 Address</Typography>
               <TextField
                 name="usdt_bep20_address"
                 value={formData.usdt_bep20_address}

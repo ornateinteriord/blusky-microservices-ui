@@ -38,7 +38,7 @@ const Footer = () => {
                                 lineHeight: 1.1
                             }}
                         >
-                            USDT WORLD CLUB
+                            UWC+
                         </Typography>
                         <Box sx={{ p: 2, borderRadius: "12px", bgcolor: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.05)", display: "inline-block", mb: 2 }}>
                             <Typography variant="caption" sx={{ opacity: 0.8, fontWeight: 700, letterSpacing: "1px", color: "#60a5fa" }}>
@@ -115,7 +115,7 @@ const Footer = () => {
                     }}
                 >
                     <Typography variant="caption" sx={{ opacity: 0.4, fontWeight: 600 }}>
-                        © {currentYear} USDT WORLD CLUB. All rights reserved.
+                        © {currentYear} UWC+. All rights reserved.
                     </Typography>
 
                     <Box sx={{ display: "flex", gap: { xs: 2, sm: 5 }, flexWrap: "wrap", justifyContent: "center" }}>

@@ -244,8 +244,11 @@ export const getTransactionColumns = () => [
   {
     name: "Credit",
     selector: (row: any) => {
-      const amt = parseFloat(row.ew_credit || 0) > 0 ? row.ew_credit : row.credit;
-      return amt && parseFloat(amt) > 0 ? `$ ${parseFloat(amt).toLocaleString('en-US')}` : "-";
+      const ew = parseFloat(row.ew_credit || 0);
+      const uw = parseFloat(row.uw_credit || 0);
+      const regular = parseFloat(row.credit || 0);
+      const amt = ew > 0 ? ew : (uw > 0 ? uw : regular);
+      return amt > 0 ? `$ ${parseFloat(amt.toString()).toLocaleString('en-US')}` : "-";
     },
     sortable: true,
     style: { color: '#059669', fontWeight: 'bold' }
@@ -253,8 +256,11 @@ export const getTransactionColumns = () => [
   {
     name: "Debit",
     selector: (row: any) => {
-      const amt = parseFloat(row.ew_debit || 0) > 0 ? row.ew_debit : row.debit;
-      return amt && parseFloat(amt) > 0 ? `$ ${parseFloat(amt).toLocaleString('en-US')}` : "-";
+      const ew = parseFloat(row.ew_debit || 0);
+      const uw = parseFloat(row.uw_debit || 0);
+      const regular = parseFloat(row.debit || 0);
+      const amt = ew > 0 ? ew : (uw > 0 ? uw : regular);
+      return amt > 0 ? `$ ${parseFloat(amt.toString()).toLocaleString('en-US')}` : "-";
     },
     sortable: true,
     style: { color: '#dc2626', fontWeight: 'bold' }
