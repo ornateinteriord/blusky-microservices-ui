@@ -7,9 +7,7 @@ import {
 } from '@mui/material';
 import { 
   Menu as MenuIcon, X as CloseIcon, TrendingUp, ShieldCheck, 
-  Rocket
-  // Users, Shield, Rocket as RocketLaunch, Pickaxe, 
-  // LineChart, UserPlus, Fingerprint, Wallet, Activity
+  Rocket, Shield, LineChart, UserPlus, Fingerprint, Wallet
 } from 'lucide-react';
 
 const uwtLogo = "https://www.usdtworld.club/assets/images/usdtw.png";
@@ -17,7 +15,7 @@ const aboutImage = "https://www.usdtworld.club/assets/images/about_image.png";
 const benefit1 = "https://www.usdtworld.club/assets/images/benefit1.png";
 const benefit2 = "https://www.usdtworld.club/assets/images/benefit2.png";
 const benefit3 = "https://www.usdtworld.club/assets/images/benefit3.png";
-// const aboutSocial = "https://www.usdtworld.club/assets/images/about_social_vista.png";
+const aboutSocial = "https://www.usdtworld.club/assets/images/about_social_vista.png";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -387,7 +385,7 @@ const Home = () => {
       </Box>
 
       {/* QUICK START */}
-      {/* <Box id="get-started" sx={{ py: 12 }}>
+      <Box id="get-started" sx={{ py: 12 }}>
         <Container maxWidth="lg">
           <Box sx={{ textAlign: 'center', mb: 8 }}>
             <Typography sx={{ color: '#FFD700', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', mb: 2 }}>Quick Start</Typography>
@@ -413,7 +411,7 @@ const Home = () => {
             ))}
           </Grid>
         </Container>
-      </Box> */}
+      </Box>
 
       {/* ECOSYSTEM */}
       {/* <Box id="ecosystem" sx={{ py: 12, bgcolor: '#030612' }}>
@@ -447,7 +445,7 @@ const Home = () => {
       </Box> */}
 
       {/* ABOUT */}
-      {/* <Box id="about" sx={{ py: 12 }}>
+      <Box id="about" sx={{ py: 12 }}>
         <Container maxWidth="xl">
           <Grid container spacing={8} alignItems="center">
             <Grid item xs={12} md={6}>
@@ -490,7 +488,7 @@ const Home = () => {
             </Grid>
           </Grid>
         </Container>
-      </Box> */}
+      </Box>
       
       {/* Footer handles it's own global layout in App.tsx */}
     </Box>
