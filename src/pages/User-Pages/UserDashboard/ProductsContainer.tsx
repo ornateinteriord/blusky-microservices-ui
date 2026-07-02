@@ -128,7 +128,7 @@ const ProductsContainer: React.FC = () => {
             {/* Clean Logo on the right side */}
             <Box sx={{
               position: 'absolute',
-              top: '90px',
+              top: '100px',
               right: '-10px',
               width: '135px',
               height: '135px',
@@ -160,7 +160,7 @@ const ProductsContainer: React.FC = () => {
                 {pkg.title}
               </Typography>
               
-              <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.75rem', mb: 2, minHeight: '40px', lineHeight: 1.3, pr: '60px', position: 'relative', zIndex: 2 }}>
+              <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.75rem', mb: 2, minHeight: '40px', lineHeight: 1.3, position: 'relative', zIndex: 2 }}>
                 {pkg.description}
               </Typography>
               
@@ -195,7 +195,7 @@ const ProductsContainer: React.FC = () => {
                     </Box>
                   ) : (
                     <Box>
-                      <Typography variant="subtitle1" sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: '0.85rem', mb: 0.2 }}>Single Level Income</Typography>
+                      <Typography variant="subtitle1" sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: '0.85rem', mb: 0.2, whiteSpace: 'nowrap' }}>Single Level Income</Typography>
                       <Typography variant="h5" fontWeight={900} sx={{ lineHeight: 1.2, color: '#FFD700' }}>
                         ${(walletOverview?.singleLevelIncomeByPackage?.[pkg.amount] || 0).toFixed(4)}
                       </Typography>
@@ -213,36 +213,38 @@ const ProductsContainer: React.FC = () => {
                       borderRadius: '24px',
                       height: '24px',
                       fontSize: '0.65rem',
-                      px: 0.5
+                      flexShrink: 0,
+                      
                     }} 
                   />
                 ) : (
                   <Button
-                  variant="contained"
-                  onClick={() => handleBuyClick(pkg)}
-                  disabled={isPending || hasAnyPackagePurchased}
-                  sx={{
-                    bgcolor: '#FFD700',
-                    color: '#000000',
-                    fontWeight: 800,
-                    textTransform: 'none',
-                    borderRadius: '24px',
-                    minWidth: '64px',
-                    px: 3,
-                    py: 0.8,
-                    boxShadow: 'none',
-                    '&:hover': {
-                      bgcolor: '#e6c200',
-                      boxShadow: 'none'
-                    },
-                    '&:disabled': {
-                      bgcolor: 'rgba(0, 230, 118, 0.3)',
-                      color: 'rgba(255,255,255,0.5)'
-                    }
-                  }}
-                >
-                  {isPending && buyingId === pkg.id ? <CircularProgress size={16} color="inherit" /> : "Buy"}
-                </Button>
+                    variant="contained"
+                    onClick={() => handleBuyClick(pkg)}
+                    disabled={isPending || hasAnyPackagePurchased}
+                    sx={{
+                      bgcolor: '#FFD700',
+                      color: '#000000',
+                      fontWeight: 800,
+                      textTransform: 'none',
+                      borderRadius: '24px',
+                      minWidth: '64px',
+                      px: 3,
+                      py: 0.8,
+                      boxShadow: 'none',
+                      flexShrink: 0,
+                      '&:hover': {
+                        bgcolor: '#e6c200',
+                        boxShadow: 'none'
+                      },
+                      '&:disabled': {
+                        bgcolor: 'rgba(0, 230, 118, 0.3)',
+                        color: 'rgba(255,255,255,0.5)'
+                      }
+                    }}
+                  >
+                    {isPending && buyingId === pkg.id ? <CircularProgress size={16} color="inherit" /> : "Buy"}
+                  </Button>
                 )}
               </Box>
             </CardContent>
