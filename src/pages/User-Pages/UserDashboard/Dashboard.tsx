@@ -132,33 +132,6 @@ const UserDashboard = () => {
 
       {/* Earnings, Upgrade & Top Up Wallets */}
       {/* Load Fund Button & 3 Wallet Cards */}
-      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4, mt: 4 }}>
-        <Button
-          variant="contained"
-          onClick={() => navigate('/user/load-fund')}
-          sx={{
-            background: 'linear-gradient(45deg, #FFD700 30%, #FFDF00 90%)',
-            color: '#050916',
-            borderRadius: '999px',
-            px: { xs: 5, md: 8 },
-            py: { xs: 1.2, md: 1.5 },
-            fontWeight: 900,
-            letterSpacing: '1px',
-            textTransform: 'uppercase',
-            fontSize: { xs: '0.9rem', md: '1rem' },
-            boxShadow: '0 8px 25px rgba(255, 215, 0, 0.3)',
-            '&:hover': {
-              background: 'linear-gradient(45deg, #e6c200 30%, #FFD700 90%)',
-              boxShadow: '0 12px 30px rgba(255, 215, 0, 0.5)',
-              transform: 'translateY(-2px)'
-            },
-            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-          }}
-        >
-          Load Fund
-        </Button>
-      </Box>
-
       <Paper elevation={0} sx={{
         p: { xs: 2, md: 4 },
         mb: 4,
@@ -188,6 +161,35 @@ const UserDashboard = () => {
             <Box sx={{ width: '100%' }}>
               <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Top Up</Typography>
               <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '13px' }}>Your money, topped up instantly—simple, secure, and always accessible</Typography>
+              <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-start' }}>
+                <Button
+                  variant="contained"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigate('/user/load-fund');
+                  }}
+                  sx={{
+                    background: 'linear-gradient(45deg, #FFD700 30%, #FFDF00 90%)',
+                    color: '#050916',
+                    borderRadius: '999px',
+                    px: 3.5,
+                    py: 0.8,
+                    fontWeight: 900,
+                    letterSpacing: '0.5px',
+                    textTransform: 'uppercase',
+                    fontSize: '0.8rem',
+                    boxShadow: '0 4px 15px rgba(255, 215, 0, 0.3)',
+                    '&:hover': {
+                      background: 'linear-gradient(45deg, #e6c200 30%, #FFD700 90%)',
+                      boxShadow: '0 6px 20px rgba(255, 215, 0, 0.5)',
+                      transform: 'translateY(-1px)'
+                    },
+                    transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)'
+                  }}
+                >
+                  Load
+                </Button>
+              </Box>
             </Box>
           </Box>
 
@@ -392,68 +394,68 @@ const UserDashboard = () => {
                 {/* 1st Section: Replaced with grid of icons */}
                 <Box sx={{ display: 'grid', gridTemplateColumns: '1fr', gap: 2 }}>
 
-                  <Box onClick={() => navigate('/user/earnings/referral-bonus')} sx={{ display: 'flex', flexDirection: 'column', cursor: 'pointer', p: 3, borderRadius: '24px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.02)', bgcolor: 'rgba(255,255,255,0.05)' } }}>
+                  <Box onClick={() => navigate('/user/earnings/referral-bonus')} sx={{ display: 'flex', flexDirection: 'column', cursor: 'pointer', p: { xs: 2, sm: 3 }, borderRadius: '20px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.02)', bgcolor: 'rgba(255,255,255,0.05)' } }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', mb: 2 }}>
-                      <Box sx={{ p: 1.5, borderRadius: '16px', bgcolor: 'rgba(245, 158, 11, 0.1)', display: 'flex', height: 'fit-content' }}>
-                        <PaymentsIcon sx={{ fontSize: 32, color: '#f59e0b' }} />
+                      <Box sx={{ p: 1.5, borderRadius: '12px', bgcolor: 'rgba(245, 158, 11, 0.1)', display: 'flex', height: 'fit-content' }}>
+                        <PaymentsIcon sx={{ fontSize: { xs: 24, sm: 32 }, color: '#f59e0b' }} />
                       </Box>
-                      <Typography variant="h5" sx={{ color: '#ffffff', fontWeight: 900, m: 0 }}>${Number(walletOverview?.directBenefits || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
+                      <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>${Number(walletOverview?.directBenefits || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
                     </Box>
                     <Box sx={{ width: '100%' }}>
-                      <Typography variant="subtitle1" sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, mb: 0.5 }}>Referral Income</Typography>
-                      <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '13px' }}>Turn every referral into a rewarding opportunity with instant bonus earnings.</Typography>
+                      <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Referral Income</Typography>
+                      <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '14px' }}>Turn every referral into a rewarding opportunity with instant bonus earnings.</Typography>
                     </Box>
                   </Box>
 
-                  <Box onClick={() => navigate('/user/earnings/level-benefits')} sx={{ display: 'flex', flexDirection: 'column', cursor: 'pointer', p: 3, borderRadius: '24px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.02)', bgcolor: 'rgba(255,255,255,0.05)' } }}>
+                  <Box onClick={() => navigate('/user/earnings/level-benefits')} sx={{ display: 'flex', flexDirection: 'column', cursor: 'pointer', p: { xs: 2, sm: 3 }, borderRadius: '20px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.02)', bgcolor: 'rgba(255,255,255,0.05)' } }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', mb: 2 }}>
-                      <Box sx={{ p: 1.5, borderRadius: '16px', bgcolor: 'rgba(255, 215, 0, 0.1)', display: 'flex', height: 'fit-content' }}>
-                        <AccountTreeIcon sx={{ fontSize: 32, color: '#FFD700' }} />
+                      <Box sx={{ p: 1.5, borderRadius: '12px', bgcolor: 'rgba(255, 215, 0, 0.1)', display: 'flex', height: 'fit-content' }}>
+                        <AccountTreeIcon sx={{ fontSize: { xs: 24, sm: 32 }, color: '#FFD700' }} />
                       </Box>
-                      <Typography variant="h5" sx={{ color: '#ffffff', fontWeight: 900, m: 0 }}>${Number(walletOverview?.levelBenefits || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
+                      <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>${Number(walletOverview?.levelBenefits || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
                     </Box>
                     <Box sx={{ width: '100%' }}>
-                      <Typography variant="subtitle1" sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, mb: 0.5 }}>Level Income</Typography>
-                      <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '13px' }}>Every new level brings greater rewards—keep progressing and keep earning</Typography>
+                      <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Level Income</Typography>
+                      <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '14px' }}>Every new level brings greater rewards—keep progressing and keep earning</Typography>
                     </Box>
                   </Box>
 
-                  <Box onClick={() => navigate('/user/earnings/single-level-income-history')} sx={{ display: 'flex', flexDirection: 'column', cursor: 'pointer', p: 3, borderRadius: '24px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.02)', bgcolor: 'rgba(255,255,255,0.05)' } }}>
+                  <Box onClick={() => navigate('/user/earnings/single-level-income-history')} sx={{ display: 'flex', flexDirection: 'column', cursor: 'pointer', p: { xs: 2, sm: 3 }, borderRadius: '20px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.02)', bgcolor: 'rgba(255,255,255,0.05)' } }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', mb: 2 }}>
-                      <Box sx={{ p: 1.5, borderRadius: '16px', bgcolor: 'rgba(239, 68, 68, 0.1)', display: 'flex', height: 'fit-content' }}>
-                        <TrendingUpIcon sx={{ fontSize: 32, color: '#ef4444' }} />
+                      <Box sx={{ p: 1.5, borderRadius: '12px', bgcolor: 'rgba(239, 68, 68, 0.1)', display: 'flex', height: 'fit-content' }}>
+                        <TrendingUpIcon sx={{ fontSize: { xs: 24, sm: 32 }, color: '#ef4444' }} />
                       </Box>
-                      <Typography variant="h5" sx={{ color: '#ffffff', fontWeight: 900, m: 0 }}>${Number(walletOverview?.singleLineIncome || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
+                      <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>${Number(walletOverview?.singleLineIncome || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
                     </Box>
                     <Box sx={{ width: '100%' }}>
-                      <Typography variant="subtitle1" sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, mb: 0.5 }}>Single Level Income</Typography>
-                      <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '13px' }}>One growing network, multiple earning opportunities—powered by your single-leg structure.</Typography>
+                      <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Single Level Income</Typography>
+                      <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '14px' }}>One growing network, multiple earning opportunities—powered by your single-leg structure.</Typography>
                     </Box>
                   </Box>
 
-                  <Box onClick={() => navigate('/user/earnings/global-income-history')} sx={{ display: 'flex', flexDirection: 'column', cursor: 'pointer', p: 3, borderRadius: '24px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.02)', bgcolor: 'rgba(255,255,255,0.05)' } }}>
+                  <Box onClick={() => navigate('/user/earnings/global-income-history')} sx={{ display: 'flex', flexDirection: 'column', cursor: 'pointer', p: { xs: 2, sm: 3 }, borderRadius: '20px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.02)', bgcolor: 'rgba(255,255,255,0.05)' } }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', mb: 2 }}>
-                      <Box sx={{ p: 1.5, borderRadius: '16px', bgcolor: 'rgba(59, 130, 246, 0.1)', display: 'flex', height: 'fit-content' }}>
-                        <PublicIcon sx={{ fontSize: 32, color: '#3b82f6' }} />
+                      <Box sx={{ p: 1.5, borderRadius: '12px', bgcolor: 'rgba(59, 130, 246, 0.1)', display: 'flex', height: 'fit-content' }}>
+                        <PublicIcon sx={{ fontSize: { xs: 24, sm: 32 }, color: '#3b82f6' }} />
                       </Box>
-                      <Typography variant="h5" sx={{ color: '#ffffff', fontWeight: 900, m: 0 }}>${Number(walletOverview?.globalIncome || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
+                      <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>${Number(walletOverview?.globalIncome || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
                     </Box>
                     <Box sx={{ width: '100%' }}>
-                      <Typography variant="subtitle1" sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, mb: 0.5 }}>Global Income</Typography>
-                      <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '13px' }}>Earn from your global network as your community continues to grow</Typography>
+                      <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Global Income</Typography>
+                      <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '14px' }}>Earn from your global network as your community continues to grow</Typography>
                     </Box>
                   </Box>
 
-                  <Box onClick={() => navigate('/user/transactions?type=Withdrawal')} sx={{ display: 'flex', flexDirection: 'column', cursor: 'pointer', p: 3, borderRadius: '24px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.02)', bgcolor: 'rgba(255,255,255,0.05)' } }}>
+                  <Box onClick={() => navigate('/user/transactions?type=Withdrawal')} sx={{ display: 'flex', flexDirection: 'column', cursor: 'pointer', p: { xs: 2, sm: 3 }, borderRadius: '20px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.02)', bgcolor: 'rgba(255,255,255,0.05)' } }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', mb: 2 }}>
-                      <Box sx={{ p: 1.5, borderRadius: '16px', bgcolor: 'rgba(168, 85, 247, 0.1)', display: 'flex', height: 'fit-content' }}>
-                        <AttachMoneyIcon sx={{ fontSize: 32, color: '#a855f7' }} />
+                      <Box sx={{ p: 1.5, borderRadius: '12px', bgcolor: 'rgba(168, 85, 247, 0.1)', display: 'flex', height: 'fit-content' }}>
+                        <AttachMoneyIcon sx={{ fontSize: { xs: 24, sm: 32 }, color: '#a855f7' }} />
                       </Box>
-                      <Typography variant="h5" sx={{ color: '#ffffff', fontWeight: 900, m: 0 }}>${Number(walletOverview?.totalWithdrawal || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
+                      <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>${Number(walletOverview?.totalWithdrawal || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
                     </Box>
                     <Box sx={{ width: '100%' }}>
-                      <Typography variant="subtitle1" sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, mb: 0.5 }}>Total Withdrawal</Typography>
-                      <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '13px' }}>Your total withdrawals, displayed for quick and easy financial tracking</Typography>
+                      <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Total Withdrawal</Typography>
+                      <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '14px' }}>Your total withdrawals, displayed for quick and easy financial tracking</Typography>
                     </Box>
                   </Box>
 
