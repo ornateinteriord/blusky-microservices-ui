@@ -45,19 +45,21 @@ export const useChatSocket = (roomId?: string) => {
 
     // Try socket connection but don't rely on it
     useEffect(() => {
-        socketRef.current = getSocket();
+        const socket = getSocket();
+        socketRef.current = socket;
 
-        if (!socketRef.current) {
+        if (!socket) {
             console.log('Socket not initialized, using REST API only');
             return;
         }
 
-        const socket = socketRef.current;
-
-        // Connection status - but we always show connected since REST works
         const handleConnect = () => {
-            console.log('Socket connected');
+            console.log('Socket connected, joining room:', roomId);
+            if (roomId) {
+                socket.emit('joinRoom', { roomId });
+            }
         };
+
         const handleDisconnect = () => {
             console.log('Socket disconnected, using REST API');
         };
@@ -65,11 +67,14 @@ export const useChatSocket = (roomId?: string) => {
         socket.on('connect', handleConnect);
         socket.on('disconnect', handleDisconnect);
 
-        // Join room if roomId is provided and socket is connected
-        if (roomId && socket.connected) {
-            socket.emit('joinRoom', { roomId });
+        if (roomId) {
+            // Emit joinRoom immediately (if connected it sends right away; if connecting, socket.io buffers it and sends upon connection!)
+            if (socket.connected) {
+                socket.emit('joinRoom', { roomId });
+            } else {
+                socket.connect();
+            }
 
-            // Listen for new messages (as backup to polling)
             const handleReceiveMessage = (message: Message) => {
                 setMessages((prev) => {
                     // Avoid duplicates
@@ -80,7 +85,6 @@ export const useChatSocket = (roomId?: string) => {
                 });
             };
 
-            // Listen for typing indicator
             const handleUserTyping = (data: { userId: string; isTyping: boolean }) => {
                 setIsTyping(data.isTyping);
             };
@@ -116,6 +120,9 @@ export const useChatSocket = (roomId?: string) => {
                 console.error('Failed to poll messages:', error);
             }
         };
+
+        // Poll immediately when room opens or changes
+        pollMessages();
 
         // Poll every 3 seconds for new messages
         pollingRef.current = setInterval(pollMessages, 3000);

@@ -50,7 +50,17 @@ const Chat: React.FC = () => {
                 setIsLoadingRooms(false);
             }
         };
-        if (currentUserId) fetchRooms();
+        if (currentUserId) {
+            fetchRooms();
+        }
+
+        const handleNewMsg = () => {
+            if (currentUserId) fetchRooms();
+        };
+        window.addEventListener('new-chat-message-received', handleNewMsg);
+        return () => {
+            window.removeEventListener('new-chat-message-received', handleNewMsg);
+        };
     }, [currentUserId]);
 
     useEffect(() => {
@@ -58,7 +68,7 @@ const Chat: React.FC = () => {
             try {
                 const response = await get(`/user/sponsers/${currentUserId}`);
                 if (response.success) {
-                    setDirectMembers(response.sponsoredUsers || []);
+                    setDirectMembers(response.data || []);
                 }
             } catch (error) {
                 console.error('Failed to fetch direct members:', error);
@@ -87,7 +97,20 @@ const Chat: React.FC = () => {
         fetchMessages();
     }, [selectedRoomId, setMessages]);
 
-    const handleSelectRoom = (roomId: string) => {
+    const handleSendMessage = async (text: string, attachment?: any) => {
+        if (!selectedRoomId) return;
+        await sendMessage(text, attachment);
+        
+        // Refresh room list to update last message and time
+        try {
+            const response = await get('/chat/rooms');
+            if (response.success) setRooms(response.data || []);
+        } catch (error) {
+            console.error('Failed to refresh rooms:', error);
+        }
+    };
+
+    const handleRoomSelect = async (roomId: string) => {
         setSelectedRoomId(roomId);
         setShowChatWindow(true);
         window.dispatchEvent(new CustomEvent('active-chat-room', { detail: roomId }));
@@ -102,8 +125,6 @@ const Chat: React.FC = () => {
         setShowChatWindow(true);
     };
 
-    const selectedRoom = rooms.find((r) => r.roomId === selectedRoomId);
-    
     // Merge actual rooms with direct members who don't have a room yet
     const allDisplayRooms = [...rooms];
     
@@ -126,6 +147,7 @@ const Chat: React.FC = () => {
         }
     });
 
+    const selectedRoom = allDisplayRooms.find((r) => r.roomId === selectedRoomId);
     const otherParticipant = selectedRoom?.participantDetails.find((p) => p.memberId !== currentUserId);
 
     return (
@@ -141,11 +163,11 @@ const Chat: React.FC = () => {
         }}>
             <Box sx={{ flex: 1, display: 'flex', overflow: 'hidden', minHeight: 0 }}>
                 <Box sx={{ width: { xs: '100%', lg: 400 }, flexShrink: 0, display: { xs: showChatWindow ? 'none' : 'block', lg: 'block' } }}>
-                    <ChatList rooms={allDisplayRooms.filter(r => !r.roomId.includes('ADMIN_'))} selectedRoomId={selectedRoomId} onSelectRoom={handleSelectRoom} isLoading={isLoadingRooms} currentUserId={currentUserId} onNewChat={() => setShowNewChatDialog(true)} />
+                    <ChatList rooms={allDisplayRooms.filter(r => !r.roomId.includes('ADMIN_'))} selectedRoomId={selectedRoomId} onSelectRoom={handleRoomSelect} isLoading={isLoadingRooms} currentUserId={currentUserId} onNewChat={() => setShowNewChatDialog(true)} />
                 </Box>
                 <Box sx={{ flex: 1, display: { xs: !showChatWindow && !selectedRoomId ? 'none' : 'flex', lg: 'flex' } }}>
                     {selectedRoomId ? (
-                        <ChatWindow roomId={selectedRoomId} messages={messages} onSendMessage={sendMessage} onTyping={sendTypingIndicator} isConnected={isConnected} isTyping={isTyping} isLoading={isLoadingMessages} recipientName={otherParticipant?.name || 'User'} recipientRole={otherParticipant?.role || 'user'} onBack={() => { setShowChatWindow(false); setSelectedRoomId(''); window.dispatchEvent(new CustomEvent('active-chat-room', { detail: null })); }} />
+                        <ChatWindow roomId={selectedRoomId} messages={messages} onSendMessage={handleSendMessage} onTyping={sendTypingIndicator} isConnected={isConnected} isTyping={isTyping} isLoading={isLoadingMessages} recipientName={otherParticipant?.name || 'User'} recipientRole={otherParticipant?.role || 'user'} onBack={() => { setShowChatWindow(false); setSelectedRoomId(''); window.dispatchEvent(new CustomEvent('active-chat-room', { detail: null })); }} />
                     ) : (
                         <Box sx={{ display: { xs: 'none', lg: 'flex' }, flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', bgcolor: '#050916', flex: 1 }}>
                             <Paper sx={{ width: 96, height: 96, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(10, 37, 88, 0.2) 100%)', mb: 3, boxShadow: 3, border: '1px solid rgba(255,215,0,0.2)' }}>

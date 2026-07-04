@@ -116,6 +116,7 @@ const ChatNotificationListener: React.FC = () => {
             });
 
             playNotificationSound();
+            window.dispatchEvent(new Event('new-chat-message-received'));
         };
 
         socket.on('new_message_notification', handleNewMessageNotification);

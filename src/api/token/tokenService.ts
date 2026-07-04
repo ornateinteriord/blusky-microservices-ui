@@ -21,12 +21,12 @@ class TokenService {
     return sessionStorage.getItem("token") || localStorage.getItem("token");
   }
 
-  static decodeToken(): { id: string; role: string; memberId: string } | null {
+  static decodeToken(): any | null {
     const token = this.getToken();
     if (!token) return null;
 
     try {
-      const decoded = jwtDecode<{ id: string; role: string; memberId: string }>(token);
+      const decoded = jwtDecode<any>(token);
 
       return decoded;
     } catch (error) {
@@ -40,11 +40,13 @@ class TokenService {
   }
 
   static getMemberId(): string | null {
-    return this.decodeToken()?.memberId || null;
+    const decoded: any = this.decodeToken();
+    return decoded?.Member_id || decoded?.memberId || decoded?.id || null;
   }
 
   static getUserId(): string | null {
-    return this.decodeToken()?.id || null;
+    const decoded: any = this.decodeToken();
+    return decoded?.id || decoded?.Member_id || decoded?.memberId || null;
   }
 
   static removeToken(): void {

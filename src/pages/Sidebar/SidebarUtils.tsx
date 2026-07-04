@@ -2,6 +2,8 @@ import { SideBarMenuItemType } from '../../store/store';
 import { DashboardIcon, AccountCircleIcon, CheckCircleIcon, GroupIcon, MonetizationOnIcon, ShowChartIcon, CreditCardIcon, MailOutlineIcon, PersonIcon, VerifiedUserIcon, LockIcon, PeopleIcon, AccountTreeIcon, PersonAddIcon, TrendingUpIcon, PaymentsIcon, SupportIcon, AnnouncementIcon, EventIcon, SmsIcon,  } from '../Icons';
 import { Pending } from '@mui/icons-material';
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
+import QrCode2Icon from "@mui/icons-material/QrCode2";
+import SendIcon from "@mui/icons-material/Send";
 import { LucideIcons, MuiIcons } from '../Icons';
 
 export const UserSideBarMenuItems: SideBarMenuItemType[] = [
@@ -112,6 +114,18 @@ export const UserSideBarMenuItems: SideBarMenuItemType[] = [
     name: "Upgrade Wallet",
     icon: <CreditCardIcon />,
     path: "/user/upgrade-wallet",
+    isExpandable: false,
+  },
+  {
+    name: "My QR Code",
+    icon: <QrCode2Icon />,
+    path: "/user/my-qr",
+    isExpandable: false,
+  },
+  {
+    name: "P2P Transfer",
+    icon: <SendIcon />,
+    path: "/user/p2p-transfer",
     isExpandable: false,
   },
   {

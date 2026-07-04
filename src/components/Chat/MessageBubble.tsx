@@ -17,7 +17,7 @@ const SentBubble = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(1.5, 2),
     borderRadius: '16px',
     borderBottomRightRadius: '4px',
-    background: 'linear-gradient(135deg, #FFD700 0%, #e6c200 100%)',
+    background: 'linear-gradient(135deg, #00C853 0%, #00E676 100%)',
     color: '#050916',
     maxWidth: '70%',
     minWidth: 'fit-content',
@@ -61,14 +61,27 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
         }
     };
 
-    const handleDownload = (url: string, fileName: string) => {
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = fileName || 'download';
-        link.target = '_blank';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+    const handleDownload = async (url: string, fileName: string) => {
+        try {
+            const response = await fetch(url);
+            const blob = await response.blob();
+            const blobUrl = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = blobUrl;
+            link.download = fileName || 'download.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(blobUrl);
+        } catch (e) {
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = fileName || 'download.png';
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
     };
 
     const BubbleComponent = isSent ? SentBubble : ReceivedBubble;
@@ -99,9 +112,13 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
                             <Box
                                 sx={{
                                     mb: message.text ? 1 : 0,
-                                    cursor: 'pointer',
                                     borderRadius: 1,
                                     overflow: 'hidden',
+                                    position: 'relative',
+                                    cursor: 'pointer',
+                                    '&:hover .download-btn': {
+                                        opacity: 1,
+                                    },
                                 }}
                                 onClick={() => setLightboxOpen(true)}
                             >
@@ -120,6 +137,31 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
                                         },
                                     }}
                                 />
+                                <IconButton
+                                    className="download-btn"
+                                    size="small"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleDownload(message.imageUrl!, message.text?.includes('UWC-P2P:') || message.imageUrl?.includes('qrserver') ? 'P2P_QR_Code.png' : 'chat_image.png');
+                                    }}
+                                    sx={{
+                                        position: 'absolute',
+                                        top: 8,
+                                        left: 8,
+                                        opacity: 0,
+                                        transition: 'opacity 0.2s ease, background-color 0.2s ease',
+                                        bgcolor: 'rgba(0, 0, 0, 0.6)',
+                                        color: '#ffffff',
+                                        p: 0.8,
+                                        boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+                                        '&:hover': {
+                                            bgcolor: 'rgba(0, 0, 0, 0.85)',
+                                            color: '#FFD700',
+                                        },
+                                    }}
+                                >
+                                    <Download size={16} />
+                                </IconButton>
                             </Box>
                         )}
 

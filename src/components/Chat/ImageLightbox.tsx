@@ -9,14 +9,27 @@ interface ImageLightboxProps {
 }
 
 const ImageLightbox: React.FC<ImageLightboxProps> = ({ open, imageUrl, onClose }) => {
-    const handleDownload = () => {
-        const link = document.createElement('a');
-        link.href = imageUrl;
-        link.download = 'image';
-        link.target = '_blank';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+    const handleDownload = async () => {
+        try {
+            const response = await fetch(imageUrl);
+            const blob = await response.blob();
+            const blobUrl = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = blobUrl;
+            link.download = imageUrl.includes('qrserver') ? 'P2P_QR_Code.png' : 'chat_image.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(blobUrl);
+        } catch (e) {
+            const link = document.createElement('a');
+            link.href = imageUrl;
+            link.download = 'chat_image.png';
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
     };
 
     return (

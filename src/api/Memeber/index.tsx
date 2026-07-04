@@ -940,3 +940,57 @@ export const useTransferMoney = () => {
     },
   });
 };
+
+// Lookup Member for P2P Transfer (by Member_id or QR string)
+export const useLookupMemberForTransfer = () => {
+  return useMutation({
+    mutationFn: async ({ identifier }: { identifier: string }) => {
+      const response = await get(`/user/transfer-lookup?query=${encodeURIComponent(identifier)}`);
+      if (!response) throw new Error("No response from server");
+      const data = response.data || response;
+      if (data.success === false) {
+        throw new Error(data.message || "Member lookup failed");
+      }
+      return data;
+    },
+  });
+};
+
+// Execute P2P Wallet Transfer (from Earning or Top Up to Recipient's Top Up)
+export const useTransferP2PWallet = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (transferData: {
+      senderId: string;
+      recipientId: string;
+      sourceWallet: 'Earning Wallet' | 'Top Up Wallet';
+      amount: number;
+      idToken: string;
+    }) => {
+      const payload = {
+        memberId: transferData.senderId,
+        receiverId: transferData.recipientId,
+        fromWallet: transferData.sourceWallet === 'Earning Wallet' ? 'Earnings Wallet' : 'Top Up Wallet',
+        amount: transferData.amount,
+        otp: transferData.idToken,
+      };
+      const response = await post("/user/transfer-p2p", payload);
+      if (!response) throw new Error("No response from server");
+      const data = response.data || response;
+      if (data.success === false) {
+        throw new Error(data.message || "P2P transfer failed");
+      }
+      return data;
+    },
+    onSuccess: (data: any) => {
+      toast.success(data.message || "Member to Member transfer successful!");
+      queryClient.invalidateQueries({ queryKey: ["memberDetails"] });
+      queryClient.invalidateQueries({ queryKey: ["walletOverview"] });
+      queryClient.invalidateQueries({ queryKey: ["transactionsWithConfig"] });
+    },
+    onError: (error: any) => {
+      const message = error?.response?.data?.message || error?.message || "P2P Transfer failed.";
+      toast.error(message);
+    },
+  });
+};

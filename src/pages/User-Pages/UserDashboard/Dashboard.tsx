@@ -20,6 +20,8 @@ import PaymentsIcon from '@mui/icons-material/Payments';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import SyncAltIcon from '@mui/icons-material/SyncAlt';
 import PublicIcon from '@mui/icons-material/Public';
+import QrCode2Icon from '@mui/icons-material/QrCode2';
+import SendIcon from '@mui/icons-material/Send';
 
 import TokenService from '../../../api/token/tokenService';
 import { useVerifyPayment, parsePaymentRedirectParams, useGetTransactionDetails, useGetWalletOverview, useGetMemberDetails, useGetDailyPayout } from '../../../api/Memeber';
@@ -77,6 +79,8 @@ const UserDashboard = () => {
         // { label: "KYC", icon: <VerifiedUserIcon />, route: "/user/account/kyc", color: "#10b981" },
         { label: "Password", icon: <LockIcon />, route: "/user/account/change-password", color: "#f59e0b" },
         { label: "Transfer", icon: <SyncAltIcon />, route: "/user/transfer", color: "#10b981" },
+        { label: "My QR", icon: <QrCode2Icon />, route: "/user/my-qr", color: "#1de9b6" },
+        { label: "P2P Transfer", icon: <SendIcon />, route: "/user/p2p-transfer", color: "#FF6E40" },
         { label: "New Subscription", icon: <InventoryIcon />, onClick: () => navigate("/user/new-subscription"), route: "", color: "#10b981" },
         { label: "My Subscription", icon: <ReceiptLongIcon />, onClick: () => navigate("/user/my-subscriptions"), route: "", color: "#f59e0b" },
       ]
