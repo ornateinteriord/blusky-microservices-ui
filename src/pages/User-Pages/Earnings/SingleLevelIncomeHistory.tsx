@@ -73,7 +73,7 @@ const SingleLevelIncomeHistory = () => {
   return (
     <Card sx={{ margin: '2rem', mt: 10, bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px' }}>
       <CardContent>
-        <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem"     }}>
+        <div style={{ marginBottom: "1rem", color: "#FFFF", fontWeight: "bold", fontSize: "1.25rem"     }}>
           List of Single Level Income ({singleLevelData.length})
         </div>
           <DataTable
