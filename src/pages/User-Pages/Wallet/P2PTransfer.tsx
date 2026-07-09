@@ -7,7 +7,6 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import jsQR from 'jsqr';
 import { toast } from 'react-toastify';
-import { auth } from '../../../firebase';
 import { jwtDecode } from 'jwt-decode';
 import TokenService from '../../../api/token/tokenService';
 
@@ -214,9 +213,7 @@ const P2PTransfer: React.FC = () => {
     if (!recipient) return;
     try {
       let idToken = 'BYPASS_TOKEN';
-      if (auth.currentUser) {
-        idToken = await auth.currentUser.getIdToken();
-      }
+      // Firebase OTP bypass for P2P as requested
       await transferMutation.mutateAsync({
         senderId: memberDetails?.Member_id || memberDetails?.member_id || '',
         recipientId: recipient.Member_id || recipient.member_id || '',

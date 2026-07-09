@@ -27,11 +27,13 @@ import TokenService from '../../../api/token/tokenService';
 import { useVerifyPayment, parsePaymentRedirectParams, useGetTransactionDetails, useGetWalletOverview, useGetMemberDetails, useGetDailyPayout } from '../../../api/Memeber';
 import { toast } from 'react-toastify';
 import ProductsContainer from './ProductsContainer';
+import DashboardQRDialog from './DashboardQRDialog';
 
 const UserDashboard = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const [paymentProcessed, setPaymentProcessed] = useState(false);
+  const [isQRDialogOpen, setIsQRDialogOpen] = useState(false);
 
   const memberId = TokenService.getMemberId();
   const { data: walletOverview } = useGetWalletOverview(memberId);
@@ -126,6 +128,66 @@ const UserDashboard = () => {
         </Box>
       )}
 
+      {/* User Header */}
+      <Paper elevation={0} sx={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center', 
+        mb: 3,
+        mt: 1,
+        p: { xs: 2, sm: 3 },
+        borderRadius: '24px',
+        bgcolor: 'rgba(255,255,255,0.02)',
+        border: '1px solid rgba(255,255,255,0.08)',
+        boxShadow: '0 10px 40px rgba(0,0,0,0.15)',
+        width: '100%'
+      }}>
+        <Box>
+          <Typography sx={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.70rem', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', mb: 0.5 }}>
+            User ID
+          </Typography>
+          <Typography sx={{ color: 'white', fontSize: { xs: '1.1rem', sm: '1.3rem' }, fontWeight: 900 }}>
+            {memberDetails?.Member_id || memberId}
+          </Typography>
+          <Typography sx={{ color: 'rgba(255,215,0,0.9)', fontSize: { xs: '0.85rem', sm: '1rem' }, fontWeight: 700, mt: 0.2 }}>
+            {memberDetails?.Name || 'Loading...'}
+          </Typography>
+        </Box>
+        <Button
+          onClick={() => setIsQRDialogOpen(true)}
+          variant="contained"
+          startIcon={<QrCode2Icon />}
+          sx={{
+            background: 'linear-gradient(45deg, #FFD700 30%, #FFDF00 90%)',
+            color: '#0D2658',
+            borderRadius: '14px',
+            px: { xs: 2, sm: 3 },
+            py: 1.2,
+            fontWeight: 800,
+            textTransform: 'none',
+            fontSize: { xs: '0.85rem', sm: '0.95rem' },
+            boxShadow: '0 4px 15px rgba(255, 215, 0, 0.3)',
+            '&:hover': {
+              background: 'linear-gradient(45deg, #e6c200 30%, #FFD700 90%)',
+              boxShadow: '0 6px 20px rgba(255, 215, 0, 0.4)',
+              transform: 'translateY(-2px)'
+            },
+            transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+            whiteSpace: 'nowrap'
+          }}
+        >
+          MY QR
+        </Button>
+      </Paper>
+
+      {/* QR Dialog */}
+      <DashboardQRDialog 
+        open={isQRDialogOpen} 
+        onClose={() => setIsQRDialogOpen(false)} 
+        memberId={memberDetails?.Member_id || memberId || ''} 
+        memberName={memberDetails?.Name || ''}
+      />
+
       {/* Sliding Flags */}
       <CyclingFlag />
 
@@ -165,7 +227,7 @@ const UserDashboard = () => {
             <Box sx={{ width: '100%' }}>
               <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Top Up</Typography>
               <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '13px' }}>Your money, topped up instantly—simple, secure, and always accessible</Typography>
-              <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-start' }}>
+              <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end' }}>
                 <Button
                   variant="contained"
                   onClick={(e) => {
@@ -222,6 +284,35 @@ const UserDashboard = () => {
             <Box sx={{ width: '100%' }}>
               <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Earnings</Typography>
               <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '13px' }}>Watch your earnings grow and access them anytime with your Earning Wallet</Typography>
+              <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end' }}>
+                <Button
+                  variant="contained"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigate('/user/wallet?type=withdrawal');
+                  }}
+                  sx={{
+                    background: 'linear-gradient(45deg, #FFD700 30%, #FFDF00 90%)',
+                    color: '#050916',
+                    borderRadius: '999px',
+                    px: 3.5,
+                    py: 0.8,
+                    fontWeight: 900,
+                    letterSpacing: '0.5px',
+                    textTransform: 'uppercase',
+                    fontSize: '0.8rem',
+                    boxShadow: '0 4px 15px rgba(255, 215, 0, 0.3)',
+                    '&:hover': {
+                      background: 'linear-gradient(45deg, #e6c200 30%, #FFD700 90%)',
+                      boxShadow: '0 6px 20px rgba(255, 215, 0, 0.5)',
+                      transform: 'translateY(-1px)'
+                    },
+                    transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)'
+                  }}
+                >
+                  Withdraw
+                </Button>
+              </Box>
             </Box>
           </Box>
         </Box>
@@ -432,7 +523,7 @@ const UserDashboard = () => {
                       <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>${Number(walletOverview?.singleLineIncome || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
                     </Box>
                     <Box sx={{ width: '100%' }}>
-                      <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Single Level Income</Typography>
+                      <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Single Leg Income</Typography>
                       <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '14px' }}>One growing network, multiple earning opportunities—powered by your single-leg structure.</Typography>
                     </Box>
                   </Box>

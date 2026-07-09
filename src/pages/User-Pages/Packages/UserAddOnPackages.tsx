@@ -233,7 +233,7 @@ export const UserAddOnPackages = () => {
                       <Divider sx={{ mb: 2 }} />
                       <Box sx={{ mb: 2 }}>
                         <Typography variant="caption" sx={{ fontSize: '0.75rem', color: 'text.secondary', display: 'block', fontWeight: 600 }}>
-                          {pkg.isFD ? 'Interest Rate' : 'Single Level Income'}
+                          {pkg.isFD ? 'Interest Rate' : 'Single Leg Income'}
                         </Typography>
                         <Typography variant="h6" sx={{ fontWeight: 800, color: '#1565c0', fontSize: '1.1rem' }}>
                           {pkg.isFD ? `${pkg.interest_rate || 0}% p.a.` : `$${sliAmount.toFixed(4)}`}

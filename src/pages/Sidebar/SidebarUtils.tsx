@@ -267,7 +267,7 @@ export const AdminSideBarMenuItems: SideBarMenuItemType[] = [
         icon: <TrendingUpIcon />,
       },
       {
-        name: "Single Level Income",
+        name: "Single Leg Income",
         path: "/admin/income/daily-payouts",
         icon: <PaymentsIcon />,
       },

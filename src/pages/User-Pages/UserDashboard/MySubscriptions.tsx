@@ -125,7 +125,7 @@ const MySubscriptions: React.FC = () => {
                       <Divider sx={{ mb: 2, borderColor: 'rgba(255,255,255,0.08)' }} />
                       <Box sx={{ mb: 2 }}>
                         <Typography variant="caption" sx={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', display: 'block', fontWeight: 600 }}>
-                          {pkg.isFD ? 'Interest Rate' : 'Single Level Income'}
+                          {pkg.isFD ? 'Interest Rate' : 'Single Leg Income'}
                         </Typography>
                         <Typography variant="h6" sx={{ fontWeight: 800, color: '#FFD700', fontSize: '1.2rem' }}>
                           {pkg.isFD ? `${pkg.interest_rate || 0}% p.a.` : `$${sliAmount.toFixed(4)}`}

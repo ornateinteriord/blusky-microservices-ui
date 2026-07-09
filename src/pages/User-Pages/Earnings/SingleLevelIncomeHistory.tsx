@@ -43,11 +43,11 @@ const SingleLevelIncomeHistory = () => {
       return {
         id: transaction._id || transaction.transaction_id,
         date: transaction.transaction_date,
-        payoutLevel: 'Single Level Income', 
+        payoutLevel: 'Single Leg Income', 
         memberName: transaction.related_member_name || '-',
         memberId: extractedMemberId,
         amount: ((parseFloat(transaction.ew_credit) || 0) + (parseFloat(transaction.uw_credit) || 0)).toFixed(4),
-        description: transaction.description || 'Single Level Income',
+        description: transaction.description || 'Single Leg Income',
         transactionType: transaction.transaction_type
       };
     });
@@ -63,7 +63,7 @@ const SingleLevelIncomeHistory = () => {
       <Card sx={{ margin: '2rem', mt: 10 }}>
         <CardContent>
           <div style={{ padding: '24px', textAlign: 'center', color: 'red' }}>
-            Error loading single level income data: {(error as any)?.message}
+            Error loading single leg income data: {(error as any)?.message}
           </div>
         </CardContent>
       </Card>
@@ -74,7 +74,7 @@ const SingleLevelIncomeHistory = () => {
     <Card sx={{ margin: '2rem', mt: 10, bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px' }}>
       <CardContent>
         <div style={{ marginBottom: "1rem", color: "#FFFF", fontWeight: "bold", fontSize: "1.25rem"     }}>
-          List of Single Level Income ({singleLevelData.length})
+          List of Single Leg Income ({singleLevelData.length})
         </div>
           <DataTable
               columns={getLevelBenifitsColumns()}

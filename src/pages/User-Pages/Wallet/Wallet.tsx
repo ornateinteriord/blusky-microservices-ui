@@ -9,7 +9,11 @@ import { toast } from 'react-toastify';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { MuiOtpInput } from 'mui-one-time-password-input';
 
+import { useSearchParams } from 'react-router-dom';
+
 const Wallet = () => {
+  const [searchParams] = useSearchParams();
+  const isWithdrawalView = searchParams.get('type') === 'withdrawal';
   const isMobile = useMediaQuery("(max-width:600px)");
   const [amount, setAmount] = useState("");
   const [tds, setTds] = useState(0); const [netAmount, setNetAmount] = useState(0);
@@ -183,6 +187,7 @@ const Wallet = () => {
     >
       <CardContent sx={{ padding: isMobile ? "12px" : "24px" }}>
         {/* Withdrawal Section */}
+        {isWithdrawalView && (
         <div>
           <Box sx={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)", display: "flex", alignItems: "center", gap: "8px" }}>
             {step === 2 && (
@@ -417,8 +422,11 @@ const Wallet = () => {
             )}
           </div>
         </div>
+        )}
 
         {/* Transaction History */}
+        {!isWithdrawalView && (
+        <>
         <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem"     }}>Transaction History</div>
           {walletData?.transactions && walletData.transactions.filter((tx: any) => tx.transaction_type !== "Upgrade Wallet Deduction").length > 0 ? (
               <DataTable
@@ -447,6 +455,8 @@ const Wallet = () => {
                 </Typography>
               </Box>
             )}
+        </>
+        )}
       </CardContent>
     </Card>
   );
