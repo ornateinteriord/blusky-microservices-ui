@@ -27,7 +27,7 @@ const LevelBenifits = () => {
       const descStr = transaction.description?.toLowerCase() || "";
 
       // Match Level Benefit exactly like the backend dashboard does
-      const isLevelBonus = (txType.includes('level benefit') || benefitType.includes('level income')) && 
+      const isLevelBonus = (txType.includes('level benefit') || txType.includes('level bonus') || benefitType.includes('level income') || descStr.includes('level bonus')) && 
                            !txType.includes('roi') && !descStr.includes('roi') &&
                            !txType.includes('referral') && !descStr.includes('referral');
       
