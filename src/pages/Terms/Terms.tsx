@@ -6,38 +6,32 @@ const Terms = () => {
     const navigate = useNavigate();
 
     return (
-        <Container maxWidth="lg" sx={{ py: 8 }}>
-            <Button
-                startIcon={<ArrowLeft size={20} />}
-                onClick={() => navigate("/")}
-                sx={{
-                    mt: 3,
-                    mb: 3,
-                    color: "#6b21a8",
-                    "&:hover": {
-                        backgroundColor: "rgba(107, 33, 168, 0.1)",
-                    },
-                }}
-            >
-                Back to Home
-            </Button>
-            <Box sx={{ textAlign: "center", mb: 6 }}>
-                <Typography
-                    variant="h3"
-                    sx={{
-                        fontWeight: "bold",
-                        mb: 2,
-                        background: "linear-gradient(135deg, #6b21a8 0%, #a855f7 100%)",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                    }}
-                >
-                    Terms & Conditions
-                </Typography>
-                <Typography variant="body1" color="text.secondary">
-                    Last Updated: {new Date().toLocaleDateString()}
-                </Typography>
+        <Box sx={{ bgcolor: "#f8fafc", minHeight: "100vh", color: "#1e293b", pb: 12 }}>
+            {/* HERO SECTION */}
+            <Box sx={{ bgcolor: '#1e3a8a', color: '#ffffff', py: { xs: 8, md: 10 }, textAlign: 'center' }}>
+                <Container maxWidth="md">
+                    <Button
+                        startIcon={<ArrowLeft size={20} />}
+                        onClick={() => navigate("/")}
+                        sx={{
+                            mb: 4,
+                            color: "#93c5fd",
+                            "&:hover": {
+                                backgroundColor: "rgba(147, 197, 253, 0.1)",
+                            },
+                        }}
+                    >
+                        Back to Home
+                    </Button>
+                    <Typography variant="h2" sx={{ fontWeight: 800, mb: 2, fontSize: { xs: '2.5rem', md: '3.5rem' }, color: '#ffffff' }}>
+                        Terms & <span style={{ color: '#93c5fd' }}>Conditions</span>
+                    </Typography>
+                    <Typography sx={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.8)' }}>
+                        Last Updated: {new Date().toLocaleDateString()}
+                    </Typography>
+                </Container>
             </Box>
+            <Container maxWidth="lg" sx={{ mt: 8 }}>
 
             <Paper elevation={3} sx={{ p: 4, mb: 3 }}>
                 <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
@@ -209,6 +203,7 @@ const Terms = () => {
                 </Typography>
             </Paper>
         </Container>
+    </Box>
     );
 };
 

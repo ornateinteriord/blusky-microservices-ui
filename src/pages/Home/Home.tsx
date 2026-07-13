@@ -164,11 +164,12 @@ const Home = () => {
           </Box>
           <Grid container spacing={4}>
             {[
-              { title: 'Personal Loan', desc: 'Quick and easy personal loans to meet your immediate financial requirements with minimal documentation.' },
-              { title: 'Business Loan', desc: 'Expand your business with our customized loan options offering competitive interest rates.' },
-              { title: 'Home Loan', desc: 'Turn your dream of owning a home into reality with our flexible and affordable home loan plans.' },
+              { title: 'Savings Account', desc: 'Reduced Payments maintenance and processing fees. No hidden fees.' },
+              { title: 'Business Lending', desc: 'Helping businesses secure capital for growth, equipment, and working capital.' },
+              { title: 'Pay Out & Refund', desc: 'Execute pay outs and refunds straight to your customer’s bank account.' },
+              { title: 'Agent Banking', desc: 'Stay updated. Check your bank account to manage funds and track transactions securely.' }
             ].map((service, i) => (
-              <Grid item xs={12} md={4} key={i}>
+              <Grid item xs={12} sm={6} md={3} key={i}>
                 <Card sx={{ p: 4, borderRadius: '16px', bgcolor: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.1)', color: 'white', height: '100%' }}>
                   <Box sx={{ mb: 3 }}>
                     <CheckCircle2 size={40} color="#93c5fd" />
@@ -188,6 +189,73 @@ const Home = () => {
           </Grid>
         </Container>
       </Box>
+      {/* FOUR SIMPLE STEPS SECTION */}
+      <Box sx={{ py: { xs: 8, md: 12 }, bgcolor: '#f8fafc' }}>
+        <Container maxWidth="xl">
+          <Grid container spacing={6} alignItems="center">
+            <Grid item xs={12} md={6}>
+              <Typography sx={{ color: '#1e3a8a', fontWeight: 700, textTransform: 'uppercase', mb: 1, letterSpacing: '2px' }}>
+                FINANCE AT YOUR FINGERTIPS
+              </Typography>
+              <Typography variant="h3" sx={{ fontWeight: 800, color: '#0f172a', mb: 3 }}>
+                Four Simple Steps to Get the Right Loan
+              </Typography>
+              <Typography sx={{ color: '#475569', mb: 4, lineHeight: 1.8, fontSize: '1.1rem' }}>
+                Access fast, flexible financing through a simple and transparent process designed to support your personal and business financial goals.
+              </Typography>
+              
+              <Grid container spacing={3}>
+                <Grid item xs={12} sm={6}>
+                  <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
+                    <CheckCircle2 size={24} color="#2563eb" style={{ flexShrink: 0 }} />
+                    <Typography sx={{ color: '#1e293b', fontWeight: 600 }}>Transparent loan terms with no hidden charges</Typography>
+                  </Box>
+                  <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
+                    <CheckCircle2 size={24} color="#2563eb" style={{ flexShrink: 0 }} />
+                    <Typography sx={{ color: '#1e293b', fontWeight: 600 }}>Secure and encrypted application process</Typography>
+                  </Box>
+                  <Box sx={{ display: 'flex', gap: 2 }}>
+                    <CheckCircle2 size={24} color="#2563eb" style={{ flexShrink: 0 }} />
+                    <Typography sx={{ color: '#1e293b', fontWeight: 600 }}>Quick eligibility check and fast approvals</Typography>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
+                    <CheckCircle2 size={24} color="#2563eb" style={{ flexShrink: 0 }} />
+                    <Typography sx={{ color: '#1e293b', fontWeight: 600 }}>Flexible loan options to suit your needs</Typography>
+                  </Box>
+                  <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
+                    <CheckCircle2 size={24} color="#2563eb" style={{ flexShrink: 0 }} />
+                    <Typography sx={{ color: '#1e293b', fontWeight: 600 }}>Expert financial guidance at every step</Typography>
+                  </Box>
+                  <Box sx={{ display: 'flex', gap: 2 }}>
+                    <CheckCircle2 size={24} color="#2563eb" style={{ flexShrink: 0 }} />
+                    <Typography sx={{ color: '#1e293b', fontWeight: 600 }}>Reliable support from application to disbursal</Typography>
+                  </Box>
+                </Grid>
+              </Grid>
+              
+              <Button 
+                variant="contained" 
+                onClick={() => navigate('/loan')}
+                sx={{ mt: 5, bgcolor: '#1e3a8a', color: 'white', px: 4, py: 1.5, borderRadius: '50px', fontWeight: 700, '&:hover': { bgcolor: '#1e40af' } }}
+              >
+                Explore Loan Options
+              </Button>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Box sx={{ position: 'relative' }}>
+                <img 
+                  src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=1950" 
+                  alt="Finance process" 
+                  style={{ width: '100%', borderRadius: '16px', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)' }} 
+                />
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
     </Box>
   );
 };
