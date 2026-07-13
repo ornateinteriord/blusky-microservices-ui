@@ -234,14 +234,6 @@ const Home = () => {
                   </Box>
                 </Grid>
               </Grid>
-              
-              <Button 
-                variant="contained" 
-                onClick={() => navigate('/loan')}
-                sx={{ mt: 5, bgcolor: '#1e3a8a', color: 'white', px: 4, py: 1.5, borderRadius: '50px', fontWeight: 700, '&:hover': { bgcolor: '#1e40af' } }}
-              >
-                Explore Loan Options
-              </Button>
             </Grid>
             <Grid item xs={12} md={6}>
               <Box sx={{ position: 'relative' }}>

@@ -20,20 +20,12 @@ const PublicNavbar = () => {
 
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
-  const navLinks = [
+  const navLinks: { title: string, path: string, dropdown?: { title: string, path: string }[] }[] = [
     { title: "Home", path: "/" },
     { title: "About Us", path: "/about" },
     { 
       title: "Loan", 
-      path: "/loan",
-      dropdown: [
-        { title: "Loan", path: "/loan" },
-        { title: "Business Loan", path: "/loan" },
-        { title: "Car Loan", path: "/loan" },
-        { title: "Education Loan", path: "/loan" },
-        { title: "Personal Loan", path: "/loan" },
-        { title: "Home Loan", path: "/loan" },
-      ]
+      path: "#",
     },
     { title: "Gallery", path: "/gallery" },
     { title: "Legal", path: "/terms" },
