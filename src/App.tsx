@@ -39,10 +39,14 @@ const RecoverPassword = lazy(() => import("./pages/Auth/RecoverPassword"))
 const ResetPassword = lazy(() => import("./pages/Auth/ResetPassword"))
 const Impersonate = lazy(() => import("./pages/Auth/Impersonate"));
 const Navbar = lazy(() => import("./pages/Navbar/Navbar"));
+const PublicNavbar = lazy(() => import("./components/PublicNavbar/PublicNavbar"));
 const Sidebar = lazy(() => import("./pages/Sidebar/Sidebar"));
 const NotFound = lazy(() => import("./pages/not-found/NotFound"));
 const Footer = lazy(() => import("./components/Footer/Footer"));
 const About = lazy(() => import("./pages/About/About"));
+const Contact = lazy(() => import("./pages/Contact/Contact"));
+const PublicLoan = lazy(() => import("./pages/Loans/PublicLoan"));
+const Gallery = lazy(() => import("./pages/Gallery/Gallery"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy/PrivacyPolicy"));
 const Terms = lazy(() => import("./pages/Terms/Terms"));
 const RefundPolicy = lazy(() => import("./pages/RefundPolicy/RefundPolicy"));
@@ -248,8 +252,14 @@ const ShouldHideSidebar = () => {
 const ShouldHideNavbar = () => {
   const location = useLocation();
   // Comment out login from nav bar - hide navbar on public/auth pages
-  const noNavbarPaths = ["/", "/login", "/register", "/recover-password", "/reset-password", "/forgot-password"];
+  const noNavbarPaths = ["/", "/about", "/contact", "/loan", "/gallery", "/login", "/register", "/recover-password", "/reset-password", "/forgot-password"];
   return noNavbarPaths.includes(location.pathname);
+};
+
+const ShouldShowPublicNavbar = () => {
+  const location = useLocation();
+  const publicPaths = ["/", "/about", "/contact", "/loan", "/gallery", "/terms", "/privacy-policy", "/refund-policy"];
+  return publicPaths.includes(location.pathname);
 };
 
 const ShouldShowFooter = () => {
@@ -303,9 +313,12 @@ const RoutesProvider = ({
   const isAdmin01 = userRole === "ADMIN_01";
   const showSidebar = isAdmin || isAgent || isAdmin01;
 
+  const showPublicNavbar = ShouldShowPublicNavbar();
+
   return (
     <>
       <Navbar shouldHide={hideNavbar} onToggleSidebar={() => setIsOpen(!isOpen)} />
+      {showPublicNavbar && <PublicNavbar />}
       <ChatNotificationListener />
 
       <div
@@ -353,6 +366,9 @@ const RoutesProvider = ({
             </Route>
             {/* policy and info pages - accessible to all */}
             <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/loan" element={<PublicLoan />} />
+            <Route path="/gallery" element={<Gallery />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/refund-policy" element={<RefundPolicy />} />

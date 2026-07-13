@@ -1,143 +1,104 @@
-import { Container, Typography, Box, Paper, Button } from '@mui/material';
-import { Building2, Users, Target, Award, ArrowLeft } from 'lucide-react';
+import { Container, Typography, Box, Grid, Button } from '@mui/material';
+import { ArrowLeft, Target, Award, ShieldCheck, Building2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import aboutBanner from "../../assets/about_banner.jpg";
 
 const About = () => {
     const navigate = useNavigate();
 
     return (
-        <Box sx={{ bgcolor: "#0B2453", minHeight: "100vh", color: "white" }}>
-            <Container maxWidth="lg" sx={{ py: 8 }}>
+        <Box sx={{ bgcolor: "#ffffff", minHeight: "100vh", color: "#1e293b" }}>
+            
+            {/* HERO SECTION */}
+            <Box sx={{ bgcolor: '#1e3a8a', color: 'white', py: { xs: 8, md: 12 }, textAlign: 'center' }}>
+                <Container maxWidth="md">
+                    <Typography sx={{ color: '#93c5fd', fontWeight: 700, textTransform: 'uppercase', mb: 2, letterSpacing: '2px' }}>
+                        Who We Are
+                    </Typography>
+                    <Typography variant="h2" sx={{ fontWeight: 800, mb: 3, fontSize: { xs: '2.5rem', md: '3.5rem' } }}>
+                        About <span style={{ color: '#93c5fd' }}>BMS Foundations</span>
+                    </Typography>
+                    <Typography sx={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'rgba(255,255,255,0.8)' }}>
+                        Empowering growth and opportunity through flexible, transparent, and reliable financial solutions for individuals and businesses alike.
+                    </Typography>
+                </Container>
+            </Box>
+
+            <Container maxWidth="lg" sx={{ py: { xs: 8, md: 12 } }}>
                 <Button
                     startIcon={<ArrowLeft size={20} />}
                     onClick={() => navigate("/")}
-                    sx={{
-                        mt: 3,
-                        mb: 3,
-                        color: "#FFD700",
-                        "&:hover": {
-                            backgroundColor: "rgba(255, 215, 0, 0.1)",
-                        },
-                    }}
+                    sx={{ mb: 6, color: "#1e3a8a", fontWeight: 700, "&:hover": { bgcolor: "rgba(30, 58, 138, 0.05)" } }}
                 >
                     Back to Home
                 </Button>
-                <Box sx={{ textAlign: "center", mb: 6 }}>
-                    <Typography
-                        variant="h3"
-                        sx={{
-                            fontWeight: "bold",
-                            mb: 2,
-                            color: "#FFD700",
-                        }}
-                    >
-                        About Us
-                    </Typography>
-                    <Typography variant="h6" color="rgba(255,255,255,0.7)" sx={{ mb: 4 }}>
-                        USDT.
-                    </Typography>
-                    <img 
-                        src={aboutBanner} 
-                        alt="About Us Banner" 
-                        style={{ 
-                            width: "100%", 
-                            maxWidth: "800px", 
-                            borderRadius: "20px", 
-                            boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
-                            border: "1px solid rgba(255, 215, 0, 0.2)"
-                        }} 
-                    />
-                </Box>
 
-                <Paper elevation={3} sx={{ p: 4, mb: 4, background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255, 215, 0, 0.2)", color: "white" }}>
-                    <Typography variant="h5" sx={{ fontWeight: "bold", mb: 3, color: "#FFD700" }}>
-                        Who We Are
-                    </Typography>
-                    <Typography variant="body1" paragraph sx={{ lineHeight: 1.8 }}>
-                        USDT (USDT) is a premier cooperative society dedicated to
-                        providing comprehensive financial services to our valued members. Established with the vision of
-                        financial inclusion and empowerment, we have been serving our community with integrity, transparency,
-                        and excellence.
-                    </Typography>
-                    <Typography variant="body1" paragraph sx={{ lineHeight: 1.8 }}>
-                        Our society operates under the principles of cooperation, mutual assistance, and financial responsibility.
-                        We are registered under the Cooperative Societies Act and are committed to maintaining the highest
-                        standards of financial governance and member service.
-                    </Typography>
-                </Paper>
-
-                <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: 3, mb: 4 }}>
-                    <Paper elevation={3} sx={{ p: 4, background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255, 215, 0, 0.2)", color: "white" }}>
-                        <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-                            <Target size={32} style={{ color: "#FFD700", marginRight: "12px" }} />
-                            <Typography variant="h5" sx={{ fontWeight: "bold", color: "#FFD700" }}>
-                                Our Mission
-                            </Typography>
-                        </Box>
-                        <Typography variant="body1" sx={{ lineHeight: 1.8 }}>
-                            To provide accessible, reliable, and innovative financial services that empower our members
-                            to achieve their financial goals while fostering a culture of savings, investment, and mutual growth.
+                <Grid container spacing={8} alignItems="center">
+                    <Grid item xs={12} md={6}>
+                        <img 
+                            src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=1950" 
+                            alt="About Us Banner" 
+                            style={{ 
+                                width: "100%", 
+                                borderRadius: "20px", 
+                                boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
+                            }} 
+                        />
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <Typography variant="h4" sx={{ fontWeight: 800, mb: 3, color: '#0f172a' }}>
+                            BLUSKY MICRO SERVICES FOUNDATION
                         </Typography>
-                    </Paper>
-
-                    <Paper elevation={3} sx={{ p: 4, background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255, 215, 0, 0.2)", color: "white" }}>
-                        <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-                            <Award size={32} style={{ color: "#FFD700", marginRight: "12px" }} />
-                            <Typography variant="h5" sx={{ fontWeight: "bold", color: "#FFD700" }}>
-                                Our Vision
-                            </Typography>
-                        </Box>
-                        <Typography variant="body1" sx={{ lineHeight: 1.8 }}>
-                            To be the most trusted and preferred cooperative society, recognized for financial excellence,
-                            member satisfaction, and contribution to the economic development of our community.
+                        <Typography variant="body1" paragraph sx={{ lineHeight: 1.8, color: '#475569' }}>
+                            <strong>As on: 2024-07-03</strong><br/>
+                            BLUSKY MICRO SERVICES FOUNDATION (CIN: U65100DL2022NPL407403) is a Private company incorporated on 25 Dec 2022. It is classified as Non-government company and is registered at Registrar of Companies, Delhi.
                         </Typography>
-                    </Paper>
-                </Box>
-
-                <Paper elevation={3} sx={{ p: 4, mb: 4, background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255, 215, 0, 0.2)", color: "white" }}>
-                    <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
-                        <Users size={32} style={{ color: "#FFD700", marginRight: "12px" }} />
-                        <Typography variant="h5" sx={{ fontWeight: "bold", color: "#FFD700" }}>
-                            Our Values
+                        <Typography variant="body1" paragraph sx={{ lineHeight: 1.8, color: '#475569' }}>
+                            We are dedicated to providing comprehensive financial services to our valued members. Established with the vision of financial inclusion and empowerment, we have been serving our community with integrity, transparency, and excellence.
                         </Typography>
-                    </Box>
-                    <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: 2 }}>
+                    </Grid>
+                </Grid>
+
+                <Box sx={{ mt: 12 }}>
+                    <Grid container spacing={4}>
                         {[
-                            { title: "Integrity", description: "We conduct our business with honesty and ethical principles" },
-                            { title: "Transparency", description: "We maintain open and clear communication with all stakeholders" },
-                            { title: "Member-Centric", description: "Our members' interests are at the heart of everything we do" },
-                            { title: "Innovation", description: "We continuously improve our services through technology and best practices" },
-                        ].map((value, index) => (
-                            <Box key={index}>
-                                <Typography variant="subtitle1" sx={{ fontWeight: "bold", mb: 0.5, color: "#FFD700" }}>
-                                    {value.title}
-                                </Typography>
-                                <Typography variant="body2" color="rgba(255,255,255,0.7)">
-                                    {value.description}
-                                </Typography>
-                            </Box>
+                            { icon: <Target size={40} />, title: "Our Mission", desc: "To empower growth and opportunity by providing fast, flexible, and transparent private lending solutions. We believe that access to capital should be straightforward, personalized, and responsive to real-world financial needs." },
+                            { icon: <Award size={40} />, title: "Our Vision", desc: "To be the most trusted and preferred financial partner, recognized for excellence, member satisfaction, and contribution to the economic development of our community." },
+                            { icon: <ShieldCheck size={40} />, title: "Our Values", desc: "Integrity, Transparency, Member-Centricity, and Innovation. We conduct our business with ethical principles and maintain open communication with all stakeholders." }
+                        ].map((item, index) => (
+                            <Grid item xs={12} md={4} key={index}>
+                                <Box sx={{ p: 4, bgcolor: '#f8fafc', borderRadius: '16px', height: '100%', border: '1px solid #e2e8f0', transition: 'transform 0.3s', '&:hover': { transform: 'translateY(-5px)', borderColor: '#93c5fd' } }}>
+                                    <Box sx={{ color: '#1e3a8a', mb: 3 }}>
+                                        {item.icon}
+                                    </Box>
+                                    <Typography variant="h5" sx={{ fontWeight: 800, mb: 2, color: '#0f172a' }}>
+                                        {item.title}
+                                    </Typography>
+                                    <Typography sx={{ color: '#475569', lineHeight: 1.7 }}>
+                                        {item.desc}
+                                    </Typography>
+                                </Box>
+                            </Grid>
                         ))}
-                    </Box>
-                </Paper>
+                    </Grid>
+                </Box>
 
-                <Paper elevation={3} sx={{ p: 4, background: "linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%)", color: "white", border: "1px solid rgba(255, 215, 0, 0.2)" }}>
-                    <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-                        <Building2 size={32} style={{ marginRight: "12px", color: "#FFD700" }} />
-                        <Typography variant="h5" sx={{ fontWeight: "bold", color: "#FFD700" }}>
-                            Registration Details
-                        </Typography>
+                {/* Contact Preview */}
+                <Box sx={{ mt: 12, p: { xs: 4, md: 6 }, bgcolor: '#1e3a8a', borderRadius: '24px', color: 'white', display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: 'center', justifyContent: 'space-between' }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 3, mb: { xs: 4, md: 0 } }}>
+                        <Building2 size={48} color="#93c5fd" />
+                        <Box>
+                            <Typography variant="h5" sx={{ fontWeight: 800, mb: 1 }}>Get in Touch with Us</Typography>
+                            <Typography sx={{ color: 'rgba(255,255,255,0.8)' }}>Ready to take the next step in your financial journey?</Typography>
+                        </Box>
                     </Box>
-                    <Typography variant="body1" paragraph>
-                        <strong>Registration Number:</strong> DRP | 6112 | 21-22
-                    </Typography>
-                    <Typography variant="body1" paragraph>
-                        <strong>Address:</strong> Shop No. G6, Asha Chandra Trade Centre, Udupi, Karnataka
-                    </Typography>
-                    <Typography variant="body1">
-                        <strong>Contact:</strong> +91 9004478100, 0820-7966887 | support@usdt.com
-                    </Typography>
-                </Paper>
+                    <Button 
+                        variant="contained" 
+                        onClick={() => navigate('/contact')}
+                        sx={{ bgcolor: 'white', color: '#1e3a8a', px: 4, py: 1.5, borderRadius: '50px', fontWeight: 700, '&:hover': { bgcolor: '#f1f5f9' }, whiteSpace: 'nowrap' }}
+                    >
+                        Contact Us
+                    </Button>
+                </Box>
             </Container>
         </Box>
     );
