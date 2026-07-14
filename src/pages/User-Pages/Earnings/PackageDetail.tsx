@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import TokenService from '../../../api/token/tokenService';
 import { useGetWalletOverview } from '../../../api/Memeber';
-import BMSLogo from "../../../assets/BMS1.png";
+import BMSLogo from "../../../assets/bms_logo.png";
 import PaymentsIcon from '@mui/icons-material/Payments';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
