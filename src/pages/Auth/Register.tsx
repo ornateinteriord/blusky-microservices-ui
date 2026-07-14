@@ -10,7 +10,7 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import WcIcon from "@mui/icons-material/Wc";
 import PublicIcon from '@mui/icons-material/Public';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
-import BMSLogo from "../../assets/USDT1.png";
+import BMSLogo from "../../assets/bms_logo.png";
 import { useGetSponserRef, useSignupMutation } from '../../api/Auth';
 import { LoadingComponent } from '../../App';
 
@@ -119,7 +119,7 @@ const Register = () => {
         sponsor_id: formData.Sponsor_code,
         Sponsor_code: formData.Sponsor_code,
         Sponsor_name: formData.Sponsor_name,
-        spackage: 'USDT Plan',
+        spackage: 'BMS Plan',
         ...formData
       };
 
@@ -190,7 +190,7 @@ const Register = () => {
               Join the Future
             </Typography>
             <Typography variant="h5" sx={{ color: '#ffffff', opacity: 0.9, fontWeight: 500, lineHeight: 1.6, mb: 4 }}>
-              Unlock exclusive benefits, instant transactions, and global opportunities with the world's leading USDT platform.
+              Unlock exclusive benefits, instant transactions, and global opportunities with the world's leading BMS platform.
             </Typography>
             
             <Box sx={{ display: 'flex', gap: 3, justifyContent: 'center', mt: 4 }}>

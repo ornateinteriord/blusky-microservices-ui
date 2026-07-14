@@ -98,7 +98,7 @@ const TransferMoneyDialog: React.FC<TransferMoneyDialogProps> = ({ open, onClose
 
         // Check balance
         if (fromAccount.account_amount < parseFloat(amount)) {
-            toast.error(`Insufficient balance. Available: $${fromAccount.account_amount}`);
+            toast.error(`Insufficient balance. Available: ₹${fromAccount.account_amount}`);
             return;
         }
 
@@ -314,11 +314,11 @@ const TransferMoneyDialog: React.FC<TransferMoneyDialogProps> = ({ open, onClose
                     error={selectedFrom && parseFloat(amount) > selectedFrom.account_amount}
                     helperText={
                         selectedFrom && parseFloat(amount) > selectedFrom.account_amount
-                            ? `Insufficient balance. Available: $${selectedFrom.account_amount.toFixed(4)}`
+                            ? `Insufficient balance. Available: ₹${selectedFrom.account_amount.toFixed(4)}`
                             : ''
                     }
                     InputProps={{
-                        startAdornment: <Typography sx={{ mr: 1 }}>$</Typography>
+                        startAdornment: <Typography sx={{ mr: 1 }}>₹</Typography>
                     }}
                 />
             </DialogContent>

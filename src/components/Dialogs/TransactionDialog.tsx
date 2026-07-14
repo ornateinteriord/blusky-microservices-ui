@@ -67,7 +67,7 @@ const TransactionDialog: React.FC<TransactionDialogProps> = ({
             minWidth: 100,
             align: 'right',
             renderCell: (row) => {
-                return row.credit > 0 ? `$${row.credit.toLocaleString('en-US')}` : '-';
+                return row.credit > 0 ? `₹${row.credit.toLocaleString('en-US')}` : '-';
             }
         },
         {
@@ -76,7 +76,7 @@ const TransactionDialog: React.FC<TransactionDialogProps> = ({
             minWidth: 100,
             align: 'right',
             renderCell: (row) => {
-                return row.debit > 0 ? `$${row.debit.toLocaleString('en-US')}` : '-';
+                return row.debit > 0 ? `₹${row.debit.toLocaleString('en-US')}` : '-';
             }
         },
         {
@@ -85,7 +85,7 @@ const TransactionDialog: React.FC<TransactionDialogProps> = ({
             minWidth: 120,
             align: 'right',
             renderCell: (row) => {
-                return `$${row.balance.toLocaleString('en-US')}`;
+                return `₹${row.balance.toLocaleString('en-US')}`;
             }
         },
         {
@@ -110,9 +110,9 @@ const TransactionDialog: React.FC<TransactionDialogProps> = ({
     const printData = (data?.data || []).map(row => ({
         ...row,
         transaction_date: new Date(row.transaction_date).toLocaleDateString('en-GB'),
-        credit: row.credit > 0 ? `$${row.credit.toLocaleString('en-US')}` : '-',
-        debit: row.debit > 0 ? `$${row.debit.toLocaleString('en-US')}` : '-',
-        balance: `$${row.balance.toLocaleString('en-US')}`,
+        credit: row.credit > 0 ? `₹${row.credit.toLocaleString('en-US')}` : '-',
+        debit: row.debit > 0 ? `₹${row.debit.toLocaleString('en-US')}` : '-',
+        balance: `₹${row.balance.toLocaleString('en-US')}`,
     }));
 
     return (

@@ -237,7 +237,7 @@ const WithdrawMoneyDialog: React.FC<WithdrawMoneyDialogProps> = ({ open, onClose
                             onChange={(e) => {
                                 const value = e.target.value;
                                 // Allow only numbers and one decimal point
-                                if (value === '' || /^\d+(\.\d{0,2})?$/.test(value)) {
+                                if (value === '' || /^\d+(\.\d{0,2})?₹/.test(value)) {
                                     setAmount(value);
                                 }
                             }}
@@ -245,11 +245,11 @@ const WithdrawMoneyDialog: React.FC<WithdrawMoneyDialogProps> = ({ open, onClose
                             error={isCommission ? parseFloat(amount || '0') > availableBalance : (selectedAccountData && parseFloat(amount || '0') > selectedAccountData.account_amount)}
                             helperText={
                                 selectedAccountData && parseFloat(amount || '0') > selectedAccountData.account_amount
-                                    ? `Insufficient balance. Available: $${selectedAccountData.account_amount.toFixed(4)}`
+                                    ? `Insufficient balance. Available: ₹${selectedAccountData.account_amount.toFixed(4)}`
                                     : ''
                             }
                             InputProps={{
-                                startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                                startAdornment: <InputAdornment position="start">₹</InputAdornment>,
                             }}
                             sx={{
                                 '& .MuiOutlinedInput-root': {

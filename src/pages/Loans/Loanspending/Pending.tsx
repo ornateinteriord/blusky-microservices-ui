@@ -60,7 +60,7 @@ export default function PendingLoans() {
       const value = column.selector(row);
 
       if (column.name === 'Loan Amount') {
-        return `$${(value || 0).toLocaleString()}`;
+        return `₹${(value || 0).toLocaleString()}`;
       }
 
       return value || '-';

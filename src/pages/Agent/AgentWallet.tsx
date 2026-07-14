@@ -41,7 +41,7 @@ const AgentWallet = () => {
             id: transaction._id || transaction.transaction_id,
             date: new Date(transaction.createdAt || transaction.transaction_date).toLocaleDateString('en-US'),
             description,
-            amount: `${isCredit ? '+ ' : '- '}$${Math.abs(amount).toFixed(4)}`,
+            amount: `${isCredit ? '+ ' : '- '}₹${Math.abs(amount).toFixed(4)}`,
             status: transaction.status || 'Completed',
             isCredit,
             type: isCredit ? 'commission_received' : 'commission_withdrawal'

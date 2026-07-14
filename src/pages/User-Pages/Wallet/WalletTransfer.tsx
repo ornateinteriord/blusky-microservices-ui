@@ -215,7 +215,7 @@ const WalletTransfer = () => {
                 </Box>
 
                 <Box>
-                  <Typography variant="subtitle2" sx={{ color: 'rgba(255,255,255,0.7)', mb: 1, fontWeight: 600 }}>Amount (USDT)</Typography>
+                  <Typography variant="subtitle2" sx={{ color: 'rgba(255,255,255,0.7)', mb: 1, fontWeight: 600 }}>Amount (?)</Typography>
                   <TextField
                     fullWidth
                     placeholder="Enter amount to transfer"
@@ -223,7 +223,7 @@ const WalletTransfer = () => {
                     onChange={(e) => setAmount(e.target.value)}
                     type="number"
                     InputProps={{
-                      startAdornment: <Typography sx={{ color: 'rgba(255,255,255,0.5)', mr: 1 }}>$</Typography>
+                      startAdornment: <Typography sx={{ color: 'rgba(255,255,255,0.5)', mr: 1 }}>₹</Typography>
                     }}
                     sx={{
                       '& .MuiOutlinedInput-root': {

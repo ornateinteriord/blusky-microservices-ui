@@ -85,7 +85,7 @@ export const UserAddOnPackages = () => {
                     <TextField
                       {...params}
                       required
-                      label="Amount ($)"
+                      label="Amount (₹)"
                       variant="outlined"
                       size="medium"
                       placeholder="e.g. 10000"
@@ -236,7 +236,7 @@ export const UserAddOnPackages = () => {
                           {pkg.isFD ? 'Interest Rate' : 'Single Leg Income'}
                         </Typography>
                         <Typography variant="h6" sx={{ fontWeight: 800, color: '#1565c0', fontSize: '1.1rem' }}>
-                          {pkg.isFD ? `${pkg.interest_rate || 0}% p.a.` : `$${sliAmount.toFixed(4)}`}
+                          {pkg.isFD ? `${pkg.interest_rate || 0}% p.a.` : `₹${sliAmount.toFixed(4)}`}
                         </Typography>
                       </Box>
 

@@ -68,7 +68,7 @@ const Wallet = () => {
   const handleAmountChange = (e: any) => {
     const value = e.target.value;
     // Allow only numeric input
-    if (value !== "" && !/^\d*$/.test(value)) return;
+    if (value !== "" && !/^\d*₹/.test(value)) return;
 
     setAmount(value);
 
@@ -107,12 +107,12 @@ const Wallet = () => {
     }
 
     if (withdrawalAmount < 5) {
-      toast.error('Minimum withdrawal amount is $5');
+      toast.error('Minimum withdrawal amount is ₹5');
       return;
     }
 
     if (withdrawalAmount > maxWithdrawal) {
-      toast.error(`Maximum withdrawal limit is $${maxWithdrawal.toFixed(4)} (25% of your total package amount)`);
+      toast.error(`Maximum withdrawal limit is ₹${maxWithdrawal.toFixed(4)} (25% of your total package amount)`);
       return;
     }
 
@@ -210,7 +210,7 @@ const Wallet = () => {
             >
               <TextField
                 label="Available Balance"
-                value={`$${displayBalance.toFixed(4)}`}
+                value={`₹${displayBalance.toFixed(4)}`}
                 fullWidth
                 size="medium"
                 InputProps={{ readOnly: true }}
@@ -229,7 +229,7 @@ const Wallet = () => {
                 onChange={handleAmountChange}
                 fullWidth
                 size="medium"
-                placeholder="Enter amount (Min $5)"
+                placeholder="Enter amount (Min ₹5)"
                 disabled={withdrawMutation.isPending || !isWithdrawalAllowed}
                 error={parseFloat(amount) > displayBalance}
                 helperText={parseFloat(amount) > displayBalance ? "Insufficient Balance" : ""}
@@ -244,7 +244,7 @@ const Wallet = () => {
               {/* 
               <TextField
                 label="Admin Charges (15%)"
-                value={`$${adminCharges.toFixed(4)}`}
+                value={`₹${adminCharges.toFixed(4)}`}
                 fullWidth
                 size="medium"
                 InputProps={{ readOnly: true }}
@@ -259,7 +259,7 @@ const Wallet = () => {
 
               <TextField
                 label="Admin (5%)"
-                value={`$${tds.toFixed(4)}`}
+                value={`₹${tds.toFixed(4)}`}
                 fullWidth
                 size="medium"
                 InputProps={{ readOnly: true }}
@@ -273,7 +273,7 @@ const Wallet = () => {
 
               <TextField
                 label="Net Amount Received"
-                value={`$${netAmount.toFixed(4)}`}
+                value={`₹${netAmount.toFixed(4)}`}
                 fullWidth
                 size="medium"
                 InputProps={{ readOnly: true }}
@@ -301,7 +301,7 @@ const Wallet = () => {
                   <Box sx={{ display: "flex", gap: 4, flexDirection: isMobile ? "column" : "row" }}>
                     <Box>
                       <Typography variant="body2">• 5% Admin applied</Typography>
-                      <Typography variant="body2">• Minimum withdrawal: $5</Typography>
+                      <Typography variant="body2">• Minimum withdrawal: ₹5</Typography>
                       <Typography variant="body2">• Maximum withdrawal: 25% of total package (${maxWithdrawal.toFixed(4)})</Typography>
                       <Typography variant="body2">• One withdrawal per day allowed</Typography>
                     </Box>

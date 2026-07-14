@@ -106,7 +106,7 @@ const NewSubscription: React.FC = () => {
           case "250": packageName = "Global FX Advantage Plan"; break;
           case "500": packageName = "Pro Trader Wealth Package"; break;
           case "1000": packageName = "VIP Liquidity Master Plan"; break;
-          default: packageName = `$${formData.package} Package`;
+          default: packageName = `₹${formData.package} Package`;
         }
         
         setPurchasedPkgDetails({
@@ -198,7 +198,7 @@ const NewSubscription: React.FC = () => {
             <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'flex-start', sm: 'center' }, gap: 1 }}>
               <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Your Top-Up Balance</Typography>
               <TextField
-                value={`$${Number(walletOverview?.topUpBalance || 0).toLocaleString(undefined, { maximumFractionDigits: 4, minimumFractionDigits: 4 })}`}
+                value={`₹${Number(walletOverview?.topUpBalance || 0).toLocaleString(undefined, { maximumFractionDigits: 4, minimumFractionDigits: 4 })}`}
                 fullWidth
                 size="small"
                 disabled
@@ -226,12 +226,12 @@ const NewSubscription: React.FC = () => {
                   }}
                 >
                   <MenuItem value="" disabled>Select Package</MenuItem>
-                  <MenuItem value="30">$30 Starter Pip Plan</MenuItem>
-                  <MenuItem value="60">$60 Growth Trader Package</MenuItem>
-                  <MenuItem value="120">$120 Elite Currency Portfolio</MenuItem>
-                  <MenuItem value="250">$250 Global FX Advantage Plan</MenuItem>
-                  <MenuItem value="500">$500 Pro Trader Wealth Package</MenuItem>
-                  <MenuItem value="1000">$1000 VIP Liquidity Master Plan</MenuItem>
+                  <MenuItem value="30">₹30 Starter Pip Plan</MenuItem>
+                  <MenuItem value="60">₹60 Growth Trader Package</MenuItem>
+                  <MenuItem value="120">₹120 Elite Currency Portfolio</MenuItem>
+                  <MenuItem value="250">₹250 Global FX Advantage Plan</MenuItem>
+                  <MenuItem value="500">₹500 Pro Trader Wealth Package</MenuItem>
+                  <MenuItem value="1000">₹1000 VIP Liquidity Master Plan</MenuItem>
                 </Select>
               </FormControl>
             </Box>

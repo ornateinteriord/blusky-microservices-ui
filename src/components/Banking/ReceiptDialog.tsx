@@ -97,7 +97,7 @@ const ReceiptDialog: React.FC<ReceiptDialogProps> = ({ open, onClose, receiptId 
     const handleChange = (field: string, value: string) => {
         if (field === 'amount') {
             // Allow only numbers and one decimal point
-            if (!/^\d*\.?\d*$/.test(value)) {
+            if (!/^\d*\.?\d*₹/.test(value)) {
                 return;
             }
         }
@@ -360,7 +360,7 @@ const ReceiptDialog: React.FC<ReceiptDialogProps> = ({ open, onClose, receiptId 
                                 disabled={!!receiptId}
                                 helperText={receiptId ? "Amount cannot be modified" : ""}
                                 InputProps={{
-                                    startAdornment: <Typography sx={{ mr: 1 }}>$</Typography>
+                                    startAdornment: <Typography sx={{ mr: 1 }}>₹</Typography>
                                 }}
                             />
                         </Grid>

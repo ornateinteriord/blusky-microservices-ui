@@ -133,7 +133,7 @@ const LoadFundPage: React.FC = () => {
               </Typography> */}
               {/* 
               <Chip
-                label={`USDT Deposit Network: ${config?.network_text || 'USDT-BEP20'}`}
+                label={`Deposit Network: ${config?.network_text || 'BEP20'}`}
                 color="success"
                 variant="outlined"
                 sx={{
@@ -257,7 +257,7 @@ const LoadFundPage: React.FC = () => {
                     fullWidth
                     label="Top Up Balance"
                     variant="outlined"
-                    value={`$${Number(walletOverview?.topUpBalance || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}`}
+                    value={`₹${Number(walletOverview?.topUpBalance || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}`}
                     disabled
                     sx={{
                       mb: 2,
@@ -279,7 +279,7 @@ const LoadFundPage: React.FC = () => {
 
                   <TextField
                     fullWidth
-                    label="Amount (USDT / $)"
+                    label="Amount (BMS / ₹)"
                     variant="outlined"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}

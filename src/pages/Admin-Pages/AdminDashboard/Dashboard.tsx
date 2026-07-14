@@ -230,9 +230,9 @@ const AdminDashboard = () => {
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <StatCard
-              amount={`$${(roiSummary?.totalROIDistributed || 0).toLocaleString()}`}
+              amount={`₹${(roiSummary?.totalROIDistributed || 0).toLocaleString()}`}
               title="ROI Distributed"
-              subTitle={`Today: $${(roiSummary?.todaysTotal || 0).toLocaleString()} (${roiSummary?.todaysCount || 0} payouts)`}
+              subTitle={`Today: ₹${(roiSummary?.todaysTotal || 0).toLocaleString()} (${roiSummary?.todaysCount || 0} payouts)`}
               icon={<PaymentsIcon />}
               color="#FFD700"
               onClick={() => navigate('/admin/income/daily-payouts')}

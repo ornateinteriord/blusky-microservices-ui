@@ -51,7 +51,7 @@ const Collections: React.FC = () => {
       });
 
       if (response.success) {
-        toast.success(`Successfully collected $${amount} from ${selectedAccount.account_holder}`);
+        toast.success(`Successfully collected ₹${amount} from ${selectedAccount.account_holder}`);
         handleCloseDialog();
       } else {
         toast.error(response.message || 'Failed to collect payment');
@@ -123,7 +123,7 @@ const Collections: React.FC = () => {
       label: 'Balance',
       align: 'right',
       sortable: true,
-      renderCell: (row) => `$ ${row.balance.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}`,
+      renderCell: (row) => `₹ ${row.balance.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}`,
     },
     {
       id: 'status',
@@ -290,7 +290,7 @@ const Collections: React.FC = () => {
                   <strong>Account Holder:</strong> {selectedAccount.account_holder}
                 </Typography>
                 <Typography variant="body2">
-                  <strong>Balance:</strong> $ {selectedAccount.balance.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}
+                  <strong>Balance:</strong> ₹ {selectedAccount.balance.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}
                 </Typography>
               </Box>
             </Box>
@@ -304,7 +304,7 @@ const Collections: React.FC = () => {
             onChange={(e) => setAmount(e.target.value)}
             placeholder="Enter collection amount"
             InputProps={{
-              startAdornment: <Typography sx={{ mr: 1, color: 'text.secondary' }}>$</Typography>,
+              startAdornment: <Typography sx={{ mr: 1, color: 'text.secondary' }}>₹</Typography>,
             }}
             sx={{
               '& .MuiOutlinedInput-root': {

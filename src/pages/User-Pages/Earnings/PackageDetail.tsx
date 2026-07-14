@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import TokenService from '../../../api/token/tokenService';
 import { useGetWalletOverview } from '../../../api/Memeber';
-import USDTLogo from "../../../assets/USDT1.png";
+import BMSLogo from "../../../assets/BMS1.png";
 import PaymentsIcon from '@mui/icons-material/Payments';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
@@ -54,7 +54,7 @@ const PackageDetail = () => {
           boxShadow: `0 0 30px ${pkgInfo.color}20`,
           border: `1px solid ${pkgInfo.color}40`
         }}>
-          <img src={USDTLogo} alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+          <img src={BMSLogo} alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
         </Box>
         
         <Box sx={{ 

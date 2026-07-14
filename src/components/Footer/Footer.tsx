@@ -1,95 +1,93 @@
-import { Box, Container, Typography, Grid, IconButton, Divider } from '@mui/material';
+import { Box, Container, Typography, Grid, IconButton } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Linkedin, Youtube, ArrowUpRight } from 'lucide-react';
+import bmsLogo from '../../assets/bms_logo.png';
 
 const Footer = () => {
-    const currentYear = new Date().getFullYear();
-
     return (
         <Box
             component="footer"
             sx={{
-                background: "linear-gradient(135deg, #0a2558 0%, #0f172a 50%, #020617 100%)",
-                color: "white",
-                pt: { xs: 4, md: 6 },
-                pb: { xs: 3, md: 4 },
-                mt: 0,
-                borderTop: "1px solid rgba(255,255,255,0.08)",
+                bgcolor: "#0f172a", // Dark background matching accent-2
+                color: "#f8fafc",
                 position: "relative",
                 overflow: "hidden"
             }}
         >
-            {/* Subtle background glow effect */}
-            <Box sx={{ position: "absolute", top: -100, right: -100, width: 300, height: 300, background: "radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%)", pointerEvents: "none" }} />
-
-            <Container maxWidth="xl">
-                <Grid container spacing={3}>
-                    {/* Branding Section */}
-                    <Grid item xs={12} lg={4}>
-                        <Typography
-                            variant="h4"
-                            sx={{
-                                fontWeight: 900,
-                                mb: 3,
-                                background: "linear-gradient(to right, #fff, #94a3b8)",
-                                WebkitBackgroundClip: "text",
-                                WebkitTextFillColor: "transparent",
-                                letterSpacing: "-1px",
-                                lineHeight: 1.1
-                            }}
-                        >
-                            UWC+
-                        </Typography>
-                        <Box sx={{ p: 2, borderRadius: "12px", bgcolor: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.05)", display: "inline-block", mb: 2 }}>
-                            <Typography variant="caption" sx={{ opacity: 0.8, fontWeight: 700, letterSpacing: "1px", color: "#60a5fa" }}>
-                                www.usdtworld.club
-                            </Typography>
-                        </Box>
-                        <Typography variant="body1" sx={{ opacity: 0.6, fontSize: "0.95rem", lineHeight: 1.7, maxWidth: "400px" }}>
-                            A next-generation crypto trading and investment company dedicated to transforming digital wealth creation.
-                        </Typography>
-                    </Grid>
-
-                    {/* Links & Info Grouped */}
-                    <Grid item xs={12} lg={8}>
-                        <Grid container spacing={3}>
-                            {/* Location Section */}
-                            <Grid item xs={12} sm={4}>
-                                <Typography variant="overline" sx={{ fontWeight: 900, mb: 3, display: "block", color: "#3b82f6", letterSpacing: "2px" }}>
-                                    Visit Us
+            <Container maxWidth="xl" sx={{ p: 0 }}>
+                <Box sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, justifyContent: 'space-between' }}>
+                    
+                    {/* Left Section (Main content) */}
+                    <Box sx={{ flex: 1, py: { xs: 6, md: 8 }, px: { xs: 2, md: 4, xl: 0 } }}>
+                        <Grid container spacing={{ xs: 6, md: 4 }}>
+                            
+                            {/* Column 1: Logo & Text */}
+                            <Grid item xs={12} md={4}>
+                                <Box sx={{ mb: 3 }}>
+                                    <img src={bmsLogo} alt="BMS Foundations Logo" style={{ height: "80px", objectFit: "contain", filter: "brightness(0) invert(1)" }} />
+                                </Box>
+                                <Typography variant="body1" sx={{ color: "#94a3b8", lineHeight: 1.7, pr: { md: 4 } }}>
+                                    Highlights the impact of technology on the banking industry,
+                                    enabling convenient digital access to financial services.
                                 </Typography>
-                                <Box sx={{ display: "flex", gap: 2 }}>
-                                    <MapPin size={24} color="#60a5fa" style={{ flexShrink: 0 }} />
-                                    <Box>
-                                        <Typography variant="body2" sx={{ fontWeight: 700, mb: 0.5 }}>Head Office</Typography>
-                                        <Typography variant="body2" sx={{ opacity: 0.7, lineHeight: 1.6 }}>
-                                            United Kingdom &<br />
-                                            Dubai, UAE
+                            </Grid>
+
+                            {/* Column 2: Quick Links */}
+                            <Grid item xs={12} md={4}>
+                                <Typography variant="h6" sx={{ fontWeight: 600, mb: 3 }}>
+                                    Quick Link
+                                </Typography>
+                                <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                                    {['About Us', 'Services', 'Gallery', 'Contact Us'].map((text) => (
+                                        <Typography 
+                                            key={text}
+                                            component={Link} 
+                                            to={text === 'About Us' ? '/about' : text === 'Services' ? '/services' : text === 'Gallery' ? '/gallery' : '/contact-us'} 
+                                            sx={{ 
+                                                color: "#94a3b8", 
+                                                textDecoration: "none", 
+                                                transition: "all 0.3s",
+                                                '&:hover': { color: "#38bdf8", letterSpacing: "1px" }
+                                            }}
+                                        >
+                                            {text}
                                         </Typography>
-                                    </Box>
+                                    ))}
                                 </Box>
                             </Grid>
 
-                            {/* Contact Section removed */}
-                            {/* Connect Section */}
-                            <Grid item xs={12} sm={4}>
-                                <Typography variant="overline" sx={{ fontWeight: 900, mb: 3, display: "block", color: "#3b82f6", letterSpacing: "2px" }}>
-                                    Follow Us
+                            {/* Column 3: Connect with us */}
+                            <Grid item xs={12} md={4}>
+                                <Typography variant="h6" sx={{ fontWeight: 600, mb: 3 }}>
+                                    Connect with us
                                 </Typography>
-                                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1.5 }}>
-                                    {[Facebook, Twitter, Instagram, Linkedin].map((Icon, idx) => (
+                                <Typography 
+                                    component="a" 
+                                    href="mailto:support@bmsfoundations.com" 
+                                    sx={{ 
+                                        color: "#94a3b8", 
+                                        textDecoration: "none",
+                                        display: "block",
+                                        mb: 4,
+                                        '&:hover': { color: "#38bdf8" }
+                                    }}
+                                >
+                                    support@bmsfoundations.com
+                                </Typography>
+                                
+                                <Box sx={{ display: "flex", gap: 1.5 }}>
+                                    {[Facebook, Twitter, Instagram, Linkedin, Youtube].map((Icon, idx) => (
                                         <IconButton
                                             key={idx}
                                             sx={{
-                                                color: "white",
-                                                bgcolor: "rgba(255,255,255,0.03)",
-                                                border: "1px solid rgba(255,255,255,0.08)",
-                                                transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                                                bgcolor: "#1e293b",
+                                                color: "#f8fafc",
+                                                borderRadius: "12px",
+                                                p: 1.5,
+                                                transition: "all 0.3s",
                                                 "&:hover": {
-                                                    bgcolor: "#3b82f6",
-                                                    color: "white",
-                                                    transform: "translateY(-5px) rotate(8deg)",
-                                                    boxShadow: "0 10px 20px rgba(59, 130, 246, 0.3)"
+                                                    bgcolor: "#38bdf8",
+                                                    color: "#0f172a",
                                                 },
                                             }}
                                         >
@@ -99,59 +97,89 @@ const Footer = () => {
                                 </Box>
                             </Grid>
                         </Grid>
-                    </Grid>
-                </Grid>
 
-                <Divider sx={{ my: { xs: 3, md: 4 }, borderColor: "rgba(255,255,255,0.06)" }} />
-
-                {/* Bottom Bar */}
-                <Box
-                    sx={{
-                        display: "flex",
-                        flexDirection: { xs: "column", md: "row" },
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        gap: { xs: 1.5, md: 2 },
-                    }}
-                >
-                    <Typography variant="caption" sx={{ opacity: 0.4, fontWeight: 600 }}>
-                        © {currentYear} UWC+. All rights reserved.
-                    </Typography>
-
-                    <Box sx={{ display: "flex", gap: { xs: 2, sm: 5 }, flexWrap: "wrap", justifyContent: "center" }}>
-                        {[
-                            { label: "About Us", path: "/about" },
-                            // { label: "Privacy Policy", path: "/privacy-policy" },
-                            // { label: "Terms & Conditions", path: "/terms" },
-                            // { label: "Refund Policy", path: "/refund-policy" }
-                        ].map((item) => (
-                            <Link
-                                key={item.label}
-                                to={item.path}
-                                style={{
-                                    color: "white",
-                                    textDecoration: "none",
-                                    fontSize: "0.8rem",
-                                    opacity: 0.5,
-                                    fontWeight: 700,
-                                    transition: "all 0.3s ease",
-                                    borderBottom: "1px solid transparent"
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.opacity = "1";
-                                    e.currentTarget.style.color = "#60a5fa";
-                                    e.currentTarget.style.borderBottomColor = "#60a5fa";
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.opacity = "0.5";
-                                    e.currentTarget.style.color = "white";
-                                    e.currentTarget.style.borderBottomColor = "transparent";
-                                }}
+                        {/* Copyright Area */}
+                        <Box sx={{ 
+                            mt: { xs: 6, md: 8 }, 
+                            pt: 4, 
+                            borderTop: "1px solid #1e293b",
+                            display: "flex",
+                            flexDirection: { xs: "column", sm: "row" },
+                            alignItems: "center",
+                            gap: { xs: 2, sm: 3 }
+                        }}>
+                            <Typography variant="body2" sx={{ color: "#f8fafc" }}>
+                                Copyright @ 2026 BMS
+                            </Typography>
+                            <Box sx={{ width: { xs: "40px", sm: "1px" }, height: { xs: "1px", sm: "16px" }, bgcolor: "#334155" }} />
+                            <Typography 
+                                component="a" 
+                                href="#" 
+                                variant="body2" 
+                                sx={{ color: "#f8fafc", textDecoration: "none", fontWeight: 500, '&:hover': { color: "#38bdf8" } }}
                             >
-                                {item.label}
-                            </Link>
-                        ))}
+                                FOUNDATION FOR GROWTH
+                            </Typography>
+                        </Box>
                     </Box>
+
+                    {/* Right Section (Contact Widget) */}
+                    <Box sx={{ 
+                        width: { xs: '100%', lg: '350px' }, 
+                        bgcolor: "#1e3a8a", // Accent-1 blue
+                        display: "flex",
+                        flexDirection: { xs: "column", sm: "row", lg: "column" },
+                        alignItems: "center",
+                        justifyContent: "space-around",
+                        py: { xs: 6, lg: 12 },
+                        px: { xs: 4, lg: 6 },
+                        gap: 4,
+                        textAlign: "center"
+                    }}>
+                        <Typography variant="h5" sx={{ fontWeight: 600, color: "#ffffff", maxWidth: "250px" }}>
+                            Have a query in Your Mind?
+                        </Typography>
+                        
+                        <Box 
+                            component={Link}
+                            to="/contact-us"
+                            sx={{
+                                width: { xs: "120px", lg: "160px" },
+                                height: { xs: "120px", lg: "160px" },
+                                borderRadius: "50%",
+                                border: "1px solid rgba(255,255,255,0.2)",
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                textDecoration: "none",
+                                color: "#ffffff",
+                                transition: "all 0.3s",
+                                position: "relative",
+                                overflow: "hidden",
+                                '&:hover': {
+                                    borderColor: "#38bdf8",
+                                    color: "#0f172a",
+                                    bgcolor: "#38bdf8"
+                                }
+                            }}
+                        >
+                            <ArrowUpRight size={32} />
+                            <Typography variant="body2" sx={{ mt: 1, fontWeight: 600, textTransform: "uppercase" }}>
+                                Contact Us
+                            </Typography>
+                        </Box>
+
+                        <Box sx={{ color: "#ffffff" }}>
+                            <Typography variant="body1" sx={{ fontWeight: 600, mb: 0.5 }}>
+                                09 : 00 AM - 10 : 30 PM
+                            </Typography>
+                            <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                                Saturday - Thursday
+                            </Typography>
+                        </Box>
+                    </Box>
+
                 </Box>
             </Container>
         </Box>
@@ -159,4 +187,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

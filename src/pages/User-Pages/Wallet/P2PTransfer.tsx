@@ -282,7 +282,7 @@ const P2PTransfer: React.FC = () => {
               P2P TRANSFER
             </Typography>
             <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: { xs: 11, sm: 14 }, display: 'block', mt: 0.3, lineHeight: 1.3 }}>
-              Instant Member to Member USDT Transfer
+              Instant Member to Member Transfer
             </Typography>
           </Box>
         </Box>
@@ -344,7 +344,7 @@ const P2PTransfer: React.FC = () => {
 
               <Box>
                 <Typography variant="subtitle2" sx={{ color: 'rgba(255, 255, 255, 0.8)', mb: 1, fontWeight: 700,fontSize:{xs:12,sm:14} }}>
-                  Enter Amount (USDT)
+                  Enter Amount (?)
                 </Typography>
                 <TextField
                   fullWidth
@@ -581,7 +581,7 @@ const P2PTransfer: React.FC = () => {
                     Transfer Amount:
                   </Typography>
                   <Typography variant="body2" sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: 13, sm: 15 }, textAlign: 'right', wordBreak: 'break-word' }}>
-                    ${parseFloat(amount).toFixed(4)} USDT
+                    ${parseFloat(amount).toFixed(4)} ?
                   </Typography>
                 </Stack>
 
@@ -632,7 +632,7 @@ const P2PTransfer: React.FC = () => {
                 },
               }}
             >
-              {transferMutation.isPending ? <CircularProgress size={24} sx={{ color: '#050916' }} /> : `Confirm & Send $${parseFloat(amount).toFixed(2)}`}
+              {transferMutation.isPending ? <CircularProgress size={24} sx={{ color: '#050916' }} /> : `Confirm & Send ₹${parseFloat(amount).toFixed(2)}`}
             </Button>
           </Box>
         )}

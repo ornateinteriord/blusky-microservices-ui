@@ -183,7 +183,7 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
                 }}
               >
                 <Typography variant="subtitle2" sx={{ color: '#FFD700', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px' }}>
-                  USDT Deposit Network: {config?.network_text || 'USDT-BEP20'}
+                  Deposit Network: {config?.network_text || 'BEP20'}
                 </Typography>
 
                 {/* QR Code Container */}
@@ -205,7 +205,7 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
                     <Box
                       component="img"
                       src={config.qr_code_url}
-                      alt="USDT QR Code"
+                      alt="BMS QR Code"
                       sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
                       onError={(e: any) => {
                         e.target.onerror = null;
@@ -230,7 +230,7 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
                 {/* Wallet Address Copy */}
                 <Box sx={{ width: '100%' }}>
                   <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.5)', display: 'block', mb: 0.5 }}>
-                    USDT Address
+                    Deposit Address
                   </Typography>
                   <Box
                     onClick={handleCopyAddress}
@@ -278,7 +278,7 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
               <Box>
                 <TextField
                   fullWidth
-                  label="Amount (USDT / $)"
+                  label="Amount (BMS / ₹)"
                   variant="outlined"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
@@ -305,7 +305,7 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
                   {PRESET_AMOUNTS.map((val) => (
                     <Chip
                       key={val}
-                      label={`+$${val}`}
+                      label={`+₹${val}`}
                       onClick={() => setAmount(val.toString())}
                       sx={{
                         bgcolor: 'rgba(255, 255, 255, 0.05)',

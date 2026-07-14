@@ -89,7 +89,7 @@ export default function LoansList() {
 
   const handleManualAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    if (value === '' || /^\d*\.?\d*$/.test(value)) {
+    if (value === '' || /^\d*\.?\d*₹/.test(value)) {
       setManualAmount(value);
     }
   };
@@ -115,12 +115,12 @@ export default function LoansList() {
     }
 
     if (finalAmount > dueAmount) {
-      toast.error(`Repayment exceeds due amount $${dueAmount}`);
+      toast.error(`Repayment exceeds due amount ₹${dueAmount}`);
       return;
     }
 
     if (finalAmount < 500) {
-      toast.error('Minimum repayment amount is $500');
+      toast.error('Minimum repayment amount is ₹500');
       return;
     }
 
@@ -431,7 +431,7 @@ export default function LoansList() {
               disabled={isCreatingOrder}
               placeholder="Enter repayment amount"
               InputProps={{
-                startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                startAdornment: <InputAdornment position="start">₹</InputAdornment>,
               }}
               sx={{
                 borderRadius: 2,
@@ -439,7 +439,7 @@ export default function LoansList() {
                   borderRadius: 2,
                 }
               }}
-              helperText="Minimum amount: $500"
+              helperText="Minimum amount: ₹500"
             />
           </TabPanel>
 
@@ -495,7 +495,7 @@ export default function LoansList() {
               boxShadow: 'none',
             }}
           >
-            {isCreatingOrder ? 'Processing...' : `Pay $${getFinalRepayAmount()}`}
+            {isCreatingOrder ? 'Processing...' : `Pay ₹${getFinalRepayAmount()}`}
           </Button>
         </DialogActions>
       </Dialog>

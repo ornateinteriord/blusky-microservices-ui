@@ -45,7 +45,7 @@ const NotFound = lazy(() => import("./pages/not-found/NotFound"));
 const Footer = lazy(() => import("./components/Footer/Footer"));
 const About = lazy(() => import("./pages/About/About"));
 const Contact = lazy(() => import("./pages/Contact/Contact"));
-const PublicLoan = lazy(() => import("./pages/Loans/PublicLoan"));
+const Services = lazy(() => import("./pages/Services/Services"));
 const Gallery = lazy(() => import("./pages/Gallery/Gallery"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy/PrivacyPolicy"));
 const Terms = lazy(() => import("./pages/Terms/Terms"));
@@ -252,13 +252,13 @@ const ShouldHideSidebar = () => {
 const ShouldHideNavbar = () => {
   const location = useLocation();
   // Comment out login from nav bar - hide navbar on public/auth pages
-  const noNavbarPaths = ["/", "/about", "/contact", "/loan", "/gallery", "/login", "/register", "/recover-password", "/reset-password", "/forgot-password"];
+  const noNavbarPaths = ["/", "/about", "/contact", "/services", "/gallery", "/login", "/register", "/recover-password", "/reset-password", "/forgot-password"];
   return noNavbarPaths.includes(location.pathname);
 };
 
 const ShouldShowPublicNavbar = () => {
   const location = useLocation();
-  const publicPaths = ["/", "/about", "/contact", "/loan", "/gallery", "/terms", "/privacy-policy", "/refund-policy"];
+  const publicPaths = ["/", "/about", "/contact", "/services", "/gallery", "/terms", "/privacy-policy", "/refund-policy"];
   return publicPaths.includes(location.pathname);
 };
 
@@ -367,7 +367,7 @@ const RoutesProvider = ({
             {/* policy and info pages - accessible to all */}
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/loan" element={<PublicLoan />} />
+            <Route path="/services" element={<Services />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<Terms />} />

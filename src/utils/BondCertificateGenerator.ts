@@ -1,7 +1,7 @@
-// Bond Certificate Generator — USDT
+// Bond Certificate Generator — BMS
 // Opens a print-ready A4 certificate in a new browser tab
 
-import usdtLogoPath from '../assets/bms_logo.png';
+import BMSLogoPath from '../assets/bms_logo.png';
 
 export interface BondData {
   memberNumber: string;
@@ -93,7 +93,7 @@ const buildStamp = (): string => {
   <text x="25" y="83" text-anchor="middle" fill="#1a3a7a" font-size="12">★</text>
   <text x="135" y="83" text-anchor="middle" fill="#1a3a7a" font-size="12">★</text>
   
-  <text x="80" y="85" text-anchor="middle" fill="#1a3a7a" font-size="28" font-weight="900" font-family="Arial Black">USDT</text>
+  <text x="80" y="85" text-anchor="middle" fill="#1a3a7a" font-size="28" font-weight="900" font-family="Arial Black">BMS</text>
 </svg>`;
 };
 
@@ -102,11 +102,11 @@ const buildStamp = (): string => {
 export const generateBondCertificate = (data: BondData, logoDataUrl: string, profilePhotoDataUrl?: string): string => {
   const interestRate = data.interestRate ?? 9.0;
   const maturityDate = data.maturityDate ?? addDays(data.commencementDate, 365);
-  const maturityAmt  = data.maturityAmount ?? (data.planAmount + (data.planAmount * interestRate / 100));
-  const matWords     = numberToWords(maturityAmt);
-  const commDate     = fmt(data.commencementDate);
-  const matDate      = fmt(maturityDate);
-  const stamp        = buildStamp();
+  const maturityAmt = data.maturityAmount ?? (data.planAmount + (data.planAmount * interestRate / 100));
+  const matWords = numberToWords(maturityAmt);
+  const commDate = fmt(data.commencementDate);
+  const matDate = fmt(maturityDate);
+  const stamp = buildStamp();
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -275,18 +275,18 @@ th { background: #e0e0e0; font-weight: bold; }
           <img src="${logoDataUrl}" alt="Logo"/>
         </div>
         <div class="hdr-main">
-          <div class="hdr-t1">USDT</div>
+          <div class="hdr-t1">BMS</div>
           <div class="hdr-t1-sub">(CIN = U64990KA2025PTC212899)</div>
-          <div class="hdr-t2">USDT</div>
+          <div class="hdr-t2">BMS</div>
           <div class="hdr-t2-sub">(BLUSKY MICRO FOUNDATION)</div>
           <div class="hdr-cin">(CIN = U85300DL2022NPL407403/ROC)</div>
           <div class="hdr-addr">
-            Tel: +91 8394232300 | Email: support@usdt.com<br/>
+            Tel: +91 8394232300 | Email: support@BMS.com<br/>
             Branch Address: ASHA CHANDRA TRADE CENTER OPPOSITE COURT ROAD UDUPI Karnataka - 576101
           </div>
         </div>
         <div class="hdr-photo">
-          ${profilePhotoDataUrl ? `<img src="${profilePhotoDataUrl}" alt="Profile Photo"/>` : 'Passport Photo'}
+          ${profilePhotoDataUrl ? `< img src = "${profilePhotoDataUrl}" alt = "Profile Photo" /> ` : 'Passport Photo'}
         </div>
       </header>
 
@@ -294,7 +294,7 @@ th { background: #e0e0e0; font-weight: bold; }
       <div class="cert-title">FD A/C BOND CERTIFICATE</div>
 
       <!-- SALUTATION -->
-      <div class="salute">Dear ${data.memberName ? `Mr./Ms. ${data.memberName},` : 'Member,'}</div>
+      <div class="salute">Dear ${data.memberName ? `Mr./ Ms. ${data.memberName}, ` : 'Member,'}</div>
       <p class="intro-text">
         In response to your application dated <strong>${commDate}</strong>, we are pleased to accept your application for deposit under new scheme per details furnished here under. The term deposit shall be governed by the terms of agreement and general terms and conditions printed over leaf.
       </p>
@@ -332,7 +332,7 @@ th { background: #e0e0e0; font-weight: bold; }
           <td>${data.accountNo}</td>
           <td>${commDate}</td>
           <td>${data.planTerm || 'FD / 365 days'}</td>
-          <td>$ ${data.planAmount}.0</td>
+          <td>₹ ${data.planAmount}.0</td>
           <td>${interestRate.toFixed(1)}</td>
         </tr>
       </table>
@@ -360,7 +360,7 @@ th { background: #e0e0e0; font-weight: bold; }
 
       <!-- MATURITY -->
       <div class="mat-sec">
-        <div><b>Maturity Amount:</b> $ ${maturityAmt}.0</div>
+        <div><b>Maturity Amount:</b> ₹ ${maturityAmt}.0</div>
         <div><b>Maturity Date:</b> ${matDate}</div>
         <div><b>Maturity Amount in Words:</b> ${matWords}</div>
         <div><b>Branch Code:</b> ${data.branchCode || '004'}</div>
@@ -375,7 +375,7 @@ th { background: #e0e0e0; font-weight: bold; }
         <div class="sig-box">Authorized Signatory</div>
       </div>
 
-      <div class="powered">Powered by USDT</div>
+      <div class="powered">Powered by BMS</div>
     </div>
   </div>
 </div>
@@ -388,7 +388,7 @@ th { background: #e0e0e0; font-weight: bold; }
 
 export const openBondCertificate = async (data: BondData): Promise<void> => {
   // Resolve logo to absolute URL then fetch as base64
-  const absoluteLogoUrl = new URL(usdtLogoPath, window.location.href).href;
+  const absoluteLogoUrl = new URL(BMSLogoPath, window.location.href).href;
   let logoDataUrl = '';
   try {
     logoDataUrl = await toBase64DataUrl(absoluteLogoUrl);
@@ -411,8 +411,8 @@ export const openBondCertificate = async (data: BondData): Promise<void> => {
 
   const html = generateBondCertificate(data, logoDataUrl, profilePhotoDataUrl);
   const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
-  const url  = URL.createObjectURL(blob);
-  const win  = window.open(url, '_blank', 'width=1000,height=860,scrollbars=yes,resizable=yes');
+  const url = URL.createObjectURL(blob);
+  const win = window.open(url, '_blank', 'width=1000,height=860,scrollbars=yes,resizable=yes');
   if (win) win.focus();
   setTimeout(() => URL.revokeObjectURL(url), 120_000);
 };

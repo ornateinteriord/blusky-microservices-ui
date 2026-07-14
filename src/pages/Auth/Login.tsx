@@ -8,7 +8,7 @@ import { post } from '../../api/Api';
 import { LoadingComponent } from '../../App';
 import { useLoginMutation } from '../../api/Auth';
 import ForgotPasswordForm from "./components/ForgotPasswordForm";
-import uwtLogo from "../../assets/USDT1.png";
+import bmsLogo from "../../assets/bms_logo.png";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -30,7 +30,6 @@ const Login = () => {
     if (savedUser) {
       try {
         const parsedUser = JSON.parse(savedUser);
-        // Validate the structure of the saved data
         if (parsedUser && typeof parsedUser === 'object' && parsedUser.username && parsedUser.password) {
           setFormData({
             username: parsedUser.username,
@@ -38,11 +37,9 @@ const Login = () => {
           });
           setRememberMe(true);
         } else {
-          // If data is invalid formatted, remove it to prevent future errors
           localStorage.removeItem("rememberedUser");
         }
       } catch (error) {
-        // If saved data is not valid JSON (e.g. was stored as plain text), remove it
         localStorage.removeItem("rememberedUser");
         console.error("Failed to parse rememberedUser data:", error);
       }
@@ -63,7 +60,6 @@ const Login = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Handle Remember Me logic
     if (rememberMe) {
       localStorage.setItem("rememberedUser", JSON.stringify(formData));
     } else {
@@ -112,13 +108,11 @@ const Login = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        /* Stunning Premium Banking Dark Gradient */
-        background: "linear-gradient(180deg, #050916 0%, #0f1e36 100%)",
+        background: "#0f172a", // Match welcome page theme
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Abstract Background Design Elements for modern feel */}
       <Box
         sx={{
           position: "absolute",
@@ -126,7 +120,7 @@ const Login = () => {
           left: "-10%",
           width: "250px",
           height: "250px",
-          background: "radial-gradient(circle, rgba(0,230,118,0.12) 0%, rgba(0,230,118,0) 70%)",
+          background: "radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%)",
           borderRadius: "50%",
           filter: "blur(50px)",
         }}
@@ -138,7 +132,7 @@ const Login = () => {
           right: "-5%",
           width: "400px",
           height: "400px",
-          background: "radial-gradient(circle, rgba(0,230,118,0.08) 0%, rgba(0,230,118,0) 70%)",
+          background: "radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%)",
           borderRadius: "50%",
           filter: "blur(60px)",
         }}
@@ -147,14 +141,8 @@ const Login = () => {
       <Container component="main" maxWidth="xs" sx={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center" }}>
         
         {/* LOGO OUTSIDE FORM */}
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', mb: 0 }}>
-          <img src={uwtLogo} alt="UWT Logo" style={{ height: "120px", marginBottom: "0px", objectFit: "contain", filter: "drop-shadow(0px 10px 20px rgba(0,0,0,0.5))" }} />
-          <Typography variant="h5" sx={{ color: '#FFD700', fontWeight: 800 }}>
-            UWC+
-          </Typography>
-          <Typography variant="body1" sx={{ color: 'rgba(255,255,255,0.8)', fontWeight: 500, mt: 0.5 }}>
-            Empowering your digital wealth journey
-          </Typography>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', mb: 3 }}>
+          <img src={bmsLogo} alt="BMS Logo" style={{ height: "90px", objectFit: "contain", filter: "brightness(0) invert(1)" }} />
         </Box>
 
         <Paper
@@ -165,11 +153,11 @@ const Login = () => {
             alignItems: "center",
             width: "100%",
             p: { xs: 3, md: 4 },
-            borderRadius: "28px",
-            background: "rgba(255, 255, 255, 0.04)", // Sleek glassmorphism
+            borderRadius: "16px",
+            background: "rgba(255, 255, 255, 0.02)",
             backdropFilter: "blur(12px)",
             boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
-            border: "1px solid rgba(255, 255, 255, 0.08)",
+            border: "1px solid rgba(255, 255, 255, 0.05)",
           }}
         >
 
@@ -213,7 +201,7 @@ const Login = () => {
                     borderColor: "rgba(255, 255, 255, 0.25)",
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: "#FFD700",
+                    borderColor: "#3b82f6",
                     borderWidth: "2px"
                   },
                 },
@@ -221,7 +209,7 @@ const Login = () => {
                   color: "rgba(255, 255, 255, 0.6)",
                 },
                 "& .MuiInputLabel-root.Mui-focused": {
-                  color: "#FFD700",
+                  color: "#3b82f6",
                 },
                 "& .MuiOutlinedInput-input::placeholder": {
                   color: "rgba(255, 255, 255, 0.4)",
@@ -274,7 +262,7 @@ const Login = () => {
                     borderColor: "rgba(255, 255, 255, 0.25)",
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: "#FFD700",
+                    borderColor: "#3b82f6",
                     borderWidth: "2px"
                   },
                 },
@@ -282,7 +270,7 @@ const Login = () => {
                   color: "rgba(255, 255, 255, 0.6)",
                 },
                 "& .MuiInputLabel-root.Mui-focused": {
-                  color: "#FFD700",
+                  color: "#3b82f6",
                 },
                 "& .MuiOutlinedInput-input::placeholder": {
                   color: "rgba(255, 255, 255, 0.4)",
@@ -307,7 +295,7 @@ const Login = () => {
                     sx={{
                       color: "rgba(255, 255, 255, 0.3)",
                       "&.Mui-checked": {
-                        color: "#FFD700",
+                        color: "#3b82f6",
                       },
                     }}
                   />
@@ -323,7 +311,7 @@ const Login = () => {
                 type="button"
                 onClick={() => setIsResetMode(true)}
                 underline="hover"
-                sx={{ color: "#FFD700", fontSize: "0.875rem", fontWeight: 600, "&:hover": { color: "#e6c200" } }}
+                sx={{ color: "#3b82f6", fontSize: "0.875rem", fontWeight: 600, "&:hover": { color: "#60a5fa" } }}
               >
                 Forgot password?
               </MuiLink>
@@ -337,19 +325,19 @@ const Login = () => {
               sx={{
                 mt: 1,
                 mb: 1,
-                background: "linear-gradient(135deg, #FFD700 0%, #e6c200 100%)",
-                color: "#050916",
-                fontWeight: 800,
+                background: "#3b82f6",
+                color: "#ffffff",
+                fontWeight: 600,
                 fontSize: "1rem",
                 padding: "12px",
                 borderRadius: "12px",
                 textTransform: "none",
-                boxShadow: "0 8px 16px rgba(0, 230, 118, 0.2)",
+                boxShadow: "0 4px 12px rgba(59, 130, 246, 0.3)",
                 transition: "all 0.3s ease",
                 "&:hover": {
-                  background: "linear-gradient(135deg, #e6c200 0%, #FFD700 100%)",
+                  background: "#2563eb",
                   transform: "translateY(-2px)",
-                  boxShadow: "0 12px 20px rgba(0, 230, 118, 0.4)",
+                  boxShadow: "0 6px 16px rgba(59, 130, 246, 0.4)",
                 },
                 "&:disabled": {
                   background: "rgba(255, 255, 255, 0.12)",
@@ -357,98 +345,81 @@ const Login = () => {
                 }
               }}
             >
-              Sign In to Account
+              Sign In
             </Button>
+
+            {/* INTEGRATED SECOND CONTAINER: CREATE ACCOUNT & SUPPORT */}
+            <Box sx={{ mt: 2, pt: 3, borderTop: '1px solid rgba(255,255,255,0.1)', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+              <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.5)", mb: 2 }}>
+                Don't have an account?
+              </Typography>
+              <Button
+                component={Link}
+                to="/register"
+                fullWidth
+                variant="outlined"
+                sx={{
+                  py: 1.5,
+                  color: "#3b82f6",
+                  borderColor: "rgba(59, 130, 246, 0.5)",
+                  fontWeight: 600,
+                  fontSize: "0.95rem",
+                  borderRadius: "12px",
+                  textTransform: "none",
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    borderColor: "#3b82f6",
+                    background: "rgba(59, 130, 246, 0.05)",
+                  }
+                }}
+              >
+                Create New Account
+              </Button>
+
+              {/* SUPPORT BUTTONS */}
+              <Box sx={{ mt: 3, display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: 3, width: '100%' }}>
+                <Button 
+                    variant="text" 
+                    onClick={() => setOpenMsgDialog(true)}
+                    sx={{ 
+                      color: 'rgba(255,255,255,0.6)', 
+                      textTransform: 'none',
+                      fontWeight: 500,
+                      padding: 0,
+                      minWidth: 'auto',
+                      '&:hover': { bgcolor: 'transparent', color: '#3b82f6' }
+                    }}
+                >
+                    💬 Message Us
+                </Button>
+                <Button 
+                    variant="text" 
+                    href="mailto:support@bmsfoundations.com"
+                    sx={{ 
+                      color: 'rgba(255,255,255,0.6)', 
+                      textTransform: 'none',
+                      fontWeight: 500,
+                      padding: 0,
+                      minWidth: 'auto',
+                      '&:hover': { bgcolor: 'transparent', color: '#3b82f6' }
+                    }}
+                >
+                    ✉️ Mail To Us
+                </Button>
+              </Box>
+            </Box>
 
             </Box>
             </>
           )}
         </Paper>
-
-        {/* SECOND CONTAINER: CREATE ACCOUNT & SUPPORT */}
-        <Paper
-          elevation={24}
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            width: "100%",
-            mt: 1,
-            p: { xs: 3, md: 4 },
-            borderRadius: "28px",
-            background: "rgba(255, 255, 255, 0.04)",
-            backdropFilter: "blur(12px)",
-            boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
-            border: "1px solid rgba(255, 255, 255, 0.08)",
-          }}
-        >
-          <Typography variant="body1" sx={{ color: "rgba(255, 255, 255, 0.7)", fontWeight: 500, mb: 2 }}>
-            New to UWC+?
-          </Typography>
-          <Button
-            component={Link}
-            to="/register"
-            fullWidth
-            variant="contained"
-            sx={{
-              py: 1.5,
-              color: "#050916", // Dark text to contrast with gold
-              background: "linear-gradient(90deg, #FFD700 0%, #FFA500 100%)",
-              fontWeight: 800,
-              fontSize: "1.1rem",
-              borderRadius: "12px",
-              textTransform: "none",
-              boxShadow: "0 8px 24px rgba(255, 215, 0, 0.3)",
-              transition: "all 0.3s ease",
-              "&:hover": {
-                background: "linear-gradient(90deg, #FFA500 0%, #FFD700 100%)",
-                transform: "translateY(-2px)",
-                boxShadow: "0 12px 28px rgba(255, 215, 0, 0.4)",
-              }
-            }}
-          >
-            Create New Account
-          </Button>
-
-          {/* SUPPORT BUTTONS */}
-          <Box sx={{ mt: 3, pt: 3, borderTop: '1px solid rgba(255,255,255,0.1)', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%', gap: 2 }}>
-            <Button 
-                variant="text" 
-                onClick={() => setOpenMsgDialog(true)}
-                sx={{ 
-                  color: '#00e676', 
-                  textTransform: 'none',
-                  fontWeight: 700,
-                  padding: 0,
-                  minWidth: 'auto',
-                  '&:hover': { bgcolor: 'transparent', color: '#33ff99' }
-                }}
-            >
-                💬 Message Us
-            </Button>
-            <Button 
-                variant="text" 
-                href="mailto:support@usdt.com"
-                sx={{ 
-                  color: 'rgba(255,255,255,0.6)', 
-                  textTransform: 'none',
-                  fontWeight: 500,
-                  padding: 0,
-                  minWidth: 'auto',
-                  '&:hover': { color: '#fff', bgcolor: 'transparent' }
-                }}
-            >
-                ✉️ Mail To Us
-            </Button>
-          </Box>
-        </Paper>
       </Container>
       {isPending && <LoadingComponent />}
 
       {/* GUEST MESSAGE DIALOG */}
-      <Dialog open={openMsgDialog} onClose={() => setOpenMsgDialog(false)} maxWidth="sm" fullWidth PaperProps={{ sx: { bgcolor: '#0f1e36', color: '#fff', borderRadius: '16px' } }}>
+      <Dialog open={openMsgDialog} onClose={() => setOpenMsgDialog(false)} maxWidth="sm" fullWidth PaperProps={{ sx: { bgcolor: '#0f172a', color: '#fff', borderRadius: '16px' } }}>
         <DialogTitle sx={{ borderBottom: '1px solid rgba(255,255,255,0.1)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography variant="h6" fontWeight={700} color="#FFD700">Message Support</Typography>
+          <Typography variant="h6" fontWeight={600} color="#3b82f6">Message Support</Typography>
           <IconButton onClick={() => setOpenMsgDialog(false)} sx={{ color: 'rgba(255,255,255,0.5)' }}><CloseIcon /></IconButton>
         </DialogTitle>
         <DialogContent sx={{ pt: 3, display: 'flex', flexDirection: 'column', gap: 2, mt: 1 }}>
@@ -485,7 +456,7 @@ const Login = () => {
             onClick={handleSendGuestMessage} 
             variant="contained" 
             disabled={isSendingMsg}
-            sx={{ background: "linear-gradient(135deg, #FFD700 0%, #e6c200 100%)", color: "#050916", fontWeight: 700, borderRadius: '8px' }}
+            sx={{ background: "#3b82f6", color: "#ffffff", fontWeight: 600, borderRadius: '8px', '&:hover': { background: '#2563eb' } }}
           >
             {isSendingMsg ? "Sending..." : "Send Message"}
           </Button>

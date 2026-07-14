@@ -260,7 +260,7 @@ const MemberModifyDialog: React.FC<ModifyDialogProps> = ({
 
   const handleSave = () => {
     // Validate contact number - must be exactly 10 digits
-    const contactRegex = /^[0-9]{10}$/;
+    const contactRegex = /^[0-9]{10}₹/;
     if (formData.contactno && !contactRegex.test(formData.contactno)) {
       setContactError('Please enter a valid 10-digit mobile number');
       return;
@@ -674,7 +674,7 @@ const AgentModifyDialog: React.FC<{
 
   const handleSave = () => {
     // Validate contact number - must be exactly 10 digits
-    const contactRegex = /^[0-9]{10}$/;
+    const contactRegex = /^[0-9]{10}₹/;
     if (formData.contactno && !contactRegex.test(formData.contactno)) {
       setContactError('Please enter a valid 10-digit mobile number');
       return;

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText, Box, Button, Typography, Container, Collapse } from '@mui/material';
 import { Menu as MenuIcon, X as CloseIcon, ChevronDown } from 'lucide-react';
+import bmsLogo from '../../assets/bms_logo.png';
 
 const PublicNavbar = () => {
   const navigate = useNavigate();
@@ -24,8 +25,8 @@ const PublicNavbar = () => {
     { title: "Home", path: "/" },
     { title: "About Us", path: "/about" },
     { 
-      title: "Loan", 
-      path: "#",
+      title: "Services", 
+      path: "/services",
     },
     { title: "Gallery", path: "/gallery" },
     { title: "Legal", path: "/terms" },
@@ -49,19 +50,7 @@ const PublicNavbar = () => {
         <Container maxWidth="xl">
           <Toolbar sx={{ justifyContent: "space-between", py: 1, px: { xs: 0, sm: 2 } }}>
             <Box sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }} onClick={() => navigate('/')}>
-               <Box sx={{ 
-                 bgcolor: '#1e3a8a', 
-                 color: 'white', 
-                 p: 1, 
-                 borderRadius: '8px', 
-                 fontWeight: 800,
-                 mr: 1
-               }}>
-                 BMS
-               </Box>
-              <Typography variant="h6" sx={{ fontWeight: 800, color: '#1e3a8a', display: { xs: 'none', sm: 'block' } }}>
-                FOUNDATIONS
-              </Typography>
+              <img src={bmsLogo} alt="BMS Foundations" style={{ height: "50px", objectFit: "contain" }} />
             </Box>
 
             {/* Desktop Links */}
@@ -162,8 +151,7 @@ const PublicNavbar = () => {
       >
         <Box sx={{ display: "flex", justifyContent: "space-between", p: 2, borderBottom: "1px solid rgba(0,0,0,0.05)" }}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Box sx={{ bgcolor: '#1e3a8a', color: 'white', p: 0.5, borderRadius: '4px', fontWeight: 800, mr: 1, fontSize: '0.8rem' }}>BMS</Box>
-            <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#1e3a8a' }}>FOUNDATIONS</Typography>
+            <img src={bmsLogo} alt="BMS Foundations" style={{ height: "40px", objectFit: "contain" }} />
           </Box>
           <IconButton onClick={handleDrawerToggle} sx={{ color: "#475569" }}><CloseIcon /></IconButton>
         </Box>

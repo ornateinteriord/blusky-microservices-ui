@@ -6,7 +6,7 @@ import { useGetWalletOverview } from '../../../api/Memeber';
 import { useBuyPackageDirectlyMutation } from '../../../api/Packages';
 import { toast } from 'react-toastify';
 import { useGetMemberAddOns } from '../../../api/Packages';
-import USDTLogo from "../../../assets/USDT1.png";
+import BMSLogo from "../../../assets/bms_logo.png";
 
 const PACKAGES = [
   { id: 1, amount: 30, title: "Starter Pip Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#1de9b6", description: "Begin your journey with the Starter PIP Plan and unlock new growth opportunities" },
@@ -53,7 +53,7 @@ const ProductsContainer: React.FC = () => {
   const handleBuyClick = (pkg: any) => {
     const amountToBuy = pkg.amount;
     if (topUpBalance < amountToBuy) {
-      toast.error(`Insufficient Top Up Balance! You need $${amountToBuy} but have $${topUpBalance}`);
+      toast.error(`Insufficient Top Up Balance! You need ₹${amountToBuy} but have ₹${topUpBalance}`);
       return;
     }
     setConfirmPkg({ ...pkg, amount: amountToBuy });
@@ -128,10 +128,10 @@ const ProductsContainer: React.FC = () => {
             {/* Clean Logo on the right side */}
             <Box sx={{
               position: 'absolute',
-              top: '100px',
-              right: '-10px',
-              width: '135px',
-              height: '135px',
+              top: '110px',
+              right: '10px',
+              width: '80px',
+              height: '80px',
               opacity: 1,
               zIndex: 0,
               display: 'flex',
@@ -139,7 +139,7 @@ const ProductsContainer: React.FC = () => {
               justifyContent: 'center',
               pointerEvents: 'none'
             }}>
-              <img src={USDTLogo} alt="USDT Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+              <img src={BMSLogo} alt="BMS Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
             </Box>
 
             <CardContent sx={{ p: 2.5, '&:last-child': { pb: 2.5 }, position: 'relative', zIndex: 1 }}>
@@ -148,11 +148,11 @@ const ProductsContainer: React.FC = () => {
                   width: 38,
                   height: 38,
                   backgroundColor: pkg.color,
-                  WebkitMaskImage: `url(${USDTLogo})`,
+                  WebkitMaskImage: `url(${BMSLogo})`,
                   WebkitMaskSize: 'contain',
                   WebkitMaskRepeat: 'no-repeat',
                   WebkitMaskPosition: 'center',
-                  maskImage: `url(${USDTLogo})`,
+                  maskImage: `url(${BMSLogo})`,
                   maskSize: 'contain',
                   maskRepeat: 'no-repeat',
                   maskPosition: 'center'

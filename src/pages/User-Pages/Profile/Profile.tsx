@@ -14,7 +14,7 @@ const Profile: React.FC = () => {
     gender: "",
     email: "",
     country: "",
-    usdt_bep20_address: "",
+    BMS_bep20_address: "",
     dob: "",
   });
 
@@ -25,7 +25,7 @@ const Profile: React.FC = () => {
         gender: user.gender ?? "Male",
         email: user.email ?? "",
         country: user.country ?? "India",
-        usdt_bep20_address: user.usdt_bep20_address ?? "",
+        BMS_bep20_address: user.BMS_bep20_address ?? "",
         dob: user.dob ?? "",
       });
     }
@@ -198,7 +198,7 @@ const Profile: React.FC = () => {
               </Box>
             </Box>
 
-            {/* Bottom Row - USDT Address */}
+            {/* Bottom Row - BMS Address */}
             <Box sx={{ 
               p: 3, 
               bgcolor: 'rgba(0, 0, 0, 0.15)', 
@@ -211,10 +211,10 @@ const Profile: React.FC = () => {
               {/* Decorative accent */}
               <Box sx={{ position: 'absolute', top: 0, left: 0, width: '4px', height: '100%', bgcolor: '#FFD700' }} />
               
-              <Typography variant="body2" sx={{ mb: 1.5, color: '#FFD700', fontWeight: 'bold', letterSpacing: '1px', ml: 1 }}>USDT - BEP20 Address</Typography>
+              <Typography variant="body2" sx={{ mb: 1.5, color: '#FFD700', fontWeight: 'bold', letterSpacing: '1px', ml: 1 }}>BEP20 Address</Typography>
               <TextField
-                name="usdt_bep20_address"
-                value={formData.usdt_bep20_address}
+                name="BMS_bep20_address"
+                value={formData.BMS_bep20_address}
                 onChange={handleInputChange}
                 fullWidth
                 sx={inputStyles}

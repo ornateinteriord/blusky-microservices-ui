@@ -186,7 +186,7 @@ const AddMoneyDialog: React.FC<AddMoneyDialogProps> = ({ open, onClose }) => {
                         onChange={(e) => setAmount(e.target.value)}
                         InputProps={{
                             inputProps: { min: 1 },
-                            startAdornment: <InputAdornment position="start">$</InputAdornment>
+                            startAdornment: <InputAdornment position="start">₹</InputAdornment>
                         }}
                     />
                 </Box>

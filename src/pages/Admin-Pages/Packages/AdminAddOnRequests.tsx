@@ -33,7 +33,7 @@ const AdminAddOnRequests = () => {
     { name: 'Member ID', selector: (row: any) => row.member_id, sortable: true },
     {
       name: 'Amount Requested',
-      selector: (row: any) => `$${row.requested_amount}`,
+      selector: (row: any) => `₹${row.requested_amount}`,
       sortable: true
     },
     {
