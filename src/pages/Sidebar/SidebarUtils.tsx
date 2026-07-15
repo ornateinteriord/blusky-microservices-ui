@@ -37,7 +37,7 @@ export const UserSideBarMenuItems: SideBarMenuItemType[] = [
     isExpandable: true,
     subItems: [
       { name: "Profile", path: "/user/account/profile", icon: <PersonIcon /> },
-      // { name: "KYC", path: "/user/account/kyc", icon: <VerifiedUserIcon /> },
+      { name: "KYC", path: "/user/account/kyc", icon: <VerifiedUserIcon /> },
       {
         name: "Change Password",
         path: "/user/account/change-password",

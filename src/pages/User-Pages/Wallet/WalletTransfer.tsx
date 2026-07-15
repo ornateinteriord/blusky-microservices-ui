@@ -23,8 +23,14 @@ const WalletTransfer = () => {
   const { mutate: transferWallet } = useTransferWallet();
 
   const [step, setStep] = useState<1 | 2>(1);
-  const [fromWallet, setFromWallet] = useState('Earnings');
-  const toWallet = fromWallet === 'Earnings' ? 'Top Up Wallet' : 'Upgrade Wallet';
+  const [fromWallet, setFromWallet] = useState('Withdrawal');
+  const [toWallet, setToWallet] = useState('Purchase Wallet');
+
+  useEffect(() => {
+    if (fromWallet === 'Withdrawal') setToWallet('Purchase Wallet');
+    else if (fromWallet === 'Top Up') setToWallet('Upgrade Wallet');
+    else if (fromWallet === 'Upgrade') setToWallet('Purchase Wallet');
+  }, [fromWallet]);
   const [amount, setAmount] = useState('');
   const [otp, setOtp] = useState('');
   const [successDialogOpen, setSuccessDialogOpen] = useState(false);
@@ -38,8 +44,9 @@ const WalletTransfer = () => {
   const upgradeBalance = walletOverview?.upgradeWalletBalance || '0.00';
 
   const getAvailableBalance = () => {
-    if (fromWallet === 'Earnings') return earningsBalance;
+    if (fromWallet === 'Withdrawal') return earningsBalance;
     if (fromWallet === 'Top Up') return topUpBalance;
+    if (fromWallet === 'Upgrade') return upgradeBalance;
     return '0.00';
   };
 
@@ -126,12 +133,12 @@ const WalletTransfer = () => {
       transferWallet({
         memberId: memberId || '',
         fromWallet,
-        toWallet,
+        toWallet: toWallet === 'Purchase Wallet' ? 'Top Up Wallet' : toWallet,
         amount,
         otp: idToken // Send Firebase token to backend instead of raw OTP
       }, {
         onSuccess: () => {
-          setTransferDetails({ amount, fromWallet, toWallet });
+          setTransferDetails({ amount, fromWallet, toWallet: toWallet === 'Purchase Wallet' ? 'Top Up Wallet' : toWallet });
           setSuccessDialogOpen(true);
           setAmount('');
           setOtp('');
@@ -186,8 +193,9 @@ const WalletTransfer = () => {
                       '& .MuiSvgIcon-root': { color: 'white' }
                     }}
                   >
-                    <MenuItem value="Earnings">Earnings Wallet (Bal: ${earningsBalance})</MenuItem>
-                    <MenuItem value="Top Up">Top Up Wallet (Bal: ${topUpBalance})</MenuItem>
+                    <MenuItem value="Withdrawal">Withdrawal Wallet (Bal: ₹{earningsBalance})</MenuItem>
+                    <MenuItem value="Top Up">Purchase Wallet (Bal: ${topUpBalance})</MenuItem>
+                    <MenuItem value="Upgrade">Upgrade Wallet (Bal: ${upgradeBalance})</MenuItem>
                   </Select>
                 </Box>
 
@@ -196,7 +204,8 @@ const WalletTransfer = () => {
                   <Select
                     fullWidth
                     value={toWallet}
-                    disabled
+                    onChange={(e) => setToWallet(e.target.value)}
+                    disabled={fromWallet !== 'Withdrawal'}
                     sx={{
                       bgcolor: 'rgba(255,255,255,0.02)',
                       color: 'white',
@@ -206,10 +215,15 @@ const WalletTransfer = () => {
                       '& .MuiSvgIcon-root': { color: 'rgba(255,255,255,0.3)' }
                     }}
                   >
-                    {toWallet === 'Top Up Wallet' ? (
-                      <MenuItem value="Top Up Wallet">Top Up Wallet (Bal: ${topUpBalance})</MenuItem>
-                    ) : (
+                    {fromWallet === 'Withdrawal' ? (
+                      [
+                        <MenuItem key="1" value="Purchase Wallet">Purchase Wallet (Bal: ${topUpBalance})</MenuItem>,
+                        <MenuItem key="2" value="Upgrade Wallet">Upgrade Wallet (Bal: ${upgradeBalance})</MenuItem>
+                      ]
+                    ) : fromWallet === 'Top Up' ? (
                       <MenuItem value="Upgrade Wallet">Upgrade Wallet (Bal: ${upgradeBalance})</MenuItem>
+                    ) : (
+                      <MenuItem value="Purchase Wallet">Purchase Wallet (Bal: ${topUpBalance})</MenuItem>
                     )}
                   </Select>
                 </Box>

@@ -14,7 +14,6 @@ const Profile: React.FC = () => {
     gender: "",
     email: "",
     country: "",
-    BMS_bep20_address: "",
     dob: "",
   });
 
@@ -25,7 +24,6 @@ const Profile: React.FC = () => {
         gender: user.gender ?? "Male",
         email: user.email ?? "",
         country: user.country ?? "India",
-        BMS_bep20_address: user.BMS_bep20_address ?? "",
         dob: user.dob ?? "",
       });
     }
@@ -198,28 +196,7 @@ const Profile: React.FC = () => {
               </Box>
             </Box>
 
-            {/* Bottom Row - BMS Address */}
-            <Box sx={{ 
-              p: 3, 
-              bgcolor: 'rgba(0, 0, 0, 0.15)', 
-              borderRadius: '20px', 
-              border: '1px solid rgba(255, 215, 0, 0.15)',
-              mb: 5,
-              position: 'relative',
-              overflow: 'hidden'
-            }}>
-              {/* Decorative accent */}
-              <Box sx={{ position: 'absolute', top: 0, left: 0, width: '4px', height: '100%', bgcolor: '#FFD700' }} />
-              
-              <Typography variant="body2" sx={{ mb: 1.5, color: '#FFD700', fontWeight: 'bold', letterSpacing: '1px', ml: 1 }}>BEP20 Address</Typography>
-              <TextField
-                name="BMS_bep20_address"
-                value={formData.BMS_bep20_address}
-                onChange={handleInputChange}
-                fullWidth
-                sx={inputStyles}
-              />
-            </Box>
+
 
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
               <Button

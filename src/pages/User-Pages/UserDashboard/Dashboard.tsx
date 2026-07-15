@@ -14,6 +14,7 @@ import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import GroupsIcon from '@mui/icons-material/Groups';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import LockIcon from '@mui/icons-material/Lock';
 import PaymentsIcon from '@mui/icons-material/Payments';
@@ -78,7 +79,7 @@ const UserDashboard = () => {
       title: "ACCOUNT",
       items: [
         { label: "Profile", icon: <AccountCircleIcon />, route: "/user/account/profile", color: "#FFD700" },
-        // { label: "KYC", icon: <VerifiedUserIcon />, route: "/user/account/kyc", color: "#10b981" },
+        { label: "KYC", icon: <VerifiedUserIcon />, route: "/user/account/kyc", color: "#10b981" },
         { label: "Password", icon: <LockIcon />, route: "/user/account/change-password", color: "#f59e0b" },
         { label: "Transfer", icon: <SyncAltIcon />, route: "/user/transfer", color: "#10b981" },
         { label: "My QR", icon: <QrCode2Icon />, route: "/user/my-qr", color: "#1de9b6" },

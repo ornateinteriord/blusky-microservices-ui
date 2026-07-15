@@ -31,7 +31,7 @@ const P2PTransfer: React.FC = () => {
   const transferMutation = useTransferP2PWallet();
 
   const [step, setStep] = useState<1 | 2 | 3>(1);
-  const [sourceWallet, setSourceWallet] = useState<'Top Up Wallet' | 'Earning Wallet'>('Top Up Wallet');
+  const [sourceWallet, setSourceWallet] = useState<'Top Up Wallet' | 'Withdrawal Wallet'>('Top Up Wallet');
   const [amount, setAmount] = useState<string>('');
   const [scanMode, setScanMode] = useState<'camera' | 'manual'>('camera');
   const [manualId, setManualId] = useState<string>('');
@@ -217,7 +217,7 @@ const P2PTransfer: React.FC = () => {
       await transferMutation.mutateAsync({
         senderId: memberDetails?.Member_id || memberDetails?.member_id || '',
         recipientId: recipient.Member_id || recipient.member_id || '',
-        sourceWallet,
+        sourceWallet: sourceWallet === 'Withdrawal Wallet' ? 'Earning Wallet' : sourceWallet,
         amount: parseFloat(amount),
         idToken,
       });
@@ -322,9 +322,9 @@ const P2PTransfer: React.FC = () => {
                       </span>
                     </Box>
                   </MenuItem>
-                  <MenuItem value="Earning Wallet" sx={{ bgcolor: '#050916', color: '#fff', '&:hover': { bgcolor: 'rgba(255,215,0,0.1)' } }}>
+                  <MenuItem value="Withdrawal Wallet" sx={{ bgcolor: '#050916', color: '#fff', '&:hover': { bgcolor: 'rgba(255,215,0,0.1)' } }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                      <span>Earnings Wallet</span>
+                      <span>Withdrawal Wallet</span>
                       <span style={{ color: '#FFD700', fontWeight: 'bold', marginLeft: '10px' }}>
                         ${Number(walletOverview?.balance || 0).toFixed(4)}
                       </span>

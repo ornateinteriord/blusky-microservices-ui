@@ -106,8 +106,8 @@ const Wallet = () => {
       return;
     }
 
-    if (withdrawalAmount < 5) {
-      toast.error('Minimum withdrawal amount is ₹5');
+    if (withdrawalAmount < 500) {
+      toast.error('Minimum withdrawal amount is ₹500');
       return;
     }
 
@@ -301,7 +301,7 @@ const Wallet = () => {
                   <Box sx={{ display: "flex", gap: 4, flexDirection: isMobile ? "column" : "row" }}>
                     <Box>
                       <Typography variant="body2">• 5% Admin applied</Typography>
-                      <Typography variant="body2">• Minimum withdrawal: ₹5</Typography>
+                      <Typography variant="body2">• Minimum withdrawal: ₹500</Typography>
                       <Typography variant="body2">• Maximum withdrawal: 25% of total package (${maxWithdrawal.toFixed(4)})</Typography>
                       <Typography variant="body2">• One withdrawal per day allowed</Typography>
                     </Box>

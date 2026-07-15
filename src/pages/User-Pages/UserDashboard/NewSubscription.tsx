@@ -100,12 +100,12 @@ const NewSubscription: React.FC = () => {
       onSuccess: () => {
         let packageName = "";
         switch(formData.package) {
-          case "30": packageName = "Starter Pip Plan"; break;
-          case "60": packageName = "Growth Trader Package"; break;
-          case "120": packageName = "Elite Currency Portfolio"; break;
-          case "250": packageName = "Global FX Advantage Plan"; break;
-          case "500": packageName = "Pro Trader Wealth Package"; break;
-          case "1000": packageName = "VIP Liquidity Master Plan"; break;
+          case "10000": packageName = "Secure Growth Plan"; break;
+          case "25000": packageName = "Smart Saver Plan"; break;
+          case "50000": packageName = "Wealth Builder Plan"; break;
+          case "100000": packageName = "Future Secure Deposit"; break;
+          case "200000": packageName = "Prosper Plus Plan"; break;
+          case "500000": packageName = "Golden Growth Investment Plan"; break;
           default: packageName = `₹${formData.package} Package`;
         }
         
@@ -196,7 +196,7 @@ const NewSubscription: React.FC = () => {
             </Box>
 
             <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'flex-start', sm: 'center' }, gap: 1 }}>
-              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Your Top-Up Balance</Typography>
+              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Your Purchase Balance</Typography>
               <TextField
                 value={`₹${Number(walletOverview?.topUpBalance || 0).toLocaleString(undefined, { maximumFractionDigits: 4, minimumFractionDigits: 4 })}`}
                 fullWidth
@@ -226,12 +226,12 @@ const NewSubscription: React.FC = () => {
                   }}
                 >
                   <MenuItem value="" disabled>Select Package</MenuItem>
-                  <MenuItem value="30">₹30 Starter Pip Plan</MenuItem>
-                  <MenuItem value="60">₹60 Growth Trader Package</MenuItem>
-                  <MenuItem value="120">₹120 Elite Currency Portfolio</MenuItem>
-                  <MenuItem value="250">₹250 Global FX Advantage Plan</MenuItem>
-                  <MenuItem value="500">₹500 Pro Trader Wealth Package</MenuItem>
-                  <MenuItem value="1000">₹1000 VIP Liquidity Master Plan</MenuItem>
+                  <MenuItem value="10000">₹10,000 Secure Growth Plan</MenuItem>
+                  <MenuItem value="25000">₹25,000 Smart Saver Plan</MenuItem>
+                  <MenuItem value="50000">₹50,000 Wealth Builder Plan</MenuItem>
+                  <MenuItem value="100000">₹1,00,000 Future Secure Deposit</MenuItem>
+                  <MenuItem value="200000">₹2,00,000 Prosper Plus Plan</MenuItem>
+                  <MenuItem value="500000">₹5,00,000 Golden Growth Investment Plan</MenuItem>
                 </Select>
               </FormControl>
             </Box>
