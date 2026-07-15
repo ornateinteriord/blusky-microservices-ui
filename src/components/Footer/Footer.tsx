@@ -18,13 +18,13 @@ const Footer = () => {
                 <Box sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, justifyContent: 'space-between' }}>
                     
                     {/* Left Section (Main content) */}
-                    <Box sx={{ flex: 1, py: { xs: 6, md: 8 }, px: { xs: 2, md: 4, xl: 0 } }}>
+                    <Box sx={{ flex: 1, py: { xs: 4, md: 6 }, px: { xs: 2, md: 4, xl: 0 } }}>
                         <Grid container spacing={{ xs: 6, md: 4 }}>
                             
                             {/* Column 1: Logo & Text */}
                             <Grid item xs={12} md={4}>
-                                <Box sx={{ mb: 3 }}>
-                                    <img src={bmsLogo} alt="BMS Foundations Logo" style={{ height: "80px", objectFit: "contain", filter: "brightness(0) invert(1)" }} />
+                                <Box sx={{ mb: 2 }}>
+                                    <img src={bmsLogo} alt="BMS Foundations Logo" style={{ height: "60px", objectFit: "contain", filter: "brightness(0) invert(1)" }} />
                                 </Box>
                                 <Typography variant="body1" sx={{ color: "#94a3b8", lineHeight: 1.7, pr: { md: 4 } }}>
                                     Highlights the impact of technology on the banking industry,
@@ -100,8 +100,8 @@ const Footer = () => {
 
                         {/* Copyright Area */}
                         <Box sx={{ 
-                            mt: { xs: 6, md: 8 }, 
-                            pt: 4, 
+                            mt: { xs: 4, md: 6 }, 
+                            pt: 3, 
                             borderTop: "1px solid #1e293b",
                             display: "flex",
                             flexDirection: { xs: "column", sm: "row" },
@@ -131,9 +131,9 @@ const Footer = () => {
                         flexDirection: { xs: "column", sm: "row", lg: "column" },
                         alignItems: "center",
                         justifyContent: "space-around",
-                        py: { xs: 6, lg: 12 },
+                        py: { xs: 4, lg: 8 },
                         px: { xs: 4, lg: 6 },
-                        gap: 4,
+                        gap: 3,
                         textAlign: "center"
                     }}>
                         <Typography variant="h5" sx={{ fontWeight: 600, color: "#ffffff", maxWidth: "250px" }}>
@@ -144,8 +144,8 @@ const Footer = () => {
                             component={Link}
                             to="/contact-us"
                             sx={{
-                                width: { xs: "120px", lg: "160px" },
-                                height: { xs: "120px", lg: "160px" },
+                                width: { xs: "100px", lg: "130px" },
+                                height: { xs: "100px", lg: "130px" },
                                 borderRadius: "50%",
                                 border: "1px solid rgba(255,255,255,0.2)",
                                 display: "flex",

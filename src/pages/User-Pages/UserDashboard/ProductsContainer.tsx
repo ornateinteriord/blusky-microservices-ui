@@ -6,15 +6,15 @@ import { useGetWalletOverview } from '../../../api/Memeber';
 import { useBuyPackageDirectlyMutation } from '../../../api/Packages';
 import { toast } from 'react-toastify';
 import { useGetMemberAddOns } from '../../../api/Packages';
-import BMSLogo from "../../../assets/bms_logo.png";
+import USDTLogo from "../../../assets/uwt.png";
 
 const PACKAGES = [
-  { id: 1, amount: 30, title: "Starter Pip Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#1de9b6", description: "Begin your journey with the Starter PIP Plan and unlock new growth opportunities" },
-  { id: 2, amount: 60, title: "Growth Trader Package", yield: "5%", days: "210 Day", tag: "Members Only", color: "#CD7F32", description: "The Growth Trader Package helps you explore enhanced features and expand your trading potential" },
-  { id: 3, amount: 120, title: "Elite Currency Portfolio", yield: "5%", days: "210 Day", tag: "Members Only", color: "#C0C0C0", description: "Explore the Elite Currency Portfolio designed for advanced financial management and growth opportunities" },
-  { id: 4, amount: 250, title: "Global FX Advantage Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#FFD700", description: "Take your forex journey further with the Global FX Advantage Plan" },
-  { id: 5, amount: 500, title: "Pro Trader Wealth Package", yield: "5%", days: "210 Day", tag: "Members Only", color: "#E5E4E2", description: "A premium package built to support smarter trading decisions and long-term growth" },
-  { id: 6, amount: 1000, title: "VIP Liquidity Master Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#b9f2ff", description: "Experience a higher level of financial flexibility with the VIP Liquidity Master Plan" }
+  { id: 1, amount: 10000, title: "Secure Growth Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#1de9b6", description: "Begin your journey with the Secure Growth Plan and unlock new growth opportunities" },
+  { id: 2, amount: 25000, title: "Smart Saver Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#CD7F32", description: "The Smart Saver Plan helps you explore enhanced features and expand your trading potential" },
+  { id: 3, amount: 50000, title: "Wealth Builder Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#C0C0C0", description: "Explore the Wealth Builder Plan designed for advanced financial management and growth opportunities" },
+  { id: 4, amount: 100000, title: "Future Secure Deposit", yield: "5%", days: "210 Day", tag: "Members Only", color: "#FFD700", description: "Take your forex journey further with the Future Secure Deposit" },
+  { id: 5, amount: 200000, title: "Prosper Plus Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#E5E4E2", description: "A premium package built to support smarter trading decisions and long-term growth" },
+  { id: 6, amount: 500000, title: "Golden Growth Investment Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#b9f2ff", description: "Experience a higher level of financial flexibility with the Golden Growth Investment Plan" }
 ];
 
 const ProductsContainer: React.FC = () => {
@@ -125,34 +125,17 @@ const ProductsContainer: React.FC = () => {
               }
             }}
           >
-            {/* Clean Logo on the right side */}
-            <Box sx={{
-              position: 'absolute',
-              top: '110px',
-              right: '10px',
-              width: '80px',
-              height: '80px',
-              opacity: 1,
-              zIndex: 0,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              pointerEvents: 'none'
-            }}>
-              <img src={BMSLogo} alt="BMS Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-            </Box>
-
             <CardContent sx={{ p: 2.5, '&:last-child': { pb: 2.5 }, position: 'relative', zIndex: 1 }}>
               <Typography variant="h5" fontWeight={900} sx={{ fontSize: '1rem', color: pkg.color, mb: 1, lineHeight: 1.2, minHeight: '48px', display: 'flex', alignItems: 'center', gap: 0.5 }}>
                 <Box sx={{
                   width: 38,
                   height: 38,
                   backgroundColor: pkg.color,
-                  WebkitMaskImage: `url(${BMSLogo})`,
+                  WebkitMaskImage: `url(${USDTLogo})`,
                   WebkitMaskSize: 'contain',
                   WebkitMaskRepeat: 'no-repeat',
                   WebkitMaskPosition: 'center',
-                  maskImage: `url(${BMSLogo})`,
+                  maskImage: `url(${USDTLogo})`,
                   maskSize: 'contain',
                   maskRepeat: 'no-repeat',
                   maskPosition: 'center'
@@ -165,39 +148,23 @@ const ProductsContainer: React.FC = () => {
               </Typography>
               
               <Typography variant="h5" fontWeight={800} sx={{ color: '#FFD700', mb: 1, height: '36px', display: 'flex', alignItems: 'center' }}>
-                ${pkg.amount}
+                ₹{pkg.amount}
               </Typography>
               
-              {pkg.tag ? (
-                <Chip 
-                  label={pkg.tag} 
-                  size="small" 
-                  sx={{ 
-                    bgcolor: 'rgba(255,255,255,0.15)', 
-                    color: 'rgba(255,255,255,0.8)',
-                    fontWeight: 500,
-                    fontSize: '0.7rem',
-                    mb: 3,
-                    borderRadius: '12px',
-                    height: '24px'
-                  }} 
-                />
-              ) : (
-                <Box sx={{ height: '24px', mb: 3 }} />
-              )}
+              <Box sx={{ height: '24px', mb: 3 }} />
               
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
                 <Box sx={{ display: 'flex', gap: 2.5 }}>
                   {!isPurchased(pkg.amount) ? (
                     <Box>
-                      <Typography variant="subtitle1" fontWeight={800} sx={{ lineHeight: 1.2, mb: 0.5 }}>{pkg.yield}</Typography>
-                      <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 500, fontSize: '0.65rem' }}>Yield</Typography>
+                      <Typography variant="subtitle1" fontWeight={800} sx={{ lineHeight: 1.1, mb: 0 }}>{pkg.yield.replace('%', '')}</Typography>
+                      <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 500, fontSize: '0.65rem', display: 'block' }}>Years</Typography>
                     </Box>
                   ) : (
                     <Box>
                       <Typography variant="subtitle1" sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: '0.85rem', mb: 0.2, whiteSpace: 'nowrap' }}>Single Leg Income</Typography>
                       <Typography variant="h5" fontWeight={900} sx={{ lineHeight: 1.2, color: '#FFD700' }}>
-                        ${(walletOverview?.singleLevelIncomeByPackage?.[pkg.amount] || 0).toFixed(4)}
+                        ₹{(walletOverview?.singleLevelIncomeByPackage?.[pkg.amount] || 0).toFixed(4)}
                       </Typography>
                     </Box>
                   )}
@@ -205,7 +172,7 @@ const ProductsContainer: React.FC = () => {
                 
                 {isPurchased(pkg.amount) ? (
                   <Chip 
-                    label="Purchased" 
+                    label="Deposited" 
                     sx={{ 
                       bgcolor: 'rgba(59, 130, 246, 0.2)', 
                       color: '#FFD700',
@@ -243,7 +210,7 @@ const ProductsContainer: React.FC = () => {
                       }
                     }}
                   >
-                    {isPending && buyingId === pkg.id ? <CircularProgress size={16} color="inherit" /> : "Buy"}
+                    {isPending && buyingId === pkg.id ? <CircularProgress size={16} color="inherit" /> : "Deposit"}
                   </Button>
                 )}
               </Box>
@@ -265,10 +232,10 @@ const ProductsContainer: React.FC = () => {
           }
         }}
       >
-        <DialogTitle sx={{ fontWeight: 800 }}>Confirm Purchase</DialogTitle>
+        <DialogTitle sx={{ fontWeight: 800 }}>Confirm Deposit</DialogTitle>
         <DialogContent>
           <DialogContentText sx={{ color: 'rgba(255,255,255,0.8)' }}>
-            Are you sure you want to buy <strong>{confirmPkg?.title}</strong> for <strong>${confirmPkg?.amount}</strong>?
+            Are you sure you want to deposit <strong>{confirmPkg?.title}</strong> for <strong>₹{confirmPkg?.amount}</strong>?
           </DialogContentText>
           {confirmPkg?.description && (
             <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)', mt: 2, fontStyle: 'italic' }}>
@@ -296,7 +263,7 @@ const ProductsContainer: React.FC = () => {
               '&:disabled': { bgcolor: 'rgba(0, 230, 118, 0.3)' }
             }}
           >
-            {isPending ? <CircularProgress size={24} color="inherit" /> : "Yes, Buy Plan"}
+            {isPending ? <CircularProgress size={24} color="inherit" /> : "Yes, Deposit Plan"}
           </Button>
         </DialogActions>
       </Dialog>
@@ -338,7 +305,7 @@ const ProductsContainer: React.FC = () => {
             )}
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>Amount Paid</Typography>
-              <Typography variant="h6" sx={{ color: '#10b981', fontWeight: 700 }}>${purchasedPkg?.amount}</Typography>
+              <Typography variant="h6" sx={{ color: '#10b981', fontWeight: 700 }}>₹{purchasedPkg?.amount}</Typography>
             </Box>
           </Box>
         </DialogContent>

@@ -245,7 +245,7 @@ export const LoadingComponent = () => {
 
 const ShouldHideSidebar = () => {
   const location = useLocation();
-  const noSidebarPaths = ["/login", "/register", "/forgot-password", "/"];
+  const noSidebarPaths = ["/login", "/register", "/forgot-password", "/recover-password", "/reset-password", "/", "/about", "/contact", "/services", "/gallery", "/terms", "/privacy-policy", "/refund-policy"];
   return noSidebarPaths.includes(location.pathname);
 };
 

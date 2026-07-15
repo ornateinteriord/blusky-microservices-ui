@@ -19,7 +19,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import SyncAltIcon from '@mui/icons-material/SyncAlt';
-import PublicIcon from '@mui/icons-material/Public';
+// import PublicIcon from '@mui/icons-material/Public';
 import QrCode2Icon from '@mui/icons-material/QrCode2';
 import SendIcon from '@mui/icons-material/Send';
 
@@ -66,7 +66,7 @@ const UserDashboard = () => {
 
   const handleCopyReferralLink = () => {
     if (!memberDetails?.Member_id) return;
-    const referralLink = `${window.location.origin}/register?ref=${memberDetails.Member_id}`;
+    const referralLink = `₹{window.location.origin}/register?ref=₹{memberDetails.Member_id}`;
     navigator.clipboard.writeText(referralLink)
       .then(() => toast.success('Referral link copied!'))
       .catch(() => toast.error('Failed to copy link'));
@@ -188,9 +188,6 @@ const UserDashboard = () => {
         memberName={memberDetails?.Name || ''}
       />
 
-      {/* Sliding Flags */}
-      <CyclingFlag />
-
       {/* <SliderSection /> */}
       <ProductsContainer />
       {/* <NewSliderSection /> */}
@@ -207,9 +204,9 @@ const UserDashboard = () => {
         boxShadow: '0 10px 40px rgba(0,0,0,0.15)',
         width: '100%'
       }}>
-        {/* <Typography variant="h6" sx={{ color: '#ffffff', fontWeight: 900, mb: 3, textAlign: 'center', letterSpacing: '1px' }}>
-          WALLET BALANCES
-        </Typography> */}
+        <Typography variant="h6" sx={{ color: '#ffffff', fontWeight: 900, mb: 3, textAlign: 'center', letterSpacing: '1px', textTransform: 'uppercase' }}>
+          My Wallet
+        </Typography>
         <Box sx={{ 
           display: 'flex', 
           flexDirection: 'column', 
@@ -222,11 +219,11 @@ const UserDashboard = () => {
               <Box sx={{ p: 1.5, borderRadius: '12px', bgcolor: 'rgba(0, 230, 118, 0.1)', display: 'flex', height: 'fit-content' }}>
                 <PaymentsIcon sx={{ fontSize: { xs: 24, sm: 32 }, color: '#00E676' }} />
               </Box>
-              <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>${Number(walletOverview?.topUpBalance || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
+              <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>₹{Number(walletOverview?.topUpBalance || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
             </Box>
             <Box sx={{ width: '100%' }}>
-              <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Top Up</Typography>
-              <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '13px' }}>Your money, topped up instantly—simple, secure, and always accessible</Typography>
+              <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Fixed Deposit</Typography>
+              <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '13px' }}>Your money securely saved for long-term growth—simple and always accessible</Typography>
               <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end' }}>
                 <Button
                   variant="contained"
@@ -265,7 +262,7 @@ const UserDashboard = () => {
               <Box sx={{ p: 1.5, borderRadius: '12px', bgcolor: 'rgba(41, 182, 246, 0.1)', display: 'flex', height: 'fit-content' }}>
                 <TrendingUpIcon sx={{ fontSize: { xs: 24, sm: 32 }, color: '#29B6F6' }} />
               </Box>
-              <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>${Number(walletOverview?.upgradeWalletBalance || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
+              <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>₹{Number(walletOverview?.upgradeWalletBalance || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
             </Box>
             <Box sx={{ width: '100%' }}>
               <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Upgrade</Typography>
@@ -279,11 +276,11 @@ const UserDashboard = () => {
               <Box sx={{ p: 1.5, borderRadius: '12px', bgcolor: 'rgba(255, 215, 0, 0.1)', display: 'flex', height: 'fit-content' }}>
                 <AccountBalanceWalletIcon sx={{ fontSize: { xs: 24, sm: 32 }, color: '#FFD700' }} />
               </Box>
-              <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>${Number(walletOverview?.balance || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
+              <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>₹{Number(walletOverview?.balance || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
             </Box>
             <Box sx={{ width: '100%' }}>
-              <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Earnings</Typography>
-              <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '13px' }}>Watch your earnings grow and access them anytime with your Earning Wallet</Typography>
+              <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Withdrawal</Typography>
+              <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '13px' }}>Watch your funds grow and withdraw them securely anytime.</Typography>
               <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end' }}>
                 <Button
                   variant="contained"
@@ -313,6 +310,19 @@ const UserDashboard = () => {
                   Withdraw
                 </Button>
               </Box>
+            </Box>
+          </Box>
+          {/* Purchase */}
+          <Box onClick={() => navigate('/user/purchase')} sx={{ display: 'flex', flexDirection: 'column', p: { xs: 2, sm: 3 }, borderRadius: '20px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.02)', bgcolor: 'rgba(255,255,255,0.05)' }, cursor: 'pointer' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', mb: 2 }}>
+              <Box sx={{ p: 1.5, borderRadius: '12px', bgcolor: 'rgba(156, 39, 176, 0.1)', display: 'flex', height: 'fit-content' }}>
+                <InventoryIcon sx={{ fontSize: { xs: 24, sm: 32 }, color: '#9C27B0' }} />
+              </Box>
+              <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>₹{Number((walletOverview as any)?.purchaseBalance || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
+            </Box>
+            <Box sx={{ width: '100%' }}>
+              <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Purchase</Typography>
+              <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '13px' }}>Manage your purchases and track your active product investments.</Typography>
             </Box>
           </Box>
         </Box>
@@ -494,7 +504,7 @@ const UserDashboard = () => {
                       <Box sx={{ p: 1.5, borderRadius: '12px', bgcolor: 'rgba(245, 158, 11, 0.1)', display: 'flex', height: 'fit-content' }}>
                         <PaymentsIcon sx={{ fontSize: { xs: 24, sm: 32 }, color: '#f59e0b' }} />
                       </Box>
-                      <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>${Number(walletOverview?.directBenefits || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
+                      <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>₹{Number(walletOverview?.directBenefits || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
                     </Box>
                     <Box sx={{ width: '100%' }}>
                       <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Referral Income</Typography>
@@ -507,7 +517,7 @@ const UserDashboard = () => {
                       <Box sx={{ p: 1.5, borderRadius: '12px', bgcolor: 'rgba(255, 215, 0, 0.1)', display: 'flex', height: 'fit-content' }}>
                         <AccountTreeIcon sx={{ fontSize: { xs: 24, sm: 32 }, color: '#FFD700' }} />
                       </Box>
-                      <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>${Number(walletOverview?.levelBenefits || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
+                      <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>₹{Number(walletOverview?.levelBenefits || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
                     </Box>
                     <Box sx={{ width: '100%' }}>
                       <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Level Income</Typography>
@@ -520,7 +530,7 @@ const UserDashboard = () => {
                       <Box sx={{ p: 1.5, borderRadius: '12px', bgcolor: 'rgba(239, 68, 68, 0.1)', display: 'flex', height: 'fit-content' }}>
                         <TrendingUpIcon sx={{ fontSize: { xs: 24, sm: 32 }, color: '#ef4444' }} />
                       </Box>
-                      <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>${Number(walletOverview?.singleLineIncome || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
+                      <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>₹{Number(walletOverview?.singleLineIncome || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
                     </Box>
                     <Box sx={{ width: '100%' }}>
                       <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Single Leg Income</Typography>
@@ -528,25 +538,25 @@ const UserDashboard = () => {
                     </Box>
                   </Box>
 
-                  <Box onClick={() => navigate('/user/earnings/global-income-history')} sx={{ display: 'flex', flexDirection: 'column', cursor: 'pointer', p: { xs: 2, sm: 3 }, borderRadius: '20px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.02)', bgcolor: 'rgba(255,255,255,0.05)' } }}>
+                  {/* <Box onClick={() => navigate('/user/earnings/global-income-history')} sx={{ display: 'flex', flexDirection: 'column', cursor: 'pointer', p: { xs: 2, sm: 3 }, borderRadius: '20px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.02)', bgcolor: 'rgba(255,255,255,0.05)' } }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', mb: 2 }}>
                       <Box sx={{ p: 1.5, borderRadius: '12px', bgcolor: 'rgba(59, 130, 246, 0.1)', display: 'flex', height: 'fit-content' }}>
                         <PublicIcon sx={{ fontSize: { xs: 24, sm: 32 }, color: '#3b82f6' }} />
                       </Box>
-                      <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>${Number(walletOverview?.globalIncome || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
+                      <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>₹{Number(walletOverview?.globalIncome || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
                     </Box>
                     <Box sx={{ width: '100%' }}>
                       <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Global Income</Typography>
                       <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '14px' }}>Earn from your global network as your community continues to grow</Typography>
                     </Box>
-                  </Box>
+                  </Box> */}
 
                   <Box onClick={() => navigate('/user/transactions?type=Withdrawal')} sx={{ display: 'flex', flexDirection: 'column', cursor: 'pointer', p: { xs: 2, sm: 3 }, borderRadius: '20px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.02)', bgcolor: 'rgba(255,255,255,0.05)' } }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', mb: 2 }}>
                       <Box sx={{ p: 1.5, borderRadius: '12px', bgcolor: 'rgba(168, 85, 247, 0.1)', display: 'flex', height: 'fit-content' }}>
                         <AttachMoneyIcon sx={{ fontSize: { xs: 24, sm: 32 }, color: '#a855f7' }} />
                       </Box>
-                      <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>${Number(walletOverview?.totalWithdrawal || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
+                      <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>₹{Number(walletOverview?.totalWithdrawal || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
                     </Box>
                     <Box sx={{ width: '100%' }}>
                       <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Total Withdrawal</Typography>
@@ -559,59 +569,6 @@ const UserDashboard = () => {
             </Paper>
           </Box>
         </Box>
-      </Box>
-    </Box>
-  );
-};
-
-const CyclingFlag = () => {
-  const flags = ['us', 'gb', 'au', 'in', 'ca', 'jp', 'de', 'fr', 'it', 'es', 'br', 'sg'];
-  // Duplicate the flags multiple times to ensure the marquee can loop seamlessly
-  const scrollFlags = [...flags, ...flags, ...flags, ...flags];
-
-  return (
-    <Box sx={{ 
-      width: '100%',
-      overflow: 'hidden',
-      mb: 3, 
-      mt: 1,
-      bgcolor: 'rgba(255,255,255,0.02)',
-      py: 1,
-      borderRadius: '8px',
-      border: '1px solid rgba(255,255,255,0.05)',
-      boxShadow: 'inset 0 0 8px rgba(0,0,0,0.2)'
-    }}>
-      <Box sx={{
-        display: 'flex',
-        width: 'max-content',
-        animation: 'scrollLeftToRight 35s linear infinite',
-        '@keyframes scrollLeftToRight': {
-          '0%': { transform: 'translateX(-50%)' },
-          '100%': { transform: 'translateX(0%)' }
-        },
-        '&:hover': {
-          animationPlayState: 'paused' // Pause on hover
-        }
-      }}>
-        {scrollFlags.map((flag, index) => (
-          <Box key={index} sx={{ 
-            width: '36px', 
-            height: '24px', 
-            mx: 1.5,
-            border: '1px solid rgba(255,255,255,0.15)',
-            borderRadius: '4px',
-            overflow: 'hidden',
-            bgcolor: '#fff',
-            flexShrink: 0,
-            boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
-          }}>
-            <img 
-              src={`https://flagcdn.com/w40/${flag}.png`} 
-              alt={`${flag.toUpperCase()} Flag`} 
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-            />
-          </Box>
-        ))}
       </Box>
     </Box>
   );
