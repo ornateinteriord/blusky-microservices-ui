@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, Box, Typography, TextField, Button, IconButton, Chip, CircularProgress, Stack, ToggleButton, ToggleButtonGroup,  } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import DeleteIcon from '@mui/icons-material/Delete';
 import TokenService from '../../../api/token/tokenService';
-import { useRequestAddOnMutation, useGetLoadFundConfig, useUploadPaymentScreenshot,  } from '../../../api/Packages';
-import { toast } from 'react-toastify';
+import { useRequestAddOnMutation, useGetLoadFundConfig, useUploadPaymentScreenshot } from '../../../api/Packages';import { toast } from 'react-toastify';
 
 interface LoadFundModalProps {
   open: boolean;
@@ -27,13 +25,6 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
   const [screenshotPreview, setScreenshotPreview] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [paymentMethod, setPaymentMethod] = useState<'crypto' | 'wallet'>('crypto');
-
-  const handleCopyAddress = () => {
-    if (config?.wallet_address) {
-      navigator.clipboard.writeText(config.wallet_address);
-      toast.success('Wallet address copied to clipboard!');
-    }
-  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -187,6 +178,7 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
                 </Typography>
 
                 {/* QR Code Container */}
+                {/* 
                 <Box
                   sx={{
                     width: 180,
@@ -226,8 +218,10 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
                     </Typography>
                   )}
                 </Box>
+                */}
 
                 {/* Wallet Address Copy */}
+                {/* 
                 <Box sx={{ width: '100%' }}>
                   <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.5)', display: 'block', mb: 0.5 }}>
                     Deposit Address
@@ -270,6 +264,7 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
                     <ContentCopyIcon sx={{ color: '#FFD700', fontSize: '1.1rem' }} />
                   </Box>
                 </Box>
+                */}
               </Box>
             )}
 

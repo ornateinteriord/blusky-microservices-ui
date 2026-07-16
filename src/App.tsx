@@ -212,6 +212,8 @@ const UserWalletTransfer = lazy(() => import("./pages/User-Pages/Wallet/WalletTr
 const UserMyQR = lazy(() => import("./pages/User-Pages/Wallet/MyQR"));
 const UserP2PTransfer = lazy(() => import("./pages/User-Pages/Wallet/P2PTransfer"));
 const UserTopUpWallet = lazy(() => import("./pages/User-Pages/Wallet/TopUpWallet"));
+const UserFixedDepositWallet = lazy(() => import("./pages/User-Pages/Wallet/FixedDepositWallet"));
+const UserPurchaseWallet = lazy(() => import("./pages/User-Pages/Wallet/PurchaseWallet"));
 const UserSupportChat = lazy(() => import("./pages/User-Pages/SupportChat/SupportChat"));
 const UserChat = lazy(() => import("./pages/User-Pages/Chat/Chat"));
 const UserOverdraft = lazy(() => import("./pages/User-Pages/Overdraft/Overdraft"));
@@ -605,6 +607,8 @@ const RoutesProvider = ({
               <Route path="/user/my-qr" element={<UserMyQR />} />
               <Route path="/user/p2p-transfer" element={<UserP2PTransfer />} />
               <Route path="/user/top-up-wallet" element={<UserTopUpWallet />} />
+              <Route path="/user/fixed-deposit-wallet" element={<UserFixedDepositWallet />} />
+              <Route path="/user/purchase-wallet" element={<UserPurchaseWallet />} />
               <Route path="/user/support-chat" element={<UserSupportChat />} />
               <Route path="/user/chat" element={<UserChat />} />
               <Route path="/user/overdraft" element={<UserOverdraft />} />

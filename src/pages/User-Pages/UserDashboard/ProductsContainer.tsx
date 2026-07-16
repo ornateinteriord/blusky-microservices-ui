@@ -6,7 +6,6 @@ import { useGetWalletOverview } from '../../../api/Memeber';
 import { useBuyPackageDirectlyMutation } from '../../../api/Packages';
 import { toast } from 'react-toastify';
 import { useGetMemberAddOns } from '../../../api/Packages';
-import USDTLogo from "../../../assets/uwt.png";
 
 const PACKAGES = [
   { id: 1, amount: 10000, title: "Secure Growth Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#1de9b6", description: "Begin your journey with the Secure Growth Plan and unlock new growth opportunities" },
@@ -126,7 +125,8 @@ const ProductsContainer: React.FC = () => {
             }}
           >
             <CardContent sx={{ p: 2.5, '&:last-child': { pb: 2.5 }, position: 'relative', zIndex: 1 }}>
-              <Typography variant="h5" fontWeight={900} sx={{ fontSize: '1rem', color: pkg.color, mb: 1, lineHeight: 1.2, minHeight: '48px', display: 'flex', alignItems: 'center', gap: 0.5 }}>
+              <Typography variant="h5" fontWeight={900} sx={{ fontSize: '1.2rem', color: pkg.color, mb: 1, lineHeight: 1.2, minHeight: '48px', display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                {/* 
                 <Box sx={{
                   width: 38,
                   height: 38,
@@ -140,6 +140,7 @@ const ProductsContainer: React.FC = () => {
                   maskRepeat: 'no-repeat',
                   maskPosition: 'center'
                 }} />
+                */}
                 {pkg.title}
               </Typography>
               
@@ -147,7 +148,7 @@ const ProductsContainer: React.FC = () => {
                 {pkg.description}
               </Typography>
               
-              <Typography variant="h5" fontWeight={800} sx={{ color: '#FFD700', mb: 1, height: '36px', display: 'flex', alignItems: 'center' }}>
+              <Typography variant="h5" fontWeight={800} sx={{ color: pkg.color, mb: 1, height: '36px', display: 'flex', alignItems: 'center' }}>
                 ₹{pkg.amount}
               </Typography>
               
@@ -158,7 +159,7 @@ const ProductsContainer: React.FC = () => {
                   {!isPurchased(pkg.amount) ? (
                     <Box>
                       <Typography variant="subtitle1" fontWeight={800} sx={{ lineHeight: 1.1, mb: 0 }}>{pkg.yield.replace('%', '')}</Typography>
-                      <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 500, fontSize: '0.65rem', display: 'block' }}>Years</Typography>
+                      <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 500, fontSize: '0.65rem', display: 'block' }}>Year Plan</Typography>
                     </Box>
                   ) : (
                     <Box>
@@ -190,7 +191,7 @@ const ProductsContainer: React.FC = () => {
                     onClick={() => handleBuyClick(pkg)}
                     disabled={isPending || hasAnyPackagePurchased}
                     sx={{
-                      bgcolor: '#FFD700',
+                      bgcolor: pkg.color,
                       color: '#000000',
                       fontWeight: 800,
                       textTransform: 'none',
@@ -201,7 +202,8 @@ const ProductsContainer: React.FC = () => {
                       boxShadow: 'none',
                       flexShrink: 0,
                       '&:hover': {
-                        bgcolor: '#e6c200',
+                        bgcolor: pkg.color,
+                        filter: 'brightness(0.9)',
                         boxShadow: 'none'
                       },
                       '&:disabled': {

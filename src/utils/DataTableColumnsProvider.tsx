@@ -1612,3 +1612,74 @@ export const getTopUpWalletColumns = () => [
     sortable: true,
   },
 ];
+
+export const getFixedDepositWalletColumns = () => [
+  {
+    name: "Date",
+    selector: (row: any) => {
+      if (!row.transaction_date && !row.createdAt) return "-";
+      const date = new Date(row.transaction_date || row.createdAt);
+      return date.toLocaleDateString();
+    },
+    sortable: true,
+  },
+  {
+    name: "Transaction ID",
+    selector: (row: any) => row.tx_no || row.transaction_id || "-",
+    sortable: true,
+  },
+  {
+    name: "Amount",
+    selector: (row: any) => {
+      const amt = row.fd_credit || row.amount;
+      return amt && parseFloat(amt) > 0 ? `? ${parseFloat(amt).toFixed(2)}` : "-";
+    },
+    sortable: true,
+  },
+  {
+    name: "Description",
+    selector: (row: any) => row.description || "-",
+    sortable: true,
+  },
+  {
+    name: "Status",
+    selector: (row: any) => row.status || "Completed",
+    sortable: true,
+  },
+];
+
+export const getPurchaseWalletColumns = () => [
+  {
+    name: "Date",
+    selector: (row: any) => {
+      if (!row.transaction_date && !row.createdAt) return "-";
+      const date = new Date(row.transaction_date || row.createdAt);
+      return date.toLocaleDateString();
+    },
+    sortable: true,
+  },
+  {
+    name: "Transaction ID",
+    selector: (row: any) => row.tx_no || row.transaction_id || "-",
+    sortable: true,
+  },
+  {
+    name: "Amount",
+    selector: (row: any) => {
+      const amt = row.pw_credit || row.amount;
+      return amt && parseFloat(amt) > 0 ? `? ${parseFloat(amt).toFixed(2)}` : "-";
+    },
+    sortable: true,
+  },
+  {
+    name: "Description",
+    selector: (row: any) => row.description || "-",
+    sortable: true,
+  },
+  {
+    name: "Status",
+    selector: (row: any) => row.status || "Completed",
+    sortable: true,
+  },
+];
+

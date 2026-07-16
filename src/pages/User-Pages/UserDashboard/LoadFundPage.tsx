@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import { Box, Typography, Paper, Grid, TextField, Button, IconButton, CircularProgress, Dialog, DialogTitle, DialogContent,  } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import DeleteIcon from '@mui/icons-material/Delete';
 import TokenService from '../../../api/token/tokenService';
 import { useGetWalletOverview } from '../../../api/Memeber';
-import { useRequestAddOnMutation, useGetLoadFundConfig, useUploadPaymentScreenshot,  } from '../../../api/Packages';
-import { toast } from 'react-toastify';
+import { useRequestAddOnMutation, useGetLoadFundConfig, useUploadPaymentScreenshot } from '../../../api/Packages';import { toast } from 'react-toastify';
 
 const LoadFundPage: React.FC = () => {
   const memberId = TokenService.getMemberId();
-  const { data: config, isLoading: isConfigLoading } = useGetLoadFundConfig();
+  const { isLoading: isConfigLoading } = useGetLoadFundConfig();
   const { data: walletOverview } = useGetWalletOverview(memberId || '');
 
   const requestAddOn = useRequestAddOnMutation();
@@ -25,13 +23,6 @@ const LoadFundPage: React.FC = () => {
 
   // For viewing screenshot history
   const [selectedScreenshot, setSelectedScreenshot] = useState<string | null>(null);
-
-  const handleCopyAddress = () => {
-    if (config?.wallet_address) {
-      navigator.clipboard.writeText(config.wallet_address);
-      toast.success('Wallet address copied to clipboard!');
-    }
-  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -112,6 +103,7 @@ const LoadFundPage: React.FC = () => {
       ) : (
         <Grid container spacing={4}>
           {/* Left Column: Instructions and Address */}
+          {/* 
           <Grid item xs={12} md={6}>
             <Paper
               elevation={0}
@@ -128,25 +120,6 @@ const LoadFundPage: React.FC = () => {
                 height: '100%',
               }}
             >
-              {/* <Typography variant="h6" sx={{ fontWeight: 800, color: '#ffffff' }}>
-                Payment Instructions
-              </Typography> */}
-              {/* 
-              <Chip
-                label={`Deposit Network: ${config?.network_text || 'BEP20'}`}
-                color="success"
-                variant="outlined"
-                sx={{
-                  color: '#FFD700',
-                  borderColor: '#FFD700',
-                  fontWeight: 800,
-                  fontSize: '0.85rem',
-                  py: 2,
-                  px: 1,
-                }}
-              /> */}
-
-              {/* QR Image */}
               <Box
                 sx={{
                   width: 200,
@@ -189,7 +162,6 @@ const LoadFundPage: React.FC = () => {
                 )}
               </Box>
 
-              {/* Copy Address */}
               <Box sx={{ width: '100%', mt: 2 }}>
                 <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.4)', display: 'block', mb: 1, textAlign: 'left' }}>
                   Copy Destination Address
@@ -234,9 +206,10 @@ const LoadFundPage: React.FC = () => {
               </Box>
             </Paper>
           </Grid>
+          */}
 
           {/* Right Column: Transaction Submission */}
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={12}>
             <Paper
               elevation={0}
               sx={{

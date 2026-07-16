@@ -223,8 +223,8 @@ const UserDashboard = () => {
               <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>₹{Number(walletOverview?.topUpBalance || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
             </Box>
             <Box sx={{ width: '100%' }}>
-              <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Fixed Deposit</Typography>
-              <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '13px' }}>Your money securely saved for long-term growth—simple and always accessible</Typography>
+              <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Top Up</Typography>
+              <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '13px' }}>Fund your wallet to unlock premium features and start growing your wealth.</Typography>
               <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end' }}>
                 <Button
                   variant="contained"
@@ -254,6 +254,20 @@ const UserDashboard = () => {
                   Load
                 </Button>
               </Box>
+            </Box>
+          </Box>
+
+          {/* Fixed Deposit */}
+          <Box onClick={() => navigate('/user/fixed-deposit-wallet')} sx={{ display: 'flex', flexDirection: 'column', p: { xs: 2, sm: 3 }, borderRadius: '20px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.02)', bgcolor: 'rgba(255,255,255,0.05)' }, cursor: 'pointer' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', mb: 2 }}>
+              <Box sx={{ p: 1.5, borderRadius: '12px', bgcolor: 'rgba(255, 193, 7, 0.1)', display: 'flex', height: 'fit-content' }}>
+                <AccountBalanceWalletIcon sx={{ fontSize: { xs: 24, sm: 32 }, color: '#FFC107' }} />
+              </Box>
+              <Typography sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>₹{Number(walletOverview?.fixedDepositBalance || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</Typography>
+            </Box>
+            <Box sx={{ width: '100%' }}>
+              <Typography sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Fixed Deposit</Typography>
+              <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '13px' }}>Your money securely saved for long-term growth—simple and always accessible.</Typography>
             </Box>
           </Box>
 
@@ -314,7 +328,7 @@ const UserDashboard = () => {
             </Box>
           </Box>
           {/* Purchase */}
-          <Box onClick={() => navigate('/user/purchase')} sx={{ display: 'flex', flexDirection: 'column', p: { xs: 2, sm: 3 }, borderRadius: '20px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.02)', bgcolor: 'rgba(255,255,255,0.05)' }, cursor: 'pointer' }}>
+          <Box onClick={() => navigate('/user/purchase-wallet')} sx={{ display: 'flex', flexDirection: 'column', p: { xs: 2, sm: 3 }, borderRadius: '20px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.02)', bgcolor: 'rgba(255,255,255,0.05)' }, cursor: 'pointer' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', mb: 2 }}>
               <Box sx={{ p: 1.5, borderRadius: '12px', bgcolor: 'rgba(156, 39, 176, 0.1)', display: 'flex', height: 'fit-content' }}>
                 <InventoryIcon sx={{ fontSize: { xs: 24, sm: 32 }, color: '#9C27B0' }} />
