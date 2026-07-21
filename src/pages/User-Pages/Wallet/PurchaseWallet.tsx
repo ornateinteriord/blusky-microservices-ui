@@ -57,7 +57,7 @@ const PurchaseWallet = () => {
                 variant="h4"
                 sx={{ color: "#0a2558", mt: 1, fontWeight: "bold" }}
               >
-                ${Number(walletData?.purchaseBalance || 0).toFixed(4)}
+                ${Number(walletData?.purchaseBalance || 0).toFixed(2)}
               </Typography>
             </Box>
           </Grid>

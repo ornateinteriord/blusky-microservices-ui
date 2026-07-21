@@ -42,7 +42,7 @@ const ReferralBonus = () => {
         payoutLevel: payoutLvl,
         memberName: transaction.related_member_name || 'N/A',
         memberId: transaction.related_member_id || 'N/A',
-        amount: `₹${((parseFloat(transaction.ew_credit) || 0) + (parseFloat(transaction.uw_credit) || 0)).toFixed(4)}`,
+        amount: `₹${((parseFloat(transaction.ew_credit) || 0) + (parseFloat(transaction.uw_credit) || 0)).toFixed(2)}`,
         description: transaction.description,
         transactionType: transaction.transaction_type
       };

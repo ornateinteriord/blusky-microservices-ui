@@ -198,7 +198,7 @@ const NewSubscription: React.FC = () => {
             <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'flex-start', sm: 'center' }, gap: 1 }}>
               <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Your Purchase Balance</Typography>
               <TextField
-                value={`₹${Number(walletOverview?.topUpBalance || 0).toLocaleString(undefined, { maximumFractionDigits: 4, minimumFractionDigits: 4 })}`}
+                value={`₹${Number(walletOverview?.topUpBalance || 0).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}`}
                 fullWidth
                 size="small"
                 disabled

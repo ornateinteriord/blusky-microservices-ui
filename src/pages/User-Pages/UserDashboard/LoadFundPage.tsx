@@ -230,7 +230,7 @@ const LoadFundPage: React.FC = () => {
                     fullWidth
                     label="Top Up Balance"
                     variant="outlined"
-                    value={`₹${Number(walletOverview?.topUpBalance || 0).toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}`}
+                    value={`₹${Number(walletOverview?.topUpBalance || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
                     disabled
                     sx={{
                       mb: 2,

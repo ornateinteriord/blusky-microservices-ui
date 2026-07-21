@@ -365,7 +365,7 @@ export default function LoansList() {
               }}>
                 <Typography sx={{ color: '#64748b' }}>Due Amount</Typography>
                 <Typography sx={{ fontWeight: 700, color: '#dc2626' }}>
-                  ${selectedLoan?.net_amount?.toFixed(4)}
+                  ${selectedLoan?.net_amount?.toFixed(2)}
                 </Typography>
               </Box>
             </Box>

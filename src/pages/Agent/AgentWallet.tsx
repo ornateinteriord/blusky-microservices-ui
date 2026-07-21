@@ -41,7 +41,7 @@ const AgentWallet = () => {
             id: transaction._id || transaction.transaction_id,
             date: new Date(transaction.createdAt || transaction.transaction_date).toLocaleDateString('en-US'),
             description,
-            amount: `${isCredit ? '+ ' : '- '}₹${Math.abs(amount).toFixed(4)}`,
+            amount: `${isCredit ? '+ ' : '- '}₹${Math.abs(amount).toFixed(2)}`,
             status: transaction.status || 'Completed',
             isCredit,
             type: isCredit ? 'commission_received' : 'commission_withdrawal'
@@ -99,7 +99,7 @@ const AgentWallet = () => {
                             <CircularProgress size={40} sx={{ color: 'white', mt: 1 }} />
                         ) : (
                             <Typography variant="h3" sx={{ fontWeight: 'bold', mb: 1 }}>
-                                ${totalBalance.toFixed(4)}
+                                ${totalBalance.toFixed(2)}
                             </Typography>
                         )}
                         <Typography variant="body2" sx={{ opacity: 0.7 }}>

@@ -123,7 +123,7 @@ const Collections: React.FC = () => {
       label: 'Balance',
       align: 'right',
       sortable: true,
-      renderCell: (row) => `₹ ${row.balance.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}`,
+      renderCell: (row) => `₹ ${row.balance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
     },
     {
       id: 'status',
@@ -290,7 +290,7 @@ const Collections: React.FC = () => {
                   <strong>Account Holder:</strong> {selectedAccount.account_holder}
                 </Typography>
                 <Typography variant="body2">
-                  <strong>Balance:</strong> ₹ {selectedAccount.balance.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}
+                  <strong>Balance:</strong> ₹ {selectedAccount.balance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </Typography>
               </Box>
             </Box>

@@ -102,7 +102,7 @@ const WithdrawalRequests: React.FC = () => {
                                         </TableCell>
                                         <TableCell sx={{ color: '#334155', fontWeight: 500 }}>{req.member_id}</TableCell>
                                         <TableCell sx={{ fontWeight: 700, color: '#059669' }}>
-                                            ${req.amount?.toFixed(4)}
+                                            ${req.amount?.toFixed(2)}
                                         </TableCell>
                                         <TableCell>
                                             <Chip

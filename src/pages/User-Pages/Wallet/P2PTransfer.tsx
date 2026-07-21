@@ -318,7 +318,7 @@ const P2PTransfer: React.FC = () => {
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
                       <span>Top Up Wallet</span>
                       <span style={{ color: '#00E676', fontWeight: 'bold', marginLeft: '10px' }}>
-                        ${Number(walletOverview?.topUpBalance || 0).toFixed(4)}
+                        ${Number(walletOverview?.topUpBalance || 0).toFixed(2)}
                       </span>
                     </Box>
                   </MenuItem>
@@ -326,7 +326,7 @@ const P2PTransfer: React.FC = () => {
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
                       <span>Withdrawal Wallet</span>
                       <span style={{ color: '#FFD700', fontWeight: 'bold', marginLeft: '10px' }}>
-                        ${Number(walletOverview?.balance || 0).toFixed(4)}
+                        ${Number(walletOverview?.balance || 0).toFixed(2)}
                       </span>
                     </Box>
                   </MenuItem>
@@ -338,7 +338,7 @@ const P2PTransfer: React.FC = () => {
                   Available Balance
                 </Typography>
                 <Typography variant="h5" sx={{ color: '#FFD700', fontWeight: 900 }}>
-                  ${maxBalance.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}
+                  ${maxBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </Typography>
               </Box>
 
@@ -581,7 +581,7 @@ const P2PTransfer: React.FC = () => {
                     Transfer Amount:
                   </Typography>
                   <Typography variant="body2" sx={{ color: '#ffffff', fontWeight: 900, fontSize: { xs: 13, sm: 15 }, textAlign: 'right', wordBreak: 'break-word' }}>
-                    ${parseFloat(amount).toFixed(4)} ?
+                    ${parseFloat(amount).toFixed(2)} ?
                   </Typography>
                 </Stack>
 
@@ -600,7 +600,7 @@ const P2PTransfer: React.FC = () => {
                   </Typography>
                   <Box sx={{ textAlign: 'right' }}>
                     <Typography variant="body2" sx={{ color: '#FFD700', fontWeight: 900, fontSize: { xs: 14, sm: 16 } }}>
-                      ${parseFloat(amount).toFixed(4)}
+                      ${parseFloat(amount).toFixed(2)}
                     </Typography>
                     <Typography variant="caption" sx={{ color: 'rgba(255, 215, 0, 0.8)', fontWeight: 700, fontSize: { xs: 11, sm: 12 }, display: 'block' }}>
                       (Top Up Wallet)

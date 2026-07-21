@@ -311,16 +311,16 @@ const AgentDashboard = () => {
                 ) : (
                   <>
                     <Typography variant="h3" sx={{ fontWeight: 'bold', mb: 2 }}>
-                      ${netCollectedAmount.toFixed(4)}
+                      ${netCollectedAmount.toFixed(2)}
                     </Typography>
                     <Box sx={{ display: 'flex', justifyContent: 'center', gap: 4 }}>
                       <Box>
                         <Typography variant="body2" sx={{ opacity: 0.8 }}>Collected</Typography>
-                        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>${totalCollected.toFixed(4)}</Typography>
+                        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>${totalCollected.toFixed(2)}</Typography>
                       </Box>
                       <Box>
                         <Typography variant="body2" sx={{ opacity: 0.8 }}>Paid</Typography>
-                        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>${totalPaid.toFixed(4)}</Typography>
+                        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>${totalPaid.toFixed(2)}</Typography>
                       </Box>
                     </Box>
                   </>
