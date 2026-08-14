@@ -70,7 +70,7 @@ const GlobalIncomeHistory = () => {
   }
 
   return (
-    <Card sx={{ margin: '2rem', mt: 10, bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px' }}>
+    <Card sx={{ margin: '2rem', mt: 10, bgcolor: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '16px' }}>
       <CardContent>
         <div style={{ marginBottom: "1rem", color: "#FFFF", fontWeight: "bold", fontSize: "1.25rem"     }}>
           List of 12% Global Non Working ({globalIncomeData.length})
@@ -92,7 +92,7 @@ const GlobalIncomeHistory = () => {
                     placeholder="Search"
                     variant="outlined"
                     size="small"
-                    sx={{ input: { color: '#fff' }, '& .MuiOutlinedInput-notchedOutline': { borderColor: 'rgba(255,255,255,0.2)' } }}
+                    sx={{ input: { color: '#0F172A' }, '& .MuiOutlinedInput-notchedOutline': { borderColor: '#E2E8F0' } }}
                   />
                 </div>
               }

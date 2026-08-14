@@ -49,9 +49,9 @@ const Navbar = ({ shouldHide, onToggleSidebar }: NavbarProps) => {
         position="fixed"
         elevation={0}
         sx={{
-          background: "#08101f", // Matches the dark dashboard background
-          borderBottom: '1px solid rgba(255,255,255,0.08)',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+          background: "#FFFFFF", // Light theme background
+          borderBottom: '1px solid #E2E8F0',
+          boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
           zIndex: (theme) => theme.zIndex.drawer + 1
         }}
       >
@@ -76,7 +76,7 @@ const Navbar = ({ shouldHide, onToggleSidebar }: NavbarProps) => {
                   borderRadius: '12px',
                   transition: 'background 0.2s',
                   '&:hover': {
-                    bgcolor: 'rgba(255,255,255,0.08)'
+                    bgcolor: '#F1F5F9'
                   }
                 }}
               >
@@ -84,11 +84,11 @@ const Navbar = ({ shouldHide, onToggleSidebar }: NavbarProps) => {
                   sx={{
                     width: { xs: 36, md: 40 },
                     height: { xs: 36, md: 40 },
-                    bgcolor: '#FFD700', // Neon green profile circular background
+                    bgcolor: '#0284C7', // Light Blue profile background
                     color: '#ffffff',
                     fontWeight: 900,
                     fontSize: { xs: '0.95rem', md: '1.1rem' },
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
                   }}
                 >
                   {memberDetails?.Name?.charAt(0).toUpperCase() || 'U'}
@@ -106,13 +106,13 @@ const Navbar = ({ shouldHide, onToggleSidebar }: NavbarProps) => {
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <IconButton
                   onClick={() => navigate('/user/support-chat')}
-                  sx={{ color: "white", '&:hover': { bgcolor: 'rgba(255,255,255,0.08)' } }}
+                  sx={{ color: "#1E293B", '&:hover': { bgcolor: '#F1F5F9' } }}
                 >
                   <Headphones size={22} />
                 </IconButton>
                 <IconButton
                   onClick={() => navigate('/user/dashboard')}
-                  sx={{ color: "white", '&:hover': { bgcolor: 'rgba(255,255,255,0.08)' } }}
+                  sx={{ color: "#1E293B", '&:hover': { bgcolor: '#F1F5F9' } }}
                 >
                   <Home size={22} />
                 </IconButton>
@@ -125,7 +125,7 @@ const Navbar = ({ shouldHide, onToggleSidebar }: NavbarProps) => {
                 {isAdmin && onToggleSidebar && (
                   <IconButton
                     onClick={onToggleSidebar}
-                    sx={{ color: "white", mr: 1, display: { xs: 'flex', md: 'flex' } }}
+                    sx={{ color: "#1E293B", mr: 1, display: { xs: 'flex', md: 'flex' } }}
                   >
                     <MenuIcon size={24} />
                   </IconButton>
@@ -138,8 +138,8 @@ const Navbar = ({ shouldHide, onToggleSidebar }: NavbarProps) => {
                     fontSize: { xs: '1.4rem', md: '1.85rem' },
                     cursor: "pointer",
                     letterSpacing: '1.5px',
-                    color: 'white',
-                    textShadow: '0 2px 4px rgba(0,0,0,0.2)'
+                    color: '#0284C7',
+                    textShadow: '0 2px 4px rgba(2, 132, 199, 0.1)'
                   }}
                 >
                   BMS

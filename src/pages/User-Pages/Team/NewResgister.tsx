@@ -100,59 +100,59 @@ const NewResgister: React.FC = () => {
 
   const textFieldStyles = {
     '& .MuiOutlinedInput-root': {
-      bgcolor: 'rgba(255,255,255,0.03)',
-      color: '#fff',
+      bgcolor: '#F8FAFC',
+      color: '#0F172A',
       borderRadius: '12px',
       '& fieldset': {
-        borderColor: 'rgba(255,255,255,0.1)',
+        borderColor: '#E2E8F0',
       },
       '&:hover fieldset': {
-        borderColor: 'rgba(255,255,255,0.2)',
+        borderColor: '#E2E8F0',
       },
       '&.Mui-focused fieldset': {
-        borderColor: '#FFD700',
+        bordercolor: '#0284C7',
       },
       '&.Mui-disabled': {
         bgcolor: 'rgba(0,0,0,0.2)',
-        color: '#ffffff',
-        WebkitTextFillColor: '#ffffff',
+        color: '#0F172A',
+        WebkitTextFillcolor: '#0F172A',
         opacity: 1,
       }
     },
     '& .MuiOutlinedInput-input': {
       '&.Mui-disabled': {
-        color: '#ffffff',
-        WebkitTextFillColor: '#ffffff',
+        color: '#0F172A',
+        WebkitTextFillcolor: '#0F172A',
         opacity: 1,
       }
     },
     '& .MuiInputLabel-root': {
-      color: 'rgba(255,255,255,0.7)',
+      color: '#475569',
       '&.Mui-focused': {
-        color: '#FFD700',
+        color: '#0284C7',
       },
       '&.Mui-disabled': {
-        color: '#ffffff',
+        color: '#0F172A',
       }
     },
     '& .MuiOutlinedInput-input::placeholder': {
-      color: 'rgba(255,255,255,0.3)',
+      color: '#64748B',
       opacity: 1,
     }
   };
 
   return (
-    <Box sx={{ minHeight: "100vh", background: 'linear-gradient(180deg, #050916 0%, #0f1e36 100%)', p: { xs: 2, md: 5 }, pt: { xs: 4, md: 10 } }}>
+    <Box sx={{ minHeight: "100vh", bgcolor: '#F8FAFC', p: { xs: 2, md: 5 }, pt: { xs: 4, md: 10 } }}>
       <Box sx={{ maxWidth: '800px', mx: 'auto' }}>
-        <Typography variant="h5" sx={{ color: '#fff', fontWeight: 800, mb: 1, textAlign: 'center' }}>
+        <Typography variant="h5" sx={{ color: '#0F172A', fontWeight: 800, mb: 1, textAlign: 'center' }}>
           Create New Member
         </Typography>
        
 
-        <Card sx={{ borderRadius: '24px', bgcolor: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.08)', backdropFilter: 'blur(10px)' }}>
+        <Card sx={{ borderRadius: '24px', bgcolor: '#F8FAFC', border: '1px solid #E2E8F0', backdropFilter: 'blur(10px)' }}>
           <CardContent sx={{ p: { xs: 2, md: 5 } }}>
             {/* Joining Details Section */}
-            <Typography variant="h6" sx={{ color: '#FFD700', fontWeight: 700, mb: 3, display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Typography variant="h6" sx={{ color: '#0284C7', fontWeight: 700, mb: 3, display: 'flex', alignItems: 'center', gap: 1 }}>
               <PersonIcon /> Joining Details
             </Typography>
             
@@ -165,7 +165,7 @@ const NewResgister: React.FC = () => {
                 fullWidth
                 variant="outlined"
                 InputProps={{
-                  startAdornment: <InputAdornment position="start"><PersonIcon sx={{ color: 'rgba(255,255,255,0.3)' }} /></InputAdornment>,
+                  startAdornment: <InputAdornment position="start"><PersonIcon sx={{ color: '#64748B' }} /></InputAdornment>,
                 }}
                 sx={textFieldStyles}
               />
@@ -177,14 +177,14 @@ const NewResgister: React.FC = () => {
                 fullWidth
                 variant="outlined"
                 InputProps={{
-                  startAdornment: <InputAdornment position="start"><PersonIcon sx={{ color: 'rgba(255,255,255,0.3)' }} /></InputAdornment>,
+                  startAdornment: <InputAdornment position="start"><PersonIcon sx={{ color: '#64748B' }} /></InputAdornment>,
                 }}
                 sx={textFieldStyles}
               />
             </Box>
 
             {/* New Member Details Section */}
-            <Typography variant="h6" sx={{ color: '#FFD700', fontWeight: 700, mb: 3, display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Typography variant="h6" sx={{ color: '#0284C7', fontWeight: 700, mb: 3, display: 'flex', alignItems: 'center', gap: 1 }}>
               <PersonIcon /> New Member Details
             </Typography>
             
@@ -198,19 +198,19 @@ const NewResgister: React.FC = () => {
                 variant="outlined"
                 placeholder="Enter member's full name"
                 InputProps={{
-                  startAdornment: <InputAdornment position="start"><PersonIcon sx={{ color: '#FFD700' }} /></InputAdornment>,
+                  startAdornment: <InputAdornment position="start"><PersonIcon sx={{ color: '#0284C7' }} /></InputAdornment>,
                 }}
                 sx={textFieldStyles}
               />
 
-              <FormControl error={!!genderError} sx={{ bgcolor: 'rgba(255,255,255,0.03)', p: 2, borderRadius: '12px', border: '1px solid rgba(255,255,255,0.1)' }}>
-                <FormLabel sx={{ color: 'rgba(255,255,255,0.7)', display: 'flex', alignItems: 'center', gap: 1, mb: 1, '&.Mui-focused': { color: '#FFD700' } }}>
-                  <WcIcon sx={{ color: '#FFD700' }} />
+              <FormControl error={!!genderError} sx={{ bgcolor: '#F8FAFC', p: 2, borderRadius: '12px', border: '1px solid #E2E8F0' }}>
+                <FormLabel sx={{ color: '#475569', display: 'flex', alignItems: 'center', gap: 1, mb: 1, '&.Mui-focused': { color: '#0284C7' } }}>
+                  <WcIcon sx={{ color: '#0284C7' }} />
                   Gender
                 </FormLabel>
                 <RadioGroup row name="gender" value={formData.gender || ''} onChange={handleRadioChange}>
-                  <FormControlLabel value="Male" control={<Radio sx={{ color: 'rgba(255,255,255,0.5)', '&.Mui-checked': { color: '#FFD700' } }} />} label={<Typography sx={{ color: '#fff' }}>Male</Typography>} />
-                  <FormControlLabel value="Female" control={<Radio sx={{ color: 'rgba(255,255,255,0.5)', '&.Mui-checked': { color: '#FFD700' } }} />} label={<Typography sx={{ color: '#fff' }}>Female</Typography>} />
+                  <FormControlLabel value="Male" control={<Radio sx={{ color: '#475569', '&.Mui-checked': { color: '#0284C7' } }} />} label={<Typography sx={{ color: '#0F172A' }}>Male</Typography>} />
+                  <FormControlLabel value="Female" control={<Radio sx={{ color: '#475569', '&.Mui-checked': { color: '#0284C7' } }} />} label={<Typography sx={{ color: '#0F172A' }}>Female</Typography>} />
                 </RadioGroup>
                 {genderError && <FormHelperText sx={{ color: "#f44336" }}>Please select gender*</FormHelperText>}
               </FormControl>
@@ -225,7 +225,7 @@ const NewResgister: React.FC = () => {
                 variant="outlined"
                 placeholder="Enter email address"
                 InputProps={{
-                  startAdornment: <InputAdornment position="start"><EmailIcon sx={{ color: '#FFD700' }} /></InputAdornment>,
+                  startAdornment: <InputAdornment position="start"><EmailIcon sx={{ color: '#0284C7' }} /></InputAdornment>,
                 }}
                 sx={textFieldStyles}
               />
@@ -240,7 +240,7 @@ const NewResgister: React.FC = () => {
                 variant="outlined"
                 placeholder="Enter mobile number"
                 InputProps={{
-                  startAdornment: <InputAdornment position="start"><PhoneIcon sx={{ color: '#FFD700' }} /></InputAdornment>,
+                  startAdornment: <InputAdornment position="start"><PhoneIcon sx={{ color: '#0284C7' }} /></InputAdornment>,
                 }}
                 sx={textFieldStyles}
               />
@@ -254,20 +254,20 @@ const NewResgister: React.FC = () => {
                 fullWidth
                 variant="outlined"
                 InputProps={{
-                  startAdornment: <InputAdornment position="start"><PublicIcon sx={{ color: '#FFD700' }} /></InputAdornment>,
+                  startAdornment: <InputAdornment position="start"><PublicIcon sx={{ color: '#0284C7' }} /></InputAdornment>,
                 }}
                 SelectProps={{
                   displayEmpty: true,
                   renderValue: (value: any) => {
                     if (!value) {
-                      return <span style={{ color: "rgba(255, 255, 255, 0.3)" }}>Enter country</span>;
+                      return <span style={{ color: '#64748B' }}>Enter country</span>;
                     }
                     return value;
                   }
                 }}
                 sx={{
                   ...textFieldStyles,
-                  "& .MuiSelect-icon": { color: "rgba(255, 255, 255, 0.6)" }
+                  "& .MuiSelect-icon": { color: '#475569' }
                 }}
               >
                 <MenuItem disabled value=""><em>Enter country</em></MenuItem>
@@ -288,7 +288,7 @@ const NewResgister: React.FC = () => {
                 error={!!errorMessage}
                 helperText={errorMessage}
                 InputProps={{
-                  startAdornment: <InputAdornment position="start"><LockIcon sx={{ color: '#FFD700' }} /></InputAdornment>,
+                  startAdornment: <InputAdornment position="start"><LockIcon sx={{ color: '#0284C7' }} /></InputAdornment>,
                 }}
                 sx={textFieldStyles}
               />
@@ -305,7 +305,7 @@ const NewResgister: React.FC = () => {
                   py: 1.5,
                   borderRadius: '12px',
                   background: 'linear-gradient(135deg, #FFD700 0%, #e6c200 100%)',
-                  color: '#050916',
+                  color: '#FFFFFF',
                   textTransform: "none",
                   fontWeight: 800,
                   fontSize: '1.1rem',
@@ -316,8 +316,8 @@ const NewResgister: React.FC = () => {
                     boxShadow: '0 10px 25px rgba(255, 215, 0, 0.4)',
                   },
                   '&:disabled': {
-                    background: 'rgba(255, 255, 255, 0.1)',
-                    color: 'rgba(255, 255, 255, 0.3)',
+                    background: '#E2E8F0',
+                    color: '#64748B',
                   },
                   transition: 'all 0.2s'
                 }}
@@ -335,8 +335,8 @@ const NewResgister: React.FC = () => {
           onClose={handleCloseDialog}
           PaperProps={{
             sx: {
-              bgcolor: '#0f1e36',
-              color: '#fff',
+              bgcolor: '#F1F5F9',
+              color: '#0F172A',
               borderRadius: '24px',
               border: '1px solid rgba(255, 215, 0, 0.2)',
               boxShadow: '0 20px 40px rgba(0,0,0,0.5)',
@@ -352,20 +352,20 @@ const NewResgister: React.FC = () => {
             <Typography variant="h6" sx={{ fontWeight: 800, color: '#10b981' }}>Registration Successful!</Typography>
           </DialogTitle>
           <DialogContent sx={{ pb: 1 }}>
-            {/* <Typography variant="body1" sx={{ textAlign: 'center', mb: 4, color: 'rgba(255,255,255,0.7)' }}>
+            {/* <Typography variant="body1" sx={{ textAlign: 'center', mb: 4, color: '#475569' }}>
               New member has been successfully added to your network.
             </Typography> */}
-            <Box sx={{ bgcolor: 'rgba(0,0,0,0.2)', p: 3, borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
+            <Box sx={{ bgcolor: 'rgba(0,0,0,0.2)', p: 3, borderRadius: '16px', border: '1px solid #E2E8F0' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2, alignItems: 'center' }}>
-                <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>Member ID</Typography>
-                <Typography variant="h6" sx={{ color: '#FFD700', fontWeight: 700 }}>{registrationData.memberId}</Typography>
+                <Typography variant="body2" sx={{ color: '#475569' }}>Member ID</Typography>
+                <Typography variant="h6" sx={{ color: '#0284C7', fontWeight: 700 }}>{registrationData.memberId}</Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>Password</Typography>
-                <Typography variant="h6" sx={{ color: '#fff', fontWeight: 700 }}>{registrationData.password}</Typography>
+                <Typography variant="body2" sx={{ color: '#475569' }}>Password</Typography>
+                <Typography variant="h6" sx={{ color: '#0F172A', fontWeight: 700 }}>{registrationData.password}</Typography>
               </Box>
             </Box>
-            <Typography variant="caption" sx={{ display: 'block', mt: 3, color: 'rgba(255,255,255,0.5)', textAlign: 'center' }}>
+            <Typography variant="caption" sx={{ display: 'block', mt: 3, color: '#475569', textAlign: 'center' }}>
               Please securely share these credentials with the new member.
             </Typography>
           </DialogContent>
@@ -377,12 +377,12 @@ const NewResgister: React.FC = () => {
               sx={{
                 py: 1.5,
                 borderRadius: '12px',
-                background: 'rgba(255, 255, 255, 0.1)',
-                color: '#fff',
+                background: '#E2E8F0',
+                color: '#0F172A',
                 textTransform: 'none',
                 fontWeight: 600,
                 '&:hover': {
-                  background: 'rgba(255, 255, 255, 0.2)',
+                  background: '#E2E8F0',
                 }
               }}
             >

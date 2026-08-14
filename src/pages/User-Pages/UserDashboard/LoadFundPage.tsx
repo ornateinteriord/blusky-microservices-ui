@@ -82,7 +82,7 @@ const LoadFundPage: React.FC = () => {
     <Box
       sx={{
         pb: 6,
-        background: 'linear-gradient(180deg, #050916 0%, #0f1e36 100%)',
+        bgcolor: '#F8FAFC',
         minHeight: '100vh',
         px: { xs: 2.5, md: 5, lg: 10 },
         pt: { xs: 4, md: 4 },
@@ -91,14 +91,14 @@ const LoadFundPage: React.FC = () => {
       }}
     >
       <Box sx={{ mb: 2 }}>
-        <Typography variant="h5" sx={{ fontWeight: 900, color: '#ffffff', mb: 1 }}>
+        <Typography variant="h5" sx={{ fontWeight: 900, color: '#0F172A', mb: 1 }}>
           Load Fund
         </Typography>
       </Box>
 
       {isConfigLoading ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
-          <CircularProgress sx={{ color: '#FFD700' }} />
+          <CircularProgress sx={{ color: '#0284C7' }} />
         </Box>
       ) : (
         <Grid container spacing={4}>
@@ -109,9 +109,9 @@ const LoadFundPage: React.FC = () => {
               elevation={0}
               sx={{
                 p: 4,
-                bgcolor: 'rgba(255, 255, 255, 0.03)',
+                bgcolor: '#F8FAFC',
                 borderRadius: '24px',
-                border: '1px solid rgba(255,255,255,0.06)',
+                border: '1px solid #E2E8F0',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -124,7 +124,7 @@ const LoadFundPage: React.FC = () => {
                 sx={{
                   width: 200,
                   height: 200,
-                  bgcolor: '#ffffff',
+                  bgcolor: '#F1F5F9',
                   borderRadius: '20px',
                   p: 2,
                   display: 'flex',
@@ -156,14 +156,14 @@ const LoadFundPage: React.FC = () => {
                     }}
                   />
                 ) : (
-                  <Typography variant="body2" sx={{ color: '#050916', fontWeight: 800 }}>
+                  <Typography variant="body2" sx={{ color: '#FFFFFF', fontWeight: 800 }}>
                     QR Code Not Configured
                   </Typography>
                 )}
               </Box>
 
               <Box sx={{ width: '100%', mt: 2 }}>
-                <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.4)', display: 'block', mb: 1, textAlign: 'left' }}>
+                <Typography variant="caption" sx={{ color: '#64748B', display: 'block', mb: 1, textAlign: 'left' }}>
                   Copy Destination Address
                 </Typography>
                 <Box
@@ -172,16 +172,16 @@ const LoadFundPage: React.FC = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    bgcolor: 'rgba(255, 255, 255, 0.04)',
-                    border: '1px solid rgba(255,255,255,0.06)',
+                    bgcolor: '#F8FAFC',
+                    border: '1px solid #E2E8F0',
                     borderRadius: '16px',
                     px: 3,
                     py: 2,
                     cursor: 'pointer',
                     transition: 'all 0.2s',
                     '&:hover': {
-                      bgcolor: 'rgba(255, 255, 255, 0.08)',
-                      borderColor: '#FFD700',
+                      bgcolor: '#F8FAFC',
+                      bordercolor: '#0284C7',
                     },
                   }}
                 >
@@ -189,7 +189,7 @@ const LoadFundPage: React.FC = () => {
                     variant="body2"
                     sx={{
                       fontFamily: 'monospace',
-                      color: 'rgba(255, 255, 255, 0.95)',
+                      color: '#475569',
                       overflow: 'hidden',
                       textOverflow: 'ellipsis',
                       whiteSpace: 'nowrap',
@@ -201,7 +201,7 @@ const LoadFundPage: React.FC = () => {
                   >
                     {config?.wallet_address || 'No wallet address configured'}
                   </Typography>
-                  <ContentCopyIcon sx={{ color: '#FFD700' }} />
+                  <ContentCopyIcon sx={{ color: '#0284C7' }} />
                 </Box>
               </Box>
             </Paper>
@@ -214,13 +214,13 @@ const LoadFundPage: React.FC = () => {
               elevation={0}
               sx={{
                 p: 4,
-                bgcolor: 'rgba(255, 255, 255, 0.03)',
+                bgcolor: '#F8FAFC',
                 borderRadius: '24px',
-                border: '1px solid rgba(255,255,255,0.06)',
+                border: '1px solid #E2E8F0',
                 height: '100%',
               }}
             >
-              <Typography variant="h5" sx={{ fontWeight: 800, color: '#ffffff', mb: 2, textAlign: 'center' }}>
+              <Typography variant="h5" sx={{ fontWeight: 800, color: '#0F172A', mb: 2, textAlign: 'center' }}>
                 Load Fund Request
               </Typography>
 
@@ -230,29 +230,29 @@ const LoadFundPage: React.FC = () => {
                     fullWidth
                     label="Top Up Balance"
                     variant="outlined"
-                    value={`₹${Number(walletOverview?.topUpBalance || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
+                    value={`${Number(walletOverview?.topUpBalance || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
                     disabled
                     sx={{
                       mb: 2,
                       '& .MuiOutlinedInput-root': {
-                        color: '#ffffff',
+                        color: '#0F172A',
                         fontWeight: 900,
                         fontSize: '1.2rem',
                         borderRadius: '14px',
-                        '& fieldset': { borderColor: 'rgba(255,255,255,0.08)' },
-                        '&.Mui-disabled': { color: '#ffffff', WebkitTextFillColor: '#ffffff' },
-                        '& input.Mui-disabled': { color: '#ffffff', WebkitTextFillColor: '#ffffff' }
+                        '& fieldset': { borderColor: '#E2E8F0' },
+                        '&.Mui-disabled': { color: '#0F172A', WebkitTextFillcolor: '#0F172A' },
+                        '& input.Mui-disabled': { color: '#0F172A', WebkitTextFillcolor: '#0F172A' }
                       },
                       '& .MuiInputLabel-root': {
-                        color: 'rgba(255,255,255,0.6)',
-                        '&.Mui-disabled': { color: 'rgba(255,255,255,0.6)' }
+                        color: '#475569',
+                        '&.Mui-disabled': { color: '#475569' }
                       }
                     }}
                   />
 
                   <TextField
                     fullWidth
-                    label="Amount (BMS / ₹)"
+                    label="Amount (BMS / )"
                     variant="outlined"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
@@ -260,16 +260,16 @@ const LoadFundPage: React.FC = () => {
                     placeholder="Enter amount loaded"
                     slotProps={{
                       inputLabel: {
-                        sx: { color: 'rgba(255,255,255,0.6)', '&.Mui-focused': { color: '#FFD700' } }
+                        sx: { color: '#475569', '&.Mui-focused': { color: '#0284C7' } }
                       }
                     }}
                     sx={{
                       '& .MuiOutlinedInput-root': {
-                        color: '#ffffff',
+                        color: '#0F172A',
                         borderRadius: '14px',
-                        '& fieldset': { borderColor: 'rgba(255,255,255,0.08)' },
-                        '&:hover fieldset': { borderColor: 'rgba(255,255,255,0.2)' },
-                        '&.Mui-focused fieldset': { borderColor: '#FFD700' },
+                        '& fieldset': { borderColor: '#E2E8F0' },
+                        '&:hover fieldset': { borderColor: '#E2E8F0' },
+                        '&.Mui-focused fieldset': { bordercolor: '#0284C7' },
                       },
                     }}
                   />
@@ -285,23 +285,23 @@ const LoadFundPage: React.FC = () => {
                   placeholder="Enter transaction receipt hash"
                   slotProps={{
                     inputLabel: {
-                      sx: { color: 'rgba(255,255,255,0.6)', '&.Mui-focused': { color: '#FFD700' } }
+                      sx: { color: '#475569', '&.Mui-focused': { color: '#0284C7' } }
                     }
                   }}
                   sx={{
                     '& .MuiOutlinedInput-root': {
-                      color: '#ffffff',
+                      color: '#0F172A',
                       borderRadius: '14px',
-                      '& fieldset': { borderColor: 'rgba(255,255,255,0.08)' },
-                      '&:hover fieldset': { borderColor: 'rgba(255,255,255,0.2)' },
-                      '&.Mui-focused fieldset': { borderColor: '#FFD700' },
+                      '& fieldset': { borderColor: '#E2E8F0' },
+                      '&:hover fieldset': { borderColor: '#E2E8F0' },
+                      '&.Mui-focused fieldset': { bordercolor: '#0284C7' },
                     },
                   }}
                 />
 
                 {/* Receipt Image upload */}
                 <Box>
-                  <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.75)', mb: 1.5, fontWeight: 700 }}>
+                  <Typography variant="body2" sx={{ color: '#475569', mb: 1.5, fontWeight: 700 }}>
                     Upload Payment Screenshot
                   </Typography>
 
@@ -313,8 +313,8 @@ const LoadFundPage: React.FC = () => {
                         height: 200,
                         borderRadius: '14px',
                         overflow: 'hidden',
-                        border: '1px solid rgba(255,255,255,0.12)',
-                        bgcolor: '#050916',
+                        border: '1px solid #E2E8F0',
+                        bgcolor: '#F8FAFC',
                       }}
                     >
                       <Box
@@ -330,7 +330,7 @@ const LoadFundPage: React.FC = () => {
                           top: 10,
                           right: 10,
                           bgcolor: 'rgba(239, 68, 68, 0.95)',
-                          color: '#ffffff',
+                          color: '#0F172A',
                           '&:hover': { bgcolor: 'rgba(239, 68, 68, 1)' },
                         }}
                       >
@@ -347,13 +347,13 @@ const LoadFundPage: React.FC = () => {
                         py: 4,
                         borderRadius: '14px',
                         border: '2px dashed rgba(255, 255, 255, 0.12)',
-                        color: 'rgba(255,255,255,0.6)',
+                        color: '#475569',
                         textTransform: 'none',
                         fontSize: '0.95rem',
                         '&:hover': {
-                          borderColor: '#FFD700',
-                          color: '#FFD700',
-                          bgcolor: 'rgba(0, 230, 118, 0.02)',
+                          bordercolor: '#0284C7',
+                          color: '#0284C7',
+                          bgcolor: 'rgba(2, 132, 199, 0.02)',
                         },
                       }}
                     >
@@ -372,27 +372,27 @@ const LoadFundPage: React.FC = () => {
                   type="submit"
                   disabled={isSubmitting}
                   sx={{
-                    bgcolor: '#FFD700',
-                    color: '#050916',
+                    bgcolor: '#0284C7',
+                    color: '#FFFFFF',
                     textTransform: 'none',
                     fontWeight: 900,
                     fontSize: '1rem',
                     py: 1.75,
                     borderRadius: '14px',
-                    boxShadow: '0 6px 20px rgba(0, 230, 118, 0.35)',
+                    boxShadow: '0 6px 20px rgba(2, 132, 199, 0.35)',
                     '&:hover': {
-                      bgcolor: '#e6c200',
-                      boxShadow: '0 8px 26px rgba(0, 230, 118, 0.5)',
+                      bgcolor: '#0369A1',
+                      boxShadow: '0 8px 26px rgba(2, 132, 199, 0.5)',
                     },
                     '&.Mui-disabled': {
-                      bgcolor: 'rgba(255,255,255,0.1)',
-                      color: 'rgba(255,255,255,0.3)',
+                      bgcolor: '#F1F5F9',
+                      color: '#64748B',
                     },
                   }}
                 >
                   {isSubmitting ? (
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <CircularProgress size={20} sx={{ color: '#050916' }} />
+                      <CircularProgress size={20} sx={{ color: '#FFFFFF' }} />
                       Submitting...
                     </Box>
                   ) : (
@@ -413,20 +413,20 @@ const LoadFundPage: React.FC = () => {
         fullWidth
         PaperProps={{
           sx: {
-            bgcolor: '#0c162d',
+            bgcolor: '#FFFFFF',
             borderRadius: '20px',
-            border: '1px solid rgba(255,255,255,0.1)',
+            border: '1px solid #E2E8F0',
             overflow: 'hidden',
           },
         }}
       >
-        <DialogTitle sx={{ m: 0, p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#ffffff' }}>
+        <DialogTitle sx={{ m: 0, p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#0F172A' }}>
           <Typography variant="h6" sx={{ fontWeight: 800 }}>Payment Screenshot</Typography>
-          <IconButton onClick={() => setSelectedScreenshot(null)} sx={{ color: 'rgba(255,255,255,0.6)', '&:hover': { color: '#ffffff' } }}>
+          <IconButton onClick={() => setSelectedScreenshot(null)} sx={{ color: '#475569', '&:hover': { color: '#0F172A' } }}>
             <CloseIcon />
           </IconButton>
         </DialogTitle>
-        <DialogContent sx={{ p: 0, display: 'flex', justifyContent: 'center', bgcolor: '#050916', height: '70vh' }}>
+        <DialogContent sx={{ p: 0, display: 'flex', justifyContent: 'center', bgcolor: '#F8FAFC', height: '70vh' }}>
           {selectedScreenshot && (
             <Box
               component="img"

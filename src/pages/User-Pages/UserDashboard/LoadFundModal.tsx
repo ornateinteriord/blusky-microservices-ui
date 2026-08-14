@@ -97,25 +97,25 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
       maxWidth="sm"
       PaperProps={{
         sx: {
-          bgcolor: '#0c162d',
+          bgcolor: '#FFFFFF',
           backgroundImage: 'none',
-          color: '#ffffff',
+          color: '#0F172A',
           borderRadius: '24px',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
+          border: '1px solid #E2E8F0',
           boxShadow: '0 20px 40px rgba(0, 0, 0, 0.5)',
           p: 2,
         },
       }}
     >
       <DialogTitle sx={{ m: 0, p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography variant="h5" sx={{ fontWeight: 800, color: '#ffffff' }}>
+        <Typography variant="h5" sx={{ fontWeight: 800, color: '#0F172A' }}>
           Load Fund
         </Typography>
         <IconButton
           onClick={onClose}
           sx={{
-            color: 'rgba(255, 255, 255, 0.6)',
-            '&:hover': { color: '#ffffff', bgcolor: 'rgba(255,255,255,0.08)' },
+            color: '#475569',
+            '&:hover': { color: '#0F172A', bgcolor: '#F8FAFC' },
           }}
         >
           <CloseIcon />
@@ -125,7 +125,7 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
       <DialogContent sx={{ p: 2, overflowY: 'auto', '&::-webkit-scrollbar': { display: 'none' } }}>
         {isConfigLoading ? (
           <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
-            <CircularProgress sx={{ color: '#FFD700' }} />
+            <CircularProgress sx={{ color: '#0284C7' }} />
           </Box>
         ) : (
           <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
@@ -137,18 +137,18 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
                 exclusive
                 onChange={(_, newMethod) => { if (newMethod) setPaymentMethod(newMethod); }}
                 sx={{
-                  bgcolor: 'rgba(255, 255, 255, 0.05)',
+                  bgcolor: '#F8FAFC',
                   '& .MuiToggleButton-root': {
-                    color: 'rgba(255,255,255,0.7)',
-                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                    color: '#475569',
+                    borderColor: '#E2E8F0',
                     px: 3,
                     py: 1,
                     textTransform: 'none',
                     fontWeight: 700,
                     '&.Mui-selected': {
-                      color: '#050916',
-                      bgcolor: '#FFD700',
-                      '&:hover': { bgcolor: '#e6c200' }
+                      color: '#FFFFFF',
+                      bgcolor: '#0284C7',
+                      '&:hover': { bgcolor: '#0369A1' }
                     }
                   }
                 }}
@@ -162,9 +162,9 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
             {paymentMethod === 'crypto' && (
               <Box
                 sx={{
-                  bgcolor: 'rgba(255, 255, 255, 0.03)',
+                  bgcolor: '#F8FAFC',
                   borderRadius: '16px',
-                  border: '1px solid rgba(255, 255, 255, 0.05)',
+                  border: '1px solid #E2E8F0',
                   p: 3,
                   textAlign: 'center',
                   display: 'flex',
@@ -173,7 +173,7 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
                   gap: 2,
                 }}
               >
-                <Typography variant="subtitle2" sx={{ color: '#FFD700', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px' }}>
+                <Typography variant="subtitle2" sx={{ color: '#0284C7', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px' }}>
                   Deposit Network: {config?.network_text || 'BEP20'}
                 </Typography>
 
@@ -183,7 +183,7 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
                   sx={{
                     width: 180,
                     height: 180,
-                    bgcolor: '#ffffff',
+                    bgcolor: '#F1F5F9',
                     borderRadius: '16px',
                     p: 1.5,
                     display: 'flex',
@@ -213,7 +213,7 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
                       }}
                     />
                   ) : (
-                    <Typography variant="body2" sx={{ color: '#050916', fontWeight: 700 }}>
+                    <Typography variant="body2" sx={{ color: '#FFFFFF', fontWeight: 700 }}>
                       QR Code Not Configured
                     </Typography>
                   )}
@@ -223,7 +223,7 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
                 {/* Wallet Address Copy */}
                 {/* 
                 <Box sx={{ width: '100%' }}>
-                  <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.5)', display: 'block', mb: 0.5 }}>
+                  <Typography variant="caption" sx={{ color: '#475569', display: 'block', mb: 0.5 }}>
                     Deposit Address
                   </Typography>
                   <Box
@@ -232,16 +232,16 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
-                      bgcolor: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid rgba(255,255,255,0.08)',
+                      bgcolor: '#F8FAFC',
+                      border: '1px solid #E2E8F0',
                       borderRadius: '12px',
                       px: 2,
                       py: 1.25,
                       cursor: 'pointer',
                       transition: 'all 0.2s',
                       '&:hover': {
-                        bgcolor: 'rgba(255, 255, 255, 0.08)',
-                        borderColor: '#FFD700',
+                        bgcolor: '#F8FAFC',
+                        bordercolor: '#0284C7',
                       },
                     }}
                   >
@@ -249,7 +249,7 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
                       variant="body2"
                       sx={{
                         fontFamily: 'monospace',
-                        color: 'rgba(255, 255, 255, 0.9)',
+                        color: '#475569',
                         overflow: 'hidden',
                         textOverflow: 'ellipsis',
                         whiteSpace: 'nowrap',
@@ -261,7 +261,7 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
                     >
                       {config?.wallet_address || 'No wallet address configured'}
                     </Typography>
-                    <ContentCopyIcon sx={{ color: '#FFD700', fontSize: '1.1rem' }} />
+                    <ContentCopyIcon sx={{ color: '#0284C7', fontSize: '1.1rem' }} />
                   </Box>
                 </Box>
                 */}
@@ -273,7 +273,7 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
               <Box>
                 <TextField
                   fullWidth
-                  label="Amount (BMS / ₹)"
+                  label="Amount (BMS / )"
                   variant="outlined"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
@@ -281,16 +281,16 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
                   placeholder="Enter deposit amount"
                   slotProps={{
                     inputLabel: {
-                      sx: { color: 'rgba(255,255,255,0.6)', '&.Mui-focused': { color: '#FFD700' } }
+                      sx: { color: '#475569', '&.Mui-focused': { color: '#0284C7' } }
                     }
                   }}
                   sx={{
                     '& .MuiOutlinedInput-root': {
-                      color: '#ffffff',
+                      color: '#0F172A',
                       borderRadius: '12px',
-                      '& fieldset': { borderColor: 'rgba(255,255,255,0.1)' },
-                      '&:hover fieldset': { borderColor: 'rgba(255,255,255,0.2)' },
-                      '&.Mui-focused fieldset': { borderColor: '#FFD700' },
+                      '& fieldset': { borderColor: '#E2E8F0' },
+                      '&:hover fieldset': { borderColor: '#E2E8F0' },
+                      '&.Mui-focused fieldset': { bordercolor: '#0284C7' },
                     },
                   }}
                 />
@@ -300,17 +300,17 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
                   {PRESET_AMOUNTS.map((val) => (
                     <Chip
                       key={val}
-                      label={`+₹${val}`}
+                      label={`+${val}`}
                       onClick={() => setAmount(val.toString())}
                       sx={{
-                        bgcolor: 'rgba(255, 255, 255, 0.05)',
-                        color: 'rgba(255, 255, 255, 0.8)',
-                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                        bgcolor: '#F8FAFC',
+                        color: '#475569',
+                        border: '1px solid #E2E8F0',
                         fontWeight: 700,
                         '&:hover': {
-                          bgcolor: 'rgba(0, 230, 118, 0.1)',
-                          color: '#FFD700',
-                          borderColor: '#FFD700',
+                          bgcolor: 'rgba(2, 132, 199, 0.1)',
+                          color: '#0284C7',
+                          bordercolor: '#0284C7',
                         },
                       }}
                     />
@@ -329,23 +329,23 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
                     placeholder="Enter Transaction ID"
                     slotProps={{
                       inputLabel: {
-                        sx: { color: 'rgba(255,255,255,0.6)', '&.Mui-focused': { color: '#FFD700' } }
+                        sx: { color: '#475569', '&.Mui-focused': { color: '#0284C7' } }
                       }
                     }}
                     sx={{
                       '& .MuiOutlinedInput-root': {
-                        color: '#ffffff',
+                        color: '#0F172A',
                         borderRadius: '12px',
-                        '& fieldset': { borderColor: 'rgba(255,255,255,0.1)' },
-                        '&:hover fieldset': { borderColor: 'rgba(255,255,255,0.2)' },
-                        '&.Mui-focused fieldset': { borderColor: '#FFD700' },
+                        '& fieldset': { borderColor: '#E2E8F0' },
+                        '&:hover fieldset': { borderColor: '#E2E8F0' },
+                        '&.Mui-focused fieldset': { bordercolor: '#0284C7' },
                       },
                     }}
                   />
 
                   {/* Upload Screenshot */}
                   <Box>
-                    <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)', mb: 1, fontWeight: 700 }}>
+                    <Typography variant="body2" sx={{ color: '#475569', mb: 1, fontWeight: 700 }}>
                       Upload Payment Screenshot
                     </Typography>
                     
@@ -357,14 +357,14 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
                           height: 180,
                           borderRadius: '12px',
                           overflow: 'hidden',
-                          border: '1px solid rgba(255,255,255,0.15)',
+                          border: '1px solid #E2E8F0',
                         }}
                       >
                         <Box
                           component="img"
                           src={screenshotPreview}
                           alt="Payment Preview"
-                          sx={{ width: '100%', height: '100%', objectFit: 'contain', bgcolor: '#050916' }}
+                          sx={{ width: '100%', height: '100%', objectFit: 'contain', bgcolor: '#F8FAFC' }}
                         />
                         <IconButton
                           onClick={handleRemoveScreenshot}
@@ -373,7 +373,7 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
                             top: 8,
                             right: 8,
                             bgcolor: 'rgba(239, 68, 68, 0.9)',
-                            color: '#ffffff',
+                            color: '#0F172A',
                             '&:hover': { bgcolor: 'rgba(239, 68, 68, 1)' },
                           }}
                         >
@@ -390,12 +390,12 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
                           py: 3,
                           borderRadius: '12px',
                           border: '2px dashed rgba(255, 255, 255, 0.15)',
-                          color: 'rgba(255,255,255,0.7)',
+                          color: '#475569',
                           textTransform: 'none',
                           '&:hover': {
-                            borderColor: '#FFD700',
-                            color: '#FFD700',
-                            bgcolor: 'rgba(0, 230, 118, 0.02)',
+                            bordercolor: '#0284C7',
+                            color: '#0284C7',
+                            bgcolor: 'rgba(2, 132, 199, 0.02)',
                           },
                         }}
                       >
@@ -417,27 +417,27 @@ const LoadFundModal: React.FC<LoadFundModalProps> = ({ open, onClose }) => {
                 type="submit"
                 disabled={isSubmitting}
                 sx={{
-                  bgcolor: '#FFD700',
-                  color: '#050916',
+                  bgcolor: '#0284C7',
+                  color: '#FFFFFF',
                   textTransform: 'none',
                   fontWeight: 900,
                   fontSize: '1rem',
                   py: 1.5,
                   borderRadius: '12px',
-                  boxShadow: '0 6px 16px rgba(0, 230, 118, 0.35)',
+                  boxShadow: '0 6px 16px rgba(2, 132, 199, 0.35)',
                   '&:hover': {
-                    bgcolor: '#e6c200',
-                    boxShadow: '0 8px 24px rgba(0, 230, 118, 0.5)',
+                    bgcolor: '#0369A1',
+                    boxShadow: '0 8px 24px rgba(2, 132, 199, 0.5)',
                   },
                   '&.Mui-disabled': {
-                    bgcolor: 'rgba(255,255,255,0.12)',
-                    color: 'rgba(255,255,255,0.3)',
+                    bgcolor: '#F1F5F9',
+                    color: '#64748B',
                   },
                 }}
               >
                 {isSubmitting ? (
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <CircularProgress size={20} sx={{ color: '#050916' }} />
+                    <CircularProgress size={20} sx={{ color: '#FFFFFF' }} />
                     Submitting Request...
                   </Box>
                 ) : (

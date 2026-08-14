@@ -33,7 +33,7 @@ const FixedDepositWallet = () => {
     <Card
       sx={{
         margin: isMobile ? "0.5rem" : "1rem",
-        backgroundColor: "#fff",
+        backgroundcolor: '#0F172A',
         mt: 1,
       }}
     >

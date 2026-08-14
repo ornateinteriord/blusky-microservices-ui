@@ -85,7 +85,7 @@ export const UserAddOnPackages = () => {
                     <TextField
                       {...params}
                       required
-                      label="Amount (₹)"
+                      label="Amount ()"
                       variant="outlined"
                       size="medium"
                       placeholder="e.g. 10000"
@@ -103,7 +103,7 @@ export const UserAddOnPackages = () => {
                       sx={{
                         "& .MuiOutlinedInput-root": {
                           borderRadius: "12px",
-                          backgroundColor: 'white',
+                          backgroundcolor: '#0F172A',
                         },
                       }}
                     />
@@ -119,7 +119,7 @@ export const UserAddOnPackages = () => {
                     mt: 2,
                     py: 1.5,
                     backgroundColor: '#0a2558',
-                    color: 'white',
+                    color: '#0F172A',
                     fontWeight: 700,
                     fontSize: '1rem',
                     textTransform: 'none',
@@ -205,7 +205,7 @@ export const UserAddOnPackages = () => {
                     boxShadow: '0 4px 15px rgba(0,0,0,0.06)',
                     borderRadius: '16px',
                     border: '1px solid #e3eafc',
-                    backgroundColor: 'white',
+                    backgroundcolor: '#0F172A',
                     transition: 'transform 0.2s',
                     '&:hover': { transform: 'translateY(-4px)' }
                   }}>
@@ -236,7 +236,7 @@ export const UserAddOnPackages = () => {
                           {pkg.isFD ? 'Interest Rate' : 'Single Leg Income'}
                         </Typography>
                         <Typography variant="h6" sx={{ fontWeight: 800, color: '#1565c0', fontSize: '1.1rem' }}>
-                          {pkg.isFD ? `${pkg.interest_rate || 0}% p.a.` : `₹${sliAmount.toFixed(2)}`}
+                          {pkg.isFD ? `${pkg.interest_rate || 0}% p.a.` : `${sliAmount.toFixed(2)}`}
                         </Typography>
                       </Box>
 

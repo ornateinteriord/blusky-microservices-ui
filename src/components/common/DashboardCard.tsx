@@ -45,9 +45,9 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
 
   const renderTextWithIcon = (val: string | number, justifyContent: string = 'center') => {
     const valStr = String(val);
-    if (!valStr.includes('₹')) return valStr;
+    if (!valStr.includes('')) return valStr;
 
-    const parts = valStr.split('₹');
+    const parts = valStr.split('');
     return (
       <Box sx={{ display: 'inline-flex', alignItems: 'center', justifyContent, gap: 0, flexWrap: 'wrap' }}>
         {parts.map((part, index) => (
@@ -89,14 +89,14 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
       case 'approved':
         return {
           ...baseStyle,
-          background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', // Emerald Green
+          background: 'linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)', // Emerald Green
           color: 'white',
           '&:hover': {
-            background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+            background: 'linear-gradient(135deg, #0284C7 0%, #0369A1 100%)',
           },
           '&.Mui-disabled': {
             color: 'white',
-            background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+            background: 'linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)',
           }
         };
       default:
@@ -122,7 +122,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
           justifyContent: 'center',
           position: 'relative',
           overflow: 'hidden',
-          border: '1px solid rgba(255, 255, 255, 0.1)'
+          border: '1px solid #E2E8F0'
         }}
       >
         {/* Glow effect */}
@@ -141,7 +141,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
               fontWeight: 700,
               mb: 1.5,
               fontSize: { xs: '0.9rem', sm: '1.1rem' },
-              color: '#FFC000' // Gold Accent
+              color: '#0284C7' // Gold Accent
             }}
           >
             {title}
@@ -343,13 +343,13 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
             disabled={!isRenewEnabled}
             sx={{
               background: isRenewEnabled
-                ? 'linear-gradient(135deg, #10b981 0%, #059669 100%)' // Fresh Emerald Green
+                ? 'linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)' // Fresh Emerald Green
                 : '#f1f5f9',
               color: isRenewEnabled ? 'white' : '#94a3b8',
               boxShadow: isRenewEnabled ? '0 4px 12px rgba(16, 185, 129, 0.3)' : 'none',
               '&:hover': {
                 background: isRenewEnabled
-                  ? 'linear-gradient(135deg, #059669 0%, #047857 100%)'
+                  ? 'linear-gradient(135deg, #0284C7 0%, #0369A1 100%)'
                   : '#f1f5f9',
                 transform: isRenewEnabled ? 'translateY(-2px)' : 'none',
                 boxShadow: isRenewEnabled ? '0 6px 15px rgba(16, 185, 129, 0.4)' : 'none',
@@ -418,8 +418,8 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
           justifyContent: 'center'
         }}>
           {IconComponent ?
-            <IconComponent sx={{ fontSize: { xs: '2.5rem', sm: '3rem' }, color: '#FFC000' }} /> :
-            <MonetizationOnIcon sx={{ fontSize: { xs: '2.5rem', sm: '3rem' }, color: '#FFC000' }} />
+            <IconComponent sx={{ fontSize: { xs: '2.5rem', sm: '3rem' }, color: '#0284C7' }} /> :
+            <MonetizationOnIcon sx={{ fontSize: { xs: '2.5rem', sm: '3rem' }, color: '#0284C7' }} />
           }
         </Box>
       </Box>

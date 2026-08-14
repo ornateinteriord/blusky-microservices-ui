@@ -35,16 +35,16 @@ const SearchField = styled(TextField)(() => ({
         backgroundColor: 'rgba(255, 255, 255, 0.05)',
         color: '#fff',
         '& fieldset': {
-            borderColor: 'rgba(255, 255, 255, 0.1)',
+            borderColor: '#E2E8F0',
         },
         '&:hover fieldset': {
             borderColor: 'rgba(255, 215, 0, 0.5)',
         },
         '&.Mui-focused fieldset': {
-            borderColor: '#FFD700',
+            bordercolor: '#0284C7',
         },
         '& input::placeholder': {
-            color: 'rgba(255, 255, 255, 0.5)',
+            color: '#475569',
             opacity: 1,
         },
     },
@@ -82,19 +82,19 @@ const ChatList: React.FC<ChatListProps> = ({
                 display: 'flex',
                 flexDirection: 'column',
                 height: '100%',
-                bgcolor: '#0f1e36',
+                bgcolor: '#F1F5F9',
                 borderRight: 1,
-                borderColor: 'rgba(255, 255, 255, 0.1)',
+                borderColor: '#E2E8F0',
             }}
         >
             {/* Header */}
-            <Box sx={{ p: 3, borderBottom: 1, borderColor: 'rgba(255, 255, 255, 0.1)' }}>
+            <Box sx={{ p: 3, borderBottom: 1, borderColor: '#E2E8F0' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
                     <Typography
                         variant="h5"
                         sx={{
                             fontWeight: 700,
-                            color: '#FFD700',
+                            color: '#0284C7',
                         }}
                     >
                         Chat
@@ -172,7 +172,7 @@ const ChatList: React.FC<ChatListProps> = ({
                         <Typography variant="h6" gutterBottom sx={{ color: '#fff' }}>
                             No conversations yet
                         </Typography>
-                        <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.6)' }} maxWidth={300}>
+                        <Typography variant="body2" sx={{ color: '#475569' }} maxWidth={300}>
                             {searchQuery
                                 ? 'No results found for your search'
                                 : 'Start a new conversation to get started'}
@@ -247,13 +247,13 @@ const ChatList: React.FC<ChatListProps> = ({
                                                             height: 18,
                                                             fontSize: '10px',
                                                             bgcolor: 'rgba(255, 215, 0, 0.2)',
-                                                            color: '#FFD700',
+                                                            color: '#0284C7',
                                                             border: '1px solid rgba(255, 215, 0, 0.5)',
                                                         }}
                                                     />
                                                 )}
                                                 {room.lastMessageTime && (
-                                                    <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.5)' }}>
+                                                    <Typography variant="caption" sx={{ color: '#475569' }}>
                                                         {formatTime(room.lastMessageTime)}
                                                     </Typography>
                                                 )}
@@ -282,7 +282,7 @@ const ChatList: React.FC<ChatListProps> = ({
                                                             ml: 1,
                                                             '& .MuiBadge-badge': {
                                                                 background: 'linear-gradient(135deg, #FFD700 0%, #e6c200 100%)',
-                                                                color: '#050916',
+                                                                color: '#FFFFFF',
                                                                 fontWeight: 700,
                                                             },
                                                         }}

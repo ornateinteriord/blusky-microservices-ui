@@ -11,7 +11,7 @@ const PACKAGES = [
   { id: 1, amount: 10000, title: "Secure Growth Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#1de9b6", description: "Begin your journey with the Secure Growth Plan and unlock new growth opportunities" },
   { id: 2, amount: 25000, title: "Smart Saver Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#CD7F32", description: "The Smart Saver Plan helps you explore enhanced features and expand your trading potential" },
   { id: 3, amount: 50000, title: "Wealth Builder Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#C0C0C0", description: "Explore the Wealth Builder Plan designed for advanced financial management and growth opportunities" },
-  { id: 4, amount: 100000, title: "Future Secure Deposit", yield: "5%", days: "210 Day", tag: "Members Only", color: "#FFD700", description: "Take your forex journey further with the Future Secure Deposit" },
+  { id: 4, amount: 100000, title: "Future Secure Deposit", yield: "5%", days: "210 Day", tag: "Members Only", color: '#0284C7', description: "Take your forex journey further with the Future Secure Deposit" },
   { id: 5, amount: 200000, title: "Prosper Plus Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#E5E4E2", description: "A premium package built to support smarter trading decisions and long-term growth" },
   { id: 6, amount: 500000, title: "Golden Growth Investment Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#b9f2ff", description: "Experience a higher level of financial flexibility with the Golden Growth Investment Plan" }
 ];
@@ -52,7 +52,7 @@ const ProductsContainer: React.FC = () => {
   const handleBuyClick = (pkg: any) => {
     const amountToBuy = pkg.amount;
     if (topUpBalance < amountToBuy) {
-      toast.error(`Insufficient Top Up Balance! You need ₹${amountToBuy} but have ₹${topUpBalance}`);
+      toast.error(`Insufficient Top Up Balance! You need ${amountToBuy} but have ${topUpBalance}`);
       return;
     }
     setConfirmPkg({ ...pkg, amount: amountToBuy });
@@ -97,7 +97,7 @@ const ProductsContainer: React.FC = () => {
           pb: 2,
           px: 1,
           '&::-webkit-scrollbar': { height: '8px' },
-          '&::-webkit-scrollbar-thumb': { backgroundColor: 'rgba(255,255,255,0.2)', borderRadius: '4px' },
+          '&::-webkit-scrollbar-thumb': { backgroundColor: '#E2E8F0', borderRadius: '4px' },
           justifyContent: 'flex-start'
         }}
       >
@@ -109,10 +109,10 @@ const ProductsContainer: React.FC = () => {
               minWidth: { xs: '260px', sm: '290px' },
               maxWidth: { xs: '260px', sm: '290px' },
               flexShrink: 0,
-              bgcolor: '#1c1f2e', 
-              border: '1px solid rgba(255,255,255,0.8)', 
+              bgcolor: '#FFFFFF', 
+              border: '1px solid #E2E8F0', 
               borderRadius: '16px', 
-              color: '#ffffff',
+              color: '#0F172A',
               boxShadow: 'none',
               cursor: isPurchased(pkg.amount) ? 'pointer' : 'default',
               transition: 'transform 0.3s ease',
@@ -144,12 +144,12 @@ const ProductsContainer: React.FC = () => {
                 {pkg.title}
               </Typography>
               
-              <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.75rem', mb: 2, minHeight: '40px', lineHeight: 1.3, position: 'relative', zIndex: 2 }}>
+              <Typography variant="body2" sx={{ color: '#475569', fontSize: '0.75rem', mb: 2, minHeight: '40px', lineHeight: 1.3, position: 'relative', zIndex: 2 }}>
                 {pkg.description}
               </Typography>
               
               <Typography variant="h5" fontWeight={800} sx={{ color: pkg.color, mb: 1, height: '36px', display: 'flex', alignItems: 'center' }}>
-                ₹{pkg.amount}
+                {Number(pkg.amount).toFixed(2)}
               </Typography>
               
               <Box sx={{ height: '24px', mb: 3 }} />
@@ -159,13 +159,13 @@ const ProductsContainer: React.FC = () => {
                   {!isPurchased(pkg.amount) ? (
                     <Box>
                       <Typography variant="subtitle1" fontWeight={800} sx={{ lineHeight: 1.1, mb: 0 }}>{pkg.yield.replace('%', '')}</Typography>
-                      <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 500, fontSize: '0.65rem', display: 'block' }}>Year Plan</Typography>
+                      <Typography variant="caption" sx={{ color: '#475569', fontWeight: 500, fontSize: '0.65rem', display: 'block' }}>Year Plan</Typography>
                     </Box>
                   ) : (
                     <Box>
-                      <Typography variant="subtitle1" sx={{ color: 'rgba(255,255,255,0.9)', fontWeight: 800, fontSize: '0.85rem', mb: 0.2, whiteSpace: 'nowrap' }}>Single Leg Income</Typography>
-                      <Typography variant="h5" fontWeight={900} sx={{ lineHeight: 1.2, color: '#FFD700' }}>
-                        ₹{(walletOverview?.singleLevelIncomeByPackage?.[pkg.amount] || 0).toFixed(2)}
+                      <Typography variant="subtitle1" sx={{ color: '#475569', fontWeight: 800, fontSize: '0.85rem', mb: 0.2, whiteSpace: 'nowrap' }}>Single Leg Income</Typography>
+                      <Typography variant="h5" fontWeight={900} sx={{ lineHeight: 1.2, color: '#0284C7' }}>
+                        {(walletOverview?.singleLevelIncomeByPackage?.[pkg.amount] || 0).toFixed(2)}
                       </Typography>
                     </Box>
                   )}
@@ -173,10 +173,10 @@ const ProductsContainer: React.FC = () => {
                 
                 {isPurchased(pkg.amount) ? (
                   <Chip 
-                    label="Deposited" 
+                    label="Invested" 
                     sx={{ 
                       bgcolor: 'rgba(59, 130, 246, 0.2)', 
-                      color: '#FFD700',
+                      color: '#0284C7',
                       fontWeight: 700,
                       borderRadius: '24px',
                       height: '24px',
@@ -207,12 +207,12 @@ const ProductsContainer: React.FC = () => {
                         boxShadow: 'none'
                       },
                       '&:disabled': {
-                        bgcolor: 'rgba(0, 230, 118, 0.3)',
-                        color: 'rgba(255,255,255,0.5)'
+                        bgcolor: 'rgba(2, 132, 199, 0.3)',
+                        color: '#475569'
                       }
                     }}
                   >
-                    {isPending && buyingId === pkg.id ? <CircularProgress size={16} color="inherit" /> : "Deposit"}
+                    {isPending && buyingId === pkg.id ? <CircularProgress size={16} color="inherit" /> : "Invest"}
                   </Button>
                 )}
               </Box>
@@ -227,20 +227,20 @@ const ProductsContainer: React.FC = () => {
         onClose={() => !isPending && setConfirmPkg(null)}
         PaperProps={{
           sx: {
-            bgcolor: '#1c1f2e',
-            color: '#fff',
+            bgcolor: '#FFFFFF',
+            color: '#0F172A',
             borderRadius: '16px',
-            border: '1px solid rgba(255,255,255,0.1)'
+            border: '1px solid #E2E8F0'
           }
         }}
       >
-        <DialogTitle sx={{ fontWeight: 800 }}>Confirm Deposit</DialogTitle>
+        <DialogTitle sx={{ fontWeight: 800 }}>Confirm Investment</DialogTitle>
         <DialogContent>
-          <DialogContentText sx={{ color: 'rgba(255,255,255,0.8)' }}>
-            Are you sure you want to deposit <strong>{confirmPkg?.title}</strong> for <strong>₹{confirmPkg?.amount}</strong>?
+          <DialogContentText sx={{ color: '#475569' }}>
+            Are you sure you want to invest in <strong>{confirmPkg?.title}</strong> for <strong>{Number(confirmPkg?.amount).toFixed(2)}</strong>?
           </DialogContentText>
           {confirmPkg?.description && (
-            <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)', mt: 2, fontStyle: 'italic' }}>
+            <Typography variant="body2" sx={{ color: '#475569', mt: 2, fontStyle: 'italic' }}>
               "{confirmPkg.description}"
             </Typography>
           )}
@@ -249,7 +249,7 @@ const ProductsContainer: React.FC = () => {
           <Button 
             onClick={() => setConfirmPkg(null)} 
             disabled={isPending}
-            sx={{ color: 'rgba(255,255,255,0.6)' }}
+            sx={{ color: '#475569' }}
           >
             Cancel
           </Button>
@@ -258,14 +258,14 @@ const ProductsContainer: React.FC = () => {
             variant="contained" 
             disabled={isPending}
             sx={{
-              bgcolor: '#FFD700',
+              bgcolor: '#0284C7',
               color: '#000',
               fontWeight: 700,
-              '&:hover': { bgcolor: '#e6c200' },
-              '&:disabled': { bgcolor: 'rgba(0, 230, 118, 0.3)' }
+              '&:hover': { bgcolor: '#0369A1' },
+              '&:disabled': { bgcolor: 'rgba(2, 132, 199, 0.3)' }
             }}
           >
-            {isPending ? <CircularProgress size={24} color="inherit" /> : "Yes, Deposit Plan"}
+            {isPending ? <CircularProgress size={24} color="inherit" /> : "Yes, Invest Now"}
           </Button>
         </DialogActions>
       </Dialog>
@@ -276,8 +276,8 @@ const ProductsContainer: React.FC = () => {
         onClose={() => setSuccessDialogOpen(false)}
         PaperProps={{
           sx: {
-            bgcolor: '#0f1e36',
-            color: '#fff',
+            bgcolor: '#F1F5F9',
+            color: '#0F172A',
             borderRadius: '24px',
             border: '1px solid rgba(16, 185, 129, 0.2)',
             boxShadow: '0 20px 40px rgba(0,0,0,0.5)',
@@ -290,24 +290,24 @@ const ProductsContainer: React.FC = () => {
           Purchase Successful!
         </DialogTitle>
         <DialogContent sx={{ pb: 1 }}>
-          <Typography variant="body1" sx={{ textAlign: 'center', mb: 4, color: 'rgba(255,255,255,0.7)' }}>
+          <Typography variant="body1" sx={{ textAlign: 'center', mb: 4, color: '#475569' }}>
             You have successfully subscribed to the package.
           </Typography>
-          <Box sx={{ bgcolor: 'rgba(0,0,0,0.2)', p: 3, borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
+          <Box sx={{ bgcolor: 'rgba(0,0,0,0.2)', p: 3, borderRadius: '16px', border: '1px solid #E2E8F0' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2, alignItems: 'flex-start' }}>
-              <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>Package Name</Typography>
-              <Typography variant="h6" sx={{ color: '#FFD700', fontWeight: 700, textAlign: 'right' }}>{purchasedPkg?.title}</Typography>
+              <Typography variant="body2" sx={{ color: '#475569' }}>Package Name</Typography>
+              <Typography variant="h6" sx={{ color: '#0284C7', fontWeight: 700, textAlign: 'right' }}>{purchasedPkg?.title}</Typography>
             </Box>
             {purchasedPkg?.description && (
               <Box sx={{ mb: 2, display: 'flex', justifyContent: 'flex-end' }}>
-                <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)', fontStyle: 'italic', textAlign: 'right', maxWidth: '80%' }}>
+                <Typography variant="body2" sx={{ color: '#475569', fontStyle: 'italic', textAlign: 'right', maxWidth: '80%' }}>
                   "{purchasedPkg.description}"
                 </Typography>
               </Box>
             )}
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>Amount Paid</Typography>
-              <Typography variant="h6" sx={{ color: '#10b981', fontWeight: 700 }}>₹{purchasedPkg?.amount}</Typography>
+              <Typography variant="body2" sx={{ color: '#475569' }}>Amount Paid</Typography>
+              <Typography variant="h6" sx={{ color: '#10b981', fontWeight: 700 }}>{Number(purchasedPkg?.amount).toFixed(2)}</Typography>
             </Box>
           </Box>
         </DialogContent>
@@ -319,13 +319,13 @@ const ProductsContainer: React.FC = () => {
             sx={{
               py: 1.5,
               borderRadius: '12px',
-              background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-              color: '#fff',
+              background: 'linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)',
+              color: '#0F172A',
               textTransform: 'none',
               fontWeight: 700,
               fontSize: '1.1rem',
               '&:hover': {
-                background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+                background: 'linear-gradient(135deg, #0284C7 0%, #0369A1 100%)',
               }
             }}
           >

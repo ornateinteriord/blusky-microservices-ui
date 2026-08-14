@@ -85,7 +85,7 @@ const Tree = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: 'white',
+            color: '#0F172A',
             fontWeight: 'bold',
             fontSize: '1rem',
             backgroundImage: userDetails?.profile_image ? `url(${userDetails.profile_image})` : 'none',

@@ -23,7 +23,7 @@ const PackageHistory = () => {
   return (
     <Card sx={{
       margin: isMobile ? '1rem' : '2rem',
-      backgroundColor: '#fff',
+      backgroundcolor: '#0F172A',
       mt: 10
     }}>
       <CardContent sx={{ padding: isMobile ? '12px' : '24px' }}>

@@ -68,7 +68,7 @@ const Wallet = () => {
   const handleAmountChange = (e: any) => {
     const value = e.target.value;
     // Allow only numeric input
-    if (value !== "" && !/^\d*₹/.test(value)) return;
+    if (value !== "" && !/^\d*/.test(value)) return;
 
     setAmount(value);
 
@@ -107,12 +107,12 @@ const Wallet = () => {
     }
 
     if (withdrawalAmount < 500) {
-      toast.error('Minimum withdrawal amount is ₹500');
+      toast.error('Minimum withdrawal amount is 500');
       return;
     }
 
     if (withdrawalAmount > maxWithdrawal) {
-      toast.error(`Maximum withdrawal limit is ₹${maxWithdrawal.toFixed(2)} (25% of your total package amount)`);
+      toast.error(`Maximum withdrawal limit is ${maxWithdrawal.toFixed(2)} (25% of your total package amount)`);
       return;
     }
 
@@ -181,7 +181,7 @@ const Wallet = () => {
     <Card
       sx={{
         margin: isMobile ? "0.5rem" : "1rem",
-        backgroundColor: "#fff",
+        backgroundcolor: '#0F172A',
         mt: 1, // Further reduced top margin
       }}
     >
@@ -189,9 +189,9 @@ const Wallet = () => {
         {/* Withdrawal Section */}
         {isWithdrawalView && (
         <div>
-          <Box sx={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: "#fff", padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)", display: "flex", alignItems: "center", gap: "8px" }}>
+          <Box sx={{ marginBottom: "1rem", backgroundColor: "#0a2558", color: '#0F172A', padding: "12px 16px", borderRadius: "8px", fontWeight: "bold", fontSize: "1.1rem", boxShadow: "0 4px 6px rgba(0,0,0,0.1)", display: "flex", alignItems: "center", gap: "8px" }}>
             {step === 2 && (
-              <IconButton onClick={() => setStep(1)} size="small" sx={{ color: 'white' }}>
+              <IconButton onClick={() => setStep(1)} size="small" sx={{ color: '#0F172A' }}>
                 <ArrowBackIcon fontSize="small" />
               </IconButton>
             )}
@@ -210,7 +210,7 @@ const Wallet = () => {
             >
               <TextField
                 label="Available Balance"
-                value={`₹${displayBalance.toFixed(2)}`}
+                value={`${displayBalance.toFixed(2)}`}
                 fullWidth
                 size="medium"
                 InputProps={{ readOnly: true }}
@@ -229,7 +229,7 @@ const Wallet = () => {
                 onChange={handleAmountChange}
                 fullWidth
                 size="medium"
-                placeholder="Enter amount (Min ₹5)"
+                placeholder="Enter amount (Min 5)"
                 disabled={withdrawMutation.isPending || !isWithdrawalAllowed}
                 error={parseFloat(amount) > displayBalance}
                 helperText={parseFloat(amount) > displayBalance ? "Insufficient Balance" : ""}
@@ -244,7 +244,7 @@ const Wallet = () => {
               {/* 
               <TextField
                 label="Admin Charges (15%)"
-                value={`₹${adminCharges.toFixed(2)}`}
+                value={`${adminCharges.toFixed(2)}`}
                 fullWidth
                 size="medium"
                 InputProps={{ readOnly: true }}
@@ -259,7 +259,7 @@ const Wallet = () => {
 
               <TextField
                 label="Admin (5%)"
-                value={`₹${tds.toFixed(2)}`}
+                value={`${tds.toFixed(2)}`}
                 fullWidth
                 size="medium"
                 InputProps={{ readOnly: true }}
@@ -273,7 +273,7 @@ const Wallet = () => {
 
               <TextField
                 label="Net Amount Received"
-                value={`₹${netAmount.toFixed(2)}`}
+                value={`${netAmount.toFixed(2)}`}
                 fullWidth
                 size="medium"
                 InputProps={{ readOnly: true }}
@@ -301,7 +301,7 @@ const Wallet = () => {
                   <Box sx={{ display: "flex", gap: 4, flexDirection: isMobile ? "column" : "row" }}>
                     <Box>
                       <Typography variant="body2">• 5% Admin applied</Typography>
-                      <Typography variant="body2">• Minimum withdrawal: ₹500</Typography>
+                      <Typography variant="body2">• Minimum withdrawal: 500</Typography>
                       <Typography variant="body2">• Maximum withdrawal: 25% of total package (${maxWithdrawal.toFixed(2)})</Typography>
                       <Typography variant="body2">• One withdrawal per day allowed</Typography>
                     </Box>
@@ -353,7 +353,7 @@ const Wallet = () => {
                   }}
                 >
                   {isSendingOTP ? (
-                    <CircularProgress size={24} sx={{ color: "white" }} />
+                    <CircularProgress size={24} sx={{ color: '#0F172A' }} />
                   ) : (
                     (!isWithdrawalAllowed || !isReferralConditionMet) ? "Disabled" : "Proceed to Withdraw"
                   )}
@@ -414,7 +414,7 @@ const Wallet = () => {
                         "&:disabled": { backgroundColor: "#cccccc" },
                       }}
                     >
-                      {withdrawMutation.isPending ? <CircularProgress size={24} sx={{ color: "white" }} /> : 'Confirm Withdrawal'}
+                      {withdrawMutation.isPending ? <CircularProgress size={24} sx={{ color: '#0F172A' }} /> : 'Confirm Withdrawal'}
                     </Button>
                   </Box>
                 </Box>

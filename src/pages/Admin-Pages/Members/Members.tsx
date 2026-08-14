@@ -441,13 +441,13 @@ export const PendingMembers = () => {
                     '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: primaryColor },
                   }}
                 >
-                  <MenuItem value="100">BMS Plan - ₹100</MenuItem>
-                  <MenuItem value="250">BMS Plan - ₹250</MenuItem>
-                  <MenuItem value="500">BMS Plan - ₹500</MenuItem>
-                  <MenuItem value="1000">BMS Plan - ₹1,000</MenuItem>
-                  <MenuItem value="2000">BMS Plan - ₹2,000</MenuItem>
-                  <MenuItem value="5000">BMS Plan - ₹5,000</MenuItem>
-                  <MenuItem value="10000">BMS Plan - ₹10,000</MenuItem>
+                  <MenuItem value="100">BMS Plan - 100</MenuItem>
+                  <MenuItem value="250">BMS Plan - 250</MenuItem>
+                  <MenuItem value="500">BMS Plan - 500</MenuItem>
+                  <MenuItem value="1000">BMS Plan - 1,000</MenuItem>
+                  <MenuItem value="2000">BMS Plan - 2,000</MenuItem>
+                  <MenuItem value="5000">BMS Plan - 5,000</MenuItem>
+                  <MenuItem value="10000">BMS Plan - 10,000</MenuItem>
                   <MenuItem value="custom">Enter Custom Amount...</MenuItem>
                 </Select>
               </FormControl>

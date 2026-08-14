@@ -86,7 +86,7 @@ const AccountCloseDialog: React.FC<AccountCloseDialogProps> = ({
                 });
 
                 if (response && response.success) {
-                    toast.success(`Account closed successfully. Cash payment of ₹${totalPayout.toLocaleString('en-US')} processed.`);
+                    toast.success(`Account closed successfully. Cash payment of ${totalPayout.toLocaleString('en-US')} processed.`);
                     onSuccess();
                     onClose();
                 } else {
@@ -118,7 +118,7 @@ const AccountCloseDialog: React.FC<AccountCloseDialogProps> = ({
 
             // Check if response is successful
             if (response && response.success) {
-                toast.success(response.message || `Maturity payment of ₹${totalPayout.toLocaleString('en-US')} processed successfully`);
+                toast.success(response.message || `Maturity payment of ${totalPayout.toLocaleString('en-US')} processed successfully`);
                 onSuccess();
                 onClose();
             } else {
@@ -251,13 +251,13 @@ const AccountCloseDialog: React.FC<AccountCloseDialogProps> = ({
                     sx={{
                         background: hasBalance
                             ? 'linear-gradient(135deg, #667EEA 0%, #818CF8 100%)'
-                            : 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                            : 'linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)',
                     }}
                 >
                     {isLoading ? (
                         <CircularProgress size={20} color="inherit" />
                     ) : hasBalance ? (
-                        `Pay ₹${totalPayout.toLocaleString('en-US', { maximumFractionDigits: 2, minimumFractionDigits: 2 })} & Close`
+                        `Pay ${totalPayout.toLocaleString('en-US', { maximumFractionDigits: 2, minimumFractionDigits: 2 })} & Close`
                     ) : (
                         'Close Account'
                     )}

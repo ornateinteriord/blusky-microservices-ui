@@ -1,9 +1,9 @@
 .sidebar {
   width: 250px;
   height: 100%;
-  background-color: #0a2558;
-  /* Dark Blue */
-  color: #fff;
+  background-color: #FFFFFF;
+  /* Light Background */
+  color: #1E293B;
   position: fixed;
   transition: transform 0.3s ease-in-out;
 }
@@ -38,12 +38,12 @@
   padding-left: 20px;
   margin-top: 5px;
   overflow: hidden;
-  background-color: #00041a;
-  /* Darker Blue for sub-items */
+  background-color: #F8FAFC;
+  /* Light Sub-items */
 }
 
 .sub-items a {
-  color: #fff;
+  color: #475569;
   text-decoration: none;
   padding: 5px 10px;
   border-radius: 3px;
@@ -52,14 +52,14 @@
   transition: color 0.3s ease;
 
   &:hover {
-    color: #FFC000;
-    background-color: rgba(255, 192, 0, 0.1);
+    color: #0284C7;
+    background-color: rgba(2, 132, 199, 0.1);
   }
 
   &.selected {
-    color: #FFC000;
+    color: #0284C7;
     font-weight: 700;
-    border-left: 3px solid #FFC000;
+    border-left: 3px solid #0284C7;
   }
 }
 
@@ -84,14 +84,14 @@
 }
 
 .menu-item:hover {
-  background-color: rgba(255, 192, 0, 0.12);
-  color: #FFC000;
+  background-color: rgba(2, 132, 199, 0.12);
+  color: #0284C7;
 }
 
 .menu-item.selected {
-  background: rgba(255, 192, 0, 0.18);
-  color: #FFC000;
-  border-left: 4px solid #FFC000;
+  background: rgba(2, 132, 199, 0.18);
+  color: #0284C7;
+  border-left: 4px solid #0284C7;
   border-radius: 0 8px 8px 0;
   font-weight: 700;
 }

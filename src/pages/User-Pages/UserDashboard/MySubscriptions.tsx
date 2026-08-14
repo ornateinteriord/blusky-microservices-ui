@@ -17,8 +17,8 @@ const MySubscriptions: React.FC = () => {
 
   if (!user) {
     return (
-      <Box sx={{ background: 'linear-gradient(180deg, #050916 0%, #0f1e36 100%)', minHeight: '100vh', display: 'flex', justifyContent: 'center', pt: 10 }}>
-        <CircularProgress sx={{ color: '#FFD700' }} />
+      <Box sx={{ bgcolor: '#F8FAFC', minHeight: '100vh', display: 'flex', justifyContent: 'center', pt: 10 }}>
+        <CircularProgress sx={{ color: '#0284C7' }} />
       </Box>
     );
   }
@@ -26,22 +26,22 @@ const MySubscriptions: React.FC = () => {
   return (
     <Box sx={{ 
       p: { xs: 2, md: 4 }, 
-      background: 'linear-gradient(180deg, #050916 0%, #0f1e36 100%)', 
+      bgcolor: '#F8FAFC', 
       minHeight: '100vh' 
     }}>
       <Box sx={{ mb: 4, mt: { xs: 1, md: 3 } }}>
-        <Typography variant="h5" sx={{ color: '#ffffff', fontWeight: 900, letterSpacing: -0.5, display: 'flex', alignItems: 'center', gap: 1.5, textTransform: 'uppercase' }}>
-          <Box sx={{ width: 4, height: 24, backgroundColor: '#FFD700', borderRadius: 1 }} />
+        <Typography variant="h5" sx={{ color: '#0F172A', fontWeight: 900, letterSpacing: -0.5, display: 'flex', alignItems: 'center', gap: 1.5, textTransform: 'uppercase' }}>
+          <Box sx={{ width: 4, height: 24, backgroundcolor: '#0284C7', borderRadius: 1 }} />
           My Subscriptions
         </Typography>
-        <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)', mt: 0.5, ml: 2, fontWeight: 500 }}>
+        <Typography variant="body2" sx={{ color: '#475569', mt: 0.5, ml: 2, fontWeight: 500 }}>
           Manage your deposits and investment tracks.
         </Typography>
       </Box>
 
       {addOnsLoading ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
-          <CircularProgress sx={{ color: '#FFD700' }} />
+          <CircularProgress sx={{ color: '#0284C7' }} />
         </Box>
       ) : (
         <Grid container spacing={3}>
@@ -88,23 +88,23 @@ const MySubscriptions: React.FC = () => {
                     height: '100%',
                     boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
                     borderRadius: '24px',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    backgroundColor: 'rgba(255, 255, 255, 0.06)',
-                    color: '#ffffff',
+                    border: '1px solid #E2E8F0',
+                    backgroundColor: '#F8FAFC',
+                    color: '#0F172A',
                     transition: 'transform 0.2s',
-                    '&:hover': { transform: 'translateY(-6px)', backgroundColor: 'rgba(255, 255, 255, 0.08)' }
+                    '&:hover': { transform: 'translateY(-6px)', backgroundColor: '#F8FAFC' }
                   }}>
                     <CardContent sx={{ p: 3 }}>
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
                         <Box>
                           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, mb: 0.5 }}>
-                            {pkg.isFD ? <AccountBalanceIcon sx={{ fontSize: 16, color: '#f59e0b' }} /> : <PaymentsIcon sx={{ fontSize: 16, color: 'rgba(255,255,255,0.5)' }} />}
-                            <Typography variant="caption" sx={{ fontSize: '0.75rem', fontWeight: 800, color: pkg.isFD ? '#f59e0b' : 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: 0.5 }}>
+                            {pkg.isFD ? <AccountBalanceIcon sx={{ fontSize: 16, color: '#f59e0b' }} /> : <PaymentsIcon sx={{ fontSize: 16, color: '#475569' }} />}
+                            <Typography variant="caption" sx={{ fontSize: '0.75rem', fontWeight: 800, color: pkg.isFD ? '#f59e0b' : '#64748B', textTransform: 'uppercase', letterSpacing: 0.5 }}>
                               {pkg.isFD ? 'Fixed Deposit' : `My Subscription #${index + 1}`}
                             </Typography>
                           </Box>
-                          <Typography variant="h5" sx={{ fontWeight: 900, fontSize: '1.6rem', color: '#ffffff', lineHeight: 1.2 }}>
-                            ₹{pkgAmount.toLocaleString('en-US')}
+                          <Typography variant="h5" sx={{ fontWeight: 900, fontSize: '1.6rem', color: '#0F172A', lineHeight: 1.2 }}>
+                            ${pkgAmount.toLocaleString('en-US')}
                           </Typography>
                         </Box>
                           <Chip
@@ -115,28 +115,28 @@ const MySubscriptions: React.FC = () => {
                             fontSize: '0.75rem', 
                             fontWeight: 800, 
                             borderRadius: '6px',
-                            backgroundColor: pkg.roi_status === 'Active' ? 'rgba(0, 230, 118, 0.2)' : 'rgba(255,255,255,0.1)',
-                            color: pkg.roi_status === 'Active' ? '#FFD700' : 'rgba(255,255,255,0.7)',
-                            border: `1px solid ${pkg.roi_status === 'Active' ? 'rgba(0, 230, 118, 0.3)' : 'rgba(255,255,255,0.2)'}`
+                            backgroundColor: pkg.roi_status === 'Active' ? 'rgba(2, 132, 199, 0.2)' : '#E2E8F0',
+                            color: pkg.roi_status === 'Active' ? '#FFD700' : '#64748B',
+                            border: `1px solid ${pkg.roi_status === 'Active' ? 'rgba(2, 132, 199, 0.3)' : '#E2E8F0'}`
                           }}
                         />
                       </Box>
 
-                      <Divider sx={{ mb: 2, borderColor: 'rgba(255,255,255,0.08)' }} />
+                      <Divider sx={{ mb: 2, borderColor: '#E2E8F0' }} />
                       <Box sx={{ mb: 2 }}>
-                        <Typography variant="caption" sx={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', display: 'block', fontWeight: 600 }}>
+                        <Typography variant="caption" sx={{ fontSize: '0.75rem', color: '#475569', display: 'block', fontWeight: 600 }}>
                           {pkg.isFD ? 'Interest Rate' : 'Single Leg Income'}
                         </Typography>
-                        <Typography variant="h6" sx={{ fontWeight: 800, color: '#FFD700', fontSize: '1.2rem' }}>
-                          {pkg.isFD ? `${pkg.interest_rate || 0}% p.a.` : `₹${sliAmount.toFixed(2)}`}
+                        <Typography variant="h6" sx={{ fontWeight: 800, color: '#0284C7', fontSize: '1.2rem' }}>
+                          {pkg.isFD ? `${pkg.interest_rate || 0}% p.a.` : `${sliAmount.toFixed(2)}`}
                         </Typography>
                       </Box>
 
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                        <Typography variant="caption" sx={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.8)', fontWeight: 700 }}>
+                        <Typography variant="caption" sx={{ fontSize: '0.75rem', color: '#475569', fontWeight: 700 }}>
                           {pkg.isFD ? 'Maturity Progress' : `${buyersCount} of 100 Buyers`}
                         </Typography>
-                        <Typography variant="caption" sx={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.8)', fontWeight: 700 }}>
+                        <Typography variant="caption" sx={{ fontSize: '0.75rem', color: '#475569', fontWeight: 700 }}>
                           {pkg.isFD ? `${pkgProgress.toFixed(0)}%` : `${sliProgress.toFixed(0)}%`}
                         </Typography>
                       </Box>
@@ -146,7 +146,7 @@ const MySubscriptions: React.FC = () => {
                         sx={{
                           height: 8,
                           borderRadius: 4,
-                          backgroundColor: 'rgba(255,255,255,0.1)',
+                          backgroundColor: '#E2E8F0',
                           '& .MuiLinearProgress-bar': {
                             background: 'linear-gradient(90deg, #FFD700, #8b5cf6)',
                             borderRadius: 4
@@ -157,12 +157,12 @@ const MySubscriptions: React.FC = () => {
 
                       <Box sx={{ mt: 2.5, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                          <CalendarTodayIcon sx={{ color: 'rgba(255,255,255,0.4)', fontSize: 14 }} />
-                          <Typography variant="caption" sx={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', fontWeight: 500 }}>
+                          <CalendarTodayIcon sx={{ color: '#64748B', fontSize: 14 }} />
+                          <Typography variant="caption" sx={{ fontSize: '0.7rem', color: '#475569', fontWeight: 500 }}>
                             {new Date(pkg.roi_start_date || pkg.createdAt || Date.now()).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
                           </Typography>
                         </Box>
-                        <Typography variant="caption" sx={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.4)', fontFamily: 'monospace', fontWeight: 500 }}>
+                        <Typography variant="caption" sx={{ fontSize: '0.7rem', color: '#64748B', fontFamily: 'monospace', fontWeight: 500 }}>
                           #{pkgId.toString().slice(-8)}
                         </Typography>
                       </Box>

@@ -158,61 +158,61 @@ const WalletTransfer = () => {
   };
 
   return (
-    <Box sx={{ p: { xs: 2, md: 5 }, minHeight: '100vh', background: 'linear-gradient(180deg, #050916 0%, #0f1e36 100%)', pt: { xs: 3, md: 10 } }}>
+    <Box sx={{ p: { xs: 2, md: 5 }, minHeight: '100vh', bgcolor: '#F8FAFC', pt: { xs: 3, md: 10 } }}>
       <Box sx={{ maxWidth: '600px', mx: 'auto' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 2, gap: 2 }}>
           {step === 2 && (
-            <IconButton onClick={() => setStep(1)} sx={{ color: 'white', bgcolor: 'rgba(255,255,255,0.1)' }}>
+            <IconButton onClick={() => setStep(1)} sx={{ color: '#0F172A', bgcolor: '#F1F5F9' }}>
               <ArrowBackIcon />
             </IconButton>
           )}
           <Box sx={{ p: 1.5, borderRadius: '12px', bgcolor: 'rgba(16, 185, 129, 0.1)', color: '#10b981' }}>
             <CurrencyExchangeIcon fontSize="small" />
           </Box>
-          <Typography variant="h5" sx={{ color: 'white', fontWeight: 800 }}>Wallet Transfer</Typography>
+          <Typography variant="h5" sx={{ color: '#0F172A', fontWeight: 800 }}>Wallet Transfer</Typography>
         </Box>
 
-        <Card sx={{ p: 4, borderRadius: '24px', bgcolor: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+        <Card sx={{ p: 4, borderRadius: '24px', bgcolor: '#F8FAFC', border: '1px solid #E2E8F0' }}>
 
           {step === 1 ? (
             <Fade in={step === 1}>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
                 <Box>
-                  <Typography variant="subtitle2" sx={{ color: 'rgba(255,255,255,0.7)', mb: 1, fontWeight: 600 }}>From Account</Typography>
+                  <Typography variant="subtitle2" sx={{ color: '#475569', mb: 1, fontWeight: 600 }}>From Account</Typography>
                   <Select
                     fullWidth
                     value={fromWallet}
                     onChange={(e) => setFromWallet(e.target.value)}
                     sx={{
-                      bgcolor: 'rgba(255,255,255,0.05)',
-                      color: 'white',
+                      bgcolor: '#F8FAFC',
+                      color: '#0F172A',
                       borderRadius: '12px',
-                      '& .MuiOutlinedInput-notchedOutline': { borderColor: 'rgba(255,255,255,0.1)' },
-                      '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: 'rgba(255,255,255,0.2)' },
+                      '& .MuiOutlinedInput-notchedOutline': { borderColor: '#E2E8F0' },
+                      '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: '#E2E8F0' },
                       '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#10b981' },
-                      '& .MuiSvgIcon-root': { color: 'white' }
+                      '& .MuiSvgIcon-root': { color: '#0F172A' }
                     }}
                   >
-                    <MenuItem value="Withdrawal">Withdrawal Wallet (Bal: ₹{earningsBalance})</MenuItem>
+                    <MenuItem value="Withdrawal">Withdrawal Wallet (Bal: ${earningsBalance})</MenuItem>
                     <MenuItem value="Top Up">Purchase Wallet (Bal: ${topUpBalance})</MenuItem>
                     <MenuItem value="Upgrade">Upgrade Wallet (Bal: ${upgradeBalance})</MenuItem>
                   </Select>
                 </Box>
 
                 <Box>
-                  <Typography variant="subtitle2" sx={{ color: 'rgba(255,255,255,0.7)', mb: 1, fontWeight: 600 }}>To Account</Typography>
+                  <Typography variant="subtitle2" sx={{ color: '#475569', mb: 1, fontWeight: 600 }}>To Account</Typography>
                   <Select
                     fullWidth
                     value={toWallet}
                     onChange={(e) => setToWallet(e.target.value)}
                     disabled={fromWallet !== 'Withdrawal'}
                     sx={{
-                      bgcolor: 'rgba(255,255,255,0.02)',
-                      color: 'white',
+                      bgcolor: '#F8FAFC',
+                      color: '#0F172A',
                       borderRadius: '12px',
-                      '& .MuiOutlinedInput-notchedOutline': { borderColor: 'rgba(255,255,255,0.1)' },
-                      '& .MuiSelect-select.Mui-disabled': { color: 'rgba(255,255,255,0.7)', WebkitTextFillColor: 'rgba(255,255,255,0.7)', opacity: 1 },
-                      '& .MuiSvgIcon-root': { color: 'rgba(255,255,255,0.3)' }
+                      '& .MuiOutlinedInput-notchedOutline': { borderColor: '#E2E8F0' },
+                      '& .MuiSelect-select.Mui-disabled': { color: '#475569', WebkitTextFillColor: '#64748B', opacity: 1 },
+                      '& .MuiSvgIcon-root': { color: '#64748B' }
                     }}
                   >
                     {fromWallet === 'Withdrawal' ? (
@@ -229,7 +229,7 @@ const WalletTransfer = () => {
                 </Box>
 
                 <Box>
-                  <Typography variant="subtitle2" sx={{ color: 'rgba(255,255,255,0.7)', mb: 1, fontWeight: 600 }}>Amount (?)</Typography>
+                  <Typography variant="subtitle2" sx={{ color: '#475569', mb: 1, fontWeight: 600 }}>Amount (?)</Typography>
                   <TextField
                     fullWidth
                     placeholder="Enter amount to transfer"
@@ -237,15 +237,15 @@ const WalletTransfer = () => {
                     onChange={(e) => setAmount(e.target.value)}
                     type="number"
                     InputProps={{
-                      startAdornment: <Typography sx={{ color: 'rgba(255,255,255,0.5)', mr: 1 }}>₹</Typography>
+                      startAdornment: <Typography sx={{ color: '#475569', mr: 1 }}></Typography>
                     }}
                     sx={{
                       '& .MuiOutlinedInput-root': {
-                        bgcolor: 'rgba(255,255,255,0.05)',
-                        color: 'white',
+                        bgcolor: '#F8FAFC',
+                        color: '#0F172A',
                         borderRadius: '12px',
-                        '& fieldset': { borderColor: 'rgba(255,255,255,0.1)' },
-                        '&:hover fieldset': { borderColor: 'rgba(255,255,255,0.2)' },
+                        '& fieldset': { borderColor: '#E2E8F0' },
+                        '&:hover fieldset': { borderColor: '#E2E8F0' },
                         '&.Mui-focused fieldset': { borderColor: '#10b981' },
                       },
                       '& input[type=number]::-webkit-outer-spin-button, & input[type=number]::-webkit-inner-spin-button': {
@@ -270,13 +270,13 @@ const WalletTransfer = () => {
                     mt: 2,
                     py: 1.5,
                     borderRadius: '12px',
-                    background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                    background: 'linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)',
                     textTransform: 'none',
                     fontWeight: 700,
                     fontSize: '1.1rem',
                     boxShadow: '0 8px 20px rgba(16, 185, 129, 0.3)',
                     '&:hover': {
-                      background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+                      background: 'linear-gradient(135deg, #0284C7 0%, #0369A1 100%)',
                     }
                   }}
                 >
@@ -288,8 +288,8 @@ const WalletTransfer = () => {
             <Fade in={step === 2}>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
                 <Box textAlign="center">
-                  <Typography variant="h6" sx={{ color: 'white', mb: 1 }}>Security Verification</Typography>
-                  <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)' }}>
+                  <Typography variant="h6" sx={{ color: '#0F172A', mb: 1 }}>Security Verification</Typography>
+                  <Typography variant="body2" sx={{ color: '#475569' }}>
                     Enter the 6-digit OTP sent to your registered mobile number.
                   </Typography>
                 </Box>
@@ -305,13 +305,13 @@ const WalletTransfer = () => {
                       type: 'password',
                       sx: {
                         '& .MuiOutlinedInput-root': {
-                          bgcolor: 'rgba(255, 255, 255, 0.05)',
-                          color: '#ffffff',
+                          bgcolor: '#F8FAFC',
+                          color: '#0F172A',
                           borderRadius: '12px',
                           fontSize: '1.2rem',
                           fontWeight: 'bold',
-                          '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.15)' },
-                          '&:hover fieldset': { borderColor: 'rgba(255, 255, 255, 0.3)' },
+                          '& fieldset': { borderColor: '#E2E8F0' },
+                          '&:hover fieldset': { borderColor: '#E2E8F0' },
                           '&.Mui-focused fieldset': {
                             borderColor: '#10b981',
                             borderWidth: '2px'
@@ -334,17 +334,17 @@ const WalletTransfer = () => {
                   sx={{
                     py: 1.5,
                     borderRadius: '12px',
-                    background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                    background: 'linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)',
                     textTransform: 'none',
                     fontWeight: 700,
                     fontSize: '1.1rem',
                     boxShadow: '0 8px 20px rgba(16, 185, 129, 0.3)',
                     '&:hover': {
-                      background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+                      background: 'linear-gradient(135deg, #0284C7 0%, #0369A1 100%)',
                     },
                     '&.Mui-disabled': {
-                      background: 'rgba(255, 255, 255, 0.1)',
-                      color: 'rgba(255, 255, 255, 0.3)',
+                      background: '#E2E8F0',
+                      color: '#64748B',
                     }
                   }}
                 >
@@ -363,8 +363,8 @@ const WalletTransfer = () => {
         onClose={() => setSuccessDialogOpen(false)}
         PaperProps={{
           sx: {
-            bgcolor: '#0f1e36',
-            color: '#fff',
+            bgcolor: '#F1F5F9',
+            color: '#0F172A',
             borderRadius: '24px',
             border: '1px solid rgba(16, 185, 129, 0.2)',
             boxShadow: '0 20px 40px rgba(0,0,0,0.5)',
@@ -377,21 +377,21 @@ const WalletTransfer = () => {
           Transfer Successful!
         </DialogTitle>
         <DialogContent sx={{ pb: 1 }}>
-          <Typography variant="body1" sx={{ textAlign: 'center', mb: 4, color: 'rgba(255,255,255,0.7)' }}>
+          <Typography variant="body1" sx={{ textAlign: 'center', mb: 4, color: '#475569' }}>
             Your funds have been successfully transferred.
           </Typography>
-          <Box sx={{ bgcolor: 'rgba(0,0,0,0.2)', p: 3, borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
+          <Box sx={{ bgcolor: 'rgba(0,0,0,0.2)', p: 3, borderRadius: '16px', border: '1px solid #E2E8F0' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2, alignItems: 'center' }}>
-              <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>Amount Transferred</Typography>
+              <Typography variant="body2" sx={{ color: '#475569' }}>Amount Transferred</Typography>
               <Typography variant="h6" sx={{ color: '#10b981', fontWeight: 700 }}>${transferDetails?.amount}</Typography>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2, alignItems: 'center' }}>
-              <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>From</Typography>
-              <Typography variant="h6" sx={{ color: '#fff', fontWeight: 700 }}>{transferDetails?.fromWallet}</Typography>
+              <Typography variant="body2" sx={{ color: '#475569' }}>From</Typography>
+              <Typography variant="h6" sx={{ color: '#0F172A', fontWeight: 700 }}>{transferDetails?.fromWallet}</Typography>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>To</Typography>
-              <Typography variant="h6" sx={{ color: '#fff', fontWeight: 700 }}>{transferDetails?.toWallet}</Typography>
+              <Typography variant="body2" sx={{ color: '#475569' }}>To</Typography>
+              <Typography variant="h6" sx={{ color: '#0F172A', fontWeight: 700 }}>{transferDetails?.toWallet}</Typography>
             </Box>
           </Box>
         </DialogContent>
@@ -403,13 +403,13 @@ const WalletTransfer = () => {
             sx={{
               py: 1.5,
               borderRadius: '12px',
-              background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-              color: '#fff',
+              background: 'linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)',
+              color: '#0F172A',
               textTransform: 'none',
               fontWeight: 700,
               fontSize: '1.1rem',
               '&:hover': {
-                background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+                background: 'linear-gradient(135deg, #0284C7 0%, #0369A1 100%)',
               }
             }}
           >

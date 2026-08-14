@@ -35,7 +35,7 @@ const BMSLoanChart = () => {
             }}>
                 <Typography variant="h6" sx={{
                     fontWeight: 800,
-                    color: '#fff',
+                    color: '#0F172A',
                     letterSpacing: '1px',
                     fontSize: { xs: '1rem', md: '1.25rem' },
                 }}>
@@ -52,11 +52,11 @@ const BMSLoanChart = () => {
                                     key={cell}
                                     sx={{
                                         background: 'linear-gradient(135deg, #0a2558 0%, #1d40af 100%)',
-                                        color: '#fff',
+                                        color: '#0F172A',
                                         fontWeight: 700,
                                         fontSize: '0.85rem',
                                         textAlign: 'center',
-                                        border: '1px solid rgba(255,255,255,0.15)',
+                                        border: '1px solid #E2E8F0',
                                         py: 1.8,
                                         whiteSpace: 'nowrap',
                                     }}

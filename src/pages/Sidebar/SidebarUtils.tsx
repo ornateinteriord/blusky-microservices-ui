@@ -20,13 +20,13 @@ export const UserSideBarMenuItems: SideBarMenuItemType[] = [
     isExpandable: false,
   }, */
   {
-    name: "New Subscription",
+    name: "Property Listings",
     icon: <PaymentsIcon />,
     path: "/user/new-subscription",
     isExpandable: false,
   },
   {
-    name: "My Subscription",
+    name: "My Properties",
     icon: <ReceiptLongIcon />,
     path: "/user/my-subscriptions",
     isExpandable: false,
@@ -46,37 +46,37 @@ export const UserSideBarMenuItems: SideBarMenuItemType[] = [
     ],
   },
   {
-    name: "Team",
+    name: "Brokerage",
     icon: <GroupIcon />,
     isExpandable: true,
     subItems: [
-      { name: "Direct", path: "/user/team/direct", icon: <PeopleIcon /> },
-      { name: "Team", path: "/user/team", icon: <GroupIcon /> },
-      { name: "Tree", path: "/user/team/tree", icon: <AccountTreeIcon /> },
+      { name: "Direct Clients", path: "/user/team/direct", icon: <PeopleIcon /> },
+      { name: "Agents", path: "/user/team", icon: <GroupIcon /> },
+      { name: "Network Tree", path: "/user/team/tree", icon: <AccountTreeIcon /> },
       {
-        name: "New Register",
+        name: "Register Agent",
         path: "/user/team/new-register",
         icon: <PersonAddIcon />,
       },
     ],
   },
   {
-    name: "Earnings",
+    name: "Revenue",
     icon: <MonetizationOnIcon />,
     isExpandable: true,
     subItems: [
       {
-        name: "Referral Bonus",
+        name: "Referral Commission",
         path: "/user/earnings/referral-bonus",
         icon: <PaymentsIcon />,
       },
       {
-        name: "Level Bonus",
+        name: "Brokerage Override",
         path: "/user/earnings/level-benefits",
         icon: <TrendingUpIcon />,
       },
       {
-        name: "Daily ROI",
+        name: "Rental Yield",
         path: "/user/earnings/daily-payout",
         icon: <PaymentsIcon />,
       },
@@ -105,13 +105,13 @@ export const UserSideBarMenuItems: SideBarMenuItemType[] = [
   },
   */
   {
-    name: "Earnings Wallet",
+    name: "Brokerage Earnings",
     icon: <CreditCardIcon />,
     path: "/user/wallet",
     isExpandable: false,
   },
   {
-    name: "Upgrade Wallet",
+    name: "Property Fund",
     icon: <CreditCardIcon />,
     path: "/user/upgrade-wallet",
     isExpandable: false,
@@ -129,7 +129,7 @@ export const UserSideBarMenuItems: SideBarMenuItemType[] = [
     isExpandable: false,
   },
   {
-    name: "Add-On Packages",
+    name: "Add-On Investments",
     icon: <PaymentsIcon />,
     path: "/user/addon-packages",
     isExpandable: false,
@@ -164,7 +164,7 @@ export const AdminSideBarMenuItems: SideBarMenuItemType[] = [
     isExpandable: false,
   },
   {
-    name: "Load Fund",
+    name: "Escrow Deposits",
     icon: <PaymentsIcon />,
     isExpandable: true,
     subItems: [
@@ -247,7 +247,7 @@ export const AdminSideBarMenuItems: SideBarMenuItemType[] = [
 
 
   {
-    name: "Incomes",
+    name: "Revenue",
     icon: <MonetizationOnIcon />,
     isExpandable: true,
     subItems: [
@@ -257,22 +257,22 @@ export const AdminSideBarMenuItems: SideBarMenuItemType[] = [
       //   icon: <TrendingUpIcon />,
       // },
       {
-        name: "Referral Income",
+        name: "Referral Commission",
         path: "/admin/income/referral-income",
         icon: <PaymentsIcon />,
       },
       {
-        name: "Level Bonus",
+        name: "Brokerage Override",
         path: "/admin/income/level-benefits",
         icon: <TrendingUpIcon />,
       },
       {
-        name: "Single Leg Income",
+        name: "Direct Commission",
         path: "/admin/income/daily-payouts",
         icon: <PaymentsIcon />,
       },
       {
-        name: "12% Global Non Working",
+        name: "Franchise Bonus",
         path: "/admin/income/global-income",
         icon: <PaymentsIcon />,
       },
@@ -315,7 +315,7 @@ export const AdminSideBarMenuItems: SideBarMenuItemType[] = [
 
 
   {
-    name: "Payout",
+    name: "Commission Payout",
     icon: <CreditCardIcon />,
     path: "/admin/payout",
     isExpandable: false,
@@ -391,7 +391,7 @@ export const Admin01SideBarMenuItems: SideBarMenuItemType[] = [
     ],
   },
   {
-    name: "Withdrawal Requests",
+    name: "Commission Payouts",
     icon: <PaymentsIcon />,
     path: "/admin/withdrawal-requests",
     isExpandable: false,

@@ -254,7 +254,7 @@ const MailBox = () => {
         <DialogTitle
           sx={{
             backgroundColor: "#0a2558",
-            color: "#fff",
+            color: '#0F172A',
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
@@ -265,7 +265,7 @@ const MailBox = () => {
           <IconButton
             onClick={handleCloseDialog}
             size="medium"
-            sx={{ color: "#fff" }}
+            sx={{ color: '#0F172A' }}
           >
             <CloseIcon fontSize="medium" />
           </IconButton>

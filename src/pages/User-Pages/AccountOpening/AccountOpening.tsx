@@ -147,9 +147,9 @@ const UserAccountOpening = () => {
         { header: 'Transaction ID', key: 'transaction_id', width: 20 },
         { header: 'Type', key: 'transaction_type', width: 15 },
         { header: 'Description', key: 'description', width: 40 },
-        { header: 'Credit (₹)', key: 'credit', width: 15 },
-        { header: 'Debit (₹)', key: 'debit', width: 15 },
-        { header: 'Balance (₹)', key: 'balance', width: 15 },
+        { header: 'Credit ()', key: 'credit', width: 15 },
+        { header: 'Debit ()', key: 'debit', width: 15 },
+        { header: 'Balance ()', key: 'balance', width: 15 },
         { header: 'Status', key: 'status', width: 12 },
       ],
       data: transactions.map((tx: any) => ({
@@ -222,7 +222,7 @@ const UserAccountOpening = () => {
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3 }}>
           <IconButton 
             onClick={() => navigate('/user/dashboard')}
-            sx={{ bgcolor: 'white', boxShadow: '0 2px 8px rgba(0,0,0,0.05)', '&:hover': { bgcolor: '#f1f5f9' } }}
+            sx={{ bgcolor: '#F1F5F9', boxShadow: '0 2px 8px rgba(0,0,0,0.05)', '&:hover': { bgcolor: '#f1f5f9' } }}
           >
             <ArrowBackIcon />
           </IconButton>
@@ -237,7 +237,7 @@ const UserAccountOpening = () => {
           borderRadius: '24px',
           border: `1px solid ${theme.primary}15`,
           boxShadow: '0 10px 40px rgba(0,0,0,0.03)',
-          backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          backgroundColor: '#64748B',
           backdropFilter: 'blur(10px)',
         }}>
           <Box sx={{ mt: 2 }}>
@@ -254,7 +254,7 @@ const UserAccountOpening = () => {
                       p: 3, 
                       borderRadius: '24px', 
                       background: theme.gradient,
-                      color: 'white',
+                      color: '#0F172A',
                       display: 'flex',
                       flexDirection: 'column',
                       gap: 2,
@@ -270,23 +270,23 @@ const UserAccountOpening = () => {
                         width: 150, 
                         height: 150, 
                         borderRadius: '50%', 
-                        background: 'rgba(255,255,255,0.1)' 
+                        background: '#E2E8F0' 
                       }} />
 
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                         <Box>
-                          <Typography sx={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px' }}>
+                          <Typography sx={{ color: '#475569', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px' }}>
                             Account Type
                           </Typography>
                           <Typography variant="h5" sx={{ fontWeight: 800 }}>
                             {existingAccount.account_group_name}
                           </Typography>
                         </Box>
-                        <AccountBalanceWalletIcon sx={{ color: 'rgba(255,255,255,0.3)', fontSize: 40 }} />
+                        <AccountBalanceWalletIcon sx={{ color: '#64748B', fontSize: 40 }} />
                       </Box>
 
                       <Box sx={{ mt: 1 }}>
-                        <Typography sx={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px' }}>
+                        <Typography sx={{ color: '#475569', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px' }}>
                           Account Number
                         </Typography>
                         <Typography variant="h6" sx={{ fontWeight: 600, letterSpacing: '1px' }}>
@@ -294,18 +294,18 @@ const UserAccountOpening = () => {
                         </Typography>
                       </Box>
 
-                      <Divider sx={{ borderColor: 'rgba(255,255,255,0.1)', my: 1 }} />
+                      <Divider sx={{ borderColor: '#E2E8F0', my: 1 }} />
 
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <Box>
-                          <Typography sx={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px' }}>
+                          <Typography sx={{ color: '#475569', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px' }}>
                             Available Balance
                           </Typography>
                           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
                             <Typography variant="h4" sx={{ fontWeight: 900 }}>
-                              {showBalance ? `₹${Number(existingAccount.account_amount || 0).toLocaleString('en-US')}` : '••••••••'}
+                              {showBalance ? `${Number(existingAccount.account_amount || 0).toLocaleString('en-US')}` : '••••••••'}
                             </Typography>
-                            <IconButton onClick={() => setShowBalance(!showBalance)} sx={{ color: 'rgba(255,255,255,0.7)' }}>
+                            <IconButton onClick={() => setShowBalance(!showBalance)} sx={{ color: '#475569' }}>
                               {showBalance ? <VisibilityOffIcon /> : <VisibilityIcon />}
                             </IconButton>
                           </Box>
@@ -318,7 +318,7 @@ const UserAccountOpening = () => {
                           color: existingAccount.status?.toLowerCase() === 'active' ? '#4ade80' : '#f87171',
                           fontSize: '0.75rem',
                           fontWeight: 800,
-                          border: '1px solid rgba(255,255,255,0.2)'
+                          border: '1px solid #E2E8F0'
                         }}>
                           {existingAccount.status || 'Active'}
                         </Box>
@@ -366,7 +366,7 @@ const UserAccountOpening = () => {
                           borderRadius: '12px', 
                           py: 1.5, 
                           bgcolor: '#1e293b', 
-                          '&:hover': { bgcolor: '#0f172a' }
+                          '&:hover': { bgcolor: '#F1F5F9' }
                         }}
                       >
                         Statement
@@ -406,7 +406,7 @@ const UserAccountOpening = () => {
                       onChange={(e) => setSearchQuery(e.target.value)}
                       sx={{ 
                         width: 250,
-                        '& .MuiOutlinedInput-root': { borderRadius: '12px', bgcolor: 'white' }
+                        '& .MuiOutlinedInput-root': { borderRadius: '12px', bgcolor: '#F1F5F9' }
                       }}
                     />
                   </Box>
@@ -473,13 +473,13 @@ const UserAccountOpening = () => {
                 </FormControl>
 
                 <TextField
-                    label="Amount (₹)"
+                    label="Amount ()"
                     fullWidth
                     type="number"
                     value={transferAmount}
                     onChange={(e) => setTransferAmount(e.target.value)}
                     InputProps={{
-                        startAdornment: <InputAdornment position="start">₹</InputAdornment>,
+                        startAdornment: <InputAdornment position="start"></InputAdornment>,
                     }}
                     sx={{ '& .MuiOutlinedInput-root': { borderRadius: '12px' } }}
                 />

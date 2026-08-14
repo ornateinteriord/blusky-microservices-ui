@@ -24,7 +24,7 @@ interface ChatWindowProps {
 
 const ChatHeader = styled(AppBar)(({ theme }) => ({
     background: 'linear-gradient(135deg, #0a2558 0%, #050916 100%)',
-    color: '#FFD700',
+    color: '#0284C7',
     boxShadow: theme.shadows[1],
     position: 'static', // Ensure it works with flex flow
     borderBottom: '1px solid rgba(255, 215, 0, 0.2)',
@@ -35,7 +35,7 @@ const MessagesContainer = styled(Box)(({ theme }) => ({
     overflowY: 'auto',
     minHeight: 0, // Critical for scrolling inside flex
     padding: theme.spacing(3),
-    backgroundColor: '#050916',
+    backgroundcolor: '#FFFFFF',
     backgroundImage: 'radial-gradient(circle at center, rgba(10, 37, 88, 0.2) 0%, #050916 100%)',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
@@ -98,25 +98,25 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
                             <ArrowBack />
                         </IconButton>
                     )}
-                    <Avatar sx={{ background: 'linear-gradient(135deg, #FFD700 0%, #e6c200 100%)', mr: 2, position: 'relative', color: '#050916', fontWeight: 700 }}>
+                    <Avatar sx={{ background: 'linear-gradient(135deg, #FFD700 0%, #e6c200 100%)', mr: 2, position: 'relative', color: '#FFFFFF', fontWeight: 700 }}>
                         {recipientName.charAt(0).toUpperCase()}
                         {isConnected && (
-                            <Circle sx={{ position: 'absolute', bottom: -2, right: -2, fontSize: 14, color: '#4caf50', bgcolor: '#050916', borderRadius: '50%' }} />
+                            <Circle sx={{ position: 'absolute', bottom: -2, right: -2, fontSize: 14, color: '#4caf50', bgcolor: '#F8FAFC', borderRadius: '50%' }} />
                         )}
                     </Avatar>
                     <Box sx={{ flexGrow: 1 }}>
                         <Typography variant="h6" noWrap sx={{ color: '#fff' }}>{recipientName}</Typography>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                             {isTyping ? (
-                                <Typography variant="caption" sx={{ color: '#FFD700', fontWeight: 500 }}>Typing...</Typography>
+                                <Typography variant="caption" sx={{ color: '#0284C7', fontWeight: 500 }}>Typing...</Typography>
                             ) : (
                                 <>
-                                    {isConnected ? <Circle sx={{ fontSize: 8, color: '#4caf50' }} /> : <WifiOff sx={{ fontSize: 12, color: 'rgba(255,255,255,0.7)' }} />}
-                                    <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)' }}>{isConnected ? 'Online' : 'Offline'}</Typography>
+                                    {isConnected ? <Circle sx={{ fontSize: 8, color: '#4caf50' }} /> : <WifiOff sx={{ fontSize: 12, color: '#475569' }} />}
+                                    <Typography variant="caption" sx={{ color: '#475569' }}>{isConnected ? 'Online' : 'Offline'}</Typography>
                                 </>
                             )}
                             {recipientRole === 'admin' && (
-                                <Box component="span" sx={{ px: 1, py: 0.25, bgcolor: 'rgba(255, 215, 0, 0.2)', color: '#FFD700', borderRadius: 1, fontSize: '10px', fontWeight: 600, border: '1px solid rgba(255, 215, 0, 0.5)' }}>Admin</Box>
+                                <Box component="span" sx={{ px: 1, py: 0.25, bgcolor: 'rgba(255, 215, 0, 0.2)', color: '#0284C7', borderRadius: 1, fontSize: '10px', fontWeight: 600, border: '1px solid rgba(255, 215, 0, 0.5)' }}>Admin</Box>
                             )}
                         </Box>
                     </Box>
@@ -125,7 +125,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
             <MessagesContainer ref={containerRef}>
                 {isLoading ? (
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', flexDirection: 'column', gap: 2 }}>
-                        <CircularProgress size={40} sx={{ color: '#FFD700' }} /><Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>Loading messages...</Typography>
+                        <CircularProgress size={40} sx={{ color: '#0284C7' }} /><Typography variant="body2" sx={{ color: '#475569' }}>Loading messages...</Typography>
                     </Box>
                 ) : messages.length === 0 ? (
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', flexDirection: 'column', gap: 2 }}>
@@ -133,7 +133,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
                             <User size={40} color="#FFD700" />
                         </Paper>
                         <Typography variant="h6" sx={{ color: '#fff' }}>No messages yet</Typography>
-                        <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)', textAlign: 'center', maxWidth: 400 }}>Start the conversation by sending a message below</Typography>
+                        <Typography variant="body2" sx={{ color: '#475569', textAlign: 'center', maxWidth: 400 }}>Start the conversation by sending a message below</Typography>
                     </Box>
                 ) : (
                     <>
@@ -144,7 +144,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
                     </>
                 )}
             </MessagesContainer>
-            <Box sx={{ bgcolor: '#0f1e36', width: '100%', overflow: 'hidden', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+            <Box sx={{ bgcolor: '#F1F5F9', width: '100%', overflow: 'hidden', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
                 <MessageInput onSendMessage={onSendMessage} onTyping={onTyping} disabled={!isConnected} placeholder={isConnected ? 'Type a message...' : 'Connecting...'} />
             </Box>
         </Box>

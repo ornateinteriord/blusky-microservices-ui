@@ -2,19 +2,19 @@ import { Box, Container, Typography, Grid } from '@mui/material';
 
 const services = [
   {
-    title: 'Property Purchases',
-    description: 'Explore exclusive properties and real estate opportunities tailored to your needs. Whether you are looking for a luxurious new home, a prime commercial space, or a lucrative investment opportunity, we offer dedicated assistance every step of the way.',
+    title: 'Buy & Sell Real Estate',
+    description: 'Whether you are looking to purchase your dream property or sell your current asset for maximum returns, our expert team provides end-to-end real estate solutions. We connect buyers with premium listings and help sellers reach high-net-worth investors quickly.',
     features: [
       'Access to premium, off-market real estate listings',
+      'Strategic marketing and valuation for sellers',
       'End-to-end purchasing and legal documentation support',
-      'Expert market analysis and investment consultations',
-      'Dedicated relationship managers to guide your decisions'
+      'Expert market analysis to ensure maximum ROI'
     ],
     images: [
-      'https://picsum.photos/id/1015/800/600', // landscape
-      'https://picsum.photos/id/1029/800/600', // architecture
-      'https://picsum.photos/id/1040/800/600', // house
-      'https://picsum.photos/id/122/800/600'   // street
+      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80', // luxury house exterior
+      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80', // modern interior
+      'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80', // handshake/buying
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80'  // premium estate
     ]
   },
   {

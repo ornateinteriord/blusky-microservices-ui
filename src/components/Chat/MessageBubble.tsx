@@ -18,7 +18,7 @@ const SentBubble = styled(Paper)(({ theme }) => ({
     borderRadius: '16px',
     borderBottomRightRadius: '4px',
     background: 'linear-gradient(135deg, #00C853 0%, #00E676 100%)',
-    color: '#050916',
+    color: '#FFFFFF',
     maxWidth: '70%',
     minWidth: 'fit-content',
     wordBreak: 'break-word',
@@ -35,7 +35,7 @@ const ReceivedBubble = styled(Paper)(({ theme }) => ({
     minWidth: 'fit-content',
     wordBreak: 'break-word',
     boxShadow: theme.shadows[1],
-    border: `1px solid rgba(255, 255, 255, 0.1)`,
+    border: '1px solid #E2E8F0',
 }));
 
 const formatFileSize = (bytes: number): string => {
@@ -156,7 +156,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
                                         boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
                                         '&:hover': {
                                             bgcolor: 'rgba(0, 0, 0, 0.85)',
-                                            color: '#FFD700',
+                                            color: '#0284C7',
                                         },
                                     }}
                                 >

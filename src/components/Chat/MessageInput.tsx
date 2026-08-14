@@ -27,10 +27,10 @@ const StyledTextField = styled(TextField)(() => ({
         borderRadius: '24px',
         backgroundColor: 'rgba(255, 255, 255, 0.05)',
         color: '#fff',
-        '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.1)' },
+        '& fieldset': { borderColor: '#E2E8F0' },
         '&:hover fieldset': { borderColor: 'rgba(255, 215, 0, 0.5)' },
-        '&.Mui-focused fieldset': { borderColor: '#FFD700', borderWidth: '2px' },
-        '& input::placeholder': { color: 'rgba(255, 255, 255, 0.5)', opacity: 1 },
+        '&.Mui-focused fieldset': { bordercolor: '#0284C7', borderWidth: '2px' },
+        '& input::placeholder': { color: '#475569', opacity: 1 },
     },
 }));
 
@@ -203,13 +203,13 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage, onTyping, di
     };
 
     return (
-        <Box sx={{ p: 2, bgcolor: '#0f1e36', borderTop: 1, borderColor: 'rgba(255,255,255,0.1)', width: '100%', boxSizing: 'border-box' }}>
+        <Box sx={{ p: 2, bgcolor: '#F1F5F9', borderTop: 1, borderColor: '#E2E8F0', width: '100%', boxSizing: 'border-box' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, width: '100%' }}>
                 {!isRecording ? (
                     <>
-                        <IconButton size="medium" onClick={(e) => setEmojiAnchor(e.currentTarget)} sx={{ color: '#FFD700' }}><EmojiEmotions /></IconButton>
-                        <IconButton size="medium" onClick={() => fileInputRef.current?.click()} disabled={disabled || isUploading} sx={{ color: '#FFD700' }}>
-                            {isUploading ? <CircularProgress size={20} sx={{ color: '#FFD700' }} /> : <AttachFile />}
+                        <IconButton size="medium" onClick={(e) => setEmojiAnchor(e.currentTarget)} sx={{ color: '#0284C7' }}><EmojiEmotions /></IconButton>
+                        <IconButton size="medium" onClick={() => fileInputRef.current?.click()} disabled={disabled || isUploading} sx={{ color: '#0284C7' }}>
+                            {isUploading ? <CircularProgress size={20} sx={{ color: '#0284C7' }} /> : <AttachFile />}
                         </IconButton>
                         <input type="file" ref={fileInputRef} onChange={(e) => {
                             const file = e.target.files?.[0];
@@ -244,18 +244,18 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage, onTyping, di
                                                 disabled={isSending}
                                                 size="small"
                                                 sx={{
-                                                    color: '#FFD700',
-                                                    '&:hover': { color: '#e6c200' }
+                                                    color: '#0284C7',
+                                                    '&:hover': { color: '#0369A1' }
                                                 }}
                                             >
-                                                {isSending ? <CircularProgress size={20} sx={{ color: '#FFD700' }} /> : <Send />}
+                                                {isSending ? <CircularProgress size={20} sx={{ color: '#0284C7' }} /> : <Send />}
                                             </IconButton>
                                         ) : (
                                             <IconButton
                                                 onClick={startRecording}
                                                 disabled={disabled}
                                                 size="small"
-                                                sx={{ color: '#FFD700' }}
+                                                sx={{ color: '#0284C7' }}
                                             >
                                                 <Mic />
                                             </IconButton>
@@ -305,8 +305,8 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage, onTyping, di
                     {audioBlob && <audio controls style={{ width: '100%', marginTop: '10px' }} src={URL.createObjectURL(audioBlob)} />}
                 </DialogContent>
                 <DialogActions sx={{ px: 3, pb: 2 }}>
-                    <Button onClick={cancelRecording} disabled={isSending} sx={{ borderRadius: 2, color: 'rgba(255,255,255,0.7)' }}>Discard</Button>
-                    <Button onClick={handleSendAudio} variant="contained" disabled={isSending} sx={{ borderRadius: 2, px: 3, bgcolor: '#FFD700', color: '#050916', '&:hover': { bgcolor: '#e6c200' } }}>Send</Button>
+                    <Button onClick={cancelRecording} disabled={isSending} sx={{ borderRadius: 2, color: '#475569' }}>Discard</Button>
+                    <Button onClick={handleSendAudio} variant="contained" disabled={isSending} sx={{ borderRadius: 2, px: 3, bgcolor: '#0284C7', color: '#FFFFFF', '&:hover': { bgcolor: '#0369A1' } }}>Send</Button>
                 </DialogActions>
             </Dialog>
             <Dialog
@@ -369,7 +369,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage, onTyping, di
                                 disabled={isSending}
                                 sx={{
                                     '& .MuiOutlinedInput-root': {
-                                        bgcolor: 'rgba(255,255,255,0.1)',
+                                        bgcolor: '#FFFFFF',
                                         color: '#fff',
                                         borderRadius: '24px'
                                     }
@@ -379,11 +379,11 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage, onTyping, di
                                 onClick={handleSend}
                                 disabled={isSending}
                                 sx={{
-                                    bgcolor: '#FFD700',
-                                    color: '#050916',
+                                    bgcolor: '#0284C7',
+                                    color: '#FFFFFF',
                                     width: 50,
                                     height: 50,
-                                    '&:hover': { bgcolor: '#e6c200' }
+                                    '&:hover': { bgcolor: '#0369A1' }
                                 }}
                             >
                                 {isSending ? <CircularProgress size={24} color="inherit" /> : <Send />}

@@ -8,7 +8,7 @@ const Footer = () => {
         <Box
             component="footer"
             sx={{
-                bgcolor: "#0f172a", // Dark background matching accent-2
+                bgcolor: '#F1F5F9', // Dark background matching accent-2
                 color: "#f8fafc",
                 position: "relative",
                 overflow: "hidden"
@@ -147,7 +147,7 @@ const Footer = () => {
                                 width: { xs: "100px", lg: "130px" },
                                 height: { xs: "100px", lg: "130px" },
                                 borderRadius: "50%",
-                                border: "1px solid rgba(255,255,255,0.2)",
+                                border: '1px solid #E2E8F0',
                                 display: "flex",
                                 flexDirection: "column",
                                 alignItems: "center",

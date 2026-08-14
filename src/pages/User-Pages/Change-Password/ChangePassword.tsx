@@ -37,35 +37,35 @@ const ChangePassword: React.FC = () => {
   };
 
   const inputStyles = {
-    bgcolor: 'rgba(255,255,255,0.05)',
+    bgcolor: '#F8FAFC',
     borderRadius: '8px',
-    color: '#ffffff',
+    color: '#0F172A',
     '& .MuiOutlinedInput-notchedOutline': {
-      borderColor: 'rgba(255,255,255,0.1)',
+      borderColor: '#E2E8F0',
     },
     '&:hover .MuiOutlinedInput-notchedOutline': {
-      borderColor: 'rgba(255,255,255,0.3)',
+      borderColor: '#E2E8F0',
     },
     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: '#FFD700',
+      bordercolor: '#0284C7',
     },
     '& .MuiInputBase-input': {
-      color: '#ffffff',
+      color: '#0F172A',
     },
     '& .MuiInputLabel-root': {
-      color: 'rgba(255,255,255,0.7)',
+      color: '#475569',
     },
     '& .MuiInputLabel-root.Mui-focused': {
-      color: '#FFD700',
+      color: '#0284C7',
     }
   };
 
   return (
-    <Box sx={{ p: { xs: 2, md: 4 }, display: 'flex', justifyContent: 'center', background: 'linear-gradient(180deg, #050916 0%, #0f1e36 100%)', minHeight: '100vh' }}>
-      <Card sx={{ maxWidth: 600, width: '100%', bgcolor: 'rgba(255, 255, 255, 0.06)', border: '1px solid rgba(255,255,255,0.08)', boxShadow: "0 15px 35px rgba(0,0,0,0.2)", borderRadius: '28px', color: '#ffffff', mt: { xs: 4, md: 10 }, alignSelf: 'flex-start' }}>
+    <Box sx={{ p: { xs: 2, md: 4 }, display: 'flex', justifyContent: 'center', bgcolor: '#F8FAFC', minHeight: '100vh' }}>
+      <Card sx={{ maxWidth: 600, width: '100%', bgcolor: '#F8FAFC', border: '1px solid #E2E8F0', boxShadow: "0 15px 35px rgba(0,0,0,0.2)", borderRadius: '28px', color: '#0F172A', mt: { xs: 4, md: 10 }, alignSelf: 'flex-start' }}>
         <CardHeader 
           title="CHANGE PASSWORD" 
-          sx={{ bgcolor: 'rgba(255,255,255,0.03)', color: '#ffffff', py: 2.5, textAlign: 'center', borderBottom: '1px solid rgba(255,255,255,0.08)' }}
+          sx={{ bgcolor: '#F8FAFC', color: '#0F172A', py: 2.5, textAlign: 'center', borderBottom: '1px solid rgba(255,255,255,0.08)' }}
           titleTypographyProps={{ variant: 'subtitle1', fontWeight: 900, letterSpacing: '1px' }}
         />
         <CardContent sx={{ p: 4 }}>
@@ -82,7 +82,7 @@ const ChangePassword: React.FC = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <VpnKeyIcon sx={{ color: 'rgba(255,255,255,0.7)' }} />
+                    <VpnKeyIcon sx={{ color: '#475569' }} />
                   </InputAdornment>
                 ),
               }}
@@ -100,7 +100,7 @@ const ChangePassword: React.FC = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <LockIcon sx={{ color: 'rgba(255,255,255,0.7)' }} />
+                    <LockIcon sx={{ color: '#475569' }} />
                   </InputAdornment>
                 ),
               }}
@@ -118,7 +118,7 @@ const ChangePassword: React.FC = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <KeyIcon sx={{ color: 'rgba(255,255,255,0.7)' }} />
+                    <KeyIcon sx={{ color: '#475569' }} />
                   </InputAdornment>
                 ),
               }}
@@ -130,22 +130,22 @@ const ChangePassword: React.FC = () => {
                 onClick={handleSubmit}
                 disabled={!formData.oldPassword || !formData.newPassword || !formData.confirmPassword || updateMember.isPending}
                 sx={{
-                  bgcolor: '#FFD700',
-                  color: '#050916',
+                  bgcolor: '#0284C7',
+                  color: '#FFFFFF',
                   px: 5,
                   py: 1.2,
                   fontWeight: 800,
                   textTransform: 'none',
                   borderRadius: '999px',
-                  boxShadow: '0 4px 14px rgba(0, 230, 118, 0.4)',
+                  boxShadow: '0 4px 14px rgba(2, 132, 199, 0.4)',
                   width: { xs: '100%', sm: 'auto' },
                   '&:hover': {
-                    bgcolor: '#e6c200',
-                    boxShadow: '0 6px 20px rgba(0, 230, 118, 0.6)'
+                    bgcolor: '#0369A1',
+                    boxShadow: '0 6px 20px rgba(2, 132, 199, 0.6)'
                   },
                   "&:disabled": {
-                    bgcolor: 'rgba(0, 230, 118, 0.3)',
-                    color: 'rgba(255,255,255,0.5)'
+                    bgcolor: 'rgba(2, 132, 199, 0.3)',
+                    color: '#475569'
                   }
                 }}
               >

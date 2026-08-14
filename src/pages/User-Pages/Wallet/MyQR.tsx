@@ -108,7 +108,7 @@ const MyQR: React.FC = () => {
   if (isLoading) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}>
-        <CircularProgress sx={{ color: '#FFD700' }} />
+        <CircularProgress sx={{ color: '#0284C7' }} />
       </Box>
     );
   }
@@ -148,8 +148,8 @@ const MyQR: React.FC = () => {
         sx={{
           p: { xs: 3, sm: 5 },
           borderRadius: '28px',
-          bgcolor: 'rgba(255, 255, 255, 0.04)',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
+          bgcolor: '#F8FAFC',
+          border: '1px solid #E2E8F0',
           boxShadow: '0 20px 50px rgba(0, 0, 0, 0.4)',
           textAlign: 'center',
           position: 'relative',
@@ -158,20 +158,20 @@ const MyQR: React.FC = () => {
         }}
       >
         <Box sx={{ display: 'inline-flex', p: 2, borderRadius: '20px', bgcolor: 'rgba(255, 215, 0, 0.1)', mb: 2 }}>
-          <QrCode2Icon sx={{ fontSize: 40, color: '#FFD700' }} />
+          <QrCode2Icon sx={{ fontSize: 40, color: '#0284C7' }} />
         </Box>
 
-        <Typography variant="h4" sx={{ color: '#ffffff', fontWeight: 900, mb: 0.5, letterSpacing: '0.5px',fontSize:{xs:20,sm:25} }}>
+        <Typography variant="h4" sx={{ color: '#0F172A', fontWeight: 900, mb: 0.5, letterSpacing: '0.5px',fontSize:{xs:20,sm:25} }}>
           MY P2P QR CODE
         </Typography>
-        <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.6)', mb: 4, maxWidth: '400px', mx: 'auto',fontSize:{xs:12,sm:14} }}>
+        <Typography variant="body2" sx={{ color: '#475569', mb: 4, maxWidth: '400px', mx: 'auto',fontSize:{xs:12,sm:14} }}>
           Share this QR code with other BMS members to receive instant member-to-member transfers directly to your Top Up Wallet.
         </Typography>
 
         <Box
           sx={{
             p: 3,
-            bgcolor: '#ffffff',
+            bgcolor: '#F1F5F9',
             borderRadius: '24px',
             display: 'inline-block',
             boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
@@ -185,11 +185,11 @@ const MyQR: React.FC = () => {
           />
         </Box>
 
-        <Box sx={{ mb: 4, p: 2, borderRadius: '16px', bgcolor: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.06)' }}>
-          <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.5)', textTransform: 'uppercase', letterSpacing: '1px', display: 'block', mb: 0.5,fontSize:{xs:12,sm:14} }}>
+        <Box sx={{ mb: 4, p: 2, borderRadius: '16px', bgcolor: '#F8FAFC', border: '1px solid #E2E8F0' }}>
+          <Typography variant="caption" sx={{ color: '#475569', textTransform: 'uppercase', letterSpacing: '1px', display: 'block', mb: 0.5,fontSize:{xs:12,sm:14} }}>
             Member Name & ID
           </Typography>
-          <Typography variant="h6" sx={{ color: '#ffffff', fontWeight: 800,fontSize:{xs:12,sm:14} }}>
+          <Typography variant="h6" sx={{ color: '#0F172A', fontWeight: 800,fontSize:{xs:12,sm:14} }}>
             {memberName} ({memberId})
           </Typography>
         </Box>
@@ -200,8 +200,8 @@ const MyQR: React.FC = () => {
             startIcon={<ContentCopyIcon />}
             onClick={handleCopy}
             sx={{
-              background: 'linear-gradient(45deg, #FFD700 30%, #FFDF00 90%)',
-              color: '#050916',
+              background: 'linear-gradient(45deg, #0EA5E9 30%, #0284C7 90%)',
+              color: '#FFFFFF',
               borderRadius: '999px',
               px: 3.5,
               py: 1.5,
@@ -211,7 +211,7 @@ const MyQR: React.FC = () => {
               letterSpacing: '0.5px',
               boxShadow: '0 4px 15px rgba(255, 215, 0, 0.3)',
               '&:hover': {
-                background: 'linear-gradient(45deg, #e6c200 30%, #FFD700 90%)',
+                background: 'linear-gradient(45deg, #0284C7 30%, #0369A1 90%)',
                 transform: 'translateY(-2px)',
                 boxShadow: '0 6px 20px rgba(255, 215, 0, 0.5)',
               },
@@ -225,8 +225,8 @@ const MyQR: React.FC = () => {
             startIcon={<ChatBubbleOutlineIcon />}
             onClick={handleOpenShare}
             sx={{
-              background: 'linear-gradient(45deg, #00E676 30%, #00C853 90%)',
-              color: '#050916',
+              background: 'linear-gradient(45deg, #0EA5E9 30%, #0284C7 90%)',
+              color: '#FFFFFF',
               borderRadius: '999px',
               px: 3.5,
               py: 1.5,
@@ -234,11 +234,11 @@ const MyQR: React.FC = () => {
               textTransform: 'uppercase',
               fontSize: '0.8rem',
               letterSpacing: '0.5px',
-              boxShadow: '0 4px 15px rgba(0, 230, 118, 0.3)',
+              boxShadow: '0 4px 15px rgba(2, 132, 199, 0.3)',
               '&:hover': {
-                background: 'linear-gradient(45deg, #00C853 30%, #00E676 90%)',
+                background: 'linear-gradient(45deg, #0284C7 30%, #0369A1 90%)',
                 transform: 'translateY(-2px)',
-                boxShadow: '0 6px 20px rgba(0, 230, 118, 0.5)',
+                boxShadow: '0 6px 20px rgba(2, 132, 199, 0.5)',
               },
             }}
           >
@@ -250,8 +250,8 @@ const MyQR: React.FC = () => {
             startIcon={<DownloadIcon />}
             onClick={handleDownload}
             sx={{
-              borderColor: 'rgba(255, 255, 255, 0.3)',
-              color: '#ffffff',
+              borderColor: '#E2E8F0',
+              color: '#0F172A',
               borderRadius: '999px',
               px: 3.5,
               py: 1.5,
@@ -260,8 +260,8 @@ const MyQR: React.FC = () => {
               fontSize: '0.8rem',
               letterSpacing: '0.5px',
               '&:hover': {
-                borderColor: '#ffffff',
-                bgcolor: 'rgba(255, 255, 255, 0.05)',
+                bordercolor: '#0F172A',
+                bgcolor: '#F8FAFC',
                 transform: 'translateY(-2px)',
               },
             }}
@@ -280,44 +280,44 @@ const MyQR: React.FC = () => {
         PaperProps={{
           sx: {
             borderRadius: { xs: '20px', sm: '24px' },
-            bgcolor: '#0A1128',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
+            bgcolor: '#F8FAFC',
+            border: '1px solid #E2E8F0',
             boxShadow: '0 20px 60px rgba(0,0,0,0.8)',
-            color: '#fff',
+            color: '#0F172A',
             m: { xs: 1.5, sm: 4 },
             width: { xs: 'calc(100% - 24px)', sm: '100%' },
           },
         }}
       >
         <DialogTitle sx={{ pb: 1, pt: { xs: 2.5, sm: 3 }, px: { xs: 2, sm: 3 }, display: 'flex', alignItems: 'center', gap: 1.5 }}>
-          <Box sx={{ p: { xs: 0.8, sm: 1 }, borderRadius: '12px', bgcolor: 'rgba(0, 230, 118, 0.1)', display: 'flex', flexShrink: 0 }}>
+          <Box sx={{ p: { xs: 0.8, sm: 1 }, borderRadius: '12px', bgcolor: 'rgba(2, 132, 199, 0.1)', display: 'flex', flexShrink: 0 }}>
             <ChatBubbleOutlineIcon sx={{ color: '#00E676', fontSize: { xs: 22, sm: 24 } }} />
           </Box>
           <Box sx={{ flex: 1, minWidth: 0 }}>
-            <Typography variant="h6" sx={{ fontWeight: 900, color: '#fff', lineHeight: 1.2, fontSize: { xs: '1.1rem', sm: '1.25rem' } }}>
+            <Typography variant="h6" sx={{ fontWeight: 900, color: '#0F172A', lineHeight: 1.2, fontSize: { xs: '1.1rem', sm: '1.25rem' } }}>
               Share P2P QR to Chat
             </Typography>
-            <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontSize: { xs: '0.7rem', sm: '0.75rem' }, display: 'block', lineHeight: 1.3, mt: 0.2 }}>
+            <Typography variant="caption" sx={{ color: '#475569', fontSize: { xs: '0.7rem', sm: '0.75rem' }, display: 'block', lineHeight: 1.3, mt: 0.2 }}>
               Send your QR code directly to any member in your chat conversations
             </Typography>
           </Box>
         </DialogTitle>
 
         <DialogContent sx={{ px: { xs: 2, sm: 3 }, py: 2 }}>
-          <Box sx={{ p: { xs: 1.5, sm: 2 }, mb: 3, borderRadius: '16px', bgcolor: 'rgba(0, 230, 118, 0.08)', border: '1px solid rgba(0, 230, 118, 0.3)', display: 'flex', alignItems: 'center', gap: { xs: 1.5, sm: 2 } }}>
+          <Box sx={{ p: { xs: 1.5, sm: 2 }, mb: 3, borderRadius: '16px', bgcolor: 'rgba(2, 132, 199, 0.08)', border: '1px solid rgba(2, 132, 199, 0.3)', display: 'flex', alignItems: 'center', gap: { xs: 1.5, sm: 2 } }}>
             <img src={qrImageUrl} alt="QR Preview" style={{ width: 50, height: 50, borderRadius: '8px', background: '#fff', padding: '4px', flexShrink: 0 }} />
             <Box sx={{ flex: 1, minWidth: 0 }}>
               <Typography variant="body2" sx={{ fontWeight: 800, color: '#00E676', fontSize: { xs: 13, sm: 14 }, wordBreak: 'break-word' }}>
                 Sharing QR of: {memberName} ({memberId})
               </Typography>
-              <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', display: 'block', fontSize: { xs: 11, sm: 12 }, lineHeight: 1.3, mt: 0.2 }}>
+              <Typography variant="caption" sx={{ color: '#475569', display: 'block', fontSize: { xs: 11, sm: 12 }, lineHeight: 1.3, mt: 0.2 }}>
                 Recipient will receive your QR image, Member ID & Name
               </Typography>
             </Box>
           </Box>
 
           <Box sx={{ my: 2 }}>
-            <Typography variant="subtitle2" sx={{ mb: 1, color: 'rgba(255,255,255,0.8)', fontWeight: 700 }}>
+            <Typography variant="subtitle2" sx={{ mb: 1, color: '#475569', fontWeight: 700 }}>
               Search Member by Mobile Number
             </Typography>
             <Box sx={{ display: 'flex', gap: 1 }}>
@@ -330,10 +330,10 @@ const MyQR: React.FC = () => {
                 onKeyDown={(e) => e.key === 'Enter' && handleSearchMember()}
                 sx={{
                   '& .MuiOutlinedInput-root': {
-                    color: '#fff',
-                    bgcolor: 'rgba(255,255,255,0.04)',
+                    color: '#0F172A',
+                    bgcolor: '#F8FAFC',
                     borderRadius: '12px',
-                    '& fieldset': { borderColor: 'rgba(255,255,255,0.15)' },
+                    '& fieldset': { borderColor: '#E2E8F0' },
                     '&:hover fieldset': { borderColor: '#00E676' },
                     '&.Mui-focused fieldset': { borderColor: '#00E676' },
                   },
@@ -344,30 +344,30 @@ const MyQR: React.FC = () => {
                 onClick={handleSearchMember}
                 disabled={searchingMember}
                 sx={{
-                  bgcolor: '#FFD700',
-                  color: '#050916',
+                  bgcolor: '#0284C7',
+                  color: '#FFFFFF',
                   fontWeight: 800,
                   borderRadius: '12px',
                   px: 2.5,
                   flexShrink: 0,
-                  '&:hover': { bgcolor: '#e6c200' },
+                  '&:hover': { bgcolor: '#0369A1' },
                 }}
               >
-                {searchingMember ? <CircularProgress size={20} sx={{ color: '#050916' }} /> : <SearchIcon />}
+                {searchingMember ? <CircularProgress size={20} sx={{ color: '#FFFFFF' }} /> : <SearchIcon />}
               </Button>
             </Box>
 
             {foundMember && foundMember.chatRoom && (
-              <Box sx={{ mt: 2, p: { xs: 1.5, sm: 2 }, borderRadius: '16px', bgcolor: 'rgba(0, 230, 118, 0.08)', border: '1px solid rgba(0, 230, 118, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 1 }}>
+              <Box sx={{ mt: 2, p: { xs: 1.5, sm: 2 }, borderRadius: '16px', bgcolor: 'rgba(2, 132, 199, 0.08)', border: '1px solid rgba(2, 132, 199, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 1 }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.2, minWidth: 0, flex: 1 }}>
-                  <Avatar sx={{ bgcolor: '#00E676', color: '#050916', fontWeight: 900, width: { xs: 36, sm: 40 }, height: { xs: 36, sm: 40 }, flexShrink: 0 }}>
+                  <Avatar sx={{ bgcolor: '#00E676', color: '#FFFFFF', fontWeight: 900, width: { xs: 36, sm: 40 }, height: { xs: 36, sm: 40 }, flexShrink: 0 }}>
                     {(foundMember.name || 'U')[0].toUpperCase()}
                   </Avatar>
                   <Box sx={{ minWidth: 0, flex: 1 }}>
-                    <Typography noWrap variant="body2" sx={{ fontWeight: 800, color: '#fff', fontSize: { xs: 13, sm: 14 } }}>
+                    <Typography noWrap variant="body2" sx={{ fontWeight: 800, color: '#0F172A', fontSize: { xs: 13, sm: 14 } }}>
                       {foundMember.name} {foundMember.Member_id || foundMember.memberId || foundMember.member_id ? `(${foundMember.Member_id || foundMember.memberId || foundMember.member_id})` : ''}
                     </Typography>
-                    <Typography noWrap variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', display: 'block', fontSize: { xs: 11, sm: 12 } }}>
+                    <Typography noWrap variant="caption" sx={{ color: '#475569', display: 'block', fontSize: { xs: 11, sm: 12 } }}>
                       Role: {foundMember.role || 'Member'}
                     </Typography>
                   </Box>
@@ -379,8 +379,8 @@ const MyQR: React.FC = () => {
                   disabled={sendingRoomId === foundMember.chatRoom.roomId}
                   onClick={() => handleSendQRToRoom(foundMember.chatRoom.roomId, foundMember.name)}
                   sx={{
-                    background: 'linear-gradient(45deg, #00E676 30%, #00C853 90%)',
-                    color: '#050916',
+                    background: 'linear-gradient(45deg, #0EA5E9 30%, #0284C7 90%)',
+                    color: '#FFFFFF',
                     fontWeight: 900,
                     borderRadius: '999px',
                     px: { xs: 1.5, sm: 2 },
@@ -388,21 +388,21 @@ const MyQR: React.FC = () => {
                     fontSize: { xs: '0.75rem', sm: '0.8125rem' },
                     flexShrink: 0,
                     textTransform: 'none',
-                    boxShadow: '0 4px 12px rgba(0, 230, 118, 0.3)',
-                    '&:hover': { background: 'linear-gradient(45deg, #00C853 30%, #00E676 90%)' },
+                    boxShadow: '0 4px 12px rgba(2, 132, 199, 0.3)',
+                    '&:hover': { background: 'linear-gradient(45deg, #0284C7 30%, #0369A1 90%)' },
                   }}
                 >
-                  {sendingRoomId === foundMember.chatRoom.roomId ? <CircularProgress size={16} sx={{ color: '#050916' }} /> : 'Send QR'}
+                  {sendingRoomId === foundMember.chatRoom.roomId ? <CircularProgress size={16} sx={{ color: '#FFFFFF' }} /> : 'Send QR'}
                 </Button>
               </Box>
             )}
           </Box>
 
-          <Divider sx={{ my: 3, borderColor: 'rgba(255,255,255,0.1)' }}>
-            <Chip label="OR RECENT CHATS" sx={{ bgcolor: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.6)', fontWeight: 700, fontSize: '11px' }} />
+          <Divider sx={{ my: 3, borderColor: '#E2E8F0' }}>
+            <Chip label="OR RECENT CHATS" sx={{ bgcolor: '#F8FAFC', color: '#475569', fontWeight: 700, fontSize: '11px' }} />
           </Divider>
 
-          <Typography variant="subtitle2" sx={{ mb: 1, color: 'rgba(255,255,255,0.8)', fontWeight: 700 }}>
+          <Typography variant="subtitle2" sx={{ mb: 1, color: '#475569', fontWeight: 700 }}>
             Select Active Conversation
           </Typography>
 
@@ -411,8 +411,8 @@ const MyQR: React.FC = () => {
               <CircularProgress sx={{ color: '#00E676' }} />
             </Box>
           ) : chatRooms.length === 0 ? (
-            <Box sx={{ textAlign: 'center', py: 3, px: 2, bgcolor: 'rgba(255,255,255,0.02)', borderRadius: '16px' }}>
-              <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>
+            <Box sx={{ textAlign: 'center', py: 3, px: 2, bgcolor: '#F8FAFC', borderRadius: '16px' }}>
+              <Typography variant="body2" sx={{ color: '#475569' }}>
                 No active chat conversations found. Search a member above to start!
               </Typography>
             </Box>
@@ -432,9 +432,9 @@ const MyQR: React.FC = () => {
                     sx={{
                       borderRadius: '16px',
                       mb: 1,
-                      bgcolor: 'rgba(255,255,255,0.03)',
-                      border: '1px solid rgba(255,255,255,0.05)',
-                      '&:hover': { bgcolor: 'rgba(255,255,255,0.08)' },
+                      bgcolor: '#F8FAFC',
+                      border: '1px solid #E2E8F0',
+                      '&:hover': { bgcolor: '#F8FAFC' },
                       justifyContent: 'space-between',
                       px: { xs: 1.5, sm: 2 },
                       py: 1.5,
@@ -442,14 +442,14 @@ const MyQR: React.FC = () => {
                     }}
                   >
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 1, sm: 1.5 }, minWidth: 0, flex: 1 }}>
-                      <Avatar src={otherParticipant?.profileImage} sx={{ bgcolor: '#FFD700', color: '#050916', fontWeight: 900, width: { xs: 36, sm: 40 }, height: { xs: 36, sm: 40 }, flexShrink: 0 }}>
+                      <Avatar src={otherParticipant?.profileImage} sx={{ bgcolor: '#0284C7', color: '#FFFFFF', fontWeight: 900, width: { xs: 36, sm: 40 }, height: { xs: 36, sm: 40 }, flexShrink: 0 }}>
                         {name[0].toUpperCase()}
                       </Avatar>
                       <Box sx={{ minWidth: 0, flex: 1 }}>
-                        <Typography noWrap variant="body2" sx={{ fontWeight: 800, color: '#fff', fontSize: { xs: 13, sm: 14 } }}>
+                        <Typography noWrap variant="body2" sx={{ fontWeight: 800, color: '#0F172A', fontSize: { xs: 13, sm: 14 } }}>
                           {name} {otherParticipant?.memberId || otherParticipant?.Member_id ? `(${otherParticipant?.memberId || otherParticipant?.Member_id})` : ''}
                         </Typography>
-                        <Typography noWrap variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', display: 'block', fontSize: { xs: 11, sm: 12 } }}>
+                        <Typography noWrap variant="caption" sx={{ color: '#475569', display: 'block', fontSize: { xs: 11, sm: 12 } }}>
                           {role} • {room.lastMessage ? (room.lastMessage.length > 25 ? room.lastMessage.substring(0, 25) + '...' : room.lastMessage) : 'No messages yet'}
                         </Typography>
                       </Box>
@@ -465,8 +465,8 @@ const MyQR: React.FC = () => {
                         handleSendQRToRoom(room.roomId, name);
                       }}
                       sx={{
-                        background: 'linear-gradient(45deg, #00E676 30%, #00C853 90%)',
-                        color: '#050916',
+                        background: 'linear-gradient(45deg, #0EA5E9 30%, #0284C7 90%)',
+                        color: '#FFFFFF',
                         fontWeight: 900,
                         borderRadius: '999px',
                         px: { xs: 1.5, sm: 2 },
@@ -474,11 +474,11 @@ const MyQR: React.FC = () => {
                         fontSize: { xs: '0.75rem', sm: '0.8125rem' },
                         flexShrink: 0,
                         textTransform: 'none',
-                        boxShadow: '0 4px 12px rgba(0, 230, 118, 0.3)',
-                        '&:hover': { background: 'linear-gradient(45deg, #00C853 30%, #00E676 90%)' },
+                        boxShadow: '0 4px 12px rgba(2, 132, 199, 0.3)',
+                        '&:hover': { background: 'linear-gradient(45deg, #0284C7 30%, #0369A1 90%)' },
                       }}
                     >
-                      {sendingRoomId === room.roomId ? <CircularProgress size={16} sx={{ color: '#050916' }} /> : 'Send'}
+                      {sendingRoomId === room.roomId ? <CircularProgress size={16} sx={{ color: '#FFFFFF' }} /> : 'Send'}
                     </Button>
                   </ListItemButton>
                 );
@@ -491,13 +491,13 @@ const MyQR: React.FC = () => {
           <Button
             onClick={() => setShareOpen(false)}
             sx={{
-              color: 'rgba(255,255,255,0.6)',
+              color: '#475569',
               fontWeight: 800,
               px: 4,
               py: 0.8,
               borderRadius: '999px',
-              border: '1px solid rgba(255,255,255,0.1)',
-              '&:hover': { color: '#fff', bgcolor: 'rgba(255,255,255,0.05)', borderColor: 'rgba(255,255,255,0.2)' },
+              border: '1px solid #E2E8F0',
+              '&:hover': { color: '#0F172A', bgcolor: '#F8FAFC', borderColor: '#E2E8F0' },
             }}
           >
             Close

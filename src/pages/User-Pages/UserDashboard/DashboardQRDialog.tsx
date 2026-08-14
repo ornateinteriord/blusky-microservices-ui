@@ -123,11 +123,11 @@ const DashboardQRDialog: React.FC<DashboardQRDialogProps> = ({ open, onClose, me
           <Box>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               <Box sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: '#00C851' }} />
-              <Typography sx={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase' }}>
+              <Typography sx={{ color: '#475569', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase' }}>
                 Send / Receive
               </Typography>
             </Box>
-            <Typography variant="h5" sx={{ color: 'white', fontWeight: 800, mt: -0.2 }}>
+            <Typography variant="h5" sx={{ color: '#0F172A', fontWeight: 800, mt: -0.2 }}>
               Smart Transfer
             </Typography>
           </Box>
@@ -135,11 +135,11 @@ const DashboardQRDialog: React.FC<DashboardQRDialogProps> = ({ open, onClose, me
         <IconButton 
           onClick={onClose}
           sx={{ 
-            color: 'rgba(255,255,255,0.6)',
-            bgcolor: 'rgba(255,255,255,0.05)',
-            border: '1px solid rgba(255,255,255,0.1)',
+            color: '#475569',
+            bgcolor: '#F8FAFC',
+            border: '1px solid #E2E8F0',
             borderRadius: '12px',
-            '&:hover': { color: 'white', bgcolor: 'rgba(255,215,0,0.15)', borderColor: 'rgba(255,215,0,0.3)' }
+            '&:hover': { color: '#0F172A', bgcolor: 'rgba(255,215,0,0.15)', borderColor: 'rgba(255,215,0,0.3)' }
           }}
         >
           <CloseIcon fontSize="small" />
@@ -153,7 +153,7 @@ const DashboardQRDialog: React.FC<DashboardQRDialogProps> = ({ open, onClose, me
           bgcolor: 'rgba(0,0,0,0.4)', 
           borderRadius: '999px', // Pill shape
           p: 0.75,
-          border: '1px solid rgba(255,255,255,0.05)',
+          border: '1px solid #E2E8F0',
           position: 'relative'
         }}>
           {/* Animated Background Pill */}
@@ -163,7 +163,7 @@ const DashboardQRDialog: React.FC<DashboardQRDialogProps> = ({ open, onClose, me
             bottom: 6,
             left: activeTab === 'my_qr' ? '6px' : 'calc(50% + 2px)',
             width: 'calc(50% - 8px)',
-            bgcolor: '#FFD700',
+            bgcolor: '#0284C7',
             borderRadius: '999px',
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             boxShadow: '0 4px 15px rgba(255, 215, 0, 0.3)'
@@ -179,7 +179,7 @@ const DashboardQRDialog: React.FC<DashboardQRDialogProps> = ({ open, onClose, me
               textTransform: 'none',
               fontWeight: 800,
               fontSize: '0.95rem',
-              color: activeTab === 'my_qr' ? '#0D2658' : 'rgba(255,255,255,0.6)',
+              color: activeTab === 'my_qr' ? '#0D2658' : '#64748B',
               zIndex: 1,
               '&:hover': {
                 bgcolor: 'transparent'
@@ -198,7 +198,7 @@ const DashboardQRDialog: React.FC<DashboardQRDialogProps> = ({ open, onClose, me
               textTransform: 'none',
               fontWeight: 800,
               fontSize: '0.95rem',
-              color: activeTab === 'scan_pay' ? '#0D2658' : 'rgba(255,255,255,0.6)',
+              color: activeTab === 'scan_pay' ? '#0D2658' : '#64748B',
               zIndex: 1,
               '&:hover': {
                 bgcolor: 'transparent'
@@ -259,7 +259,7 @@ const DashboardQRDialog: React.FC<DashboardQRDialogProps> = ({ open, onClose, me
                   boxShadow: 'inset 0 0 20px rgba(255, 215, 0, 0.05)'
                 }}>
                   <Typography sx={{ 
-                    color: '#FFD700', 
+                    color: '#0284C7', 
                     fontSize: { xs: '0.65rem', sm: '0.75rem' }, 
                     fontWeight: 800, 
                     letterSpacing: '2px', 
@@ -273,13 +273,13 @@ const DashboardQRDialog: React.FC<DashboardQRDialogProps> = ({ open, onClose, me
                     Member
                   </Typography>
                   <Typography sx={{ 
-                    color: 'white', 
+                    color: '#0F172A', 
                     fontSize: { xs: '1rem', sm: '1.15rem' }, 
                     fontWeight: 800, 
                     letterSpacing: '0.5px',
                     mt: 0.5 
                   }}>
-                    {memberName} <span style={{ color: 'rgba(255,255,255,0.4)', fontWeight: 400, margin: '0 4px' }}>—</span> {memberId}
+                    {memberName} <span style={{ color: '#64748B', fontWeight: 400, margin: '0 4px' }}>—</span> {memberId}
                   </Typography>
                 </Box>
               </Box>
@@ -298,19 +298,19 @@ const DashboardQRDialog: React.FC<DashboardQRDialogProps> = ({ open, onClose, me
                 }}>
                   <QrCodeScannerIcon sx={{ fontSize: 48, color: 'rgba(255,215,0,0.5)' }} />
                   {/* Scanner line animation placeholder */}
-                  <Box sx={{ position: 'absolute', top: '10%', left: 0, right: 0, height: '2px', bgcolor: '#FFD700', boxShadow: '0 0 10px #FFD700' }} />
+                  <Box sx={{ position: 'absolute', top: '10%', left: 0, right: 0, height: '2px', bgcolor: '#0284C7', boxShadow: '0 0 10px #FFD700' }} />
                 </Box>
-                <Typography variant="h6" sx={{ color: 'white', fontWeight: 800, mb: 1 }}>
+                <Typography variant="h6" sx={{ color: '#0F172A', fontWeight: 800, mb: 1 }}>
                   Scan a QR Code
                 </Typography>
-                <Typography sx={{ color: 'rgba(255,255,255,0.6)', textAlign: 'center', fontSize: '0.9rem' }}>
+                <Typography sx={{ color: '#475569', textAlign: 'center', fontSize: '0.9rem' }}>
                   Align the QR code within the frame to scan and pay instantly.
                 </Typography>
                 <Button
                   variant="contained"
                   sx={{
                     mt: 3,
-                    background: 'linear-gradient(45deg, #FFD700 30%, #FFDF00 90%)',
+                    background: 'linear-gradient(45deg, #0EA5E9 30%, #0284C7 90%)',
                     color: '#0D2658',
                     borderRadius: '999px',
                     px: 4, py: 1.2,
@@ -319,7 +319,7 @@ const DashboardQRDialog: React.FC<DashboardQRDialogProps> = ({ open, onClose, me
                     letterSpacing: '0.5px',
                     boxShadow: '0 4px 15px rgba(255, 215, 0, 0.3)',
                     '&:hover': {
-                      background: 'linear-gradient(45deg, #e6c200 30%, #FFD700 90%)',
+                      background: 'linear-gradient(45deg, #0284C7 30%, #0369A1 90%)',
                       boxShadow: '0 6px 20px rgba(255, 215, 0, 0.5)',
                       transform: 'translateY(-1px)'
                     }
@@ -347,7 +347,7 @@ const DashboardQRDialog: React.FC<DashboardQRDialogProps> = ({ open, onClose, me
             startIcon={<DownloadIcon />}
             onClick={handleDownload}
             sx={{
-              color: '#FFD700',
+              color: '#0284C7',
               bgcolor: 'rgba(255,215,0,0.02)',
               borderColor: 'rgba(255,215,0,0.3)',
               borderRadius: '16px',
@@ -356,7 +356,7 @@ const DashboardQRDialog: React.FC<DashboardQRDialogProps> = ({ open, onClose, me
               textTransform: 'none',
               '&:hover': {
                 bgcolor: 'rgba(255,215,0,0.08)',
-                borderColor: '#FFD700'
+                bordercolor: '#0284C7'
               }
             }}
           >
@@ -368,7 +368,7 @@ const DashboardQRDialog: React.FC<DashboardQRDialogProps> = ({ open, onClose, me
             startIcon={<ShareIcon />}
             onClick={handleShare}
             sx={{
-              background: 'linear-gradient(45deg, #FFD700 30%, #FFDF00 90%)',
+              background: 'linear-gradient(45deg, #0EA5E9 30%, #0284C7 90%)',
               color: '#0D2658',
               borderRadius: '16px',
               py: 1.5,
@@ -376,7 +376,7 @@ const DashboardQRDialog: React.FC<DashboardQRDialogProps> = ({ open, onClose, me
               textTransform: 'none',
               boxShadow: '0 8px 20px rgba(255, 215, 0, 0.2)',
               '&:hover': {
-                background: 'linear-gradient(45deg, #e6c200 30%, #FFD700 90%)',
+                background: 'linear-gradient(45deg, #0284C7 30%, #0369A1 90%)',
                 boxShadow: '0 10px 25px rgba(255, 215, 0, 0.3)',
                 transform: 'translateY(-2px)'
               },
