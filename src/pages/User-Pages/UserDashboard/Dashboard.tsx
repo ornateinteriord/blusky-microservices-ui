@@ -170,11 +170,17 @@ const UserDashboard = () => {
           }}>
             {(() => {
               const id = memberDetails?.Member_id || memberId || 'BMS';
-              let hash = 0;
-              for (let i = 0; i < id.length; i++) hash = id.charCodeAt(i) + ((hash << 5) - hash);
-              let numStr = Math.abs(hash).toString();
-              while (numStr.length < 16) numStr += Math.abs(hash * numStr.length).toString();
-              return numStr.substring(0, 16).replace(/(.{4})/g, '$1 ').trim();
+              let seed = 5381;
+              for (let i = 0; i < id.length; i++) {
+                seed = (seed * 33) ^ id.charCodeAt(i);
+              }
+              seed = Math.abs(seed);
+              let numStr = '4'; // Start with 4 to simulate Visa
+              for (let i = 0; i < 15; i++) {
+                seed = (seed * 9301 + 49297) % 233280;
+                numStr += Math.floor((seed / 233280) * 10).toString();
+              }
+              return numStr.replace(/(.{4})/g, '$1 ').trim();
             })()}
           </Typography>
 
