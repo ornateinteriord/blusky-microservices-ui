@@ -152,6 +152,9 @@ const MISPayMaturity = lazy(() => import("./pages/Admin-Pages/Banking/MIS/MISPay
 const UserDashboard = lazy(
   () => import("./pages/User-Pages/UserDashboard/Dashboard")
 );
+const UserPortfolio = lazy(
+  () => import("./pages/User-Pages/Portfolio/Portfolio")
+);
 const LoadFundPage = lazy(() => import("./pages/User-Pages/UserDashboard/LoadFundPage"));
 const NewSubscription = lazy(() => import("./pages/User-Pages/UserDashboard/NewSubscription"));
 const MySubscriptions = lazy(() => import("./pages/User-Pages/UserDashboard/MySubscriptions"));
@@ -535,6 +538,7 @@ const RoutesProvider = ({
 
             <Route element={<ProtectedRoute allowedRoles={["USER"]} />}>
               <Route path="/user/dashboard" element={<UserDashboard />} />
+              <Route path="/user/portfolio" element={<UserPortfolio />} />
               <Route path="/user/load-fund" element={<LoadFundPage />} />
               <Route path="/user/new-subscription" element={<NewSubscription />} />
               <Route path="/user/my-subscriptions" element={<MySubscriptions />} />

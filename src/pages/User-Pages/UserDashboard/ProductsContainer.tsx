@@ -7,13 +7,15 @@ import { useBuyPackageDirectlyMutation } from '../../../api/Packages';
 import { toast } from 'react-toastify';
 import { useGetMemberAddOns } from '../../../api/Packages';
 
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+
 const PACKAGES = [
-  { id: 1, amount: 10000, title: "Secure Growth Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#1de9b6", description: "Begin your journey with the Secure Growth Plan and unlock new growth opportunities" },
-  { id: 2, amount: 25000, title: "Smart Saver Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#CD7F32", description: "The Smart Saver Plan helps you explore enhanced features and expand your trading potential" },
-  { id: 3, amount: 50000, title: "Wealth Builder Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#C0C0C0", description: "Explore the Wealth Builder Plan designed for advanced financial management and growth opportunities" },
-  { id: 4, amount: 100000, title: "Future Secure Deposit", yield: "5%", days: "210 Day", tag: "Members Only", color: '#0284C7', description: "Take your forex journey further with the Future Secure Deposit" },
-  { id: 5, amount: 200000, title: "Prosper Plus Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#E5E4E2", description: "A premium package built to support smarter trading decisions and long-term growth" },
-  { id: 6, amount: 500000, title: "Golden Growth Investment Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#b9f2ff", description: "Experience a higher level of financial flexibility with the Golden Growth Investment Plan" }
+  { id: 1, amount: 10000, title: "Secure Growth Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#1de9b6", description: "Begin your journey with the Secure Growth Plan and unlock new growth opportunities", features: ["1 Property Listing", "Standard Response Rate", "120 Days Ad Validity"] },
+  { id: 2, amount: 25000, title: "Smart Saver Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#CD7F32", description: "The Smart Saver Plan helps you explore enhanced features and expand your trading potential", features: ["Up to 2x Response Rate", "160 Days Ad Validity", "50 Buyer Notifications", "Verified Property Tag"] },
+  { id: 3, amount: 50000, title: "Wealth Builder Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#C0C0C0", description: "Explore the Wealth Builder Plan designed for advanced financial management and growth opportunities", features: ["Up to 5x Response Rate", "180 Days Ad Validity", "100 Buyer Notifications", "250 Email Promotions"] },
+  { id: 4, amount: 100000, title: "Future Secure Deposit", yield: "5%", days: "210 Day", tag: "Members Only", color: '#0284C7', description: "Take your forex journey further with the Future Secure Deposit", features: ["Up to 7x Response Rate", "250 Days Ad Validity", "100 Buyer Notifications", "1500 Email Promotions"] },
+  { id: 5, amount: 200000, title: "Prosper Plus Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#E5E4E2", description: "A premium package built to support smarter trading decisions and long-term growth", features: ["Up to 10x Response Rate", "300 Days Ad Validity", "150 Buyer Notifications", "2000 Email Promotions"] },
+  { id: 6, amount: 500000, title: "Golden Growth Investment Plan", yield: "5%", days: "210 Day", tag: "Members Only", color: "#b9f2ff", description: "Experience a higher level of financial flexibility with the Golden Growth Investment Plan", features: ["Premium Response Rate", "365 Days Ad Validity", "Unlimited Notifications", "Dedicated Support"] }
 ];
 
 const ProductsContainer: React.FC = () => {
@@ -144,22 +146,31 @@ const ProductsContainer: React.FC = () => {
                 {pkg.title}
               </Typography>
               
-              <Typography variant="body2" sx={{ color: '#475569', fontSize: '0.75rem', mb: 2, minHeight: '40px', lineHeight: 1.3, position: 'relative', zIndex: 2 }}>
+              <Typography variant="body2" sx={{ color: '#475569', fontSize: '0.75rem', mb: 2, minHeight: '32px', lineHeight: 1.3, position: 'relative', zIndex: 2 }}>
                 {pkg.description}
               </Typography>
+
+              <Box sx={{ mb: 2, display: 'flex', flexDirection: 'column', gap: 0.8, minHeight: '90px' }}>
+                {pkg.features?.map((feature, idx) => (
+                  <Box key={idx} sx={{ display: 'flex', alignItems: 'flex-start', gap: 1 }}>
+                    <CheckCircleOutlineIcon sx={{ fontSize: '1rem', color: pkg.color, mt: '2px' }} />
+                    <Typography variant="caption" sx={{ color: '#334155', fontWeight: 600, fontSize: '0.75rem' }}>
+                      {feature}
+                    </Typography>
+                  </Box>
+                ))}
+              </Box>
               
               <Typography variant="h5" fontWeight={800} sx={{ color: pkg.color, mb: 1, height: '36px', display: 'flex', alignItems: 'center' }}>
                 {Number(pkg.amount).toFixed(2)}
               </Typography>
               
-              <Box sx={{ height: '24px', mb: 3 }} />
-              
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', mt: 1 }}>
                 <Box sx={{ display: 'flex', gap: 2.5 }}>
                   {!isPurchased(pkg.amount) ? (
                     <Box>
-                      <Typography variant="subtitle1" fontWeight={800} sx={{ lineHeight: 1.1, mb: 0 }}>{pkg.yield.replace('%', '')}</Typography>
-                      <Typography variant="caption" sx={{ color: '#475569', fontWeight: 500, fontSize: '0.65rem', display: 'block' }}>Year Plan</Typography>
+                      {/* <Typography variant="subtitle1" fontWeight={800} sx={{ lineHeight: 1.1, mb: 0 }}>{pkg.yield.replace('%', '')}</Typography>
+                      <Typography variant="caption" sx={{ color: '#475569', fontWeight: 500, fontSize: '0.65rem', display: 'block' }}>Year Plan</Typography> */}
                     </Box>
                   ) : (
                     <Box>
@@ -173,7 +184,7 @@ const ProductsContainer: React.FC = () => {
                 
                 {isPurchased(pkg.amount) ? (
                   <Chip 
-                    label="Invested" 
+                    label="Active" 
                     sx={{ 
                       bgcolor: 'rgba(59, 130, 246, 0.2)', 
                       color: '#0284C7',
@@ -212,7 +223,7 @@ const ProductsContainer: React.FC = () => {
                       }
                     }}
                   >
-                    {isPending && buyingId === pkg.id ? <CircularProgress size={16} color="inherit" /> : "Invest"}
+                    {isPending && buyingId === pkg.id ? <CircularProgress size={16} color="inherit" /> : "Post"}
                   </Button>
                 )}
               </Box>
