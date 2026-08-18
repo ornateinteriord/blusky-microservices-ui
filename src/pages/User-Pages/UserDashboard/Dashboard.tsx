@@ -11,6 +11,7 @@ import PaymentsIcon from '@mui/icons-material/Payments';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import QrCode2Icon from '@mui/icons-material/QrCode2';
 
+
 import TokenService from '../../../api/token/tokenService';
 import { useVerifyPayment, parsePaymentRedirectParams, useGetTransactionDetails, useGetWalletOverview, useGetMemberDetails, useGetDailyPayout } from '../../../api/Memeber';
 
@@ -98,16 +99,16 @@ const UserDashboard = () => {
       <Box sx={{ 
         position: 'relative',
         width: '100%',
-        maxWidth: '480px',
-        height: '240px',
+        maxWidth: '380px',
+        height: '190px',
         mb: 4,
         mt: 1,
-        borderRadius: '24px',
+        borderRadius: '20px',
         background: 'linear-gradient(135deg, #f97316 0%, #ea580c 65%, #0a0a0a 100%)',
         boxShadow: '0 20px 40px rgba(234, 88, 12, 0.25)',
         overflow: 'hidden',
         color: '#fff',
-        p: 3,
+        p: 2.2,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -126,15 +127,15 @@ const UserDashboard = () => {
           <img 
             src={bmsLogo} 
             alt="BMS Logo" 
-            style={{ height: '30px', objectFit: 'contain' }} 
+            style={{ height: '26px', objectFit: 'contain' }} 
           />
           
           {/* SIM / QR Button */}
           <Box 
             onClick={() => setIsQRDialogOpen(true)}
             sx={{ 
-              width: '45px', 
-              height: '35px', 
+              width: '40px', 
+              height: '30px', 
               borderRadius: '6px', 
               background: 'linear-gradient(135deg, #fbbf24 0%, #d97706 100%)',
               display: 'flex',
@@ -155,33 +156,20 @@ const UserDashboard = () => {
             }}
             title="My QR"
           >
-            <QrCode2Icon sx={{ color: '#78350f', fontSize: 22, zIndex: 2 }} />
+            <QrCode2Icon sx={{ color: '#78350f', fontSize: 20, zIndex: 2 }} />
           </Box>
         </Box>
 
         <Box sx={{ zIndex: 1 }}>
           <Typography sx={{ 
             fontFamily: 'monospace', 
-            fontSize: { xs: '1.2rem', sm: '1.4rem' }, 
-            letterSpacing: '4px', 
+            fontSize: { xs: '1.1rem', sm: '1.25rem' }, 
+            letterSpacing: '3px', 
             fontWeight: 600,
-            mb: 2,
+            mb: 1.5,
             textShadow: '0 2px 4px rgba(0,0,0,0.3)'
           }}>
-            {(() => {
-              const id = memberDetails?.Member_id || memberId || 'BMS';
-              let seed = 5381;
-              for (let i = 0; i < id.length; i++) {
-                seed = (seed * 33) ^ id.charCodeAt(i);
-              }
-              seed = Math.abs(seed);
-              let numStr = '4'; // Start with 4 to simulate Visa
-              for (let i = 0; i < 15; i++) {
-                seed = (seed * 9301 + 49297) % 233280;
-                numStr += Math.floor((seed / 233280) * 10).toString();
-              }
-              return numStr.replace(/(.{4})/g, '$1 ').trim();
-            })()}
+            {memberDetails?.virtual_card_number || '4638 2926 4400 0000'}
           </Typography>
 
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
@@ -189,7 +177,7 @@ const UserDashboard = () => {
               <Typography sx={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.6rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
                 Cardholder Name
               </Typography>
-              <Typography sx={{ fontSize: '1rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px' }}>
+              <Typography sx={{ fontSize: '0.9rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px' }}>
                 {memberDetails?.Name || 'Loading...'}
               </Typography>
             </Box>

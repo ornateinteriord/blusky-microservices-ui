@@ -193,9 +193,9 @@ const WalletTransfer = () => {
                       '& .MuiSvgIcon-root': { color: '#0F172A' }
                     }}
                   >
-                    <MenuItem value="Withdrawal">Withdrawal Wallet (Bal: ${earningsBalance})</MenuItem>
-                    <MenuItem value="Top Up">Purchase Wallet (Bal: ${topUpBalance})</MenuItem>
-                    <MenuItem value="Upgrade">Upgrade Wallet (Bal: ${upgradeBalance})</MenuItem>
+                    <MenuItem value="Withdrawal">Withdrawal Wallet (Bal: {earningsBalance})</MenuItem>
+                    <MenuItem value="Top Up">Purchase Wallet (Bal: {topUpBalance})</MenuItem>
+                    <MenuItem value="Upgrade">Upgrade Wallet (Bal: {upgradeBalance})</MenuItem>
                   </Select>
                 </Box>
 
@@ -217,13 +217,13 @@ const WalletTransfer = () => {
                   >
                     {fromWallet === 'Withdrawal' ? (
                       [
-                        <MenuItem key="1" value="Purchase Wallet">Purchase Wallet (Bal: ${topUpBalance})</MenuItem>,
-                        <MenuItem key="2" value="Upgrade Wallet">Upgrade Wallet (Bal: ${upgradeBalance})</MenuItem>
+                        <MenuItem key="1" value="Purchase Wallet">Purchase Wallet (Bal: {topUpBalance})</MenuItem>,
+                        <MenuItem key="2" value="Upgrade Wallet">Upgrade Wallet (Bal: {upgradeBalance})</MenuItem>
                       ]
                     ) : fromWallet === 'Top Up' ? (
-                      <MenuItem value="Upgrade Wallet">Upgrade Wallet (Bal: ${upgradeBalance})</MenuItem>
+                      <MenuItem value="Upgrade Wallet">Upgrade Wallet (Bal: {upgradeBalance})</MenuItem>
                     ) : (
-                      <MenuItem value="Purchase Wallet">Purchase Wallet (Bal: ${topUpBalance})</MenuItem>
+                      <MenuItem value="Purchase Wallet">Purchase Wallet (Bal: {topUpBalance})</MenuItem>
                     )}
                   </Select>
                 </Box>
@@ -258,7 +258,7 @@ const WalletTransfer = () => {
                     }}
                   />
                   <Typography variant="caption" sx={{ color: '#10b981', mt: 1, display: 'block' }}>
-                    Available Balance: ${getAvailableBalance()}
+                    Available Balance: {getAvailableBalance()}
                   </Typography>
                 </Box>
 
@@ -383,7 +383,7 @@ const WalletTransfer = () => {
           <Box sx={{ bgcolor: 'rgba(0,0,0,0.2)', p: 3, borderRadius: '16px', border: '1px solid #E2E8F0' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2, alignItems: 'center' }}>
               <Typography variant="body2" sx={{ color: '#475569' }}>Amount Transferred</Typography>
-              <Typography variant="h6" sx={{ color: '#10b981', fontWeight: 700 }}>${transferDetails?.amount}</Typography>
+              <Typography variant="h6" sx={{ color: '#10b981', fontWeight: 700 }}>{transferDetails?.amount}</Typography>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2, alignItems: 'center' }}>
               <Typography variant="body2" sx={{ color: '#475569' }}>From</Typography>

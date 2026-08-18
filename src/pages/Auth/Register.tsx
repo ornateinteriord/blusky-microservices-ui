@@ -53,9 +53,9 @@ const Register = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [genderError, setGenderError] = useState(false);
   const [successDialogOpen, setSuccessDialogOpen] = useState(false);
-  const [registrationData, setRegistrationData] = useState<{ memberId: string; password: string; email: string }>({
+  const [registrationData, setRegistrationData] = useState<{ memberId: string; loginPin: string; email: string }>({
     memberId: '',
-    password: '',
+    loginPin: '',
     email: ''
   });
 
@@ -108,19 +108,19 @@ const Register = () => {
     e.preventDefault();
 
     if (!formData.gender) return setGenderError(true);
-    if (!formData.password || formData.password.length <= 5) return setErrorMessage("Password must be at least 6 characters*");
-    if (formData.password !== formData.confirmPassword) return setErrorMessage("Passwords do not match");
     if (!formData.Sponsor_code || formData.Sponsor_code.length < 5) return setErrorMessage("Valid sponsor code is required");
     if (!formData.Sponsor_name) return setErrorMessage("Please enter a valid sponsor code");
     if (!formData.country) return setErrorMessage("Country is required");
 
     try {
+      const generatedDummyPassword = Math.random().toString(36).substring(2, 10);
       const finalData = {
+        ...formData,
         sponsor_id: formData.Sponsor_code,
         Sponsor_code: formData.Sponsor_code,
         Sponsor_name: formData.Sponsor_name,
         spackage: 'BMS Plan',
-        ...formData
+        password: generatedDummyPassword,
       };
 
       mutate(finalData, {
@@ -128,7 +128,7 @@ const Register = () => {
           if (response.success) {
             setRegistrationData({
               memberId: response.user.Member_id,
-              password: formData.password,
+              loginPin: response.user.Member_id.replace(/\D/g, '').slice(-6),
               email: formData.email
             });
             setSuccessDialogOpen(true);
@@ -272,23 +272,6 @@ const Register = () => {
                 />
               </Grid>
 
-              {/* Password & Confirm */}
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required fullWidth name="password" type="password" placeholder="Password"
-                  value={formData.password} onChange={handleChange}
-                  InputProps={{ startAdornment: <InputAdornment position="start"><LockIcon sx={{ color: "rgba(255,255,255,0.4)" }} /></InputAdornment> }}
-                  sx={textFieldStyles}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required fullWidth name="confirmPassword" type="password" placeholder="Confirm Password"
-                  value={formData.confirmPassword} onChange={handleChange}
-                  InputProps={{ startAdornment: <InputAdornment position="start"><LockIcon sx={{ color: "rgba(255,255,255,0.4)" }} /></InputAdornment> }}
-                  sx={textFieldStyles}
-                />
-              </Grid>
 
               {/* Country & Pincode */}
               <Grid item xs={12} sm={6}>
@@ -394,12 +377,12 @@ const Register = () => {
             Welcome aboard! Here are your credentials:
           </Typography>
           <Box sx={{ bgcolor: 'rgba(15,23,42,0.5)', p: 3, borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)', display: 'inline-block', textAlign: 'left', minWidth: 250 }}>
-            <Typography variant="body1" sx={{ color: '#fff', mb: 1.5 }}><strong style={{ color: '#00e676', display: 'inline-block', width: '90px' }}>Member ID:</strong> {registrationData.memberId}</Typography>
-            <Typography variant="body1" sx={{ color: '#fff', mb: 1.5 }}><strong style={{ color: '#00e676', display: 'inline-block', width: '90px' }}>Email:</strong> {registrationData.email}</Typography>
-            <Typography variant="body1" sx={{ color: '#fff' }}><strong style={{ color: '#00e676', display: 'inline-block', width: '90px' }}>Password:</strong> {registrationData.password}</Typography>
+            <Typography variant="body1" sx={{ color: '#fff', mb: 1.5 }}><strong style={{ color: '#00e676', display: 'inline-block', width: '120px' }}>Member ID:</strong> {registrationData.memberId}</Typography>
+            <Typography variant="body1" sx={{ color: '#fff', mb: 1.5 }}><strong style={{ color: '#00e676', display: 'inline-block', width: '120px' }}>Email:</strong> {registrationData.email}</Typography>
+            <Typography variant="body1" sx={{ color: '#fff' }}><strong style={{ color: '#00e676', display: 'inline-block', width: '120px' }}>6-Digit Login PIN:</strong> {registrationData.loginPin}</Typography>
           </Box>
           <Typography variant="body2" sx={{ mt: 4, color: '#94a3b8' }}>
-            Please save these securely. You will need your Member ID to log in.
+            Please save these securely. You will need your 6-Digit Login PIN to log in.
           </Typography>
         </DialogContent>
         <DialogActions sx={{ justifyContent: 'center', pb: 2 }}>

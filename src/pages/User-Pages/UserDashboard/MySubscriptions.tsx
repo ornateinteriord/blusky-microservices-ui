@@ -1,13 +1,15 @@
 import React, { useContext } from 'react';
 import moment from 'moment';
-import { Box, Card, CardContent, Typography, Grid, CircularProgress, Divider, Chip, LinearProgress,  } from '@mui/material';
+import { Box, Card, CardContent, Typography, Grid, CircularProgress, Divider, Chip, LinearProgress, Button } from '@mui/material';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import DownloadIcon from '@mui/icons-material/Download';
 import UserContext from '../../../context/user/userContext';
 import { useGetMemberAddOns } from '../../../api/Packages';
 import { useGetWalletOverview } from '../../../api/Memeber';
+import { openBondCertificate } from '../../../utils/BondCertificateGenerator';
 
 
 const MySubscriptions: React.FC = () => {
@@ -154,6 +156,45 @@ const MySubscriptions: React.FC = () => {
                         }}
                       />
 
+                      <Button
+                        variant="outlined"
+                        size="small"
+                        startIcon={<DownloadIcon />}
+                        onClick={() => openBondCertificate({
+                          memberNumber: user.Member_id || user.member_id || '',
+                          memberName: user.Name || user.name || '',
+                          dob: user.dob || '',
+                          fatherName: user.Father_name || user.father_name || '',
+                          address: user.address || '',
+                          accountNo: user.account_number || pkg.package_id || `FD${pkgId.toString().slice(-5)}`,
+                          commencementDate: pkg.roi_start_date || user.Date_of_joining || new Date().toISOString(),
+                          planTerm: 'FD / 3 Years',
+                          planAmount: pkgAmount,
+                          interestRate: pkg.interest_rate || 9.0,
+                          maturityDate: moment(pkg.roi_start_date || user.Date_of_joining || new Date().toISOString()).add(3, 'years').toISOString(),
+                          aadhaarNo: user.aadharcard_no || '',
+                          panNo: user.Pan_no || user.pan_no || '',
+                          nomineeName: user.Nominee_name || user.nominee || '',
+                          nomineeRelation: user.Nominee_Relation || user.relation || '',
+                          branchCode: user.branch_id || '004',
+                          branch: 'UDUPI',
+                          profilePhotoUrl: user.profile_image || user.member_image,
+                        })}
+                        sx={{
+                          mt: 3,
+                          width: '100%',
+                          borderColor: '#0284C7',
+                          color: '#0284C7',
+                          fontWeight: 700,
+                          textTransform: 'none',
+                          fontSize: '0.8rem',
+                          py: 1,
+                          borderRadius: '8px',
+                          '&:hover': { bgcolor: 'rgba(2,132,199,0.1)', borderColor: '#0369A1' }
+                        }}
+                      >
+                        Download Bond Certificate
+                      </Button>
 
                       <Box sx={{ mt: 2.5, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>

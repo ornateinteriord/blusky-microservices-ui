@@ -10,6 +10,10 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import SyncAltIcon from '@mui/icons-material/SyncAlt';
+import QrCode2Icon from '@mui/icons-material/QrCode2';
+import SendIcon from '@mui/icons-material/Send';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import { toast } from 'react-toastify';
 
 import TokenService from '../../../api/token/tokenService';
@@ -28,6 +32,14 @@ const Portfolio = () => {
       .then(() => toast.success('Referral link copied!'))
       .catch(() => toast.error('Failed to copy link'));
   };
+
+  const quickAccessItems = [
+    { label: "Transfer", icon: <SyncAltIcon />, route: "/user/transfer", color: "#0284C7" },
+    { label: "My QR", icon: <QrCode2Icon />, route: "/user/my-qr", color: "#14b8a6" },
+    { label: "P2P Transfer", icon: <SendIcon />, route: "/user/p2p-transfer", color: "#ea580c" },
+    { label: "Property Listings", icon: <InventoryIcon />, route: "/user/new-subscription", color: "#0284C7" },
+    { label: "My Properties", icon: <ReceiptLongIcon />, route: "/user/my-subscriptions", color: "#f59e0b" },
+  ];
 
   return (
     <Box sx={{
@@ -128,6 +140,38 @@ const Portfolio = () => {
             <Typography sx={{ color: '#1E293B', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Purchase</Typography>
             <Typography variant="caption" sx={{ color: '#64748B', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '13px' }}>Manage your purchases and track your active product investments.</Typography>
           </Box>
+        </Box>
+      </Box>
+
+      {/* Quick Access Icons */}
+      <Box sx={{ mb: 6, width: '100%' }}>
+        <Typography variant="h6" sx={{ color: '#0F172A', fontWeight: 900, mb: 3, textAlign: 'center', letterSpacing: '1px', textTransform: 'uppercase' }}>
+          Quick Access
+        </Typography>
+        <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: { xs: 2, md: 3 } }}>
+          {quickAccessItems.map((item, i) => (
+            <Box key={i} onClick={() => navigate(item.route)} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1.5, cursor: 'pointer' }}>
+              <Box sx={{ 
+                width: { xs: 56, md: 64 }, 
+                height: { xs: 56, md: 64 }, 
+                borderRadius: '16px', 
+                bgcolor: '#F1F5F9', 
+                color: item.color,
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                boxShadow: '0 6px 15px rgba(0,0,0,0.05)',
+                border: '1px solid #E2E8F0',
+                transition: '0.2s',
+                '&:hover': { transform: 'scale(1.1)', bgcolor: '#F8FAFC' }
+              }}>
+                {item.icon}
+              </Box>
+              <Typography variant="caption" sx={{ fontWeight: 700, fontSize: { xs: '0.7rem', md: '0.8rem' }, textAlign: 'center', color: '#1E293B' }}>
+                {item.label}
+              </Typography>
+            </Box>
+          ))}
         </Box>
       </Box>
 
