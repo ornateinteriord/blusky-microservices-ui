@@ -9,22 +9,17 @@ import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import LockIcon from '@mui/icons-material/Lock';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import QrCode2Icon from '@mui/icons-material/QrCode2';
-
 
 import TokenService from '../../../api/token/tokenService';
 import { useVerifyPayment, parsePaymentRedirectParams, useGetTransactionDetails, useGetWalletOverview, useGetMemberDetails, useGetDailyPayout } from '../../../api/Memeber';
 
 import ProductsContainer from './ProductsContainer';
-import DashboardQRDialog from './DashboardQRDialog';
 import bmsLogo from '../../../assets/bms_logo.png';
 
 const UserDashboard = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const [paymentProcessed, setPaymentProcessed] = useState(false);
-  const [isQRDialogOpen, setIsQRDialogOpen] = useState(false);
-
   const memberId = TokenService.getMemberId();
   const { data: walletOverview } = useGetWalletOverview(memberId);
   const { data: memberDetails, refetch: refetchMemberDetails } = useGetMemberDetails(memberId);
@@ -129,35 +124,6 @@ const UserDashboard = () => {
             alt="BMS Logo" 
             style={{ height: '26px', objectFit: 'contain' }} 
           />
-          
-          {/* SIM / QR Button */}
-          <Box 
-            onClick={() => setIsQRDialogOpen(true)}
-            sx={{ 
-              width: '40px', 
-              height: '30px', 
-              borderRadius: '6px', 
-              background: 'linear-gradient(135deg, #fbbf24 0%, #d97706 100%)',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              cursor: 'pointer',
-              boxShadow: 'inset 0 0 5px rgba(0,0,0,0.2), 0 2px 5px rgba(0,0,0,0.2)',
-              position: 'relative',
-              '&::after': {
-                content: '""',
-                position: 'absolute',
-                inset: '4px',
-                border: '1px solid rgba(0,0,0,0.1)',
-                borderRadius: '4px'
-              },
-              transition: 'transform 0.2s',
-              '&:hover': { transform: 'scale(1.05)' }
-            }}
-            title="My QR"
-          >
-            <QrCode2Icon sx={{ color: '#78350f', fontSize: 20, zIndex: 2 }} />
-          </Box>
         </Box>
 
         <Box sx={{ zIndex: 1 }}>
@@ -202,14 +168,6 @@ const UserDashboard = () => {
           </Box>
         </Box>
       </Box>
-
-      {/* QR Dialog */}
-      <DashboardQRDialog 
-        open={isQRDialogOpen} 
-        onClose={() => setIsQRDialogOpen(false)} 
-        memberId={memberDetails?.Member_id || memberId || ''} 
-        memberName={memberDetails?.Name || ''}
-      />
 
       {/* <SliderSection /> */}
       <ProductsContainer />

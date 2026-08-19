@@ -26,7 +26,7 @@ export const UserSideBarMenuItems: SideBarMenuItemType[] = [
     isExpandable: false,
   },
   {
-    name: "My Properties",
+    name: "My Certificates",
     icon: <ReceiptLongIcon />,
     path: "/user/my-subscriptions",
     isExpandable: false,

@@ -38,7 +38,7 @@ const Portfolio = () => {
     { label: "My QR", icon: <QrCode2Icon />, route: "/user/my-qr", color: "#14b8a6" },
     { label: "P2P Transfer", icon: <SendIcon />, route: "/user/p2p-transfer", color: "#ea580c" },
     { label: "Property Listings", icon: <InventoryIcon />, route: "/user/new-subscription", color: "#0284C7" },
-    { label: "My Properties", icon: <ReceiptLongIcon />, route: "/user/my-subscriptions", color: "#f59e0b" },
+    { label: "My Certificates", icon: <ReceiptLongIcon />, route: "/user/my-subscriptions", color: "#f59e0b" },
   ];
 
   return (

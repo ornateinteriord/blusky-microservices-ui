@@ -5,7 +5,9 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import DeleteIcon from '@mui/icons-material/Delete';
 import TokenService from '../../../api/token/tokenService';
 import { useGetWalletOverview } from '../../../api/Memeber';
-import { useRequestAddOnMutation, useGetLoadFundConfig, useUploadPaymentScreenshot } from '../../../api/Packages';import { toast } from 'react-toastify';
+import { useRequestAddOnMutation, useGetLoadFundConfig, useUploadPaymentScreenshot } from '../../../api/Packages';
+import { toast } from 'react-toastify';
+import jeeScImage from '../../../assets/jee_sc.png';
 
 const LoadFundPage: React.FC = () => {
   const memberId = TokenService.getMemberId();
@@ -101,126 +103,19 @@ const LoadFundPage: React.FC = () => {
           <CircularProgress sx={{ color: '#0284C7' }} />
         </Box>
       ) : (
-        <Grid container spacing={4}>
-          {/* Left Column: Instructions and Address */}
-          {/* 
-          <Grid item xs={12} md={6}>
+        <Grid container spacing={4} justifyContent="center">
+          <Grid item xs={12} md={8}>
             <Paper
               elevation={0}
               sx={{
-                p: 4,
-                bgcolor: '#F8FAFC',
-                borderRadius: '24px',
-                border: '1px solid #E2E8F0',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                textAlign: 'center',
-                gap: 3,
-                height: '100%',
-              }}
-            >
-              <Box
-                sx={{
-                  width: 200,
-                  height: 200,
-                  bgcolor: '#F1F5F9',
-                  borderRadius: '20px',
-                  p: 2,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
-                  overflow: 'hidden',
-                  mt: 1,
-                }}
-              >
-                {config?.qr_code_url ? (
-                  <Box
-                    component="img"
-                    src={config.qr_code_url}
-                    alt="Payment QR Code"
-                    sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    onError={(e: any) => {
-                      e.target.onerror = null;
-                      e.target.style.display = 'none';
-                      const parent = e.target.parentNode;
-                      if (parent) {
-                        const fallback = document.createElement('div');
-                        fallback.innerText = 'QR Code';
-                        fallback.style.color = '#050916';
-                        fallback.style.fontWeight = 'bold';
-                        fallback.style.fontSize = '1.2rem';
-                        parent.appendChild(fallback);
-                      }
-                    }}
-                  />
-                ) : (
-                  <Typography variant="body2" sx={{ color: '#FFFFFF', fontWeight: 800 }}>
-                    QR Code Not Configured
-                  </Typography>
-                )}
-              </Box>
-
-              <Box sx={{ width: '100%', mt: 2 }}>
-                <Typography variant="caption" sx={{ color: '#64748B', display: 'block', mb: 1, textAlign: 'left' }}>
-                  Copy Destination Address
-                </Typography>
-                <Box
-                  onClick={handleCopyAddress}
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    bgcolor: '#F8FAFC',
-                    border: '1px solid #E2E8F0',
-                    borderRadius: '16px',
-                    px: 3,
-                    py: 2,
-                    cursor: 'pointer',
-                    transition: 'all 0.2s',
-                    '&:hover': {
-                      bgcolor: '#F8FAFC',
-                      bordercolor: '#0284C7',
-                    },
-                  }}
-                >
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      fontFamily: 'monospace',
-                      color: '#475569',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap',
-                      mr: 2,
-                      textAlign: 'left',
-                      fontSize: '0.9rem',
-                      width: '90%',
-                    }}
-                  >
-                    {config?.wallet_address || 'No wallet address configured'}
-                  </Typography>
-                  <ContentCopyIcon sx={{ color: '#0284C7' }} />
-                </Box>
-              </Box>
-            </Paper>
-          </Grid>
-          */}
-
-          {/* Right Column: Transaction Submission */}
-          <Grid item xs={12} md={12}>
-            <Paper
-              elevation={0}
-              sx={{
-                p: 4,
+                p: { xs: 3, md: 5 },
                 bgcolor: '#F8FAFC',
                 borderRadius: '24px',
                 border: '1px solid #E2E8F0',
                 height: '100%',
               }}
             >
-              <Typography variant="h5" sx={{ fontWeight: 800, color: '#0F172A', mb: 2, textAlign: 'center' }}>
+              <Typography variant="h5" sx={{ fontWeight: 800, color: '#0F172A', mb: 3, textAlign: 'center' }}>
                 Load Fund Request
               </Typography>
 
@@ -298,6 +193,19 @@ const LoadFundPage: React.FC = () => {
                     },
                   }}
                 />
+
+                {/* Scan to Pay QR Code */}
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', p: 3, border: '1px solid #E2E8F0', borderRadius: '20px', bgcolor: '#FFFFFF', gap: 2 }}>
+                  <Typography variant="h6" sx={{ fontWeight: 800, color: '#0F172A' }}>
+                    Scan to Pay
+                  </Typography>
+                  <Box sx={{ width: '100%', maxWidth: 280, bgcolor: '#FFFFFF', borderRadius: '16px', p: 2, boxShadow: '0 4px 15px rgba(0,0,0,0.05)', border: '1px solid #E2E8F0' }}>
+                    <Box component="img" src={jeeScImage} alt="Payment QR Code" sx={{ width: '100%', height: 'auto', objectFit: 'contain' }} />
+                  </Box>
+                  <Typography variant="h6" sx={{ color: '#0284C7', fontWeight: 800 }}>
+                    UPI ID: blusky01qr@fbl
+                  </Typography>
+                </Box>
 
                 {/* Receipt Image upload */}
                 <Box>
