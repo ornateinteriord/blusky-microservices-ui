@@ -291,7 +291,7 @@ th { background: #e0e0e0; font-weight: bold; }
       </header>
 
       <!-- TITLE -->
-      <div class="cert-title">FD A/C BOND CERTIFICATE</div>
+      <div class="cert-title">FD CERTIFICATE</div>
 
       <!-- SALUTATION -->
       <div class="salute">Dear ${data.memberName ? `Mr./ Ms. ${data.memberName}, ` : 'Member,'}</div>

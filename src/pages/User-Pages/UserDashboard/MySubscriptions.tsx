@@ -106,7 +106,7 @@ const MySubscriptions: React.FC = () => {
                             </Typography>
                           </Box>
                           <Typography variant="h5" sx={{ fontWeight: 900, fontSize: '1.6rem', color: '#0F172A', lineHeight: 1.2 }}>
-                            ${pkgAmount.toLocaleString('en-US')}
+                            {pkgAmount.toLocaleString()}
                           </Typography>
                         </Box>
                           <Chip

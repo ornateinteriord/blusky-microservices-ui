@@ -52,9 +52,9 @@ export default function AdminChat() {
   useEffect(() => {
     const fetchBroadcasts = async () => {
       try {
-        const response = await api.get(`/chat/messages/GLOBAL_BROADCAST`);
-        if (response.data.success) {
-          setSentMessages(response.data.data);
+        const response: any = await api.get(`/chat/messages/GLOBAL_BROADCAST`);
+        if (response.success) {
+          setSentMessages(response.data);
         }
       } catch (error: any) {
         console.error("Failed to fetch broadcast messages:", error);
