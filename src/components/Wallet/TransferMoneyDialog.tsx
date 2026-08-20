@@ -194,7 +194,7 @@ const TransferMoneyDialog: React.FC<TransferMoneyDialogProps> = ({ open, onClose
                 {selectedFromAccount && (
                     <Paper sx={{ p: 2, mb: 3, bgcolor: '#f3f4f6', borderRadius: '8px' }}>
                         <Typography variant="body2" color="text.secondary">
-                            Available Balance: <strong>${availableBalance.toFixed(2)}</strong>
+                            Available Balance: <strong>{availableBalance.toFixed(2)}</strong>
                         </Typography>
                     </Paper>
                 )}

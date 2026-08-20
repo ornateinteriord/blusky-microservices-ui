@@ -172,7 +172,7 @@ const AccountCloseDialog: React.FC<AccountCloseDialogProps> = ({
                             <Box sx={{ mt: 2 }}>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                                     <Typography variant="body2">Principal Amount:</Typography>
-                                    <Typography variant="body2" fontWeight={600}>${principalAmount.toLocaleString('en-US')}</Typography>
+                                    <Typography variant="body2" fontWeight={600}>{principalAmount.toLocaleString('en-US')}</Typography>
                                 </Box>
 
                                 {isMatured && interestAmount > 0 && (
@@ -184,7 +184,7 @@ const AccountCloseDialog: React.FC<AccountCloseDialogProps> = ({
                                         <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                                             <Typography variant="body2">Interest Earned:</Typography>
                                             <Typography variant="body2" color="success.main" fontWeight={600}>
-                                                + ${interestAmount.toLocaleString('en-US', { maximumFractionDigits: 2 })}
+                                                + {interestAmount.toLocaleString('en-US', { maximumFractionDigits: 2 })}
                                             </Typography>
                                         </Box>
                                     </>
@@ -195,7 +195,7 @@ const AccountCloseDialog: React.FC<AccountCloseDialogProps> = ({
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                     <Typography variant="body1" fontWeight={700}>Total Payout:</Typography>
                                     <Typography variant="body1" fontWeight={700} color="primary">
-                                        ${totalPayout.toLocaleString('en-US', { maximumFractionDigits: 2 })}
+                                        {totalPayout.toLocaleString('en-US', { maximumFractionDigits: 2 })}
                                     </Typography>
                                 </Box>
                             </Box>
