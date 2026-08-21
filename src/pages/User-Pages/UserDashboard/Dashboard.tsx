@@ -1,7 +1,7 @@
 // components/UserDashboard.tsx
 import { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { Typography, Box, CircularProgress, Paper, Button } from '@mui/material';
+import { Typography, Box, CircularProgress, Paper, Button, IconButton } from '@mui/material';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
@@ -9,6 +9,10 @@ import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import LockIcon from '@mui/icons-material/Lock';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import ChatIcon from '@mui/icons-material/Chat';
+import ShareIcon from '@mui/icons-material/Share';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import { toast } from 'react-toastify';
 
 import TokenService from '../../../api/token/tokenService';
 import { useVerifyPayment, parsePaymentRedirectParams, useGetTransactionDetails, useGetWalletOverview, useGetMemberDetails, useGetDailyPayout } from '../../../api/Memeber';
@@ -26,6 +30,14 @@ const UserDashboard = () => {
   const { mutate: verifyPayment, isPending: isVerifyingPayment } = useVerifyPayment();
   const { refetch: refetchTransactions } = useGetTransactionDetails("all");
   useGetDailyPayout(memberId);
+
+  const handleCopyReferralLink = () => {
+    if (!memberDetails?.Member_id) return;
+    const referralLink = `${window.location.origin}/register?ref=${memberDetails.Member_id}`;
+    navigator.clipboard.writeText(referralLink)
+      .then(() => toast.success('Referral link copied!'))
+      .catch(() => toast.error('Failed to copy link'));
+  };
 
 
 
@@ -64,6 +76,7 @@ const UserDashboard = () => {
       title: "TEAM & TOOLS",
       items: [
         { label: "New Regi.", icon: <PersonAddAltIcon />, route: "/user/team/new-register", color: "#0284C7" },
+        { label: "Chat", icon: <ChatIcon />, route: "/user/chat", color: "#10b981" },
       ]
     }
   ];
@@ -268,6 +281,52 @@ const UserDashboard = () => {
           ))}
         </Box>
       </Box>
+
+      {/* Referral Link */}
+      <Box sx={{ mt: 4, mb: 4 }}>
+        <Paper elevation={0} sx={{
+          p: 4,
+          borderRadius: '28px',
+          background: 'linear-gradient(135deg, #0284C7 0%, #38BDF8 100%)',
+          color: '#0F172A',
+          boxShadow: '0 20px 40px rgba(2, 132, 199, 0.25)',
+          width: '100%'
+        }}>
+          <Typography variant="h5" sx={{ fontWeight: 900, mb: 1 }}>Refer & Earn</Typography>
+          <Typography variant="caption" sx={{ display: 'block', mb: 3, opacity: 0.8, lineHeight: 1.4, fontSize: '0.8rem' }}>One link, endless connections—start building your network today</Typography>
+          <Box sx={{ display: 'flex', gap: 2 }}>
+            <Button
+              variant="contained"
+              startIcon={<ShareIcon />}
+              fullWidth
+              sx={{
+                bgcolor: '#F1F5F9',
+                color: '#0284C7',
+                borderRadius: '16px',
+                textTransform: 'none',
+                fontWeight: 900,
+                py: 1.5,
+                '&:hover': { bgcolor: '#F8FAFC' }
+              }}
+            >
+              Share Now
+            </Button>
+            <IconButton
+              onClick={handleCopyReferralLink}
+              sx={{
+                bgcolor: '#F1F5F9',
+                color: '#0F172A',
+                borderRadius: '16px',
+                width: 56,
+                height: 56
+              }}
+            >
+              <ContentCopyIcon />
+            </IconButton>
+          </Box>
+        </Paper>
+      </Box>
+
     </Box>
   );
 };

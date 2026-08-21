@@ -117,7 +117,7 @@ export const UserSideBarMenuItems: SideBarMenuItemType[] = [
     isExpandable: false,
   },
   {
-    name: "My QR Code",
+    name: "Scan & Pay",
     icon: <QrCode2Icon />,
     path: "/user/my-qr",
     isExpandable: false,

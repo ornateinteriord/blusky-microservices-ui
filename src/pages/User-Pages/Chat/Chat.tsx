@@ -56,6 +56,7 @@ import TokenService from '../../../api/token/tokenService';
 import { toast } from 'react-toastify';
 import moment from 'moment';
 
+import { useGetSponsers } from '../../../api/Memeber';
 import { useLocation } from 'react-router-dom';
 
 const THEME_COLOR = '#2c8786';
@@ -97,6 +98,7 @@ export default function Chat() {
 
   const { data: roomsResponse, isLoading: roomsLoading } = useGetRooms();
   const { data: messagesResponse, isLoading: messagesLoading } = useGetMessages(activeRoomId || "");
+  const { data: sponsersData } = useGetSponsers(currentUserId);
   const searchMemberMutation = useSearchMember();
   const sendMessageMutation = useSendMessage();
   const markAsReadMutation = useMarkAsRead();
@@ -104,8 +106,9 @@ export default function Chat() {
   const deleteMessageMutation = useDeleteMessage();
   const uploadMutation = useImageKitUpload();
 
-  const rooms = roomsResponse?.data || [];
-  const messages = messagesResponse?.data || [];
+  const rooms = Array.isArray(roomsResponse) ? roomsResponse : (roomsResponse?.data || []);
+  const messages = Array.isArray(messagesResponse) ? messagesResponse : (messagesResponse?.data || []);
+  const directReferrals = sponsersData?.sponsoredUsers || [];
 
   const activeRoom = rooms.find((r: any) => r.roomId === activeRoomId);
   const filteredRooms = rooms.filter((r: any) => {
@@ -345,7 +348,7 @@ export default function Chat() {
       onSuccess: (res) => {
         setSearchModalOpen(false);
         queryClient.invalidateQueries({ queryKey: ["chatRooms"] });
-        setActiveRoomId(res.data.chatRoom.roomId);
+        setActiveRoomId(res.chatRoom?.roomId || res.data?.chatRoom?.roomId);
       },
       onError: (error: any) => {
         toast.error(error?.response?.data?.message || "User not found");
@@ -357,7 +360,7 @@ export default function Chat() {
     supportChatMutation.mutate(undefined, {
       onSuccess: (res) => {
         queryClient.invalidateQueries({ queryKey: ["chatRooms"] });
-        setActiveRoomId(res.data.roomId);
+        setActiveRoomId(res.roomId || res.data?.roomId);
       },
       onError: () => {
         toast.error("Failed to start support chat");
@@ -367,6 +370,25 @@ export default function Chat() {
 
   const getRecipientDetails = (room: any) => {
     return room.participantDetails.find((p: any) => p.memberId !== currentUserId) || room.participantDetails[0];
+  };
+
+  const handleStartDirectChat = (mobile: string) => {
+    if (!mobile) {
+      toast.error("User does not have a valid mobile number.");
+      return;
+    }
+    const uploadToast = toast.loading("Starting chat...");
+    searchMemberMutation.mutate(mobile, {
+      onSuccess: (res) => {
+        toast.dismiss(uploadToast);
+        queryClient.invalidateQueries({ queryKey: ["chatRooms"] });
+        setActiveRoomId(res.chatRoom?.roomId || res.data?.chatRoom?.roomId);
+      },
+      onError: (error: any) => {
+        toast.dismiss(uploadToast);
+        toast.error(error?.response?.data?.message || "Failed to start chat");
+      }
+    });
   };
 
   return (
@@ -473,6 +495,55 @@ export default function Chat() {
             })
           )}
         </List>
+
+        {/* Direct Referrals */}
+        {directReferrals.length > 0 && (
+          <>
+            <Box sx={{ p: 1.5, bgcolor: '#f0f2f5', borderTop: '1px solid #e0e0e0', borderBottom: '1px solid #e0e0e0' }}>
+              <Typography variant="subtitle2" fontWeight="bold" color="#667781">Direct Referrals</Typography>
+            </Box>
+            <List sx={{ flexGrow: 1, overflowY: 'auto', p: 0, '&::-webkit-scrollbar': { width: '6px' }, '&::-webkit-scrollbar-thumb': { bgcolor: '#ccc', borderRadius: '4px' } }}>
+              {directReferrals.map((user: any) => {
+                // Skip if already in rooms list
+                const isAlreadyInRooms = rooms.some((r: any) => {
+                  const recipient = getRecipientDetails(r);
+                  return recipient.memberId === user.Member_id;
+                });
+                
+                if (isAlreadyInRooms) return null;
+
+                return (
+                  <Box key={user.Member_id}>
+                    <ListItem
+                      component="div"
+                      onClick={() => handleStartDirectChat(user.Member_id || user.mobileno)}
+                      sx={{ cursor: 'pointer', '&:hover': { bgcolor: '#f5f6f6' }, py: 1.5, px: 2 }}
+                    >
+                      <ListItemAvatar>
+                        <Avatar src={user.profile_image} sx={{ bgcolor: THEME_COLOR, width: 48, height: 48 }}>
+                          {user.Name ? user.Name[0].toUpperCase() : 'U'}
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={
+                          <Typography fontWeight={400} sx={{ color: '#111', fontSize: '16px' }} noWrap>
+                            {user.Name}
+                          </Typography>
+                        }
+                        secondary={
+                          <Typography variant="body2" noWrap sx={{ color: '#667781', mt: 0.5 }}>
+                            Tap to start chat
+                          </Typography>
+                        }
+                      />
+                    </ListItem>
+                    <Divider component="li" variant="inset" sx={{ ml: 9 }} />
+                  </Box>
+                );
+              })}
+            </List>
+          </>
+        )}
       </Box>
 
       {/* Chat Area */}

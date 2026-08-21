@@ -109,7 +109,7 @@ const AdminAddOnRequests = () => {
   return (
     <Box sx={{ p: { xs: 2, md: 4 }, mt: { xs: 8, md: 8 } }}>
       <Typography variant="h4" sx={{ mb: { xs: 2, md: 4 }, fontSize: { xs: '1.5rem', md: '2.125rem' } }}>
-        Load Fund Requests
+        Requests
       </Typography>
 
       <Card sx={{ width: '100%', mb: 2 }}>

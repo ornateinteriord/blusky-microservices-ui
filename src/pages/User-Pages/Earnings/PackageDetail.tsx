@@ -93,7 +93,7 @@ const PackageDetail = () => {
             <Typography sx={{ color: '#0F172A', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>{Number(walletOverview?.directBenefits || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
           </Box>
           <Box sx={{ width: '100%' }}>
-            <Typography sx={{ color: '#475569', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Referral Income</Typography>
+            <Typography sx={{ color: '#475569', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Referral Commission</Typography>
             <Typography variant="caption" sx={{ color: '#475569', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '14px' }}>Turn every referral into a rewarding opportunity with instant bonus earnings.</Typography>
           </Box>
         </Box>
@@ -106,7 +106,7 @@ const PackageDetail = () => {
             <Typography sx={{ color: '#0F172A', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>{Number(walletOverview?.levelBenefits || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
           </Box>
           <Box sx={{ width: '100%' }}>
-            <Typography sx={{ color: '#475569', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Level Income</Typography>
+            <Typography sx={{ color: '#475569', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Brokerage Override</Typography>
             <Typography variant="caption" sx={{ color: '#475569', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '14px' }}>Every new level brings greater rewards—keep progressing and keep earning</Typography>
           </Box>
         </Box>
@@ -119,7 +119,7 @@ const PackageDetail = () => {
             <Typography sx={{ color: '#0F172A', fontWeight: 900, fontSize: { xs: '1.3rem', sm: '1.6rem' }, letterSpacing: '1px', m: 0 }}>{Number(packageIncome || walletOverview?.singleLineIncome || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
           </Box>
           <Box sx={{ width: '100%' }}>
-            <Typography sx={{ color: '#475569', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Single Leg Income</Typography>
+            <Typography sx={{ color: '#475569', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.2rem' }, textTransform: 'uppercase', mb: 0.5 }}>Direct Commission</Typography>
             <Typography variant="caption" sx={{ color: '#475569', display: 'block', lineHeight: 1.3, width: '100%', fontSize: '14px' }}>One growing network, multiple earning opportunities—powered by your single-leg structure.</Typography>
           </Box>
         </Box>

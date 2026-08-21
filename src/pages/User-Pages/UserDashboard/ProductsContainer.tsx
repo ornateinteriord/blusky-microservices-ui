@@ -174,10 +174,7 @@ const ProductsContainer: React.FC = () => {
                     </Box>
                   ) : (
                     <Box>
-                      <Typography variant="subtitle1" sx={{ color: '#475569', fontWeight: 800, fontSize: '0.85rem', mb: 0.2, whiteSpace: 'nowrap' }}>Single Leg Income</Typography>
-                      <Typography variant="h5" fontWeight={900} sx={{ lineHeight: 1.2, color: '#0284C7' }}>
-                        {(walletOverview?.singleLevelIncomeByPackage?.[pkg.amount] || 0).toFixed(2)}
-                      </Typography>
+                      {/* Single Leg Income has been removed as per request */}
                     </Box>
                   )}
                 </Box>

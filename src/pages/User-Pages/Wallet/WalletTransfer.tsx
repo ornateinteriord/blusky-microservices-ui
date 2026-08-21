@@ -23,11 +23,11 @@ const WalletTransfer = () => {
   const { mutate: transferWallet } = useTransferWallet();
 
   const [step, setStep] = useState<1 | 2>(1);
-  const [fromWallet, setFromWallet] = useState('Withdrawal');
+  const [fromWallet, setFromWallet] = useState('Earnings');
   const [toWallet, setToWallet] = useState('Purchase Wallet');
 
   useEffect(() => {
-    if (fromWallet === 'Withdrawal') setToWallet('Purchase Wallet');
+    if (fromWallet === 'Earnings') setToWallet('Purchase Wallet');
     else if (fromWallet === 'Top Up') setToWallet('Upgrade Wallet');
     else if (fromWallet === 'Upgrade') setToWallet('Purchase Wallet');
   }, [fromWallet]);
@@ -44,7 +44,7 @@ const WalletTransfer = () => {
   const upgradeBalance = walletOverview?.upgradeWalletBalance || '0.00';
 
   const getAvailableBalance = () => {
-    if (fromWallet === 'Withdrawal') return earningsBalance;
+    if (fromWallet === 'Earnings') return earningsBalance;
     if (fromWallet === 'Top Up') return topUpBalance;
     if (fromWallet === 'Upgrade') return upgradeBalance;
     return '0.00';
@@ -193,9 +193,9 @@ const WalletTransfer = () => {
                       '& .MuiSvgIcon-root': { color: '#0F172A' }
                     }}
                   >
-                    <MenuItem value="Withdrawal">Withdrawal Wallet (Bal: {earningsBalance})</MenuItem>
+                    <MenuItem value="Earnings">Payouts (Bal: {earningsBalance})</MenuItem>
                     <MenuItem value="Top Up">Purchase Wallet (Bal: {topUpBalance})</MenuItem>
-                    <MenuItem value="Upgrade">Upgrade Wallet (Bal: {upgradeBalance})</MenuItem>
+                    <MenuItem value="Upgrade">Property Fund (Bal: {upgradeBalance})</MenuItem>
                   </Select>
                 </Box>
 
@@ -205,7 +205,7 @@ const WalletTransfer = () => {
                     fullWidth
                     value={toWallet}
                     onChange={(e) => setToWallet(e.target.value)}
-                    disabled={fromWallet !== 'Withdrawal'}
+                    disabled={fromWallet !== 'Earnings'}
                     sx={{
                       bgcolor: '#F8FAFC',
                       color: '#0F172A',
@@ -215,13 +215,13 @@ const WalletTransfer = () => {
                       '& .MuiSvgIcon-root': { color: '#64748B' }
                     }}
                   >
-                    {fromWallet === 'Withdrawal' ? (
+                    {fromWallet === 'Earnings' ? (
                       [
                         <MenuItem key="1" value="Purchase Wallet">Purchase Wallet (Bal: {topUpBalance})</MenuItem>,
-                        <MenuItem key="2" value="Upgrade Wallet">Upgrade Wallet (Bal: {upgradeBalance})</MenuItem>
+                        <MenuItem key="2" value="Upgrade Wallet">Property Fund (Bal: {upgradeBalance})</MenuItem>
                       ]
                     ) : fromWallet === 'Top Up' ? (
-                      <MenuItem value="Upgrade Wallet">Upgrade Wallet (Bal: {upgradeBalance})</MenuItem>
+                      <MenuItem value="Upgrade Wallet">Property Fund (Bal: {upgradeBalance})</MenuItem>
                     ) : (
                       <MenuItem value="Purchase Wallet">Purchase Wallet (Bal: {topUpBalance})</MenuItem>
                     )}

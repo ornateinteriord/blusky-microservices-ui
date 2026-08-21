@@ -56,7 +56,7 @@ const AdminGlobalIncome = () => {
     <>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: "1rem", mt: 10 }}>
         <Typography variant="h4">
-          12% Global Non Working
+          Franchise Bonus
         </Typography>
       </Box>
 

@@ -1,11 +1,11 @@
-import { ChevronDown, Lock, LogOutIcon, Menu as MenuIcon, Settings, User, Headphones, Home,  } from 'lucide-react';
+import { ChevronDown, LogOutIcon, Menu as MenuIcon, Settings, User, Headphones, Home, MessageCircle } from 'lucide-react';
 import "./navbar.scss";
-import { AppBar, Avatar, Box, Divider, Menu, MenuItem, Toolbar, Typography,  } from '@mui/material';
+import { AppBar, Avatar, Box, Divider, Menu, MenuItem, Toolbar, Typography, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import useAuth from "../../hooks/use-auth";
 import TokenService from "../../api/token/tokenService";
-import { deepOrange } from '@mui/material/colors';
+
 import { useState } from 'react';
 import { useGetMemberDetails } from '../../api/Memeber';
 
@@ -20,6 +20,7 @@ const Navbar = ({ shouldHide, onToggleSidebar }: NavbarProps) => {
   const { isLoggedIn, userRole } = useAuth();
   const isAdmin = userRole === "ADMIN" || userRole === "ADMIN_01" || userRole === "AGENT";
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
 
   // Always call hooks before any early return (Rules of Hooks)
   const userId = TokenService.getMemberId();
@@ -37,10 +38,19 @@ const Navbar = ({ shouldHide, onToggleSidebar }: NavbarProps) => {
   };
 
   const handleLogout = () => {
+    setLogoutDialogOpen(true);
+    setAnchorEl(null);
+  };
+
+  const confirmLogout = () => {
+    setLogoutDialogOpen(false);
     navigate("/");
     TokenService.removeToken();
     window.dispatchEvent(new Event("storage"));
-    setAnchorEl(null);
+  };
+
+  const cancelLogout = () => {
+    setLogoutDialogOpen(false);
   };
 
   return (
@@ -116,6 +126,12 @@ const Navbar = ({ shouldHide, onToggleSidebar }: NavbarProps) => {
                 >
                   <Home size={22} />
                 </IconButton>
+                <IconButton
+                  onClick={handleLogout}
+                  sx={{ color: "#ef4444", '&:hover': { bgcolor: 'rgba(239, 68, 68, 0.1)' } }}
+                >
+                  <LogOutIcon size={22} />
+                </IconButton>
               </Box>
             </>
           ) : (
@@ -188,6 +204,14 @@ const Navbar = ({ shouldHide, onToggleSidebar }: NavbarProps) => {
                     <ChevronDown size={18} color="white" style={{ opacity: 0.8 }} />
                   </Box>
                 )}
+                {isLoggedIn && (
+                  <IconButton
+                    onClick={handleLogout}
+                    sx={{ color: "#ef4444", ml: 1, '&:hover': { bgcolor: 'rgba(239, 68, 68, 0.1)' } }}
+                  >
+                    <LogOutIcon size={22} />
+                  </IconButton>
+                )}
               </Box>
             </>
           )}
@@ -199,7 +223,37 @@ const Navbar = ({ shouldHide, onToggleSidebar }: NavbarProps) => {
           open={Boolean(anchorEl)}
           onClose={handleMenuClose}
           PaperProps={{
-            className: Boolean(anchorEl) ? "custom-menu open" : "custom-menu",
+            elevation: 0,
+            sx: {
+              bgcolor: 'rgba(232, 218, 119, 1)', // Light blue (AliceBlue) with transparency
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
+              borderRadius: '16px',
+              mt: 1.5,
+              p: 0.5,
+              minWidth: '240px',
+              border: '1px solid rgba(255, 255, 255, 0.5)',
+              boxShadow: '0 10px 30px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.05)',
+              '& .MuiMenuItem-root': {
+                py: 1.2,
+                px: 2,
+                mx: 1,
+                my: 0.2,
+                borderRadius: '8px',
+                fontWeight: 600,
+                fontSize: '0.95rem',
+                color: '#334155',
+                '&:hover': {
+                  bgcolor: '#e2e8f0',
+                  color: '#0f172a',
+                },
+              },
+              '& .MuiDivider-root': {
+                borderColor: '#e2e8f0',
+                my: 1,
+                mx: 1,
+              }
+            },
           }}
         >
           <div
@@ -207,27 +261,31 @@ const Navbar = ({ shouldHide, onToggleSidebar }: NavbarProps) => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              padding: "10px 0",
+              padding: "16px 0 12px 0",
             }}
           >
             <Avatar
+              variant="rounded"
               alt="User"
               sx={{
-                width: 64,
-                height: 64,
-                marginBottom: "8px",
-                background: deepOrange[500],
-                border: '2px solid #0a2558'
+                width: 60,
+                height: 60,
+                marginBottom: "12px",
+                background: 'linear-gradient(135deg, #0a2558 0%, #2c8786 100%)',
+                border: '2px solid rgba(255,255,255,0.8)',
+                borderRadius: '14px',
+                color: '#ffffff',
+                boxShadow: '0 4px 10px rgba(0,0,0,0.15)'
               }}
             >
               {memberDetails?.Name
                 ? memberDetails.Name.charAt(0).toUpperCase()
                 : ""}
             </Avatar>
-            <Typography variant="subtitle1" sx={{ fontWeight: 900, color: '#0a2558' }}>
+            <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#0a2558', fontSize: '1.1rem' }}>
               {memberDetails?.Name || "Member"}
             </Typography>
-            <Typography variant="caption" sx={{ color: '#64748b', fontWeight: 700 }}>
+            <Typography variant="caption" sx={{ color: '#7c93b3', fontWeight: 600 }}>
                ID: {memberDetails?.Member_id || ""}
             </Typography>
           </div>
@@ -239,8 +297,20 @@ const Navbar = ({ shouldHide, onToggleSidebar }: NavbarProps) => {
             else if (userRole === "AGENT") navigate("/agent/profile");
             setAnchorEl(null);
           }}>
-            <User size={18} style={{ marginRight: "8px" }} />
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, borderRadius: '8px', bgcolor: 'rgba(2, 132, 199, 0.1)', color: '#0284C7', mr: 1.5 }}>
+              <User size={18} />
+            </Box>
             My Profile
+          </MenuItem>
+
+          <MenuItem onClick={() => {
+             navigate("/chat");
+             setAnchorEl(null);
+          }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, borderRadius: '8px', bgcolor: 'rgba(16, 185, 129, 0.1)', color: '#10B981', mr: 1.5 }}>
+              <MessageCircle size={18} />
+            </Box>
+            Chat
           </MenuItem>
 
           <MenuItem
@@ -250,26 +320,44 @@ const Navbar = ({ shouldHide, onToggleSidebar }: NavbarProps) => {
               setAnchorEl(null);
             }}
           >
-            <Settings size={18} style={{ marginRight: "8px" }} />
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, borderRadius: '8px', bgcolor: 'rgba(245, 158, 11, 0.1)', color: '#F59E0B', mr: 1.5 }}>
+              <Settings size={18} />
+            </Box>
             Change Password
           </MenuItem>
-
-          <Divider />
-
-          <div className="admin-panel-menuitems">
-            <MenuItem onClick={handleMenuClose} sx={{ display: "flex" }}>
-              <Lock size={17} style={{ marginRight: "4px", color: "#007bff" }} />
-              Lock
-            </MenuItem>
-            <MenuItem onClick={handleLogout} sx={{ display: "flex" }}>
-              <LogOutIcon
-                size={18}
-                style={{ marginRight: "4px", color: "red" }}
-              />
-              Logout
-            </MenuItem>
-          </div>
         </Menu>
+
+        <Dialog
+          open={logoutDialogOpen}
+          onClose={cancelLogout}
+          PaperProps={{
+            sx: {
+              borderRadius: '12px',
+              padding: '8px'
+            }
+          }}
+        >
+          <DialogTitle sx={{ fontWeight: 800, color: '#0f172a' }}>Confirm Logout</DialogTitle>
+          <DialogContent>
+            <DialogContentText sx={{ color: '#475569', fontWeight: 500 }}>
+              Are you sure you want to log out of your account?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions sx={{ padding: '0 24px 16px 24px' }}>
+            <Button onClick={cancelLogout} sx={{ color: '#64748b', fontWeight: 600 }}>
+              Cancel
+            </Button>
+            <Button 
+              onClick={confirmLogout} 
+              variant="contained" 
+              color="error" 
+              sx={{ borderRadius: '8px', fontWeight: 600, textTransform: 'none', boxShadow: 'none' }}
+              disableElevation
+            >
+              Log Out
+            </Button>
+          </DialogActions>
+        </Dialog>
       </AppBar >
     </>
   );

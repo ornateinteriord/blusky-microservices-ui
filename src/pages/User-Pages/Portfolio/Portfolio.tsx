@@ -1,12 +1,10 @@
-import { Typography, Box, Paper, Button, Stack, IconButton } from '@mui/material';
+import { Typography, Box, Paper, Button, Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import GroupsIcon from '@mui/icons-material/Groups';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
-import ShareIcon from '@mui/icons-material/Share';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
@@ -14,7 +12,6 @@ import SyncAltIcon from '@mui/icons-material/SyncAlt';
 import QrCode2Icon from '@mui/icons-material/QrCode2';
 import SendIcon from '@mui/icons-material/Send';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
-import { toast } from 'react-toastify';
 
 import TokenService from '../../../api/token/tokenService';
 import { useGetWalletOverview, useGetMemberDetails } from '../../../api/Memeber';
@@ -25,17 +22,11 @@ const Portfolio = () => {
   const { data: walletOverview } = useGetWalletOverview(memberId);
   const { data: memberDetails } = useGetMemberDetails(memberId);
 
-  const handleCopyReferralLink = () => {
-    if (!memberDetails?.Member_id) return;
-    const referralLink = `${window.location.origin}/register?ref=${memberDetails.Member_id}`;
-    navigator.clipboard.writeText(referralLink)
-      .then(() => toast.success('Referral link copied!'))
-      .catch(() => toast.error('Failed to copy link'));
-  };
+
 
   const quickAccessItems = [
     { label: "Transfer", icon: <SyncAltIcon />, route: "/user/transfer", color: "#0284C7" },
-    { label: "My QR", icon: <QrCode2Icon />, route: "/user/my-qr", color: "#14b8a6" },
+    { label: "Scan & Pay", icon: <QrCode2Icon />, route: "/user/my-qr", color: "#14b8a6" },
     { label: "P2P Transfer", icon: <SendIcon />, route: "/user/p2p-transfer", color: "#ea580c" },
     { label: "Property Listings", icon: <InventoryIcon />, route: "/user/new-subscription", color: "#0284C7" },
     { label: "My Certificates", icon: <ReceiptLongIcon />, route: "/user/my-subscriptions", color: "#f59e0b" },
@@ -200,54 +191,9 @@ const Portfolio = () => {
         </Paper>
       </Box>
 
-      {/* Referral Link & Earnings */}
-      <Box sx={{ display: 'flex', flexDirection: { xs: 'column', xl: 'row' }, gap: 4 }}>
-        {/* Referral Link */}
-        <Paper elevation={0} sx={{
-          p: 4,
-          borderRadius: '28px',
-          background: 'linear-gradient(135deg, #0284C7 0%, #38BDF8 100%)',
-          color: '#0F172A',
-          boxShadow: '0 20px 40px rgba(2, 132, 199, 0.25)',
-          flex: '1',
-          height: 'fit-content'
-        }}>
-          <Typography variant="h5" sx={{ fontWeight: 900, mb: 1 }}>Referral link</Typography>
-          <Typography variant="caption" sx={{ display: 'block', mb: 3, opacity: 0.8, lineHeight: 1.4, fontSize: '0.8rem' }}>One link, endless connections—start building your network today</Typography>
-          <Box sx={{ display: 'flex', gap: 2 }}>
-            <Button
-              variant="contained"
-              startIcon={<ShareIcon />}
-              fullWidth
-              sx={{
-                bgcolor: '#F1F5F9',
-                color: '#0284C7',
-                borderRadius: '16px',
-                textTransform: 'none',
-                fontWeight: 900,
-                py: 1.5,
-                '&:hover': { bgcolor: '#F8FAFC' }
-              }}
-            >
-              Share Now
-            </Button>
-            <IconButton
-              onClick={handleCopyReferralLink}
-              sx={{
-                bgcolor: '#F1F5F9',
-                color: '#0F172A',
-                borderRadius: '16px',
-                width: 56,
-                height: 56
-              }}
-            >
-              <ContentCopyIcon />
-            </IconButton>
-          </Box>
-        </Paper>
-
-        {/* Earnings Cards */}
-        <Paper elevation={0} sx={{ p: 4, borderRadius: '32px', bgcolor: '#F1F5F9', border: '1px solid #E2E8F0', boxShadow: '0 10px 40px rgba(0,0,0,0.05)', flex: '2' }}>
+      {/* Earnings Cards */}
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+        <Paper elevation={0} sx={{ p: 4, borderRadius: '32px', bgcolor: '#F1F5F9', border: '1px solid #E2E8F0', boxShadow: '0 10px 40px rgba(0,0,0,0.05)', width: '100%' }}>
           <Stack spacing={4}>
             <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: 2 }}>
               <Box onClick={() => navigate('/user/earnings/referral-bonus')} sx={{ display: 'flex', flexDirection: 'column', cursor: 'pointer', p: { xs: 2, sm: 3 }, borderRadius: '20px', bgcolor: '#F8FAFC', border: '1px solid #E2E8F0', transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.02)', bgcolor: '#F1F5F9' } }}>

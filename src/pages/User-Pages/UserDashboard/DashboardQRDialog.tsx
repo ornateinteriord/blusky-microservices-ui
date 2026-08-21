@@ -186,7 +186,7 @@ const DashboardQRDialog: React.FC<DashboardQRDialogProps> = ({ open, onClose, me
               }
             }}
           >
-            My QR
+            Show QR
           </Button>
           <Button
             fullWidth

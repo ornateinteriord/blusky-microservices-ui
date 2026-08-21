@@ -59,7 +59,7 @@ const ReferralIncome = () => {
   return (
     <>
       <Typography variant="h4" sx={{ margin: "1rem", mt: 10 }}>
-        Referral Income
+        Referral Commission
       </Typography>
       <Card sx={{ margin: "1rem", mt: 2 }}>
         <CardContent>

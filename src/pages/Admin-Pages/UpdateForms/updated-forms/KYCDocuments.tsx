@@ -8,11 +8,7 @@ interface KYCDocumentsProps {
 
 export const KYCDocuments: React.FC<KYCDocumentsProps> = ({ formData }) => {
     const documents = [
-        { url: formData.panImage, label: 'PAN Card', key: 'panImage' },
-        { url: formData.aadhaarImage, label: 'Aadhaar Card', key: 'aadhaarImage' },
-        { url: formData.checkImage, label: 'Cancelled Cheque', key: 'checkImage' },
-        { url: formData.passbookImage, label: 'Bank Passbook', key: 'passbookImage' },
-        { url: formData.rationCardImage, label: 'Ration Card', key: 'rationCardImage' },
+        { url: formData.panImage || formData.aadhaarImage, label: 'PAN / Aadhaar Card', key: 'panImage' },
         { url: formData.profile_image, label: 'Profile Photo', key: 'profile_image' },
     ];
 
@@ -23,7 +19,7 @@ export const KYCDocuments: React.FC<KYCDocumentsProps> = ({ formData }) => {
         <div>
             <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem", display: "flex", alignItems: "center", gap: "8px"     }}>
                 <Typography sx={{ fontWeight: 'bold' }}>
-                    KYC Documents ({uploadedDocs.length}/6)
+                    KYC Documents ({uploadedDocs.length}/2)
                 </Typography>
             </div>
             <div style={{ padding: "0 1rem 1rem 1rem" }}>

@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Button, Card, CardContent, Box, Typography, Grid, CircularProgress, IconButton,  } from '@mui/material';
+import { Button, Card, CardContent, Box, Typography, Grid, CircularProgress, IconButton, TextField, InputAdornment } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ImageIcon from '@mui/icons-material/Image';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import UserContext from '../../../context/user/userContext';
 import { LoadingComponent } from '../../../App';
 import { useSubmitKYC, useUploadKYCDocument } from '../../../api/Memeber';
@@ -133,6 +135,7 @@ const KYC: React.FC = () => {
     account_number: '',
     ifsc_code: '',
     bank_name: '',
+    upi_id: '',
   });
 
   const [documents, setDocuments] = useState({
@@ -153,11 +156,12 @@ const KYC: React.FC = () => {
         account_number: user.account_number || '',
         ifsc_code: user.ifsc_code || '',
         bank_name: user.bank_name || '',
+        upi_id: user.upi_id || '',
       });
 
       // Load existing document URLs if available
       setDocuments({
-        panImage: user.panImage || null,
+        panImage: user.panImage || user.aadhaarImage || null,
         aadhaarImage: user.aadhaarImage || null,
         checkImage: user.checkImage || null,
         passbookImage: user.passbookImage || null,
@@ -169,10 +173,6 @@ const KYC: React.FC = () => {
 
   const submitKYC = useSubmitKYC();
   const uploadPanImage = useUploadKYCDocument(user?.Member_id || '', 'pan');
-  const uploadAadhaarImage = useUploadKYCDocument(user?.Member_id || '', 'aadhaar');
-  const uploadCheckImage = useUploadKYCDocument(user?.Member_id || '', 'check');
-  const uploadPassbookImage = useUploadKYCDocument(user?.Member_id || '', 'passbook');
-  const uploadRationCardImage = useUploadKYCDocument(user?.Member_id || '', 'rationcard');
   const uploadProfileImage = useUploadKYCDocument(user?.Member_id || '', 'profile');
 
   const handleDocumentUpload = async (docType: string, file: File) => {
@@ -184,18 +184,6 @@ const KYC: React.FC = () => {
       switch (docType) {
         case 'panImage':
           result = await uploadPanImage.mutateAsync(file);
-          break;
-        case 'aadhaarImage':
-          result = await uploadAadhaarImage.mutateAsync(file);
-          break;
-        case 'checkImage':
-          result = await uploadCheckImage.mutateAsync(file);
-          break;
-        case 'passbookImage':
-          result = await uploadPassbookImage.mutateAsync(file);
-          break;
-        case 'rationCardImage':
-          result = await uploadRationCardImage.mutateAsync(file);
           break;
         case 'profileImage':
           result = await uploadProfileImage.mutateAsync(file);
@@ -225,14 +213,18 @@ const KYC: React.FC = () => {
     }));
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   const handleSubmit = () => {
     // Validate all documents are uploaded
     const missingDocs = [];
-    if (!documents.panImage) missingDocs.push('PAN Image');
-    if (!documents.aadhaarImage) missingDocs.push('Aadhaar Image');
-    // if (!documents.checkImage) missingDocs.push('Check Image');
-    // if (!documents.passbookImage) missingDocs.push('Passbook Image');
-    if (!documents.rationCardImage) missingDocs.push('Ration Card Image');
+    if (!documents.panImage) missingDocs.push('PAN / Aadhaar Image');
     if (!documents.profileImage) missingDocs.push('Profile Image');
 
     if (missingDocs.length > 0) {
@@ -241,41 +233,33 @@ const KYC: React.FC = () => {
     }
 
     // Validate bank details
-    /* if (!formData.account_number || !formData.ifsc_code || !formData.bank_name) {
-      toast.error('Please fill all bank account details');
+    if (!formData.account_number || !formData.ifsc_code || !formData.bank_name || !formData.upi_id) {
+      toast.error('Please fill all bank account and UPI details');
       return;
-    } */
+    }
 
     submitKYC.mutate({
       ref_no: user.Member_id,
       bankAccount: formData.account_number,
       ifsc: formData.ifsc_code,
       bankName: formData.bank_name,
+      upiId: formData.upi_id,
       panImage: documents.panImage,
-      aadhaarImage: documents.aadhaarImage,
-      checkImage: documents.checkImage,
-      passbookImage: documents.passbookImage,
-      rationCardImage: documents.rationCardImage,
       profileImage: documents.profileImage,
     });
   };
 
   const documentConfigs = [
-    { key: 'panImage', label: 'PAN Card', icon: <BadgeIcon sx={{ color: '#0a2558' }} /> },
-    { key: 'aadhaarImage', label: 'Aadhaar Card', icon: <PersonIcon sx={{ color: '#0a2558' }} /> },
-    // { key: 'checkImage', label: 'Cancelled Cheque', icon: <AccountBalanceWalletIcon sx={{ color: '#0a2558' }} /> },
-    // { key: 'passbookImage', label: 'Bank Passbook', icon: <AccountBalanceIcon sx={{ color: '#0a2558' }} /> },
-    { key: 'rationCardImage', label: 'Ration Card', icon: <ConfirmationNumberIcon sx={{ color: '#0a2558' }} /> },
+    { key: 'panImage', label: 'PAN / Aadhaar Card', icon: <BadgeIcon sx={{ color: '#0a2558' }} /> },
     { key: 'profileImage', label: 'Profile Photo', icon: <ImageIcon sx={{ color: '#0a2558' }} /> },
   ];
 
   return (
-    <Card sx={{ margin: '2rem', mt: 10, boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}>
+    <Card sx={{ margin: '2rem', mt: 4, boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}>
       <CardContent>
-        {/* Bank Account Details Commented Out
         <div>
           <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem", display: "flex", alignItems: "center", gap: "8px"     }}>
-            Update Identity and Bank Account Details
+            Update Account Details
           </div>
           <div style={{ padding: "0 1rem 1rem 1rem" }}>
             <form style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -383,15 +367,39 @@ const KYC: React.FC = () => {
                   },
                 }}
               />
+              <TextField
+                label="UPI ID"
+                name="upi_id"
+                value={formData.upi_id}
+                onChange={handleInputChange}
+                fullWidth
+                variant="outlined"
+                placeholder="Enter UPI ID (e.g., name@okbank)"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <AccountBalanceWalletIcon sx={{ color: '#0a2558' }} />
+                    </InputAdornment>
+                  ),
+                }}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '&:hover fieldset': {
+                      borderColor: '#0a2558',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#0a2558',
+                    },
+                  },
+                }}
+              />
             </form>
           </div>
         </div>
-        */}
-
         {/* KYC Documents */}
         <div>
           <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem", display: "flex", alignItems: "center", gap: "8px"     }}>
-            Upload KYC Documents (All Mandatory)
+            Upload KYC Documents
           </div>
           <div style={{ padding: "0 1rem 1rem 1rem" }}>
             <Grid container spacing={3}>

@@ -63,7 +63,7 @@ const LevelBenifits = () => {
   return (
     <>
       <Typography variant="h4" sx={{ margin: "1rem", mt: 10 }}>
-        Level Bonus
+        Brokerage Override
       </Typography>
       <Card sx={{ margin: "1rem", mt: 2 }}>
         <CardContent>
