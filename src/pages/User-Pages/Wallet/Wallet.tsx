@@ -302,7 +302,7 @@ const Wallet = () => {
                     <Box>
                       <Typography variant="body2">• 5% Admin applied</Typography>
                       <Typography variant="body2">• Minimum withdrawal: 500</Typography>
-                      <Typography variant="body2">• Maximum withdrawal: 25% of total package (${maxWithdrawal.toFixed(2)})</Typography>
+                      <Typography variant="body2">• Maximum withdrawal: 25% of total package ({maxWithdrawal.toFixed(2)})</Typography>
                       <Typography variant="body2">• One withdrawal per day allowed</Typography>
                     </Box>
                   </Box>
@@ -428,10 +428,10 @@ const Wallet = () => {
         {!isWithdrawalView && (
         <>
         <div style={{ marginBottom: "1rem", color: "#000", fontWeight: "bold", fontSize: "1.25rem"     }}>Transaction History</div>
-          {walletData?.transactions && walletData.transactions.filter((tx: any) => tx.transaction_type !== "Upgrade Wallet Deduction").length > 0 ? (
+          {walletData?.transactions && walletData.transactions.length > 0 ? (
               <DataTable
                 columns={getWalletColumns()}
-                data={walletData.transactions.filter((tx: any) => tx.transaction_type !== "Upgrade Wallet Deduction")}
+                data={walletData.transactions}
                 pagination
                 customStyles={DASHBOARD_CUTSOM_STYLE}
                 paginationPerPage={isMobile ? 10 : 25}

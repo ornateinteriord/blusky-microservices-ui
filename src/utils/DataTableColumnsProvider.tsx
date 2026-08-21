@@ -1632,7 +1632,7 @@ export const getFixedDepositWalletColumns = () => [
     name: "Amount",
     selector: (row: any) => {
       const amt = row.fd_credit || row.amount;
-      return amt && parseFloat(amt) > 0 ? `? ${parseFloat(amt).toFixed(2)}` : "-";
+      return amt && parseFloat(amt) > 0 ? `${parseFloat(amt).toFixed(2)}` : "-";
     },
     sortable: true,
   },
@@ -1667,7 +1667,7 @@ export const getPurchaseWalletColumns = () => [
     name: "Amount",
     selector: (row: any) => {
       const amt = row.pw_credit || row.amount;
-      return amt && parseFloat(amt) > 0 ? `? ${parseFloat(amt).toFixed(2)}` : "-";
+      return amt && parseFloat(amt) > 0 ? `${parseFloat(amt).toFixed(2)}` : "-";
     },
     sortable: true,
   },
